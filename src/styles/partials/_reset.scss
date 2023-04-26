@@ -1,4 +1,5 @@
 @use "./colors" as colors;
+@use "./typography" as typography;
 
 // More-intuitive box-sizing model
 html {
@@ -28,9 +29,9 @@ body,
 	height: 100%;
 }
 
-// Base font and colors
+// Base colors
 body {
-	font-family: "Quicksand";
+	font-weight: typography.$font-weight-normal;
 
 	background-color: colors.$white;
 	color: colors.$black;
