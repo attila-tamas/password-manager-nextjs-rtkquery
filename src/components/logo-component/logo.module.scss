@@ -1,0 +1,23 @@
+@use "@/styles/util/functions" as functions;
+@use "@/styles/partials/colors" as colors;
+
+.logo {
+	height: fit-content;
+
+	display: flex;
+	align-items: center;
+	gap: functions.em(4);
+
+	&__img {
+		width: 20%;
+		height: 20%;
+	}
+
+	&__text {
+		font-size: functions.em(32);
+
+		&__highlight {
+			color: colors.$interactive;
+		}
+	}
+}
