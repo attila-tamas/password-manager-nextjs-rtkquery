@@ -1,0 +1,68 @@
+@use "@/styles/util/functions" as functions;
+@use "@/styles/partials/typography" as typography;
+@use "@/styles/partials/colors" as colors;
+@use "@/styles/partials/shadows" as shadows;
+
+.button {
+	border: none;
+	border-radius: functions.rem(4);
+
+	padding: functions.rem(4) functions.rem(20);
+
+	font-size: functions.rem(16);
+	font-weight: typography.$font-weight-semibold;
+
+	background-color: transparent;
+
+	&:hover {
+		cursor: pointer;
+		background-color: rgba(colors.$gray, 0.05);
+	}
+
+	&__flex {
+		width: 100%;
+	}
+
+	&__success {
+		color: colors.$interactive;
+	}
+
+	&__danger {
+		color: colors.$error;
+	}
+
+	&__backdrop {
+		color: colors.$white;
+		box-shadow: shadows.$drop-shadow-bottom;
+
+		&__success {
+			background-color: colors.$interactive;
+
+			&:hover {
+				background-color: colors.$interactive-dark;
+			}
+		}
+
+		&__danger {
+			background-color: colors.$error;
+
+			&:hover {
+				background-color: colors.$error-dark;
+			}
+		}
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.button {
+		color: colors.$white;
+
+		&:hover {
+			background-color: rgba(colors.$white, 0.05);
+		}
+	}
+
+	.button__backdrop {
+		color: colors.$white;
+	}
+}
