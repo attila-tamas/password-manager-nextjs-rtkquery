@@ -1,1 +1,22 @@
-@use "./partials/reset";
+@use "./partials/reset" as reset;
+@use "./util/functions" as functions;
+@use "./partials/typography" as typography;
+@use "./partials/colors" as colors;
+
+// Add top, left and right padding of 24px converted to rem
+body {
+	padding: functions.rem(24) functions.rem(24) 0 functions.rem(24);
+}
+
+.unselectable {
+	user-select: none;
+}
+
+.link {
+	font-weight: typography.$font-weight-semibold;
+	color: colors.$interactive;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
