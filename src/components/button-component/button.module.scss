@@ -1,18 +1,24 @@
-@use "@/styles/util/functions" as functions;
 @use "@/styles/partials/typography" as typography;
 @use "@/styles/partials/colors" as colors;
 @use "@/styles/partials/shadows" as shadows;
+@use "@/styles/util/functions" as functions;
+@use "@/styles/util/breakpoints" as breakpoints;
 
 .button {
+	width: fit-content;
+	height: fit-content;
+
 	border: none;
 	border-radius: functions.rem(4);
 
-	padding: functions.rem(4) functions.rem(20);
+	padding: functions.rem(8) functions.rem(24);
 
-	font-size: functions.rem(16);
+	font-size: functions.rem(18);
 	font-weight: typography.$font-weight-semibold;
 
 	background-color: transparent;
+
+	transition: all 200ms ease 0s;
 
 	&:hover {
 		cursor: pointer;
@@ -24,7 +30,7 @@
 	}
 
 	&__success {
-		color: colors.$interactive;
+		color: colors.$success;
 	}
 
 	&__danger {
@@ -35,21 +41,32 @@
 		color: colors.$white;
 		box-shadow: shadows.$drop-shadow-bottom;
 
+		&:hover {
+			background-color: transparent;
+		}
+
 		&__success {
-			background-color: colors.$interactive;
+			background-color: colors.$success;
+			box-shadow: inset 0 0 0 functions.rem(2) colors.$success;
 
 			&:hover {
-				background-color: colors.$interactive-dark;
+				color: colors.$success;
 			}
 		}
 
 		&__danger {
 			background-color: colors.$error;
+			box-shadow: inset 0 0 0 functions.rem(2) colors.$error;
 
 			&:hover {
-				background-color: colors.$error-dark;
+				color: colors.$error;
 			}
 		}
+	}
+
+	@include breakpoints.breakpoint-up(large) {
+		font-size: functions.rem(20);
+		padding: functions.rem(12) functions.rem(28);
 	}
 }
 

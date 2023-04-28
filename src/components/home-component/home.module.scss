@@ -1,9 +1,10 @@
-@use "@/styles/util/functions" as functions;
 @use "@/styles/partials/typography" as typography;
 @use "@/styles/partials/colors" as colors;
+@use "@/styles/util/functions" as functions;
+@use "@/styles/util/breakpoints" as breakpoints;
 
 .home {
-	width: 100%;
+	width: min(100%, functions.rem(420));
 	height: 100%;
 
 	display: flex;
@@ -12,12 +13,117 @@
 	align-items: center;
 	gap: functions.rem(24);
 
-	&__text {
-		font-size: functions.rem(16);
-		text-align: center;
+	margin-inline: auto;
 
-		&__small {
-			font-size: functions.rem(14);
+	@include breakpoints.breakpoint-up(medium) {
+		width: functions.rem(500);
+	}
+
+	@include breakpoints.breakpoint-up(large) {
+		width: fit-content;
+		gap: functions.rem(88);
+	}
+
+	&__nav {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		align-items: center;
+
+		&__buttonGroup {
+			display: none;
+		}
+
+		@include breakpoints.breakpoint-up(large) {
+			max-width: 100%;
+
+			justify-content: space-between;
+
+			&__buttonGroup {
+				display: flex;
+				gap: functions.rem(12);
+			}
+		}
+	}
+
+	&__hero {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: functions.rem(32);
+
+		@include breakpoints.breakpoint-up(large) {
+			flex-direction: row;
+			text-align: left;
+		}
+
+		&__text {
+			width: 100%;
+			height: fit-content;
+
+			display: flex;
+			flex-direction: column;
+			gap: functions.rem(32);
+
+			@include breakpoints.breakpoint-up(large) {
+				max-width: functions.rem(650);
+			}
+
+			&__title {
+				font-size: functions.rem(32);
+				font-weight: typography.$font-weight-bold;
+
+				@include breakpoints.breakpoint-up(medium) {
+					font-size: functions.rem(40);
+				}
+
+				@include breakpoints.breakpoint-up(xlarge) {
+					font-size: functions.rem(52);
+				}
+			}
+
+			&__description {
+				font-size: functions.rem(18);
+
+				@include breakpoints.breakpoint-up(medium) {
+					font-size: functions.rem(20);
+				}
+
+				@include breakpoints.breakpoint-up(xlarge) {
+					font-size: functions.rem(24);
+				}
+			}
+
+			&__buttonGroup {
+				display: flex;
+				flex-direction: column;
+				gap: functions.rem(8);
+
+				&__small {
+					font-size: functions.rem(16);
+
+					@include breakpoints.breakpoint-up(large) {
+						display: none;
+					}
+				}
+			}
+		}
+
+		&__image {
+			width: 100%;
+			height: fit-content;
+
+			@include breakpoints.breakpoint-up(large) {
+				margin-top: functions.rem(48);
+			}
+
+			@include breakpoints.breakpoint-up(xlarge) {
+				width: functions.rem(800);
+			}
 		}
 	}
 }
