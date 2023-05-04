@@ -1,0 +1,48 @@
+@use "@/styles/util/functions" as functions;
+@use "@/styles/partials/typography" as typography;
+@use "@/styles/partials/colors" as colors;
+@use "@/styles/partials/shadows" as shadows;
+
+.container {
+	width: min(100%, functions.rem(350));
+	height: fit-content;
+
+	margin-inline: auto;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: functions.rem(32);
+
+	&__title {
+		font-size: functions.rem(28);
+		font-weight: typography.$font-weight-bold;
+	}
+
+	&__form {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		flex-direction: column;
+		gap: functions.rem(24);
+
+		font-size: functions.rem(18);
+
+		&__inputContainer {
+			display: flex;
+			flex-direction: column;
+			gap: functions.rem(8);
+		}
+
+		&__buttonGroup {
+			display: flex;
+			flex-direction: column;
+			gap: functions.rem(24);
+
+			margin-top: functions.rem(12);
+
+			text-align: center;
+		}
+	}
+}
