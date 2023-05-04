@@ -1,12 +1,12 @@
 @use "@/styles/util/functions" as functions;
 @use "@/styles/partials/colors" as colors;
 
-.logo {
+.container {
 	height: fit-content;
 
 	display: flex;
 	align-items: center;
-	gap: functions.em(4);
+	gap: functions.em(8);
 
 	&__img {
 		width: 20%;

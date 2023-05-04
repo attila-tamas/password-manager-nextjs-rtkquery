@@ -64,6 +64,7 @@ button,
 textarea,
 select {
 	font: inherit;
+	color: inherit;
 }
 
 // Avoid text overflows
@@ -87,6 +88,5 @@ h6 {
 a,
 a:visited,
 a:active {
-	color: inherit;
 	text-decoration: none;
 }

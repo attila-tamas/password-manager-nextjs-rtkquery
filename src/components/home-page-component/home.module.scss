@@ -3,7 +3,7 @@
 @use "@/styles/util/functions" as functions;
 @use "@/styles/util/breakpoints" as breakpoints;
 
-.home {
+.container {
 	width: min(100%, functions.rem(420));
 	height: 100%;
 
