@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./button.module.scss";
 
-export default function Button({ text, type, noBackdrop, flex }: any) {
-	const getButtonType = (type: string) => {
-		switch (type) {
+export default function Button({ text, color, noBackdrop, flex, type }: any) {
+	let button;
+
+	const getButtonStyle = (color: string) => {
+		switch (color) {
 			case "success":
 				if (noBackdrop) {
 					return styles.button__success;
@@ -24,15 +26,32 @@ export default function Button({ text, type, noBackdrop, flex }: any) {
 		}
 	};
 
-	return (
-		<button
-			className={`
-				${styles.button} 
-				${!noBackdrop && styles.button__backdrop}
-				${flex && styles.button__flex}
-				${getButtonType(type)}
-			`}>
-			{text}
-		</button>
-	);
+	if (type === "submit") {
+		button = (
+			<input
+				type="submit"
+				value={text}
+				className={`
+						${styles.button} 
+						${!noBackdrop && styles.button__backdrop}
+						${flex && styles.button__flex}
+						${getButtonStyle(color)}
+					`}
+			/>
+		);
+	} else {
+		button = (
+			<button
+				className={`
+						${styles.button} 
+						${!noBackdrop && styles.button__backdrop}
+						${flex && styles.button__flex}
+						${getButtonStyle(color)}
+					`}>
+				{text}
+			</button>
+		);
+	}
+
+	return button;
 }

@@ -25,8 +25,17 @@
 		background-color: rgba(colors.$gray, 0.05);
 	}
 
+	@include breakpoints.breakpoint-up(large) {
+		font-size: functions.rem(20);
+		padding: functions.rem(12) functions.rem(28);
+	}
+
 	&__flex {
 		width: 100%;
+
+		// Overwrite breakpoint styling
+		padding: functions.rem(8) functions.rem(24);
+		font-size: functions.rem(18);
 	}
 
 	&__success {
@@ -62,11 +71,6 @@
 				color: colors.$error;
 			}
 		}
-	}
-
-	@include breakpoints.breakpoint-up(large) {
-		font-size: functions.rem(20);
-		padding: functions.rem(12) functions.rem(28);
 	}
 }
 

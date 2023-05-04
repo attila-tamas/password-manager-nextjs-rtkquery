@@ -1,0 +1,71 @@
+@use "@/styles/util/functions" as functions;
+@use "@/styles/partials/colors" as colors;
+@use "@/styles/partials/shadows" as shadows;
+
+.input {
+	width: 100%;
+	height: fit-content;
+
+	border: functions.rem(1) solid colors.$gray-light;
+	border-radius: functions.rem(4);
+
+	padding: functions.rem(6) functions.rem(12);
+
+	box-shadow: shadows.$drop-shadow-bottom;
+
+	font-size: functions.rem(14);
+
+	&:focus {
+		outline: functions.rem(1) solid colors.$interactive;
+	}
+}
+
+.checkbox {
+	-webkit-appearance: none;
+	appearance: none;
+
+	background-color: colors.$white-full;
+
+	margin: 0;
+
+	width: functions.rem(24);
+	height: functions.rem(24);
+
+	border: functions.rem(1) solid colors.$gray-light;
+	border-radius: functions.rem(4);
+
+	box-shadow: shadows.$drop-shadow-bottom;
+
+	display: grid;
+	place-content: center;
+
+	cursor: pointer;
+
+	&::before {
+		content: "";
+
+		width: functions.rem(16);
+		height: functions.rem(16);
+
+		transform: scale(0);
+		transform-origin: bottom left;
+
+		box-shadow: inset functions.em(16) functions.em(16) colors.$interactive;
+		background-color: colors.$interactive;
+
+		clip-path: polygon(
+			17.22% 49.02%,
+			3.8% 64.89%,
+			40.39% 95.84%,
+			97.11% 28.78%,
+			80.96% 15.12%,
+			37.66% 66.31%
+		);
+
+		transition: all 100ms ease 0s;
+	}
+
+	&:checked::before {
+		transform: scale(1);
+	}
+}
