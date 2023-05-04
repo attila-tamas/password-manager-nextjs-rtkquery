@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./register.module.scss";
+import Link from "next/link";
 
 import Logo from "../logo-component/logo";
 import Input from "../input-component/input";
@@ -27,7 +28,10 @@ export default function Register() {
 					<Button text="Create account" color="success" type="submit" flex />
 					<p>
 						I have an account.
-						<a className="link"> Sign in</a>
+						<Link href="/login" className="link">
+							{" "}
+							Sign in
+						</Link>
 					</p>
 				</div>
 			</form>

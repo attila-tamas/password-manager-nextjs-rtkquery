@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./home.module.scss";
 import Image from "next/image";
-import heroGraphic from "@/../public/home-page-hero-graphic.svg";
+import Link from "next/link";
+
 import Logo from "@/components/logo-component/logo";
 import Button from "@/components/button-component/button";
+
+import heroGraphic from "@/../public/home-page-hero-graphic.svg";
 
 export default function Home() {
 	return (
@@ -12,8 +15,13 @@ export default function Home() {
 				<Logo />
 
 				<div className={styles.container__nav__buttonGroup}>
-					<Button text="Sign in" color="success" noBackdrop />
-					<Button text="Create account" color="success" />
+					<Link href="/login">
+						<Button text="Sign in" color="success" noBackdrop />
+					</Link>
+
+					<Link href="/register">
+						<Button text="Create account" color="success" />
+					</Link>
 				</div>
 			</div>
 
@@ -29,7 +37,10 @@ export default function Home() {
 					</p>
 
 					<div className={styles.container__hero__text__buttonGroup}>
-						<Button text="Try it now for free" color="success" />
+						<Link href="/register">
+							<Button text="Try it now for free" color="success" />
+						</Link>
+
 						<p className={styles.container__hero__text__buttonGroup__small}>
 							I have an account. <span className="link">Sign in</span>
 						</p>

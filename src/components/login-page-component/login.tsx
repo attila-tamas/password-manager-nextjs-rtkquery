@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./login.module.scss";
+import Link from "next/link";
+
 import Button from "../button-component/button";
 import Logo from "../logo-component/logo";
 import Input from "../input-component/input";
@@ -37,7 +39,10 @@ export default function Login() {
 					<Button text="Sign in" color="success" type="submit" flex />
 					<p>
 						New to keystone?
-						<a className="link"> Create account</a>
+						<Link href="/register" className="link">
+							{" "}
+							Create account
+						</Link>
 					</p>
 				</div>
 			</form>
