@@ -9,14 +9,16 @@
 	border: functions.rem(1) solid colors.$gray-light;
 	border-radius: functions.rem(4);
 
-	padding: functions.rem(6) functions.rem(12);
-
+	background-color: colors.$white-full;
 	box-shadow: shadows.$drop-shadow-bottom;
+
+	padding: functions.rem(6) functions.rem(12);
 
 	font-size: functions.rem(14);
 
 	&:focus {
-		outline: functions.rem(1) solid colors.$interactive;
+		outline: functions.rem(0.5) solid colors.$interactive;
+		border-color: colors.$interactive;
 	}
 }
 
@@ -34,6 +36,7 @@
 	border: functions.rem(1) solid colors.$gray-light;
 	border-radius: functions.rem(4);
 
+	background-color: colors.$white-full;
 	box-shadow: shadows.$drop-shadow-bottom;
 
 	display: grid;
@@ -67,5 +70,14 @@
 
 	&:checked::before {
 		transform: scale(1);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.input,
+	.checkbox {
+		border: functions.rem(1) solid colors.$black-full;
+		background-color: colors.$gray-dark;
+		box-shadow: shadows.$drop-shadow-bottom-dark;
 	}
 }

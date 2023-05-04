@@ -3,5 +3,11 @@
 
 $drop-shadow-bottom: functions.rem(2) functions.rem(2) functions.rem(6)
 	rgba(colors.$black-full, 0.1);
+$drop-shadow-bottom-dark: functions.rem(2) functions.rem(2) functions.rem(6)
+	rgba(colors.$black-full, 0.5);
 
 $drop-shadow-top: 0 functions.rem(-4) functions.rem(16) rgba(colors.$black-full, 0.1);
+$drop-shadow-top-dark: 0 functions.rem(-4) functions.rem(16) rgba(colors.$black-full, 0.7);
+
+$button-drop-shadow: inset 0 0 0 functions.rem(2) colors.$success, $drop-shadow-bottom;
+$button-drop-shadow-dark: inset 0 0 0 functions.rem(2) colors.$success, $drop-shadow-bottom-dark;
