@@ -1,27 +1,25 @@
-@use "@/styles/partials/typography" as typography;
-@use "@/styles/partials/colors" as colors;
-@use "@/styles/util/functions" as functions;
-@use "@/styles/util/breakpoints" as breakpoints;
+@use "@/styles/util" as util;
+@use "@/styles/partials" as var;
 
 .container {
-	width: min(100%, functions.rem(420));
+	width: min(100%, util.rem(420));
 	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	gap: functions.rem(24);
+	gap: util.rem(24);
 
 	margin-inline: auto;
 
-	@include breakpoints.breakpoint-up(medium) {
-		width: functions.rem(500);
+	@include util.breakpoint-up(medium) {
+		width: util.rem(500);
 	}
 
-	@include breakpoints.breakpoint-up(large) {
+	@include util.breakpoint-up(large) {
 		width: fit-content;
-		gap: functions.rem(88);
+		gap: util.rem(88);
 	}
 
 	&__nav {
@@ -35,14 +33,14 @@
 			display: none;
 		}
 
-		@include breakpoints.breakpoint-up(large) {
+		@include util.breakpoint-up(large) {
 			max-width: 100%;
 
 			justify-content: space-between;
 
 			&__buttonGroup {
 				display: flex;
-				gap: functions.rem(12);
+				gap: util.rem(12);
 			}
 		}
 	}
@@ -54,9 +52,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		gap: functions.rem(32);
+		gap: util.rem(32);
 
-		@include breakpoints.breakpoint-up(large) {
+		@include util.breakpoint-up(large) {
 			flex-direction: row;
 			text-align: left;
 		}
@@ -67,46 +65,48 @@
 
 			display: flex;
 			flex-direction: column;
-			gap: functions.rem(32);
+			gap: util.rem(32);
 
-			@include breakpoints.breakpoint-up(large) {
-				max-width: functions.rem(650);
+			@include util.breakpoint-up(large) {
+				max-width: util.rem(650);
 			}
 
 			&__title {
-				font-size: functions.rem(32);
-				font-weight: typography.$font-weight-bold;
+				font-size: util.rem(32);
+				font-weight: var.$font-weight-bold;
 
-				@include breakpoints.breakpoint-up(medium) {
-					font-size: functions.rem(40);
+				@include util.breakpoint-up(medium) {
+					font-size: util.rem(40);
 				}
 
-				@include breakpoints.breakpoint-up(xlarge) {
-					font-size: functions.rem(52);
+				@include util.breakpoint-up(xlarge) {
+					font-size: util.rem(52);
 				}
 			}
 
 			&__description {
-				font-size: functions.rem(18);
+				font-size: util.rem(18);
 
-				@include breakpoints.breakpoint-up(medium) {
-					font-size: functions.rem(20);
+				@include util.breakpoint-up(medium) {
+					font-size: util.rem(20);
 				}
 
-				@include breakpoints.breakpoint-up(xlarge) {
-					font-size: functions.rem(24);
+				@include util.breakpoint-up(xlarge) {
+					font-size: util.rem(24);
 				}
 			}
 
 			&__buttonGroup {
+				width: fit-content;
+
 				display: flex;
 				flex-direction: column;
-				gap: functions.rem(8);
+				gap: util.rem(8);
 
 				&__small {
-					font-size: functions.rem(16);
+					font-size: util.rem(16);
 
-					@include breakpoints.breakpoint-up(large) {
+					@include util.breakpoint-up(large) {
 						display: none;
 					}
 				}
@@ -117,12 +117,12 @@
 			width: 100%;
 			height: fit-content;
 
-			@include breakpoints.breakpoint-up(large) {
-				margin-top: functions.rem(48);
+			@include util.breakpoint-up(large) {
+				margin-top: util.rem(48);
 			}
 
-			@include breakpoints.breakpoint-up(xlarge) {
-				width: functions.rem(800);
+			@include util.breakpoint-up(xlarge) {
+				width: util.rem(800);
 			}
 		}
 	}

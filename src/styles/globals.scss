@@ -1,14 +1,22 @@
 @use "./partials/reset" as reset;
-@use "./partials/typography" as typography;
-@use "./partials/colors" as colors;
-@use "./util/functions" as functions;
-@use "./util/breakpoints" as breakpoints;
+@use "./util" as util;
+@use "./partials" as var;
 
 body {
-	padding: functions.rem(20) functions.rem(20) 0 functions.rem(20);
+	color: var.$color-foreground;
+	background-color: var.$color-background;
 
-	@include breakpoints.breakpoint-up(large) {
-		padding: functions.rem(20) functions.rem(60) 0 functions.rem(60);
+	@media (prefers-color-scheme: dark) {
+		color: var.$color-background;
+		background-color: var.$color-foreground;
+	}
+
+	font-weight: var.$font-weight-normal;
+
+	padding: util.rem(20) util.rem(20) 0 util.rem(20);
+
+	@include util.breakpoint-up(large) {
+		padding: util.rem(20) util.rem(60) 0 util.rem(60);
 	}
 }
 
@@ -17,8 +25,8 @@ body {
 }
 
 .link {
-	font-weight: typography.$font-weight-semibold;
-	color: colors.$interactive;
+	font-weight: var.$font-weight-semibold;
+	color: var.$color-primary;
 
 	&:hover {
 		cursor: pointer;

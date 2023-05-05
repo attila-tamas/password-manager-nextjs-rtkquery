@@ -1,6 +1,3 @@
-@use "./colors" as colors;
-@use "./typography" as typography;
-
 // More-intuitive box-sizing model
 html {
 	box-sizing: border-box;
@@ -29,22 +26,10 @@ body,
 	height: 100%;
 }
 
-// Base colors
-body {
-	font-weight: typography.$font-weight-normal;
-
-	background-color: colors.$white;
-	color: colors.$black;
-}
-
+// Dark theme support
 @media (prefers-color-scheme: dark) {
 	html {
 		color-scheme: dark;
-	}
-
-	body {
-		background-color: colors.$black;
-		color: colors.$white;
 	}
 }
 

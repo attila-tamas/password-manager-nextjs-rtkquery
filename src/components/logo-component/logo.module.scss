@@ -1,12 +1,12 @@
-@use "@/styles/util/functions" as functions;
-@use "@/styles/partials/colors" as colors;
+@use "@/styles/partials" as var;
+@use "@/styles/util" as util;
 
 .container {
 	height: fit-content;
 
 	display: flex;
 	align-items: center;
-	gap: functions.em(8);
+	gap: util.em(8);
 
 	&__img {
 		width: 20%;
@@ -14,10 +14,10 @@
 	}
 
 	&__text {
-		font-size: functions.em(32);
+		font-size: util.em(32);
 
 		&__highlight {
-			color: colors.$interactive;
+			color: var.$color-primary;
 		}
 	}
 }

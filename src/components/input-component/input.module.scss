@@ -1,24 +1,23 @@
-@use "@/styles/util/functions" as functions;
-@use "@/styles/partials/colors" as colors;
-@use "@/styles/partials/shadows" as shadows;
+@use "@/styles/partials" as var;
+@use "@/styles/util" as util;
 
 .input {
 	width: 100%;
 	height: fit-content;
 
-	border: functions.rem(1) solid colors.$gray-light;
-	border-radius: functions.rem(4);
+	border: util.rem(1) solid var.$color-gray-light;
+	border-radius: util.rem(4);
 
-	background-color: colors.$white-full;
-	box-shadow: shadows.$drop-shadow-bottom;
+	background-color: var.$color-white;
+	box-shadow: var.$drop-shadow-bottom;
 
-	padding: functions.rem(6) functions.rem(12);
+	padding: util.rem(6) util.rem(12);
 
-	font-size: functions.rem(14);
+	font-size: util.rem(14);
 
 	&:focus {
-		outline: functions.rem(0.5) solid colors.$interactive;
-		border-color: colors.$interactive;
+		outline: util.rem(0.5) solid var.$color-primary;
+		border-color: var.$color-primary;
 	}
 }
 
@@ -26,18 +25,18 @@
 	-webkit-appearance: none;
 	appearance: none;
 
-	background-color: colors.$white-full;
+	background-color: var.$color-white;
 
 	margin: 0;
 
-	width: functions.rem(24);
-	height: functions.rem(24);
+	width: util.rem(24);
+	height: util.rem(24);
 
-	border: functions.rem(1) solid colors.$gray-light;
-	border-radius: functions.rem(4);
+	border: util.rem(1) solid var.$color-gray-light;
+	border-radius: util.rem(4);
 
-	background-color: colors.$white-full;
-	box-shadow: shadows.$drop-shadow-bottom;
+	background-color: var.$color-white;
+	box-shadow: var.$drop-shadow-bottom;
 
 	display: grid;
 	place-content: center;
@@ -47,14 +46,14 @@
 	&::before {
 		content: "";
 
-		width: functions.rem(16);
-		height: functions.rem(16);
+		width: util.rem(16);
+		height: util.rem(16);
 
 		transform: scale(0);
 		transform-origin: bottom left;
 
-		box-shadow: inset functions.em(16) functions.em(16) colors.$interactive;
-		background-color: colors.$interactive;
+		box-shadow: inset util.em(16) util.em(16) var.$color-primary;
+		background-color: var.$color-primary;
 
 		clip-path: polygon(
 			17.22% 49.02%,
@@ -76,8 +75,8 @@
 @media (prefers-color-scheme: dark) {
 	.input,
 	.checkbox {
-		border: functions.rem(1) solid colors.$black-full;
-		background-color: colors.$gray-dark;
-		box-shadow: shadows.$drop-shadow-bottom-dark;
+		border: util.rem(1) solid var.$color-black;
+		background-color: rgba(var.$color-gray-light, 0.1);
+		box-shadow: var.$drop-shadow-bottom-dark;
 	}
 }
