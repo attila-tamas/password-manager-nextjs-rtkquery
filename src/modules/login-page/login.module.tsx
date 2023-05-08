@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./login.module.scss";
 import Link from "next/link";
 
-import Button from "../button-component/button";
-import Logo from "../logo-component/logo";
-import Input from "../input-component/input";
+import Button from "@components/button-component/button";
+import Logo from "@components/logo-component/logo";
+import Input from "@components/input-component/input";
 
 export default function Login() {
 	return (

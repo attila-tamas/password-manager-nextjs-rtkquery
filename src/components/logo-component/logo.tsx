@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import favicon from "@/../public/favicon.svg";
+import favicon from "@public/favicon.svg";
 import styles from "./logo.module.scss";
 
 export default function Logo({ width }: any) {

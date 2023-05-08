@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Login from "@/components/login-page-component/login";
+import Login from "@modules/login-page/login.module";
 
-export default function Index() {
+export default function LoginPage() {
 	return (
 		<>
 			<Head>

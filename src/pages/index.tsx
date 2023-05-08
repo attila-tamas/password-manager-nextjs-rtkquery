@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Home from "@/components/home-page-component/home";
+import Home from "@modules/home-page/home.module";
 
-export default function Index() {
+export default function HomePage() {
 	return (
 		<>
 			<Head>

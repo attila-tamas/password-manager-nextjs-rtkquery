@@ -3,10 +3,10 @@ import styles from "./home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
-import Logo from "@/components/logo-component/logo";
-import Button from "@/components/button-component/button";
+import Logo from "@components/logo-component/logo";
+import Button from "@components/button-component/button";
 
-import heroGraphic from "@/../public/home-page-hero-graphic.svg";
+import heroGraphic from "@public/home-page-hero-graphic.svg";
 
 export default function Home() {
 	return (
@@ -42,7 +42,11 @@ export default function Home() {
 						</Link>
 
 						<p className={styles.container__hero__text__buttonGroup__small}>
-							I have an account. <span className="link">Sign in</span>
+							I have an account.
+							<Link href="/login" className="link">
+								{" "}
+								Sign in
+							</Link>
 						</p>
 					</div>
 				</div>

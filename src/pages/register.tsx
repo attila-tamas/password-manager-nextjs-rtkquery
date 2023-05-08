@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Register from "@/components/register-page-component/register";
+import Register from "@modules/register-page/register.module";
 
-export default function Index() {
+export default function RegisterPage() {
 	return (
 		<>
 			<Head>

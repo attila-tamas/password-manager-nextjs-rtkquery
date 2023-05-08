@@ -1,4 +1,4 @@
-@use "../util/functions" as functions;
+@use "@styles/util/functions" as functions;
 @use "./colors" as colors;
 
 $drop-shadow-bottom: functions.rem(2) functions.rem(2) functions.rem(6)
