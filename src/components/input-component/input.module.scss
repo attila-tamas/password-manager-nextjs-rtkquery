@@ -76,7 +76,7 @@
 	.input,
 	.checkbox {
 		border: util.rem(1) solid var.$color-black;
-		background-color: rgba(var.$color-gray-light, 0.1);
+		background-color: var.$color-gray-dark;
 		box-shadow: var.$drop-shadow-bottom-dark;
 	}
 }

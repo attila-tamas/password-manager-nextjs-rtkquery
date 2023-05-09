@@ -12,6 +12,7 @@
 	gap: util.rem(24);
 
 	margin-inline: auto;
+	padding: util.rem(20) util.rem(20) 0 util.rem(20);
 
 	@include util.breakpoint-up(medium) {
 		width: util.rem(500);
@@ -20,6 +21,7 @@
 	@include util.breakpoint-up(large) {
 		width: fit-content;
 		gap: util.rem(88);
+		padding: util.rem(20) util.rem(60) 0 util.rem(60);
 	}
 
 	&__nav {
