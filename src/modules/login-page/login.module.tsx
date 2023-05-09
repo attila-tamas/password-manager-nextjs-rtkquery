@@ -36,7 +36,7 @@ export default function Login() {
 				</label>
 
 				<div className={styles.container__form__buttonGroup}>
-					<Button text="Sign in" color="success" type="submit" flex />
+					<Button text="Sign in" color="primary" type="submit" flex />
 					<p>
 						New to keystone?
 						<Link href="/register" className="link">

@@ -11,9 +11,9 @@
 	background-color: var.$color-white;
 	box-shadow: var.$drop-shadow-bottom;
 
-	padding: util.rem(6) util.rem(12);
+	padding: util.rem(8) util.rem(12);
 
-	font-size: util.rem(14);
+	font-size: util.rem(16);
 
 	&:focus {
 		outline: util.rem(0.5) solid var.$color-primary;

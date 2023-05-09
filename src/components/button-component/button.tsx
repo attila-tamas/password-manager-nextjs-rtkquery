@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "./button.module.scss";
 
-export default function Button({ text, color, noBackdrop, flex, type }: any) {
+export default function Button({ text, color, noBackdrop, flex, type, grow }: any) {
 	let button;
 
 	const getButtonStyle = (color: string) => {
 		switch (color) {
-			case "success":
+			case "primary":
 				if (noBackdrop) {
-					return styles.button__success;
+					return styles.button__primary;
 				}
-				return styles.button__backdrop__success;
+				return styles.button__backdrop__primary;
 
 			case "danger":
 				if (noBackdrop) {
@@ -20,9 +20,9 @@ export default function Button({ text, color, noBackdrop, flex, type }: any) {
 
 			default:
 				if (noBackdrop) {
-					return styles.button__success;
+					return styles.button__primary;
 				}
-				return styles.button__backdrop__success;
+				return styles.button__backdrop__primary;
 		}
 	};
 
@@ -35,6 +35,7 @@ export default function Button({ text, color, noBackdrop, flex, type }: any) {
 						${styles.button} 
 						${!noBackdrop && styles.button__backdrop}
 						${flex && styles.button__flex}
+						${grow && styles.button__grow}
 						${getButtonStyle(color)}
 					`}
 			/>
@@ -46,6 +47,7 @@ export default function Button({ text, color, noBackdrop, flex, type }: any) {
 						${styles.button} 
 						${!noBackdrop && styles.button__backdrop}
 						${flex && styles.button__flex}
+						${grow && styles.button__grow}
 						${getButtonStyle(color)}
 					`}>
 				{text}

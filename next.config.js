@@ -10,6 +10,16 @@ const nextConfig = {
 			},
 		];
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "icon.horse",
+				port: "",
+				pathname: "/icon/**",
+			},
+		],
+	},
 };
 
 module.exports = nextConfig;

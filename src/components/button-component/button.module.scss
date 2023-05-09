@@ -5,7 +5,7 @@
 	width: fit-content;
 	height: fit-content;
 
-	border: none;
+	border: 1px solid transparent;
 	border-radius: util.rem(4);
 
 	padding: util.rem(8) util.rem(24);
@@ -22,21 +22,19 @@
 		background-color: rgba(var.$color-gray-light, 0.1);
 	}
 
-	@include util.breakpoint-up(large) {
-		font-size: util.rem(20);
-		padding: util.rem(12) util.rem(28);
+	&__grow {
+		@include util.breakpoint-up(large) {
+			font-size: util.rem(20);
+			padding: util.rem(12) util.rem(28);
+		}
 	}
 
 	&__flex {
 		width: 100%;
-
-		// Overwrite breakpoint styling
-		padding: util.rem(8) util.rem(24);
-		font-size: util.rem(18);
 	}
 
-	&__success {
-		color: var.$color-success;
+	&__primary {
+		color: var.$color-primary;
 	}
 
 	&__danger {
@@ -45,29 +43,33 @@
 
 	&__backdrop {
 		color: var.$color-white;
-		box-shadow: var.$button-drop-shadow;
+		box-shadow: var.$drop-shadow-bottom;
 
 		&:hover {
 			background-color: var.$color-white;
 		}
 
 		@media (prefers-color-scheme: dark) {
-			box-shadow: var.$button-drop-shadow-dark;
+			box-shadow: var.$drop-shadow-bottom-dark;
 		}
 
-		&__success {
-			background-color: var.$color-success;
+		&__primary {
+			background-color: var.$color-primary;
+			border-color: var.$color-primary;
 
 			&:hover {
-				color: var.$color-success;
+				color: var.$color-primary;
+				outline: util.rem(0.5) solid var.$color-primary;
 			}
 		}
 
 		&__danger {
 			background-color: var.$color-error;
+			border-color: var.$color-error;
 
 			&:hover {
 				color: var.$color-error;
+				outline: util.rem(0.5) solid var.$color-error;
 			}
 		}
 	}

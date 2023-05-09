@@ -1,0 +1,133 @@
+@use "@styles/partials" as var;
+@use "@styles/util" as util;
+
+.container {
+	width: 100%;
+	height: fit-content;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: util.rem(12);
+
+	padding: util.rem(8);
+
+	border: util.rem(1) solid var.$color-gray-light;
+	border-radius: util.rem(4);
+
+	background-color: var.$color-white;
+	box-shadow: var.$drop-shadow-bottom;
+
+	@include util.breakpoint-up(medium) {
+		padding: util.rem(16);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		border: util.rem(1) solid var.$color-black;
+		background-color: var.$color-gray-dark;
+		box-shadow: var.$drop-shadow-bottom-dark;
+	}
+
+	&__content {
+		width: 100%;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: util.rem(12);
+
+		@include util.breakpoint-up(medium) {
+			gap: util.rem(20);
+		}
+
+		&__imageContainer {
+			min-width: util.rem(46);
+			min-height: util.rem(46);
+
+			position: relative;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			@include util.breakpoint-up(medium) {
+				min-width: util.rem(72);
+				min-height: util.rem(72);
+			}
+
+			&__image {
+				border-radius: util.rem(4);
+			}
+
+			&__openIcon {
+				width: fit-content;
+				height: fit-content;
+
+				position: absolute;
+				bottom: util.rem(2);
+				left: util.rem(2);
+
+				padding: util.rem(4);
+
+				border-radius: util.rem(4);
+
+				background-color: var.$color-white;
+				color: var.$color-primary;
+
+				transform: scale(0);
+				transform-origin: bottom left;
+
+				transition: all 100ms ease 0s;
+
+				@media (prefers-color-scheme: dark) {
+					background-color: var.$color-gray-dark;
+				}
+			}
+
+			&:hover &__openIcon {
+				transform: scale(1);
+			}
+		}
+
+		&__text {
+			p {
+				width: fit-content;
+			}
+
+			&__title {
+				font-size: util.rem(18);
+				font-weight: var.$font-weight-semibold;
+
+				@include util.breakpoint-up(medium) {
+					font-size: util.rem(24);
+				}
+			}
+
+			&__description {
+				color: var.$color-gray;
+
+				@media (prefers-color-scheme: dark) {
+					color: var.$color-gray-lighter;
+				}
+			}
+
+			&__description,
+			&__action {
+				font-size: util.rem(13);
+
+				@include util.breakpoint-up(medium) {
+					font-size: util.rem(18);
+				}
+			}
+		}
+	}
+
+	&__options {
+		color: var.$color-foreground;
+		padding-block: util.rem(4);
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}

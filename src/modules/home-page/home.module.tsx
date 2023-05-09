@@ -16,11 +16,11 @@ export default function Home() {
 
 				<div className={styles.container__nav__buttonGroup}>
 					<Link href="/login">
-						<Button text="Sign in" color="success" noBackdrop />
+						<Button text="Sign in" color="primary" noBackdrop />
 					</Link>
 
 					<Link href="/register">
-						<Button text="Create account" color="success" />
+						<Button text="Create account" color="primary" />
 					</Link>
 				</div>
 			</div>
@@ -38,7 +38,7 @@ export default function Home() {
 
 					<div className={styles.container__hero__text__buttonGroup}>
 						<Link href="/register">
-							<Button text="Try it now for free" color="success" />
+							<Button text="Try it now for free" color="primary" grow />
 						</Link>
 
 						<p className={styles.container__hero__text__buttonGroup__small}>

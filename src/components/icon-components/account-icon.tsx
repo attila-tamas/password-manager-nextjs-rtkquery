@@ -3,7 +3,7 @@ export default function AccountIcon({ size }: any) {
 		<svg
 			width={size}
 			height={size}
-			viewBox="0 0 33 32"
+			viewBox="0 0 32 32"
 			fill="currentColor"
 			xmlns="http://www.w3.org/2000/svg">
 			<path

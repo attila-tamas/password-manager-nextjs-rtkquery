@@ -17,7 +17,7 @@
 
 	box-shadow: var.$drop-shadow-top;
 
-	@include util.breakpoint-up(large) {
+	@include util.breakpoint-up(medium) {
 		width: util.rem(240);
 		height: 100%;
 
@@ -35,7 +35,7 @@
 	&__logo {
 		display: none;
 
-		@include util.breakpoint-up(large) {
+		@include util.breakpoint-up(medium) {
 			display: block;
 		}
 	}
@@ -52,11 +52,6 @@
 		gap: util.rem(12);
 
 		@include util.breakpoint-up(medium) {
-			width: util.rem(280);
-			padding-block: util.rem(4);
-		}
-
-		@include util.breakpoint-up(large) {
 			width: 100%;
 			height: 100%;
 
@@ -85,7 +80,7 @@
 	&__logoutContainer {
 		display: none;
 
-		@include util.breakpoint-up(large) {
+		@include util.breakpoint-up(medium) {
 			display: block;
 		}
 	}

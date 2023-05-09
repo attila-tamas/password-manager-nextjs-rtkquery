@@ -25,7 +25,7 @@ export default function Register() {
 				</label>
 
 				<div className={styles.container__form__buttonGroup}>
-					<Button text="Create account" color="success" type="submit" flex />
+					<Button text="Create account" color="primary" type="submit" flex />
 					<p>
 						I have an account.
 						<Link href="/login" className="link">

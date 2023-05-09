@@ -8,7 +8,7 @@
 	flex-direction: column;
 	align-items: center;
 
-	@include util.breakpoint-up(large) {
+	@include util.breakpoint-up(medium) {
 		flex-direction: row;
 		gap: util.rem(12);
 	}
@@ -20,9 +20,6 @@
 
 		@include util.breakpoint-up(medium) {
 			display: block;
-		}
-
-		@include util.breakpoint-up(large) {
 			font-size: util.rem(20);
 		}
 	}
