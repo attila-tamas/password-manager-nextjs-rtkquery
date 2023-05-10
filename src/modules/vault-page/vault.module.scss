@@ -1,7 +1,7 @@
 @use "@styles/util" as util;
 
 .container {
-	width: min(100%, util.rem(320));
+	width: min(100%, util.rem(360));
 	height: 100%;
 
 	margin-inline: auto;

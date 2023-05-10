@@ -27,6 +27,11 @@ body {
 	}
 }
 
+.danger {
+	font-weight: var.$font-weight-semibold;
+	color: var.$color-error;
+}
+
 ::placeholder {
 	color: var.$color-gray;
 	opacity: 1;

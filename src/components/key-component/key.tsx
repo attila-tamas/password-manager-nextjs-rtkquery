@@ -8,6 +8,7 @@ import OpenIcon from "@components/icon-components/open-icon";
 export default function key({ props }: any) {
 	const copyPassword = () => {
 		navigator.clipboard.writeText(props.password);
+		console.log(`password copied: ${props.password}`);
 	};
 
 	return (
@@ -19,10 +20,11 @@ export default function key({ props }: any) {
 					target="_blank"
 					rel="noopener noreferrer">
 					<Image
-						className={styles.container__content__imageContainer__image}
+						className={`unselectable ${styles.container__content__imageContainer__image}`}
 						src={`https://icon.horse/icon/${props.websiteUrl}`}
 						alt={`${props.title} icon`}
 						fill
+						sizes="2.875rem, (min-width: 40rem) 4.5rem"
 					/>
 					<div className={styles.container__content__imageContainer__openIcon}>
 						<OpenIcon size="16" />

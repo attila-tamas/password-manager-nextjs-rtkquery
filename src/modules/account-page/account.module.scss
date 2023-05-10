@@ -1,0 +1,103 @@
+@use "@styles/partials" as var;
+@use "@styles/util" as util;
+
+.container {
+	width: min(100%, util.rem(360));
+	height: fit-content;
+
+	margin-inline: auto;
+	padding: util.rem(20) util.rem(20) 0 util.rem(20);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: util.rem(32);
+
+	&__titleContainer {
+		width: 100%;
+
+		display: grid;
+		text-align: center;
+
+		&__title {
+			font-size: util.rem(28);
+			font-weight: var.$font-weight-bold;
+
+			grid-row: 1;
+			grid-column: 1;
+		}
+
+		&__logoutIcon {
+			display: block;
+
+			grid-row: 1;
+			grid-column: 1;
+
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+
+			color: var.$color-primary;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			@include util.breakpoint-up(medium) {
+				display: none;
+			}
+		}
+	}
+
+	&__optionsGroup {
+		width: 100%;
+		height: fit-content;
+
+		border-radius: util.rem(4);
+		border: util.rem(1) solid var.$color-gray-light;
+
+		box-shadow: var.$drop-shadow-bottom;
+
+		@media (prefers-color-scheme: dark) {
+			border: util.rem(1) solid var.$color-black;
+			box-shadow: var.$drop-shadow-bottom-dark;
+		}
+
+		&__option {
+			width: 100%;
+			height: fit-content;
+
+			padding: util.rem(12);
+
+			background-color: var.$color-white;
+
+			@media (prefers-color-scheme: dark) {
+				background-color: var.$color-gray-dark;
+			}
+
+			&:hover {
+				cursor: pointer;
+				background-color: rgba(var.$color-gray-light, 0.1);
+			}
+
+			&:not(:first-child, :last-child) {
+				border-top: util.rem(1) solid var.$color-gray-light;
+				border-bottom: util.rem(1) solid var.$color-gray-light;
+
+				@media (prefers-color-scheme: dark) {
+					border-color: var.$color-black;
+				}
+			}
+
+			&:first-child {
+				border-top-left-radius: util.rem(4);
+				border-top-right-radius: util.rem(4);
+			}
+
+			&:last-child {
+				border-bottom-left-radius: util.rem(4);
+				border-bottom-right-radius: util.rem(4);
+			}
+		}
+	}
+}

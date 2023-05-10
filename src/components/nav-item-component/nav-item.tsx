@@ -1,10 +1,12 @@
+import Link from "next/link";
+
 import styles from "./nav-item.module.scss";
 
-export default function NavItem({ children, text }: any) {
+export default function NavItem({ children, text, to }: any) {
 	return (
-		<div className={styles.container}>
+		<Link href={`${to}`} className={styles.container}>
 			{children}
 			<span className={styles.container__text}>{text}</span>
-		</div>
+		</Link>
 	);
 }

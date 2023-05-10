@@ -14,6 +14,11 @@ export default function Nav() {
 	const router = useRouter();
 
 	const baseUrl = "/app";
+	const routes = {
+		vault: `${baseUrl}/vault`,
+		generate: `${baseUrl}/generate`,
+		account: `${baseUrl}/account`,
+	};
 
 	return (
 		<div className={styles.container}>
@@ -24,30 +29,30 @@ export default function Nav() {
 			<div className={styles.container__nav}>
 				<div
 					className={`
-						${router.pathname == `${baseUrl}/vault` ? `${styles.active}` : undefined}
+						${router.pathname == routes.vault ? `${styles.active}` : undefined}
 						${styles.container__nav__item}
 					`}>
-					<NavItem text="Vault">
+					<NavItem text="Vault" to={routes.vault}>
 						<VaultIcon size="26" />
 					</NavItem>
 				</div>
 
 				<div
 					className={`
-						${router.pathname == `${baseUrl}/generate` ? `${styles.active}` : undefined}
+						${router.pathname == routes.generate ? `${styles.active}` : undefined}
 						${styles.container__nav__item}
 					`}>
-					<NavItem text="Generate">
+					<NavItem text="Generate" to={routes.generate}>
 						<GenerateIcon size="26" />
 					</NavItem>
 				</div>
 
 				<div
 					className={`
-						${router.pathname == `${baseUrl}/account` ? `${styles.active}` : undefined}
+						${router.pathname == routes.account ? `${styles.active}` : undefined}
 						${styles.container__nav__item}
 					`}>
-					<NavItem text="Account">
+					<NavItem text="Account" to={routes.account}>
 						<AccountIcon size="26" />
 					</NavItem>
 				</div>

@@ -1,4 +1,4 @@
-export default function VaultIcon({ size }: any) {
+export default function LogoutIcon({ size }: any) {
 	return (
 		<svg
 			width={size}
