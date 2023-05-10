@@ -1,23 +1,25 @@
-@use "@styles/partials" as var;
 @use "@styles/util" as util;
 
 .input {
 	width: 100%;
 	height: fit-content;
 
-	border: util.rem(1) solid var.$color-gray-light;
+	outline: util.rem(0.5) solid transparent;
+	border: util.rem(1) solid var(--color-border);
 	border-radius: util.rem(4);
 
-	background-color: var.$color-white;
-	box-shadow: var.$drop-shadow-bottom;
+	background-color: var(--color-contrast);
+	box-shadow: var(--drop-shadow-bottom);
 
 	padding: util.rem(8) util.rem(12);
 
 	font-size: util.rem(16);
 
+	transition: all 200ms ease 0s;
+
 	&:focus {
-		outline: util.rem(0.5) solid var.$color-primary;
-		border-color: var.$color-primary;
+		outline-color: var(--color-primary);
+		border-color: var(--color-primary);
 	}
 }
 
@@ -25,18 +27,16 @@
 	-webkit-appearance: none;
 	appearance: none;
 
-	background-color: var.$color-white;
-
 	margin: 0;
 
 	width: util.rem(24);
 	height: util.rem(24);
 
-	border: util.rem(1) solid var.$color-gray-light;
+	border: util.rem(1) solid var(--color-border);
 	border-radius: util.rem(4);
 
-	background-color: var.$color-white;
-	box-shadow: var.$drop-shadow-bottom;
+	background-color: var(--color-contrast);
+	box-shadow: var(--drop-shadow-bottom);
 
 	display: grid;
 	place-content: center;
@@ -52,8 +52,8 @@
 		transform: scale(0);
 		transform-origin: bottom left;
 
-		box-shadow: inset util.em(16) util.em(16) var.$color-primary;
-		background-color: var.$color-primary;
+		box-shadow: inset util.em(16) util.em(16) var(--color-primary);
+		background-color: var(--color-primary);
 
 		clip-path: polygon(
 			17.22% 49.02%,
@@ -69,14 +69,5 @@
 
 	&:checked::before {
 		transform: scale(1);
-	}
-}
-
-@media (prefers-color-scheme: dark) {
-	.input,
-	.checkbox {
-		border: util.rem(1) solid var.$color-black;
-		background-color: var.$color-gray-dark;
-		box-shadow: var.$drop-shadow-bottom-dark;
 	}
 }

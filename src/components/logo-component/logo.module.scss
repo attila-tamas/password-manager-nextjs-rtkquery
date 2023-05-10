@@ -1,4 +1,3 @@
-@use "@styles/partials" as var;
 @use "@styles/util" as util;
 
 .container {
@@ -15,9 +14,10 @@
 
 	&__text {
 		font-size: util.em(32);
+		color: var(--color-foreground);
 
 		&__highlight {
-			color: var.$color-primary;
+			color: var(--color-primary);
 		}
 	}
 }

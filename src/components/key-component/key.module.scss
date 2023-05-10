@@ -1,4 +1,3 @@
-@use "@styles/partials" as var;
 @use "@styles/util" as util;
 
 .container {
@@ -12,33 +11,20 @@
 
 	padding: util.rem(8);
 
-	border: util.rem(1) solid var.$color-gray-light;
+	border: util.rem(1) solid var(--color-border);
 	border-radius: util.rem(4);
 
-	background-color: var.$color-white;
-	box-shadow: var.$drop-shadow-bottom;
-
-	@include util.breakpoint-up(medium) {
-		padding: util.rem(16);
-	}
-
-	@media (prefers-color-scheme: dark) {
-		border: util.rem(1) solid var.$color-black;
-		background-color: var.$color-gray-dark;
-		box-shadow: var.$drop-shadow-bottom-dark;
-	}
+	background-color: var(--color-contrast);
+	box-shadow: var(--drop-shadow-bottom);
 
 	&__content {
 		width: 100%;
+		height: fit-content;
 
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		gap: util.rem(12);
-
-		@include util.breakpoint-up(medium) {
-			gap: util.rem(20);
-		}
 
 		&__imageContainer {
 			min-width: util.rem(46);
@@ -48,11 +34,6 @@
 
 			&:hover {
 				cursor: pointer;
-			}
-
-			@include util.breakpoint-up(medium) {
-				min-width: util.rem(72);
-				min-height: util.rem(72);
 			}
 
 			&__image {
@@ -71,17 +52,13 @@
 
 				border-radius: util.rem(4);
 
-				background-color: var.$color-white;
-				color: var.$color-primary;
+				background-color: var(--color-contrast);
+				color: var(--color-primary);
 
 				transform: scale(0);
 				transform-origin: bottom left;
 
 				transition: all 100ms ease 0s;
-
-				@media (prefers-color-scheme: dark) {
-					background-color: var.$color-gray-dark;
-				}
 			}
 
 			&:hover &__openIcon {
@@ -96,42 +73,52 @@
 
 			&__title {
 				font-size: util.rem(18);
-				font-weight: var.$font-weight-semibold;
-
-				@include util.breakpoint-up(medium) {
-					font-size: util.rem(24);
-				}
+				font-weight: var(--font-weight-semibold);
 			}
 
 			&__description {
-				color: var.$color-gray;
-
-				@media (prefers-color-scheme: dark) {
-					color: var.$color-gray-lighter;
-				}
+				color: var(--color-gray);
 			}
 
 			&__description,
 			&__action {
 				font-size: util.rem(13);
-
-				@include util.breakpoint-up(medium) {
-					font-size: util.rem(18);
-				}
 			}
 		}
 	}
 
 	&__options {
-		color: var.$color-foreground;
+		color: var(--color-gray);
 		padding-block: util.rem(4);
 
 		&:hover {
 			cursor: pointer;
 		}
+	}
+}
 
-		@media (prefers-color-scheme: dark) {
-			color: var.$color-gray-lighter;
+@include util.breakpoint-up(medium) {
+	.container {
+		padding: util.rem(16);
+
+		&__content {
+			gap: util.rem(20);
+
+			&__imageContainer {
+				min-width: util.rem(72);
+				min-height: util.rem(72);
+			}
+
+			&__text {
+				&__title {
+					font-size: util.rem(24);
+				}
+
+				&__description,
+				&__action {
+					font-size: util.rem(18);
+				}
+			}
 		}
 	}
 }

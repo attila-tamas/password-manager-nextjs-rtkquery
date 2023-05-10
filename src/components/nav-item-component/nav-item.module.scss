@@ -10,19 +10,23 @@
 
 	color: inherit;
 
-	@include util.breakpoint-up(medium) {
-		flex-direction: row;
-		gap: util.rem(12);
-	}
-
 	&__text {
 		font-size: util.rem(16);
 
 		display: none;
+	}
+}
 
-		@include util.breakpoint-up(medium) {
-			display: block;
-			font-size: util.rem(20);
+@include util.breakpoint-up(medium) {
+	.container {
+		flex-direction: row;
+		gap: util.rem(12);
+
+		&__text {
+			@include util.breakpoint-up(medium) {
+				display: block;
+				font-size: util.rem(20);
+			}
 		}
 	}
 }

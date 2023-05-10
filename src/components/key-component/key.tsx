@@ -24,7 +24,7 @@ export default function key({ props }: any) {
 						src={`https://icon.horse/icon/${props.websiteUrl}`}
 						alt={`${props.title} icon`}
 						fill
-						sizes="2.875rem, (min-width: 40rem) 4.5rem"
+						sizes="(max-width: 40rem) 2.875rem, 4.75rem"
 					/>
 					<div className={styles.container__content__imageContainer__openIcon}>
 						<OpenIcon size="16" />

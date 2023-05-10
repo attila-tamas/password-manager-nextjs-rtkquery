@@ -1,17 +1,17 @@
-@use "@styles/partials" as var;
 @use "@styles/util" as util;
 
 .button {
 	width: fit-content;
 	height: fit-content;
 
+	outline: util.rem(0.5) solid transparent;
 	border: 1px solid transparent;
 	border-radius: util.rem(4);
 
 	padding: util.rem(8) util.rem(24);
 
 	font-size: util.rem(18);
-	font-weight: var.$font-weight-semibold;
+	font-weight: var(--font-weight-semibold);
 
 	background-color: transparent;
 
@@ -19,7 +19,10 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: rgba(var.$color-gray-light, 0.1);
+	}
+
+	&__flex {
+		width: 100%;
 	}
 
 	&__grow {
@@ -29,63 +32,46 @@
 		}
 	}
 
-	&__flex {
-		width: 100%;
-	}
-
-	&__primary {
-		color: var.$color-primary;
-	}
-
-	&__danger {
-		color: var.$color-error;
-	}
-
-	&__backdrop {
-		color: var.$color-white;
-		box-shadow: var.$drop-shadow-bottom;
-
+	&__noBackdrop {
 		&:hover {
-			background-color: var.$color-white;
-		}
-
-		@media (prefers-color-scheme: dark) {
-			box-shadow: var.$drop-shadow-bottom-dark;
+			background-color: var(--color-hover);
 		}
 
 		&__primary {
-			background-color: var.$color-primary;
-			border-color: var.$color-primary;
+			color: var(--color-primary);
+		}
+
+		&__danger {
+			color: var(--color-error);
+		}
+	}
+
+	&__backdrop {
+		color: var(--color-white);
+		box-shadow: var(--drop-shadow-bottom);
+
+		&:hover {
+			background-color: var(--color-contrast);
+		}
+
+		&__primary {
+			background-color: var(--color-primary);
+			border-color: var(--color-primary);
 
 			&:hover {
-				color: var.$color-primary;
-				outline: util.rem(0.5) solid var.$color-primary;
+				color: var(--color-primary);
+				outline-color: var(--color-primary);
 			}
 		}
 
 		&__danger {
-			background-color: var.$color-error;
-			border-color: var.$color-error;
+			background-color: var(--color-error);
+			border-color: var(--color-error);
 
 			&:hover {
-				color: var.$color-error;
-				outline: util.rem(0.5) solid var.$color-error;
+				color: var(--color-error);
+				outline-color: var(--color-error);
 			}
 		}
-	}
-}
-
-@media (prefers-color-scheme: dark) {
-	.button,
-	.button__backdrop {
-		color: var.$color-white;
-	}
-
-	.button:hover {
-		background-color: rgba(var.$color-white, 0.05);
-	}
-
-	.button__backdrop:hover {
-		background-color: var.$color-gray-dark;
 	}
 }

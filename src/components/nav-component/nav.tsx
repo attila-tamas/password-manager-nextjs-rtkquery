@@ -29,7 +29,7 @@ export default function Nav() {
 			<div className={styles.container__nav}>
 				<div
 					className={`
-						${router.pathname == routes.vault ? `${styles.active}` : undefined}
+						${router.pathname == routes.vault && `${styles.container__nav__active}`}
 						${styles.container__nav__item}
 					`}>
 					<NavItem text="Vault" to={routes.vault}>
@@ -39,7 +39,7 @@ export default function Nav() {
 
 				<div
 					className={`
-						${router.pathname == routes.generate ? `${styles.active}` : undefined}
+						${router.pathname == routes.generate && `${styles.container__nav__active}`}
 						${styles.container__nav__item}
 					`}>
 					<NavItem text="Generate" to={routes.generate}>
@@ -49,7 +49,7 @@ export default function Nav() {
 
 				<div
 					className={`
-						${router.pathname == routes.account ? `${styles.active}` : undefined}
+						${router.pathname == routes.account && `${styles.container__nav__active}`}
 						${styles.container__nav__item}
 					`}>
 					<NavItem text="Account" to={routes.account}>

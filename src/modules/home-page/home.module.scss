@@ -1,5 +1,4 @@
 @use "@styles/util" as util;
-@use "@styles/partials" as var;
 
 .container {
 	width: min(100%, util.rem(420));
@@ -14,16 +13,6 @@
 	margin-inline: auto;
 	padding: util.rem(20) util.rem(20) 0 util.rem(20);
 
-	@include util.breakpoint-up(medium) {
-		width: util.rem(500);
-	}
-
-	@include util.breakpoint-up(large) {
-		width: fit-content;
-		gap: util.rem(88);
-		padding: util.rem(20) util.rem(60) 0 util.rem(60);
-	}
-
 	&__nav {
 		width: 100%;
 		height: fit-content;
@@ -33,17 +22,6 @@
 
 		&__buttonGroup {
 			display: none;
-		}
-
-		@include util.breakpoint-up(large) {
-			max-width: 100%;
-
-			justify-content: space-between;
-
-			&__buttonGroup {
-				display: flex;
-				gap: util.rem(12);
-			}
 		}
 	}
 
@@ -56,11 +34,6 @@
 		justify-content: center;
 		gap: util.rem(32);
 
-		@include util.breakpoint-up(large) {
-			flex-direction: row;
-			text-align: left;
-		}
-
 		&__text {
 			width: 100%;
 			height: fit-content;
@@ -69,33 +42,13 @@
 			flex-direction: column;
 			gap: util.rem(32);
 
-			@include util.breakpoint-up(large) {
-				max-width: util.rem(650);
-			}
-
 			&__title {
 				font-size: util.rem(32);
-				font-weight: var.$font-weight-bold;
-
-				@include util.breakpoint-up(medium) {
-					font-size: util.rem(40);
-				}
-
-				@include util.breakpoint-up(xlarge) {
-					font-size: util.rem(52);
-				}
+				font-weight: var(--font-weight-bold);
 			}
 
 			&__description {
 				font-size: util.rem(18);
-
-				@include util.breakpoint-up(medium) {
-					font-size: util.rem(20);
-				}
-
-				@include util.breakpoint-up(xlarge) {
-					font-size: util.rem(24);
-				}
 			}
 
 			&__buttonGroup {
@@ -107,10 +60,6 @@
 
 				&__small {
 					font-size: util.rem(16);
-
-					@include util.breakpoint-up(large) {
-						display: none;
-					}
 				}
 			}
 		}
@@ -118,12 +67,84 @@
 		&__image {
 			width: 100%;
 			height: fit-content;
+		}
+	}
+}
 
-			@include util.breakpoint-up(large) {
-				margin-top: util.rem(48);
+@include util.breakpoint-up(medium) {
+	.container {
+		width: util.rem(500);
+
+		&__hero {
+			&__text {
+				&__title {
+					font-size: util.rem(40);
+				}
+
+				&__description {
+					font-size: util.rem(20);
+				}
+			}
+		}
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.container {
+		width: fit-content;
+		gap: util.rem(88);
+		padding: util.rem(20) util.rem(60) 0 util.rem(60);
+
+		&__nav {
+			max-width: 100%;
+
+			justify-content: space-between;
+
+			&__buttonGroup {
+				display: flex;
+				gap: util.rem(12);
+			}
+		}
+
+		&__hero {
+			flex-direction: row;
+			text-align: left;
+
+			&__text {
+				max-width: util.rem(650);
+
+				&__title {
+					font-size: util.rem(52);
+				}
+
+				&__buttonGroup {
+					&__small {
+						display: none;
+					}
+				}
 			}
 
-			@include util.breakpoint-up(xlarge) {
+			&__image {
+				margin-top: util.rem(48);
+			}
+		}
+	}
+}
+
+@include util.breakpoint-up(xlarge) {
+	.container {
+		&__hero {
+			&__text {
+				&__title {
+					font-size: util.rem(52);
+				}
+
+				&__description {
+					font-size: util.rem(24);
+				}
+			}
+
+			&__image {
 				width: util.rem(800);
 			}
 		}

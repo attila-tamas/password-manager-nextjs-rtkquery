@@ -6,8 +6,10 @@
 
 	display: flex;
 	flex-direction: column;
+}
 
-	@include util.breakpoint-up(medium) {
+@include util.breakpoint-up(medium) {
+	.container {
 		flex-direction: row;
 	}
 }

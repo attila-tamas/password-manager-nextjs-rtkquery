@@ -1,5 +1,4 @@
 @use "@styles/util" as util;
-@use "@styles/partials" as var;
 
 .container {
 	width: min(100%, util.rem(360));
@@ -15,7 +14,7 @@
 
 	&__title {
 		font-size: util.rem(28);
-		font-weight: var.$font-weight-bold;
+		font-weight: var(--font-weight-bold);
 	}
 
 	&__form {

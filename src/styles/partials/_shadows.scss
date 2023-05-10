@@ -1,10 +1,4 @@
-@use "@styles/util/functions" as functions;
-@use "./colors" as colors;
-
-$drop-shadow-bottom: functions.rem(2) functions.rem(2) functions.rem(6)
-	rgba(colors.$color-black, 0.1);
-$drop-shadow-bottom-dark: functions.rem(2) functions.rem(2) functions.rem(6)
-	rgba(colors.$color-black, 0.3);
-
-$drop-shadow-top: 0 functions.rem(-4) functions.rem(16) rgba(colors.$color-black, 0.1);
-$drop-shadow-top-dark: 0 functions.rem(-4) functions.rem(16) rgba(colors.$color-black, 0.3);
+@mixin shadows {
+	--drop-shadow-bottom: 0.125rem 0.125rem 0.375rem var(--color-shadow);
+	--drop-shadow-top: 0 -0.25rem 1rem var(--color-shadow);
+}

@@ -1,17 +1,17 @@
-@use "./partials/reset" as reset;
-@use "./util" as util;
-@use "./partials" as var;
+@use "@styles/partials/reset" as reset;
+@use "@styles/partials" as var;
+
+:root {
+	@include var.colors;
+	@include var.font-weights;
+	@include var.shadows;
+}
 
 body {
-	font-weight: var.$font-weight-normal;
+	font-weight: var(--font-weight-normal);
 
-	color: var.$color-foreground;
-	background-color: var.$color-background;
-
-	@media (prefers-color-scheme: dark) {
-		color: var.$color-background;
-		background-color: var.$color-foreground;
-	}
+	color: var(--color-foreground);
+	background-color: var(--color-background);
 }
 
 .unselectable {
@@ -19,8 +19,8 @@ body {
 }
 
 .link {
-	font-weight: var.$font-weight-semibold;
-	color: var.$color-primary;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary);
 
 	&:hover {
 		cursor: pointer;
@@ -28,15 +28,11 @@ body {
 }
 
 .danger {
-	font-weight: var.$font-weight-semibold;
-	color: var.$color-error;
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-error);
 }
 
 ::placeholder {
-	color: var.$color-gray;
+	color: var(--color-gray);
 	opacity: 1;
-
-	@media (prefers-color-scheme: dark) {
-		color: var.$color-gray-lighter;
-	}
 }

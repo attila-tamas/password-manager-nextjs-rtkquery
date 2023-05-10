@@ -8,19 +8,19 @@ export default function Button({ text, color, noBackdrop, flex, type, grow }: an
 		switch (color) {
 			case "primary":
 				if (noBackdrop) {
-					return styles.button__primary;
+					return styles.button__noBackdrop__primary;
 				}
 				return styles.button__backdrop__primary;
 
 			case "danger":
 				if (noBackdrop) {
-					return styles.button__danger;
+					return styles.button__noBackdrop__danger;
 				}
 				return styles.button__backdrop__danger;
 
 			default:
 				if (noBackdrop) {
-					return styles.button__primary;
+					return styles.button__noBackdrop__primary;
 				}
 				return styles.button__backdrop__primary;
 		}
@@ -33,7 +33,7 @@ export default function Button({ text, color, noBackdrop, flex, type, grow }: an
 				value={text}
 				className={`
 						${styles.button} 
-						${!noBackdrop && styles.button__backdrop}
+						${noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
 						${flex && styles.button__flex}
 						${grow && styles.button__grow}
 						${getButtonStyle(color)}
@@ -45,7 +45,7 @@ export default function Button({ text, color, noBackdrop, flex, type, grow }: an
 			<button
 				className={`
 						${styles.button} 
-						${!noBackdrop && styles.button__backdrop}
+						${noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
 						${flex && styles.button__flex}
 						${grow && styles.button__grow}
 						${getButtonStyle(color)}

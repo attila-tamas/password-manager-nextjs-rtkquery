@@ -12,10 +12,6 @@
 	align-items: center;
 	gap: util.rem(20);
 
-	@include util.breakpoint-up(medium) {
-		width: min(100%, util.rem(480));
-	}
-
 	&__utilContainer {
 		width: 100%;
 		height: fit-content;
@@ -33,5 +29,11 @@
 		flex-direction: column;
 		align-items: center;
 		gap: util.rem(12);
+	}
+}
+
+@include util.breakpoint-up(medium) {
+	.container {
+		width: min(100%, util.rem(480));
 	}
 }

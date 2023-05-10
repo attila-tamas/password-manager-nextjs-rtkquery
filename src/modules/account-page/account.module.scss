@@ -1,4 +1,3 @@
-@use "@styles/partials" as var;
 @use "@styles/util" as util;
 
 .container {
@@ -21,7 +20,7 @@
 
 		&__title {
 			font-size: util.rem(28);
-			font-weight: var.$font-weight-bold;
+			font-weight: var(--font-weight-bold);
 
 			grid-row: 1;
 			grid-column: 1;
@@ -37,14 +36,10 @@
 			justify-content: flex-end;
 			align-items: center;
 
-			color: var.$color-primary;
+			color: var(--color-primary);
 
 			&:hover {
 				cursor: pointer;
-			}
-
-			@include util.breakpoint-up(medium) {
-				display: none;
 			}
 		}
 	}
@@ -54,14 +49,9 @@
 		height: fit-content;
 
 		border-radius: util.rem(4);
-		border: util.rem(1) solid var.$color-gray-light;
+		border: util.rem(1) solid var(--color-border);
 
-		box-shadow: var.$drop-shadow-bottom;
-
-		@media (prefers-color-scheme: dark) {
-			border: util.rem(1) solid var.$color-black;
-			box-shadow: var.$drop-shadow-bottom-dark;
-		}
+		box-shadow: var(--drop-shadow-bottom);
 
 		&__option {
 			width: 100%;
@@ -69,24 +59,16 @@
 
 			padding: util.rem(12);
 
-			background-color: var.$color-white;
-
-			@media (prefers-color-scheme: dark) {
-				background-color: var.$color-gray-dark;
-			}
+			background-color: var(--color-contrast);
 
 			&:hover {
 				cursor: pointer;
-				background-color: rgba(var.$color-gray-light, 0.1);
+				background-color: var(--color-hover);
 			}
 
 			&:not(:first-child, :last-child) {
-				border-top: util.rem(1) solid var.$color-gray-light;
-				border-bottom: util.rem(1) solid var.$color-gray-light;
-
-				@media (prefers-color-scheme: dark) {
-					border-color: var.$color-black;
-				}
+				border-top: util.rem(1) solid var(--color-border);
+				border-bottom: util.rem(1) solid var(--color-border);
 			}
 
 			&:first-child {
@@ -97,6 +79,16 @@
 			&:last-child {
 				border-bottom-left-radius: util.rem(4);
 				border-bottom-right-radius: util.rem(4);
+			}
+		}
+	}
+}
+
+@include util.breakpoint-up(medium) {
+	.container {
+		&__titleContainer {
+			&__logoutIcon {
+				display: none;
 			}
 		}
 	}
