@@ -43,16 +43,6 @@
 			}
 		}
 
-		&__rememberContainer {
-			width: fit-content;
-
-			display: flex;
-			align-items: center;
-			gap: util.rem(12);
-
-			cursor: pointer;
-		}
-
 		&__buttonGroup {
 			display: flex;
 			flex-direction: column;

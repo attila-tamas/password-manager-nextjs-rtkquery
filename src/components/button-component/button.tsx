@@ -1,59 +1,42 @@
 import React from "react";
 import styles from "./button.module.scss";
 
-export default function Button({ text, color, noBackdrop, flex, type, grow }: any) {
-	let button;
-
+export default function Button(props: any) {
 	const getButtonStyle = (color: string) => {
 		switch (color) {
 			case "primary":
-				if (noBackdrop) {
+				if (props.noBackdrop) {
 					return styles.button__noBackdrop__primary;
 				}
 				return styles.button__backdrop__primary;
 
 			case "danger":
-				if (noBackdrop) {
+				if (props.noBackdrop) {
 					return styles.button__noBackdrop__danger;
 				}
 				return styles.button__backdrop__danger;
 
 			default:
-				if (noBackdrop) {
+				if (props.noBackdrop) {
 					return styles.button__noBackdrop__primary;
 				}
 				return styles.button__backdrop__primary;
 		}
 	};
 
-	if (type === "submit") {
-		button = (
-			<input
-				type="submit"
-				value={text}
-				className={`
+	return (
+		<input
+			type={props.type || "button"}
+			value={props.text}
+			readOnly
+			className={`
 						${styles.button} 
-						${noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
-						${flex && styles.button__flex}
-						${grow && styles.button__grow}
-						${getButtonStyle(color)}
+						${props.noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
+						${props.flex && styles.button__flex}
+						${props.grow && styles.button__grow}
+						${getButtonStyle(props.color)}
 					`}
-			/>
-		);
-	} else {
-		button = (
-			<button
-				className={`
-						${styles.button} 
-						${noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
-						${flex && styles.button__flex}
-						${grow && styles.button__grow}
-						${getButtonStyle(color)}
-					`}>
-				{text}
-			</button>
-		);
-	}
-
-	return button;
+			onClick={props.onClick}
+		/>
+	);
 }
