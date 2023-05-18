@@ -2,11 +2,11 @@ import styles from "./key.module.scss";
 
 import Image from "next/image";
 
-import { useSelector } from "react-redux";
 import { selectKeyById } from "@redux/keys/keysApiSlice";
+import { useSelector } from "react-redux";
 
-import OptionsIcon from "@components/icon-components/options-icon";
 import OpenIcon from "@components/icon-components/open-icon";
+import OptionsIcon from "@components/icon-components/options-icon";
 
 export default function Key(props: any) {
 	const key = useSelector(state => selectKeyById(state, props.keyId));

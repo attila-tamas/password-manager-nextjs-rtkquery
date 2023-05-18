@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./button.module.scss";
 
 export default function Button(props: any) {
@@ -30,7 +29,7 @@ export default function Button(props: any) {
 			value={props.text}
 			readOnly
 			className={`
-						${styles.button} 
+						${styles.button}
 						${props.noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
 						${props.flex && styles.button__flex}
 						${props.grow && styles.button__grow}

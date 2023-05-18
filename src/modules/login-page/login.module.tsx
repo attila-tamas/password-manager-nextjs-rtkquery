@@ -1,19 +1,19 @@
 import styles from "./login.module.scss";
 
-import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import router from "next/router";
+import { useEffect, useRef, useState } from "react";
 
 import routes from "@util/routes";
 
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@redux/auth/authSlice";
-import { useLoginMutation } from "@redux/auth/authApiSlice";
 import useLocalStorage from "@hooks/useLocalStorage";
+import { useLoginMutation } from "@redux/auth/authApiSlice";
+import { setCredentials } from "@redux/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 import Button from "@components/button-component/button";
-import Logo from "@components/logo-component/logo";
 import Input from "@components/input-component/input";
+import Logo from "@components/logo-component/logo";
 
 export default function Login() {
 	const userRef = useRef<HTMLDivElement>(null);

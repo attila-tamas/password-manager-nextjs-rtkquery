@@ -1,7 +1,5 @@
 import styles from "./toggle.module.scss";
 
-import React from "react";
-
 export default function Toggle({ onChange, label, flex, defaultChecked }: any) {
 	return (
 		<label className={`${styles.container} ${flex && styles.container__flex}`}>

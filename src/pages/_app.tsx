@@ -1,11 +1,11 @@
 import "@styles/globals.scss";
 
 import type { AppProps } from "next/app";
-import Head from "next/head";
 import { Quicksand } from "next/font/google";
+import Head from "next/head";
 
-import { Provider } from "react-redux";
 import { store } from "@redux/store";
+import { Provider } from "react-redux";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 

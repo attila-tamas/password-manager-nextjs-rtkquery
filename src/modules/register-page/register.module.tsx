@@ -1,10 +1,10 @@
-import React from "react";
 import styles from "./register.module.scss";
+
 import Link from "next/link";
 
-import Logo from "@components/logo-component/logo";
-import Input from "@components/input-component/input";
 import Button from "@components/button-component/button";
+import Input from "@components/input-component/input";
+import Logo from "@components/logo-component/logo";
 
 export default function Register() {
 	return (

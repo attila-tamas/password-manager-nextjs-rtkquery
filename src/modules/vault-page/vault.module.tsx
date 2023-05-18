@@ -2,8 +2,8 @@ import styles from "./vault.module.scss";
 
 import { useGetKeysQuery } from "@redux/keys/keysApiSlice";
 
-import Input from "@components/input-component/input";
 import Button from "@components/button-component/button";
+import Input from "@components/input-component/input";
 import Key from "@components/key-component/key";
 
 export default function Vault() {

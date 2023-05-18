@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./input.module.scss";
 
 export default function Input({ type, placeholder, reference, value, onChange }: any) {

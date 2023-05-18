@@ -5,15 +5,15 @@ import { useEffect } from "react";
 
 import routes from "@util/routes";
 
-import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 import useLocalStorage from "@hooks/useLocalStorage";
+import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 
-import VaultIcon from "@components/icon-components/vault-icon";
-import GenerateIcon from "@components/icon-components/generate-icon";
 import AccountIcon from "@components/icon-components/account-icon";
+import GenerateIcon from "@components/icon-components/generate-icon";
 import LogoutIcon from "@components/icon-components/logout-icon";
-import NavItem from "@components/nav-item-component/nav-item";
+import VaultIcon from "@components/icon-components/vault-icon";
 import Logo from "@components/logo-component/logo";
+import NavItem from "@components/nav-item-component/nav-item";
 
 export default function Nav() {
 	const router = useRouter();

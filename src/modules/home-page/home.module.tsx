@@ -1,10 +1,10 @@
-import React from "react";
 import styles from "./home.module.scss";
+
 import Image from "next/image";
 import Link from "next/link";
 
-import Logo from "@components/logo-component/logo";
 import Button from "@components/button-component/button";
+import Logo from "@components/logo-component/logo";
 
 import heroGraphic from "@public/home-page-hero-graphic.svg";
 
