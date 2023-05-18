@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import Layout from "@modules/layout/layout";
+import Layout from "@components/layout-component/layout";
 import Account from "@modules/account-page/account";
 
 export default function AccountPage() {

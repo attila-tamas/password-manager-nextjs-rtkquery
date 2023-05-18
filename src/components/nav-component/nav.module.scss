@@ -42,6 +42,23 @@
 			&:hover {
 				color: var(--color-primary);
 			}
+
+			&__logout {
+				width: 100%;
+				height: fit-content;
+
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				color: inherit;
+
+				&__text {
+					font-size: util.rem(16);
+
+					display: none;
+				}
+			}
 		}
 
 		&__active {
@@ -67,6 +84,18 @@
 			display: flex;
 			flex-direction: column;
 			gap: util.rem(16);
+
+			&__item {
+				&__logout {
+					flex-direction: row;
+					gap: util.rem(12);
+
+					&__text {
+						display: block;
+						font-size: util.rem(20);
+					}
+				}
+			}
 		}
 
 		&__logo,

@@ -23,10 +23,8 @@
 		gap: util.rem(12);
 
 		&__text {
-			@include util.breakpoint-up(medium) {
-				display: block;
-				font-size: util.rem(20);
-			}
+			display: block;
+			font-size: util.rem(20);
 		}
 	}
 }

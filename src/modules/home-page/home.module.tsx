@@ -55,7 +55,6 @@ export default function Home() {
 					className={`unselectable ${styles.container__hero__image}`}
 					src={heroGraphic}
 					alt="Mobile and desktop device showing keystone vault"
-					priority
 				/>
 			</div>
 		</main>

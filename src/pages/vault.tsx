@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import Layout from "@modules/layout/layout";
+import Layout from "@components/layout-component/layout";
 import Vault from "@modules/vault-page/vault.module";
 
 export default function VaultPage() {
