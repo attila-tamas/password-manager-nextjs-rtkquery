@@ -12,6 +12,7 @@ import { setCredentials } from "@redux/auth/authSlice";
 import { useDispatch } from "react-redux";
 
 import Button from "@components/button-component/button";
+import Checkbox from "@components/checkbox-component/checkbox";
 import Input from "@components/input-component/input";
 import Logo from "@components/logo-component/logo";
 
@@ -22,6 +23,7 @@ export default function Login() {
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState("");
 	const [persist, setPersist] = useLocalStorage("persist", "false");
+	const [showPwd, setShowPwd] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -56,6 +58,8 @@ export default function Login() {
 
 	const handleEmailInput = (e: any) => setEmail(e.target.value);
 	const handlePwdInput = (e: any) => setPassword(e.target.value);
+
+	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
 
 	if (isLoading) return <p>Loading...</p>;
 
@@ -93,7 +97,17 @@ export default function Login() {
 							Forgot password?
 						</a>
 					</span>
-					<Input type="password" value={password} onChange={handlePwdInput} />
+					<Input
+						type="password"
+						show={showPwd}
+						value={password}
+						onChange={handlePwdInput}
+					/>
+					<Checkbox
+						label="Show Password"
+						checked={showPwd}
+						onChange={handleShowPwdToggle}
+					/>
 				</label>
 
 				<div className={styles.container__form__buttonGroup}>
