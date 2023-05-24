@@ -1,6 +1,8 @@
-import styles from "./generator.module.scss";
+import styles from "./password-generator.module.scss";
 
 import { useEffect, useState } from "react";
+
+import passwordGenerator from "@util/passwordGenerator";
 
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
@@ -16,23 +18,6 @@ export default function Generate() {
 	const [symbols, setSymbols] = useState(true);
 	const [errors, setErrors] = useState("");
 
-	const random = (min = 0, max = 1) => {
-		return Math.floor(Math.random() * (max + 1 - min) + min);
-	};
-
-	const randomLower = () => {
-		return String.fromCharCode(random(97, 122));
-	};
-
-	const randomUpper = () => {
-		return String.fromCharCode(random(65, 90));
-	};
-
-	const randomSymbol = () => {
-		const symbols = "~*$%@#^&!?*'-=/,.{}()[]<>";
-		return symbols[random(0, symbols.length - 1)];
-	};
-
 	const generatePassword = () => {
 		setErrors("");
 
@@ -40,25 +25,15 @@ export default function Generate() {
 			return setErrors("Select at least one option");
 		}
 
-		let password = "";
+		const generationSettings = {
+			passwordLength,
+			uppercase,
+			lowercase,
+			numbers,
+			symbols,
+		};
 
-		for (let i = 0; i < passwordLength; i++) {
-			const choice = random(0, 3);
-
-			if (lowercase && choice === 0) {
-				password += randomLower();
-			} else if (uppercase && choice === 1) {
-				password += randomUpper();
-			} else if (symbols && choice === 2) {
-				password += randomSymbol();
-			} else if (numbers && choice === 3) {
-				password += random(0, 9);
-			} else {
-				i--;
-			}
-		}
-
-		setPassword(password);
+		setPassword(passwordGenerator(generationSettings));
 	};
 
 	const copyPassword = () => navigator.clipboard.writeText(password);
@@ -120,11 +95,11 @@ export default function Generate() {
 				</div>
 
 				<Button text="Generate" color="primary" flex onClick={generatePassword} />
+			</div>
 
-				<div className={`link ${styles.container__content__addToVault}`}>
-					<AddIcon size="24" />
-					<span>Add to vault</span>
-				</div>
+			<div className={`link ${styles.container__addToVault}`}>
+				<AddIcon size="24" />
+				<span>Add to vault</span>
 			</div>
 		</div>
 	);

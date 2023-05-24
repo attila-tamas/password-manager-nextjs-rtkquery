@@ -9,6 +9,17 @@ import WebsiteIcon from "@components/website-icon-component/website-icon";
 export default function Key(props: any) {
 	const key = useSelector(state => selectKeyById(state, props.keyId));
 
+	const credentialField = key.customFields.find((field: any) => {
+		const fieldInLowerCase = field.key.toLowerCase();
+		const foundField =
+			fieldInLowerCase.includes("email") || fieldInLowerCase.includes("username");
+
+		if (foundField) {
+			return foundField;
+		}
+	});
+	const credential = credentialField.value;
+
 	const copyPassword = () => {
 		navigator.clipboard.writeText(key.password);
 		console.log(`password copied: ${key.password}`);
@@ -22,7 +33,7 @@ export default function Key(props: any) {
 
 					<div className={styles.container__content__text}>
 						<p className={styles.container__content__text__title}>{key.title}</p>
-						<p className={styles.container__content__text__description}>{key.email}</p>
+						<p className={styles.container__content__text__description}>{credential}</p>
 						<p
 							className={`link ${styles.container__content__text__action}`}
 							onClick={copyPassword}>

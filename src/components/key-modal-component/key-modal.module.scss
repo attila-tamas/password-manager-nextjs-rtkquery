@@ -14,9 +14,11 @@
 	overflow-y: auto;
 
 	padding: util.rem(20);
+	padding-bottom: util.rem(66);
 
 	border-radius: util.rem(4);
 
+	box-shadow: var(--drop-shadow-bottom);
 	background-color: var(--color-background);
 
 	z-index: 1;
@@ -204,5 +206,6 @@
 @include util.breakpoint-up(medium) {
 	.container {
 		max-height: calc(100% - util.rem(40));
+		padding: util.rem(20);
 	}
 }

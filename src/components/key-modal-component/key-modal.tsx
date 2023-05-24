@@ -4,6 +4,7 @@ import { selectKeyById } from "@redux/keys/keysApiSlice";
 import { SetStateAction, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import passwordGenerator from "@/util/passwordGenerator";
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
 import CloseIcon from "@components/icon-components/close-icon";
@@ -17,8 +18,16 @@ export default function EditKey({ keyId, showEditor }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
 
 	const [title, setTitle] = useState(key.title);
-	const [password, setPassword] = useState("");
+	const [password, setPassword] = useState(key.password);
 	const [inputFields, setInputFields] = useState([{ key: "", value: "" }]);
+
+	const passwordGenerationSettings = {
+		passwordLength: 32,
+		uppercase: true,
+		lowercase: true,
+		numbers: true,
+		symbols: true,
+	};
 
 	// load the custom fields from the key
 	useEffect(() => {
@@ -100,6 +109,13 @@ export default function EditKey({ keyId, showEditor }: any) {
 		);
 	});
 
+	const handleGeneratePasswordClick = () => {
+		// empty the password field and set an artificial delay
+		// to convey response to the user that the password has been regenerated
+		setPassword("");
+		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
+	};
+
 	const handleSubmit = (e: any) => {
 		e.preventDefault(); // prevent page reload
 
@@ -142,7 +158,8 @@ export default function EditKey({ keyId, showEditor }: any) {
 						/>
 
 						<span
-							className={styles.container__form__fieldContainer__input__generateIcon}>
+							className={styles.container__form__fieldContainer__input__generateIcon}
+							onClick={handleGeneratePasswordClick}>
 							<GenerateIcon size="32" />
 						</span>
 					</div>
