@@ -1,0 +1,46 @@
+@use "@styles/util" as util;
+
+.container {
+	min-width: util.rem(46);
+	min-height: util.rem(46);
+
+	position: relative;
+
+	cursor: pointer;
+
+	&__image {
+		border-radius: util.rem(4);
+	}
+
+	&__openIcon {
+		width: fit-content;
+		height: fit-content;
+
+		position: absolute;
+		bottom: util.rem(2);
+		left: util.rem(2);
+
+		padding: util.rem(4);
+
+		border-radius: util.rem(4);
+
+		background-color: var(--color-contrast);
+		color: var(--color-primary);
+
+		transform: scale(0);
+		transform-origin: bottom left;
+
+		transition: all 100ms ease 0s;
+	}
+
+	&:hover &__openIcon {
+		transform: scale(1);
+	}
+
+	&__grow {
+		@include util.breakpoint-up(medium) {
+			min-width: util.rem(72);
+			min-height: util.rem(72);
+		}
+	}
+}

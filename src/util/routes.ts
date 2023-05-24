@@ -5,6 +5,7 @@ const routes = {
 	vault: "/vault",
 	generate: "/generate",
 	account: "/account",
+	edit: "/edit",
 };
 
 export default routes;

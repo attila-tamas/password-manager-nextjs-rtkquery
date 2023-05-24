@@ -1,12 +1,10 @@
 import styles from "./key.module.scss";
 
-import Image from "next/image";
-
 import { selectKeyById } from "@redux/keys/keysApiSlice";
 import { useSelector } from "react-redux";
 
-import OpenIcon from "@components/icon-components/open-icon";
 import OptionsIcon from "@components/icon-components/options-icon";
+import WebsiteIcon from "@components/website-icon-component/website-icon";
 
 export default function Key(props: any) {
 	const key = useSelector(state => selectKeyById(state, props.keyId));
@@ -20,22 +18,7 @@ export default function Key(props: any) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.container__content}>
-					<a
-						className={styles.container__content__imageContainer}
-						href={`https://www.${key.websiteUrl}`}
-						target="_blank"
-						rel="noopener noreferrer">
-						<Image
-							className={`unselectable ${styles.container__content__imageContainer__image}`}
-							src={`https://icon.horse/icon/${key.websiteUrl}`}
-							alt={`${key.title} icon`}
-							fill
-							sizes="(max-width: 40rem) 2.875rem, 4.75rem"
-						/>
-						<div className={styles.container__content__imageContainer__openIcon}>
-							<OpenIcon size="16" />
-						</div>
-					</a>
+					<WebsiteIcon currentKey={key} grow />
 
 					<div className={styles.container__content__text}>
 						<p className={styles.container__content__text__title}>{key.title}</p>
@@ -48,7 +31,7 @@ export default function Key(props: any) {
 					</div>
 				</div>
 
-				<div className={styles.container__options}>
+				<div className={styles.container__options} onClick={props.onClick}>
 					<OptionsIcon size="24" />
 				</div>
 			</div>
