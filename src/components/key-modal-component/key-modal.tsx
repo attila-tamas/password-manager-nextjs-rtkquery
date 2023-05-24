@@ -1,10 +1,11 @@
 import styles from "./key-modal.module.scss";
 
-import { selectKeyById } from "@redux/keys/keysApiSlice";
+import { selectKeyById, useUpdateKeyMutation } from "@redux/keys/keysApiSlice";
 import { SetStateAction, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import passwordGenerator from "@/util/passwordGenerator";
+import passwordGenerator from "@util/passwordGenerator";
+
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
 import CloseIcon from "@components/icon-components/close-icon";
@@ -14,12 +15,14 @@ import GenerateIcon from "@components/icon-components/generate-icon";
 import Input from "@components/input-component/input";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
 
-export default function EditKey({ keyId, showEditor }: any) {
+export default function KeyModal({ keyId, showEditor }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
 
 	const [title, setTitle] = useState(key.title);
 	const [password, setPassword] = useState(key.password);
 	const [inputFields, setInputFields] = useState([{ key: "", value: "" }]);
+
+	const [updateKey, { isLoading, isSuccess, isError, error }] = useUpdateKeyMutation();
 
 	const passwordGenerationSettings = {
 		passwordLength: 32,
@@ -84,7 +87,7 @@ export default function EditKey({ keyId, showEditor }: any) {
 						name="key"
 						maxLength={24}
 						value={field.key}
-						size={field.key.length}
+						size={field.key.length || 4}
 						onChange={(event: any) => handleInputChange(index, event)}
 						className={styles.container__form__fieldContainer__title__input}
 					/>
@@ -116,13 +119,31 @@ export default function EditKey({ keyId, showEditor }: any) {
 		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
 	};
 
-	const handleSubmit = (e: any) => {
+	const handleSubmit = async (e: any) => {
 		e.preventDefault(); // prevent page reload
 
-		console.log(inputFields);
+		await updateKey({
+			id: key.id,
+			title: title || "Title",
+			password,
+			customFields: inputFields,
+		});
 	};
 
 	const handleClose = () => showEditor(false);
+
+	if (isLoading) {
+		console.log("loading...");
+	}
+
+	if (isError) {
+		const errorMsg = error as any;
+		console.log(errorMsg.data.message);
+	}
+
+	if (isSuccess) {
+		handleClose();
+	}
 
 	return (
 		<div className={styles.container}>
@@ -139,7 +160,7 @@ export default function EditKey({ keyId, showEditor }: any) {
 						name="key"
 						maxLength={24}
 						value={formatTitle(title)}
-						size={formatTitle(title).length}
+						size={formatTitle(title).length || 4}
 						onChange={(event: any) => setTitle(event.target.value)}
 						className={styles.container__form__titleContainer__input}
 					/>
@@ -182,7 +203,15 @@ export default function EditKey({ keyId, showEditor }: any) {
 					</span>
 					<div className={styles.container__form__buttonGroup__separator}>&nbsp;</div>
 					<span>
-						<Button text="Save" color="primary" noBackdrop flex type="submit" />
+						{/* Make the buttons disabled while loading */}
+						{/* Make the modal unclosable while loading */}
+						<Button
+							text={isLoading ? "Saving..." : "Save"}
+							color="primary"
+							noBackdrop
+							flex
+							type="submit"
+						/>
 					</span>
 				</div>
 			</form>

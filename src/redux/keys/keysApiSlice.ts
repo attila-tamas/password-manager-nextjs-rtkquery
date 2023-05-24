@@ -1,4 +1,4 @@
-import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 
 const keysAdapter = createEntityAdapter({
@@ -30,10 +30,21 @@ export const keysApiSlice = apiSlice.injectEndpoints({
 				}
 			},
 		}),
+
+		updateKey: builder.mutation({
+			query: initialKeyData => ({
+				url: "/key/update",
+				method: "PATCH",
+				body: {
+					...initialKeyData,
+				},
+			}),
+			invalidatesTags: (result, error, arg) => [{ type: "Key", id: arg.id }],
+		}),
 	}),
 });
 
-export const { useGetKeysQuery } = keysApiSlice;
+export const { useGetKeysQuery, useUpdateKeyMutation } = keysApiSlice;
 
 // returns the query result object
 export const selectKeysResult = keysApiSlice.endpoints.getKeys.select("");
