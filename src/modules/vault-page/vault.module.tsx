@@ -3,16 +3,18 @@ import styles from "./vault.module.scss";
 import { useGetKeysQuery } from "@redux/keys/keysApiSlice";
 import { useState } from "react";
 
-import KeyModal from "@/components/key-modal-component/key-modal";
 import Button from "@components/button-component/button";
 import Input from "@components/input-component/input";
 import Key from "@components/key-component/key";
+import AddNewKeyModal from "@components/key-modal-component/new-key-modal";
+import UpdateKeyModal from "@components/key-modal-component/update-key-modal";
 
 export default function Vault() {
 	const { data: keys, isLoading, isSuccess, isError, error } = useGetKeysQuery("");
 
 	const [keyId, setKeyId] = useState("");
-	const [editorIsVisible, setEditorIsVisible] = useState(false);
+	const [showUpdateKeyModal, setShowUpdateKeyModal] = useState(false);
+	const [showAddNewKeyModal, setShowAddNewKeyModal] = useState(false);
 
 	let content;
 
@@ -34,7 +36,7 @@ export default function Vault() {
 						keyId={keyId}
 						onClick={() => {
 							setKeyId(keyId);
-							setEditorIsVisible(true);
+							setShowUpdateKeyModal(true);
 						}}
 					/>
 			  ))
@@ -49,20 +51,38 @@ export default function Vault() {
 				<div className={styles.container__wrapper}>
 					<div className={styles.container__wrapper__utilContainer}>
 						<Input type="text" placeholder="Search..." />
-						<Button text="New" color="primary" />
+						<Button
+							text="New"
+							color="primary"
+							onClick={() => {
+								setShowAddNewKeyModal(true);
+							}}
+						/>
 					</div>
 
 					<div className={styles.container__wrapper__keyList}>{content}</div>
 				</div>
 
-				{editorIsVisible && (
+				{showUpdateKeyModal && (
 					<div className={styles.container__keyEditor}>
-						<KeyModal keyId={keyId} showEditor={setEditorIsVisible} />
+						<UpdateKeyModal keyId={keyId} show={setShowUpdateKeyModal} />
+					</div>
+				)}
+
+				{showAddNewKeyModal && (
+					<div className={styles.container__keyEditor}>
+						<AddNewKeyModal show={setShowAddNewKeyModal} />
 					</div>
 				)}
 			</div>
-			{editorIsVisible && (
-				<div className={styles.shadow} onClick={() => setEditorIsVisible(false)}></div>
+			{(showUpdateKeyModal || showAddNewKeyModal) && (
+				<div
+					className={styles.shadow}
+					onClick={() => {
+						setShowUpdateKeyModal(false);
+						setShowAddNewKeyModal(false);
+					}}
+				/>
 			)}
 		</>
 	);

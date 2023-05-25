@@ -2,7 +2,7 @@ import styles from "./password-generator.module.scss";
 
 import { useEffect, useState } from "react";
 
-import passwordGenerator from "@util/passwordGenerator";
+import { passwordGenerator } from "@util/passwordGenerator";
 
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";

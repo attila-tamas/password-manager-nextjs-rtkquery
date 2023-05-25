@@ -41,10 +41,22 @@ export const keysApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: (result, error, arg) => [{ type: "Key", id: arg.id }],
 		}),
+
+		addNewKey: builder.mutation({
+			query: initialKeyData => ({
+				url: "/key/new",
+				method: "POST",
+				body: {
+					...initialKeyData,
+				},
+			}),
+			invalidatesTags: [{ type: "Key", id: "LIST" }],
+		}),
 	}),
+	overrideExisting: false,
 });
 
-export const { useGetKeysQuery, useUpdateKeyMutation } = keysApiSlice;
+export const { useGetKeysQuery, useUpdateKeyMutation, useAddNewKeyMutation } = keysApiSlice;
 
 // returns the query result object
 export const selectKeysResult = keysApiSlice.endpoints.getKeys.select("");

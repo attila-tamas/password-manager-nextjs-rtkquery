@@ -70,12 +70,12 @@ export default function Login() {
 			<p className={styles.container__title}>Sign in</p>
 
 			{/* temp */}
-			<p
-				ref={errorRef}
-				className={errorMsg ? styles.error : styles.offscreen}
-				aria-live="assertive">
-				{errorMsg}
-			</p>
+			{errorMsg && (
+				<p ref={errorRef} className="error" aria-live="assertive">
+					{errorMsg}
+				</p>
+			)}
+
 			{/* temp */}
 
 			<form className={styles.container__form} onSubmit={handleSubmit}>

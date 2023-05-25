@@ -47,6 +47,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 			},
 		}),
 	}),
+	overrideExisting: false,
 });
 
 export const { useLoginMutation, useSendLogoutMutation, useRefreshMutation } = authApiSlice;

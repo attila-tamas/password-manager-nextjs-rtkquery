@@ -18,7 +18,7 @@ export default function Key(props: any) {
 			return foundField;
 		}
 	});
-	const credential = credentialField.value;
+	const credential = credentialField?.value;
 
 	const copyPassword = () => {
 		navigator.clipboard.writeText(key.password);

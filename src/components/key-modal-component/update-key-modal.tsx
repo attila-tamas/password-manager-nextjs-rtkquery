@@ -4,7 +4,7 @@ import { selectKeyById, useUpdateKeyMutation } from "@redux/keys/keysApiSlice";
 import { SetStateAction, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import passwordGenerator from "@util/passwordGenerator";
+import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGenerator";
 
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
@@ -15,22 +15,38 @@ import GenerateIcon from "@components/icon-components/generate-icon";
 import Input from "@components/input-component/input";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
 
-export default function KeyModal({ keyId, showEditor }: any) {
+export default function UpdateKeyModal({ keyId, show }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
 
 	const [title, setTitle] = useState(key.title);
 	const [password, setPassword] = useState(key.password);
 	const [inputFields, setInputFields] = useState([{ key: "", value: "" }]);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const [updateKey, { isLoading, isSuccess, isError, error }] = useUpdateKeyMutation();
 
-	const passwordGenerationSettings = {
-		passwordLength: 32,
-		uppercase: true,
-		lowercase: true,
-		numbers: true,
-		symbols: true,
-	};
+	useEffect(() => {
+		if (isLoading) {
+			console.log("loading...");
+		}
+	}, [isLoading]);
+
+	useEffect(() => {
+		if (isSuccess) {
+			show(false);
+		}
+	}, [isSuccess, show]);
+
+	useEffect(() => {
+		if (isError) {
+			const errorObj = error as any;
+			setErrorMessage(errorObj.data.message);
+		}
+	}, [isError, error]);
+
+	useEffect(() => {
+		setErrorMessage("");
+	}, [password]);
 
 	// load the custom fields from the key
 	useEffect(() => {
@@ -43,9 +59,7 @@ export default function KeyModal({ keyId, showEditor }: any) {
 		setInputFields(customFields);
 	}, [key.customFields]);
 
-	// check if the last two characters are white space
-	// if they are, trim the last one
-	// otherwise, return the value without formatting
+	// trim the last whitespace, when there is more than one
 	const formatTitle = (value: string) => {
 		if (value.endsWith("  ")) {
 			return value.slice(0, -1);
@@ -55,6 +69,13 @@ export default function KeyModal({ keyId, showEditor }: any) {
 	};
 
 	const handlePasswordChange = (e: any) => setPassword(e.target.value);
+
+	// empty the password field and set an artificial delay
+	// to convey response to the user that the password has been regenerated
+	const handleGeneratePasswordClick = () => {
+		setPassword("");
+		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
+	};
 
 	const handleInputChange = (index: number, event: any) => {
 		const data = [...inputFields];
@@ -112,13 +133,6 @@ export default function KeyModal({ keyId, showEditor }: any) {
 		);
 	});
 
-	const handleGeneratePasswordClick = () => {
-		// empty the password field and set an artificial delay
-		// to convey response to the user that the password has been regenerated
-		setPassword("");
-		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
-	};
-
 	const handleSubmit = async (e: any) => {
 		e.preventDefault(); // prevent page reload
 
@@ -130,24 +144,9 @@ export default function KeyModal({ keyId, showEditor }: any) {
 		});
 	};
 
-	const handleClose = () => showEditor(false);
-
-	if (isLoading) {
-		console.log("loading...");
-	}
-
-	if (isError) {
-		const errorMsg = error as any;
-		console.log(errorMsg.data.message);
-	}
-
-	if (isSuccess) {
-		handleClose();
-	}
-
 	return (
 		<div className={styles.container}>
-			<span className={styles.container__closeIcon} onClick={handleClose}>
+			<span className={styles.container__closeIcon} onClick={() => show(false)}>
 				<CloseIcon size="28" />
 			</span>
 
@@ -184,6 +183,12 @@ export default function KeyModal({ keyId, showEditor }: any) {
 							<GenerateIcon size="32" />
 						</span>
 					</div>
+
+					{errorMessage && (
+						<p className="error" aria-live="assertive">
+							{errorMessage}
+						</p>
+					)}
 				</div>
 
 				<>{customFields}</>
@@ -198,7 +203,7 @@ export default function KeyModal({ keyId, showEditor }: any) {
 				</div>
 
 				<div className={styles.container__form__buttonGroup}>
-					<span onClick={handleClose}>
+					<span onClick={() => show(false)}>
 						<Button text="Cancel" color="danger" noBackdrop flex />
 					</span>
 					<div className={styles.container__form__buttonGroup__separator}>&nbsp;</div>

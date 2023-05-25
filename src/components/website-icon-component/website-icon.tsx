@@ -13,7 +13,7 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 			return foundField;
 		}
 	});
-	const url = urlField.value;
+	const url = urlField?.value;
 
 	return (
 		<a

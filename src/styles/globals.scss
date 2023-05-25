@@ -1,5 +1,6 @@
 @use "@styles/partials/reset" as reset;
 @use "@styles/partials" as var;
+@use "@styles/util" as util;
 
 :root {
 	@include var.colors;
@@ -33,4 +34,9 @@ body {
 ::placeholder {
 	color: var(--color-gray);
 	opacity: 1;
+}
+
+.error {
+	color: var(--color-error);
+	font-size: util.rem(16);
 }

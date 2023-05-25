@@ -1,10 +1,18 @@
-export default function passwordGenerator(settings: {
+export const passwordGenerationSettings = {
+	passwordLength: 32,
+	uppercase: true,
+	lowercase: true,
+	numbers: true,
+	symbols: true,
+};
+
+export const passwordGenerator = (settings: {
 	passwordLength: number;
 	uppercase: boolean;
 	lowercase: boolean;
 	numbers: boolean;
 	symbols: boolean;
-}) {
+}) => {
 	let password = "";
 
 	for (let i = 0; i < settings.passwordLength; i++) {
@@ -24,7 +32,7 @@ export default function passwordGenerator(settings: {
 	}
 
 	return password;
-}
+};
 
 const random = (min = 0, max = 1) => {
 	return Math.floor(Math.random() * (max + 1 - min) + min);
