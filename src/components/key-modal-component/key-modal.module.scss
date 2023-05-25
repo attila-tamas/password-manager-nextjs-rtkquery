@@ -201,6 +201,31 @@
 			}
 		}
 	}
+
+	&__deleteKeyContainer {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		justify-content: center;
+
+		margin-top: util.rem(24);
+
+		&__deleteKey {
+			width: fit-content;
+			height: fit-content;
+
+			display: flex;
+			align-items: center;
+			gap: util.rem(8);
+
+			color: var(--color-error);
+
+			font-size: util.rem(16);
+
+			cursor: pointer;
+		}
+	}
 }
 
 @include util.breakpoint-up(medium) {

@@ -1,6 +1,10 @@
 import styles from "./key-modal.module.scss";
 
-import { selectKeyById, useUpdateKeyMutation } from "@redux/keys/keysApiSlice";
+import {
+	selectKeyById,
+	useDeleteKeyMutation,
+	useUpdateKeyMutation,
+} from "@redux/keys/keysApiSlice";
 import { SetStateAction, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -24,18 +28,20 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const [updateKey, { isLoading, isSuccess, isError, error }] = useUpdateKeyMutation();
+	const [deleteKey, { isLoading: isDelLoading, isSuccess: isDelSuccess }] =
+		useDeleteKeyMutation();
 
 	useEffect(() => {
-		if (isLoading) {
+		if (isLoading || isDelLoading) {
 			console.log("loading...");
 		}
-	}, [isLoading]);
+	}, [isLoading, isDelLoading]);
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccess || isDelSuccess) {
 			show(false);
 		}
-	}, [isSuccess, show]);
+	}, [isSuccess, isDelSuccess, show]);
 
 	useEffect(() => {
 		if (isError) {
@@ -68,27 +74,27 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 		return value;
 	};
 
-	const handlePasswordChange = (e: any) => setPassword(e.target.value);
+	const onPwdChange = (e: any) => setPassword(e.target.value);
 
 	// empty the password field and set an artificial delay
 	// to convey response to the user that the password has been regenerated
-	const handleGeneratePasswordClick = () => {
+	const onGeneratePwdClick = () => {
 		setPassword("");
 		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
 	};
 
-	const handleInputChange = (index: number, event: any) => {
+	const onInputChange = (index: number, event: any) => {
 		const data = [...inputFields];
 		data[index][event.target.name as keyof (typeof inputFields)[0]] = event.target.value;
 		setInputFields(data);
 	};
 
-	const handleAddNewField = () => {
+	const onAddNewFieldClicked = () => {
 		const newfield = { key: "New field", value: "" };
 		setInputFields([...inputFields, newfield]);
 	};
 
-	const handleRemoveField = (index: number) => {
+	const onRemoveFieldClicked = (index: number) => {
 		const data = [...inputFields];
 		data.splice(index, 1);
 		setInputFields(data);
@@ -109,7 +115,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 						maxLength={24}
 						value={field.key}
 						size={field.key.length || 4}
-						onChange={(event: any) => handleInputChange(index, event)}
+						onChange={(event: any) => onInputChange(index, event)}
 						className={styles.container__form__fieldContainer__title__input}
 					/>
 				</div>
@@ -119,13 +125,13 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 						type="text"
 						name="value"
 						value={field.value}
-						onChange={(event: any) => handleInputChange(index, event)}
+						onChange={(event: any) => onInputChange(index, event)}
 						withCopyButton
 					/>
 
 					<span
 						className={styles.container__form__fieldContainer__input__deleteIcon}
-						onClick={() => handleRemoveField(index)}>
+						onClick={() => onRemoveFieldClicked(index)}>
 						<DeleteIcon size="32" />
 					</span>
 				</div>
@@ -133,7 +139,11 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 		);
 	});
 
-	const handleSubmit = async (e: any) => {
+	const onDeleteKeyClicked = async () => {
+		await deleteKey({ id: key.id });
+	};
+
+	const onSubmit = async (e: any) => {
 		e.preventDefault(); // prevent page reload
 
 		await updateKey({
@@ -150,7 +160,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 				<CloseIcon size="28" />
 			</span>
 
-			<form className={styles.container__form} onSubmit={handleSubmit}>
+			<form className={styles.container__form} onSubmit={onSubmit}>
 				<div className={styles.container__form__titleContainer}>
 					<WebsiteIcon currentKey={key} />
 
@@ -173,13 +183,13 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 							id="password"
 							type="password"
 							value={password}
-							onChange={handlePasswordChange}
+							onChange={onPwdChange}
 							withCopyButton
 						/>
 
 						<span
 							className={styles.container__form__fieldContainer__input__generateIcon}
-							onClick={handleGeneratePasswordClick}>
+							onClick={onGeneratePwdClick}>
 							<GenerateIcon size="32" />
 						</span>
 					</div>
@@ -196,7 +206,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 				<div className={styles.container__form__addNewField}>
 					<span
 						className={`link ${styles.container__form__addNewField__content}`}
-						onClick={handleAddNewField}>
+						onClick={onAddNewFieldClicked}>
 						<AddIcon size="26" />
 						<span>Add new field</span>
 					</span>
@@ -220,6 +230,15 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 					</span>
 				</div>
 			</form>
+
+			<div className={styles.container__deleteKeyContainer}>
+				<div
+					className={styles.container__deleteKeyContainer__deleteKey}
+					onClick={onDeleteKeyClicked}>
+					<DeleteIcon size="22" />
+					<p className="danger">Delete key</p>
+				</div>
+			</div>
 		</div>
 	);
 }

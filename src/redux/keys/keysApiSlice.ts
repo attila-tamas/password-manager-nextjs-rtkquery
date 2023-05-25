@@ -52,11 +52,21 @@ export const keysApiSlice = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: [{ type: "Key", id: "LIST" }],
 		}),
+
+		deleteKey: builder.mutation({
+			query: ({ id }) => ({
+				url: `/key/delete`,
+				method: "DELETE",
+				body: { id },
+			}),
+			invalidatesTags: (result, error, arg) => [{ type: "Key", id: arg.id }],
+		}),
 	}),
 	overrideExisting: false,
 });
 
-export const { useGetKeysQuery, useUpdateKeyMutation, useAddNewKeyMutation } = keysApiSlice;
+export const { useGetKeysQuery, useUpdateKeyMutation, useAddNewKeyMutation, useDeleteKeyMutation } =
+	keysApiSlice;
 
 // returns the query result object
 export const selectKeysResult = keysApiSlice.endpoints.getKeys.select("");
