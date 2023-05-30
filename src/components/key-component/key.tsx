@@ -9,7 +9,7 @@ import WebsiteIcon from "@components/website-icon-component/website-icon";
 export default function Key(props: any) {
 	const key = useSelector(state => selectKeyById(state, props.keyId));
 
-	const credentialField = key.customFields.find((field: any) => {
+	const credentialField = key?.customFields.find((field: any) => {
 		const fieldInLowerCase = field.key.toLowerCase();
 		const foundField =
 			fieldInLowerCase.includes("email") || fieldInLowerCase.includes("username");

@@ -18,6 +18,7 @@ import DeleteIcon from "@components/icon-components/delete-icon";
 import GenerateIcon from "@components/icon-components/generate-icon";
 import Input from "@components/input-component/input";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
+import format from "@util/formatInputValue";
 
 export default function UpdateKeyModal({ keyId, show }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
@@ -64,15 +65,6 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 		setInputFields(customFields);
 	}, [key.customFields]);
-
-	// trim the last whitespace, when there is more than one
-	const formatTitle = (value: string) => {
-		if (value.endsWith("  ")) {
-			return value.slice(0, -1);
-		}
-
-		return value;
-	};
 
 	const onPwdChange = (e: any) => setPassword(e.target.value);
 
@@ -168,8 +160,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 						type="text"
 						name="key"
 						maxLength={24}
-						value={formatTitle(title)}
-						size={formatTitle(title).length || 4}
+						value={format(title)}
+						size={format(title).length || 4}
 						onChange={(event: any) => setTitle(event.target.value)}
 						className={styles.container__form__titleContainer__input}
 					/>

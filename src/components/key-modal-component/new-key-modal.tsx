@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGenerator";
 
+import format from "@/util/formatInputValue";
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
 import CloseIcon from "@components/icon-components/close-icon";
@@ -43,15 +44,6 @@ export default function AddNewKeyModal({ show }: any) {
 		setPassword(passwordGenerator(passwordGenerationSettings));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	// trim the last whitespace, when there is more than one
-	const formatTitle = (value: string) => {
-		if (value.endsWith("  ")) {
-			return value.slice(0, -1);
-		}
-
-		return value;
-	};
 
 	const handlePasswordChange = (e: any) => setPassword(e.target.value);
 
@@ -122,7 +114,7 @@ export default function AddNewKeyModal({ show }: any) {
 		e.preventDefault(); // prevent page reload
 
 		await addNewKey({
-			title,
+			title: title || "Title",
 			password: password || passwordGenerator(passwordGenerationSettings),
 			customFields: inputFields,
 		});
@@ -140,8 +132,8 @@ export default function AddNewKeyModal({ show }: any) {
 						type="text"
 						name="key"
 						maxLength={24}
-						value={formatTitle(title)}
-						size={formatTitle(title).length || 4}
+						value={format(title)}
+						size={format(title).length || 4}
 						onChange={(event: any) => setTitle(event.target.value)}
 						className={styles.container__form__titleContainer__input}
 					/>
