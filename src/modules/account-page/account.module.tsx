@@ -1,12 +1,35 @@
 import styles from "./account.module.scss";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import ConfirmModal from "@/components/confirm-modal/confirm-modal";
+import routes from "@util/routes";
+import { useRouter } from "next/router";
+
+import useLocalStorage from "@hooks/useLocalStorage";
+import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
+
+import ConfirmModal from "@components/confirm-modal/confirm-modal";
 import LogoutIcon from "@components/icon-components/logout-icon";
 
 export default function Account() {
+	const router = useRouter();
+
+	const [persist, setPersist] = useLocalStorage("persist", "true");
+
 	const [showConfirmEmptying, setShowConfirmEmptying] = useState(false);
+
+	const [sendLogout, { isLoading, isSuccess }] = useSendLogoutMutation();
+
+	useEffect(() => {
+		if (isSuccess) {
+			router.push(routes.home);
+		}
+	}, [isSuccess, router]);
+
+	const handleLogout = () => {
+		setPersist("false");
+		sendLogout("");
+	};
 
 	return (
 		<>
@@ -15,7 +38,9 @@ export default function Account() {
 					<div className={styles.container__wrapper__titleContainer}>
 						<p className={styles.container__wrapper__titleContainer__title}>Account</p>
 
-						<span className={styles.container__wrapper__titleContainer__logoutIcon}>
+						<span
+							className={styles.container__wrapper__titleContainer__logoutIcon}
+							onClick={handleLogout}>
 							<LogoutIcon size="32" />
 						</span>
 					</div>
