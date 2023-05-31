@@ -17,9 +17,9 @@ export default function Button(props: any) {
 
 			default:
 				if (props.noBackdrop) {
-					return styles.button__noBackdrop__primary;
+					return styles.button__noBackdrop__default;
 				}
-				return styles.button__backdrop__primary;
+				return styles.button__backdrop__default;
 		}
 	};
 

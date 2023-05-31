@@ -55,18 +55,31 @@ export const keysApiSlice = apiSlice.injectEndpoints({
 
 		deleteKey: builder.mutation({
 			query: ({ id }) => ({
-				url: `/key/delete`,
+				url: "/key/delete",
 				method: "DELETE",
 				body: { id },
 			}),
 			invalidatesTags: (result, error, arg) => [{ type: "Key", id: arg.id }],
 		}),
+
+		deleteAllKeys: builder.mutation({
+			query: () => ({
+				url: "/key/delete/all",
+				method: "DELETE",
+			}),
+			invalidatesTags: [{ type: "Key", id: "LIST" }],
+		}),
 	}),
 	overrideExisting: false,
 });
 
-export const { useGetKeysQuery, useUpdateKeyMutation, useAddNewKeyMutation, useDeleteKeyMutation } =
-	keysApiSlice;
+export const {
+	useGetKeysQuery,
+	useUpdateKeyMutation,
+	useAddNewKeyMutation,
+	useDeleteKeyMutation,
+	useDeleteAllKeysMutation,
+} = keysApiSlice;
 
 // returns the query result object
 export const selectKeysResult = keysApiSlice.endpoints.getKeys.select("");

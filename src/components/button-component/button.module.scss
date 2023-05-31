@@ -5,7 +5,7 @@
 	height: fit-content;
 
 	outline: util.rem(0.5) solid transparent;
-	border: 1px solid transparent;
+	border: util.rem(1) solid transparent;
 	border-radius: util.rem(4);
 
 	padding: util.rem(8) util.rem(24);
@@ -35,6 +35,10 @@
 			background-color: var(--color-hover);
 		}
 
+		&__default {
+			color: var(--color-gray);
+		}
+
 		&__primary {
 			color: var(--color-primary);
 		}
@@ -50,6 +54,17 @@
 
 		&:hover {
 			background-color: var(--color-contrast);
+		}
+
+		&__default {
+			color: var(--color-gray);
+			background-color: var(--color-contrast);
+			border-color: var(--color-border);
+
+			&:hover {
+				color: var(--color-foreground);
+				outline-color: var(--color-border);
+			}
 		}
 
 		&__primary {

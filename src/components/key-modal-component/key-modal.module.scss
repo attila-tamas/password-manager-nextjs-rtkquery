@@ -173,7 +173,7 @@
 			grid-template-columns: 1fr fit-content(util.rem(1)) 1fr;
 
 			border-radius: util.rem(4) util.rem(4) 0 0;
-			border: 1px solid var(--color-border);
+			border: util.rem(1) solid var(--color-border);
 
 			background-color: var(--color-contrast);
 			box-shadow: var(--drop-shadow-bottom);

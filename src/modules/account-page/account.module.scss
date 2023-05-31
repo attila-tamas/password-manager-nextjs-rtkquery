@@ -1,93 +1,127 @@
 @use "@styles/util" as util;
 
 .container {
-	width: min(100%, util.rem(360));
-	height: fit-content;
+	width: 100%;
+	height: 100%;
 
-	margin-inline: auto;
-	padding: util.rem(20) util.rem(20) 0 util.rem(20);
+	position: relative;
 
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	gap: util.rem(32);
+	gap: util.rem(20);
 
-	&__titleContainer {
-		width: 100%;
+	&__wrapper {
+		width: min(100%, util.rem(360));
+		height: 100%;
 
-		display: grid;
-		text-align: center;
+		margin-inline: auto;
+		padding: util.rem(20) util.rem(20) 0 util.rem(20);
 
-		&__title {
-			font-size: util.rem(28);
-			font-weight: var(--font-weight-bold);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: util.rem(20);
 
-			grid-row: 1;
-			grid-column: 1;
+		&__titleContainer {
+			width: 100%;
+
+			display: grid;
+			text-align: center;
+
+			&__title {
+				font-size: util.rem(28);
+				font-weight: var(--font-weight-bold);
+
+				grid-row: 1;
+				grid-column: 1;
+			}
+
+			&__logoutIcon {
+				display: block;
+
+				grid-row: 1;
+				grid-column: 1;
+
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+
+				color: var(--color-primary);
+
+				cursor: pointer;
+			}
 		}
 
-		&__logoutIcon {
-			display: block;
-
-			grid-row: 1;
-			grid-column: 1;
-
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-
-			color: var(--color-primary);
-
-			cursor: pointer;
-		}
-	}
-
-	&__optionsGroup {
-		width: 100%;
-		height: fit-content;
-
-		border-radius: util.rem(4);
-		border: util.rem(1) solid var(--color-border);
-
-		box-shadow: var(--drop-shadow-bottom);
-
-		&__option {
+		&__optionsGroup {
 			width: 100%;
 			height: fit-content;
 
-			padding: util.rem(12);
+			border-radius: util.rem(4);
+			border: util.rem(1) solid var(--color-border);
 
-			background-color: var(--color-contrast);
+			box-shadow: var(--drop-shadow-bottom);
 
-			cursor: pointer;
+			&__option {
+				width: 100%;
+				height: fit-content;
 
-			&:hover {
-				background-color: var(--color-hover);
-			}
+				padding: util.rem(12);
 
-			&:not(:first-child, :last-child) {
-				border-top: util.rem(1) solid var(--color-border);
-				border-bottom: util.rem(1) solid var(--color-border);
-			}
+				background-color: var(--color-contrast);
 
-			&:first-child {
-				border-top-left-radius: util.rem(4);
-				border-top-right-radius: util.rem(4);
-			}
+				cursor: pointer;
 
-			&:last-child {
-				border-bottom-left-radius: util.rem(4);
-				border-bottom-right-radius: util.rem(4);
+				&:hover {
+					background-color: var(--color-hover);
+				}
+
+				&:not(:first-child, :last-child) {
+					border-top: util.rem(1) solid var(--color-border);
+					border-bottom: util.rem(1) solid var(--color-border);
+				}
+
+				&:first-child {
+					border-top-left-radius: util.rem(4);
+					border-top-right-radius: util.rem(4);
+				}
+
+				&:last-child {
+					border-bottom-left-radius: util.rem(4);
+					border-bottom-right-radius: util.rem(4);
+				}
 			}
 		}
 	}
+
+	&__confirmModal {
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.shadow {
+	width: 100%;
+	height: 100%;
+
+	position: absolute;
+
+	background-color: var(--color-shadow-background);
 }
 
 @include util.breakpoint-up(medium) {
 	.container {
-		&__titleContainer {
-			&__logoutIcon {
-				display: none;
+		&__wrapper {
+			&__titleContainer {
+				&__logoutIcon {
+					display: none;
+				}
 			}
 		}
 	}
