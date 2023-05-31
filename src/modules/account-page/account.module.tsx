@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import useLocalStorage from "@hooks/useLocalStorage";
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 
+import { useDeleteAllKeysMutation } from "@/redux/keys/keysApiSlice";
+import { useDeleteAccountMutation } from "@/redux/user/userApiSlice";
 import ConfirmModal from "@components/confirm-modal/confirm-modal";
 import LogoutIcon from "@components/icon-components/logout-icon";
 
@@ -17,19 +19,56 @@ export default function Account() {
 	const [persist, setPersist] = useLocalStorage("persist", "true");
 
 	const [showConfirmEmptying, setShowConfirmEmptying] = useState(false);
+	const [showConfirmDeletion, setShowConfirmDeletion] = useState(false);
 
-	const [sendLogout, { isLoading, isSuccess }] = useSendLogoutMutation();
+	// api hooks
+	const [sendLogout, { isLoading: isLogoutLoading, isSuccess: isLogoutSuccess }] =
+		useSendLogoutMutation();
+
+	const [
+		deleteAllKeys,
+		{ isLoading: isEmptyTheVaultLoading, isSuccess: isEmptyTheVaultSuccess },
+	] = useDeleteAllKeysMutation();
+
+	const [
+		deleteAccount,
+		{ isLoading: isDeleteAccountLoading, isSuccess: isDeleteAccountSuccess },
+	] = useDeleteAccountMutation();
+	//
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isLogoutSuccess || isDeleteAccountSuccess) {
 			router.push(routes.home);
 		}
-	}, [isSuccess, router]);
+	}, [isLogoutSuccess, isDeleteAccountSuccess, router]);
 
-	const handleLogout = () => {
+	useEffect(() => {
+		if (isEmptyTheVaultSuccess) {
+			setShowConfirmEmptying(false);
+		}
+	}, [isEmptyTheVaultSuccess]);
+
+	useEffect(() => {
+		if (isDeleteAccountSuccess) {
+			setShowConfirmDeletion(false);
+		}
+	}, [isDeleteAccountSuccess]);
+
+	// api handler functions
+	const onLogoutClicked = () => {
 		setPersist("false");
 		sendLogout("");
 	};
+
+	const onEmptyTheVaultConfirmed = async () => {
+		await deleteAllKeys("");
+	};
+
+	const onDeleteAccountConfirmed = () => {
+		setPersist("false");
+		deleteAccount("");
+	};
+	//
 
 	return (
 		<>
@@ -40,7 +79,7 @@ export default function Account() {
 
 						<span
 							className={styles.container__wrapper__titleContainer__logoutIcon}
-							onClick={handleLogout}>
+							onClick={onLogoutClicked}>
 							<LogoutIcon size="32" />
 						</span>
 					</div>
@@ -57,7 +96,8 @@ export default function Account() {
 						</div>
 
 						<div
-							className={`${styles.container__wrapper__optionsGroup__option} danger`}>
+							className={`${styles.container__wrapper__optionsGroup__option} danger`}
+							onClick={() => setShowConfirmDeletion(true)}>
 							<span>Delete account</span>
 						</div>
 					</div>
@@ -68,18 +108,32 @@ export default function Account() {
 						<ConfirmModal
 							title="Empty the vault"
 							desc="Are you sure you want to delete all your entries? This action cannot be undone."
-							loadingText="Emptying..."
+							confirmText={isEmptyTheVaultLoading ? "Emptying..." : "Confirm"}
 							show={setShowConfirmEmptying}
+							onClick={onEmptyTheVaultConfirmed}
+						/>
+					</div>
+				)}
+
+				{showConfirmDeletion && (
+					<div className={styles.container__confirmModal}>
+						<ConfirmModal
+							title="Delete account"
+							desc="Are you sure you want to delete your account? This action cannot be undone."
+							confirmText={isDeleteAccountLoading ? "Deleting..." : "Confirm"}
+							show={setShowConfirmDeletion}
+							onClick={onDeleteAccountConfirmed}
 						/>
 					</div>
 				)}
 			</div>
 
-			{showConfirmEmptying && (
+			{(showConfirmDeletion || showConfirmEmptying) && (
 				<div
 					className={styles.shadow}
 					onClick={() => {
 						setShowConfirmEmptying(false);
+						setShowConfirmDeletion(false);
 					}}
 				/>
 			)}

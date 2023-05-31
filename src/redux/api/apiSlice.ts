@@ -14,14 +14,10 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth = async (
-	args: string | FetchArgs,
-	api: BaseQueryApi,
-	extraOptions: object
+	args: string | FetchArgs, // request url, method, body
+	api: BaseQueryApi, // signal, dispatch, getState()
+	extraOptions: object //custom like {shout: true}
 ) => {
-	// console.log(args) // request url, method, body
-	// console.log(api) // signal, dispatch, getState()
-	// console.log(extraOptions) //custom like {shout: true}
-
 	let result = await baseQuery(args, api, extraOptions);
 
 	if (result?.error?.status === 400) {
