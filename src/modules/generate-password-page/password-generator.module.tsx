@@ -10,19 +10,24 @@ import Slider from "@components/slider-component/slider";
 import Toggle from "@components/toggle-component/toggle";
 
 export default function Generate() {
-	const [password, setPassword] = useState("");
 	const [passwordLength, setPasswordLength] = useState(32);
 	const [uppercase, setUppercase] = useState(true);
 	const [lowercase, setLowercase] = useState(true);
 	const [numbers, setNumbers] = useState(true);
 	const [symbols, setSymbols] = useState(true);
-	const [errors, setErrors] = useState("");
+
+	const [password, setPassword] = useState("");
+	const [errorMsg, setErrorMsg] = useState("");
+	const [text, setText] = useState("");
+
+	const [wasPasswordCopied, setWasPasswordCopied] = useState(false);
+	const [waitTimer, setWaitTimer] = useState(undefined);
 
 	const generatePassword = () => {
-		setErrors("");
+		setErrorMsg("");
 
 		if (!uppercase && !lowercase && !numbers && !symbols) {
-			return setErrors("Select at least one option");
+			return setErrorMsg("Select at least one option");
 		}
 
 		const generationSettings = {
@@ -36,12 +41,35 @@ export default function Generate() {
 		setPassword(passwordGenerator(generationSettings));
 	};
 
-	const copyPassword = () => navigator.clipboard.writeText(password);
+	const copyPassword = () => {
+		if (!errorMsg && !waitTimer) {
+			navigator.clipboard.writeText(password);
+
+			setWasPasswordCopied(true);
+			setText("Password copied");
+
+			setWaitTimer(
+				setTimeout(() => {
+					setText(password);
+					setWaitTimer(undefined);
+					setWasPasswordCopied(false);
+				}, 600) as any
+			);
+		}
+	};
 
 	useEffect(() => {
 		generatePassword();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		if (!errorMsg) {
+			setText(password);
+		} else {
+			setText(errorMsg);
+		}
+	}, [errorMsg, password]);
 
 	return (
 		<div className={styles.container}>
@@ -52,9 +80,10 @@ export default function Generate() {
 					onClick={copyPassword}
 					className={`
 								${styles.container__content__generatedPassword}
-								${errors && styles.container__content__generatedPassword__error}
+								${errorMsg && styles.container__content__generatedPassword__error}
+								${wasPasswordCopied && styles.container__content__generatedPassword__copied}
 							`}>
-					<p>{errors === "" ? password : errors}</p>
+					<p>{text}</p>
 				</div>
 
 				<div className={styles.container__content__settings}>

@@ -5,9 +5,13 @@ import { useSelector } from "react-redux";
 
 import OptionsIcon from "@components/icon-components/options-icon";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
+import { useState } from "react";
 
 export default function Key(props: any) {
 	const key = useSelector(state => selectKeyById(state, props.keyId));
+
+	const [text, setText] = useState("Copy password");
+	const [waitTimer, setWaitTimer] = useState(undefined);
 
 	const credentialField = key?.customFields.find((field: any) => {
 		const fieldInLowerCase = field.key.toLowerCase();
@@ -21,8 +25,18 @@ export default function Key(props: any) {
 	const credential = credentialField?.value;
 
 	const copyPassword = () => {
-		navigator.clipboard.writeText(key.password);
-		console.log(`password copied: ${key.password}`);
+		if (!waitTimer) {
+			navigator.clipboard.writeText(key.password);
+
+			setText("Password copied");
+
+			setWaitTimer(
+				setTimeout(() => {
+					setText("Copy password");
+					setWaitTimer(undefined);
+				}, 600) as any
+			);
+		}
 	};
 
 	if (key) {
@@ -37,7 +51,7 @@ export default function Key(props: any) {
 						<p
 							className={`link ${styles.container__content__text__action}`}
 							onClick={copyPassword}>
-							Copy password
+							{text}
 						</p>
 					</div>
 				</div>

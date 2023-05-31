@@ -65,4 +65,29 @@
 			background-color: var(--color-gray-light);
 		}
 	}
+
+	&__copyFeedback {
+		width: calc(100% - util.rem(2));
+		height: calc(100% - util.rem(2));
+
+		position: absolute;
+		top: util.rem(1);
+		left: util.rem(1);
+
+		padding: util.rem(8) util.rem(12);
+
+		text-align: center;
+		font-size: util.rem(16);
+		font-weight: var(--font-weight-semibold);
+
+		border-radius: util.rem(4);
+
+		background-color: var(--color-contrast);
+		color: var(--color-primary);
+	}
+
+	&__copied {
+		outline-color: var(--color-primary);
+		border-color: var(--color-primary);
+	}
 }
