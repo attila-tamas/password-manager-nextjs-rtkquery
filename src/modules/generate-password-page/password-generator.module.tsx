@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { passwordGenerator } from "@util/passwordGenerator";
 
 import Button from "@components/button-component/button";
-import AddIcon from "@components/icon-components/add-icon";
 import Slider from "@components/slider-component/slider";
 import Toggle from "@components/toggle-component/toggle";
 
@@ -124,11 +123,6 @@ export default function Generate() {
 				</div>
 
 				<Button text="Generate" color="primary" flex onClick={generatePassword} />
-			</div>
-
-			<div className={`link ${styles.container__addToVault}`}>
-				<AddIcon size="24" />
-				<span>Add to vault</span>
 			</div>
 		</div>
 	);
