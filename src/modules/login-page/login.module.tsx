@@ -17,20 +17,21 @@ import Input from "@components/input-component/input";
 import Logo from "@components/logo-component/logo";
 
 export default function Login() {
-	const userRef = useRef<HTMLDivElement>(null);
+	const dispatch = useDispatch();
+
+	const emailRef = useRef<HTMLDivElement>(null);
 	const errorRef = useRef<HTMLDivElement>(null);
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState("");
 	const [persist, setPersist] = useLocalStorage("persist", "false");
 	const [showPwd, setShowPwd] = useState(false);
 
-	const dispatch = useDispatch();
-
 	const [login, { isLoading }] = useLoginMutation();
 
 	useEffect(() => {
-		userRef.current?.focus();
+		emailRef.current?.focus();
 	}, []);
 
 	useEffect(() => {
@@ -44,8 +45,6 @@ export default function Login() {
 			const { accessToken } = await login({ email, password }).unwrap();
 			dispatch(setCredentials({ accessToken }));
 
-			setEmail("");
-			setPassword("");
 			setPersist("true");
 
 			router.push(routes.vault);
@@ -61,8 +60,6 @@ export default function Login() {
 
 	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
 
-	if (isLoading) return <p>Loading...</p>;
-
 	return (
 		<div className={styles.container}>
 			<Logo width="130" />
@@ -75,7 +72,6 @@ export default function Login() {
 					{errorMsg}
 				</p>
 			)}
-
 			{/* temp */}
 
 			<form className={styles.container__form} onSubmit={handleSubmit}>
@@ -83,7 +79,7 @@ export default function Login() {
 					Email
 					<Input
 						type="text"
-						reference={userRef}
+						reference={emailRef}
 						value={email}
 						onChange={handleEmailInput}
 					/>
@@ -111,7 +107,12 @@ export default function Login() {
 				</label>
 
 				<div className={styles.container__form__buttonGroup}>
-					<Button text="Sign in" color="primary" type="submit" flex />
+					<Button
+						text={isLoading ? "Signing in..." : "Sign in"}
+						color="primary"
+						type="submit"
+						flex
+					/>
 					<p>
 						New to keystone?
 						<Link href="/register" className="link">
