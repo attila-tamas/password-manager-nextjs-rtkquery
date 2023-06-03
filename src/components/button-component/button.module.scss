@@ -19,6 +19,13 @@
 
 	cursor: pointer;
 
+	&:disabled,
+	&[disabled] {
+		opacity: 0.5;
+		cursor: default;
+		pointer-events: none;
+	}
+
 	&__flex {
 		width: 100%;
 	}

@@ -1,7 +1,7 @@
 import styles from "./button.module.scss";
 
 export default function Button(props: any) {
-	const getButtonStyle = (color: string) => {
+	const getButtonColor = (color: string) => {
 		switch (color) {
 			case "primary":
 				if (props.noBackdrop) {
@@ -27,13 +27,14 @@ export default function Button(props: any) {
 		<input
 			type={props.type || "button"}
 			value={props.text}
+			disabled={props.disabled}
 			readOnly
 			className={`
 						${styles.button}
 						${props.noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
 						${props.flex && styles.button__flex}
 						${props.grow && styles.button__grow}
-						${getButtonStyle(props.color)}
+						${getButtonColor(props.color)}
 					`}
 			onClick={props.onClick}
 		/>
