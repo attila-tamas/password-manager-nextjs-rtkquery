@@ -3,7 +3,7 @@ import styles from "./register.module.scss";
 import { useEffect, useRef, useState } from "react";
 
 import { useRegisterMutation } from "@redux/auth/authApiSlice";
-import { setEmailToVerify } from "@redux/user/userSlice";
+import { setCurrentEmail } from "@redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
 import Link from "next/link";
@@ -43,9 +43,9 @@ export default function Register() {
 		try {
 			await register({ email, password }).unwrap();
 
-			dispatch(setEmailToVerify({ email }));
+			dispatch(setCurrentEmail({ email }));
 
-			router.push(routes.verifyEmail);
+			router.replace(routes.verifyEmail);
 		} catch (error: any) {
 			setErrorMsg(error.data?.message);
 

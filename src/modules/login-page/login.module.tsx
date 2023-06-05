@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import routes from "@util/routes";
 
 import { setCredentials } from "@redux/auth/authSlice";
-import { setPersist } from "@redux/user/userSlice";
+import { selectEmail, setPersist } from "@redux/user/userSlice";
 
 import { useLoginMutation } from "@redux/auth/authApiSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@components/button-component/button";
 import Checkbox from "@components/checkbox-component/checkbox";
@@ -20,10 +20,13 @@ import Logo from "@components/logo-component/logo";
 export default function Login() {
 	const dispatch = useDispatch();
 
+	const currentEmail = useSelector(selectEmail);
+
 	const emailRef = useRef<HTMLDivElement>(null);
+	const passwordRef = useRef<HTMLDivElement>(null);
 	const errorRef = useRef<HTMLDivElement>(null);
 
-	const [email, setEmail] = useState("");
+	const [email, setEmail] = useState(currentEmail);
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
@@ -31,7 +34,12 @@ export default function Login() {
 	const [login, { isLoading }] = useLoginMutation();
 
 	useEffect(() => {
-		emailRef.current?.focus();
+		if (!email) {
+			emailRef.current?.focus();
+		} else {
+			passwordRef.current?.focus();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
@@ -47,7 +55,7 @@ export default function Login() {
 
 			dispatch(setPersist({ persist: true }));
 
-			router.push(routes.vault);
+			router.replace(routes.vault);
 		} catch (error: any) {
 			setErrorMsg(error.data?.message);
 
@@ -95,6 +103,7 @@ export default function Login() {
 					</span>
 					<Input
 						type="password"
+						reference={passwordRef}
 						show={showPwd}
 						value={password}
 						onChange={handlePwdInput}

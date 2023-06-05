@@ -1,6 +1,11 @@
-import router from "next/router";
 import { useEffect, useState } from "react";
+
+import router from "next/router";
+
+import routes from "@/util/routes";
+
 import { useSelector } from "react-redux";
+
 import { selectPersist } from "../user/userSlice";
 import { useRefreshMutation } from "./authApiSlice";
 import { selectCurrentToken } from "./authSlice";
@@ -38,7 +43,7 @@ export default function PersistLogin({ children }: any) {
 	} else if (isError) {
 		// when trying to access a protected route without a token
 		console.log("error");
-		router.push("/");
+		router.replace(routes.home);
 	} else if (isSuccess && trueSuccess) {
 		console.log("success");
 		content = <>{children}</>;

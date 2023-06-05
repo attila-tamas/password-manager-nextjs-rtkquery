@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { useDeleteAllKeysMutation } from "@/redux/keys/keysApiSlice";
 import { useDeleteAccountMutation } from "@/redux/user/userApiSlice";
 
-import { setPersist } from "@/redux/user/userSlice";
+import { setCurrentEmail, setPersist } from "@/redux/user/userSlice";
 import ConfirmModal from "@components/confirm-modal/confirm-modal";
 import LogoutIcon from "@components/icon-components/logout-icon";
 
@@ -39,7 +39,7 @@ export default function Account() {
 
 	useEffect(() => {
 		if (isLogoutSuccess || isDeleteAccountSuccess) {
-			router.push(routes.home);
+			router.replace(routes.home);
 		}
 	}, [isLogoutSuccess, isDeleteAccountSuccess, router]);
 
@@ -67,6 +67,7 @@ export default function Account() {
 
 	const onDeleteAccountConfirmed = () => {
 		dispatch(setPersist({ persist: false }));
+		dispatch(setCurrentEmail({ email: null }));
 		deleteAccount("");
 	};
 	//

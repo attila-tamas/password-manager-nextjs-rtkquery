@@ -9,7 +9,7 @@ const userSlice = createSlice({
 			state.persist = persist;
 		},
 
-		setEmailToVerify: (state, action) => {
+		setCurrentEmail: (state, action) => {
 			const { email } = action.payload;
 			state.email = email;
 		},
@@ -19,7 +19,7 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 
 // actions
-export const { setPersist, setEmailToVerify } = userSlice.actions;
+export const { setPersist, setCurrentEmail } = userSlice.actions;
 
 // selectors
 export const selectPersist = (state: any) => state.user.persist;

@@ -11,6 +11,13 @@ export const userApiSlice = apiSlice.injectEndpoints({
 			}),
 		}),
 
+		activateAccount: builder.mutation({
+			query: token => ({
+				url: `/auth/activate?token=${token}`,
+				method: "GET",
+			}),
+		}),
+
 		deleteAccount: builder.mutation({
 			query: () => ({
 				url: "user/delete",
@@ -34,5 +41,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useResendVerificationEmailMutation, //
+	useActivateAccountMutation,
 	useDeleteAccountMutation,
 } = userApiSlice;

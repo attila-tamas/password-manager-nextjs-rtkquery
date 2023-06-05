@@ -24,7 +24,7 @@ export default function Nav() {
 
 	useEffect(() => {
 		if (isSuccess) {
-			router.push(routes.home);
+			router.replace(routes.home);
 		}
 	}, [isSuccess, router]);
 
