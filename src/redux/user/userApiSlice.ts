@@ -3,6 +3,14 @@ import { logout } from "../auth/authSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
+		resendVerificationEmail: builder.mutation({
+			query: email => ({
+				url: "/user/resend-verification-email",
+				method: "POST",
+				body: { email },
+			}),
+		}),
+
 		deleteAccount: builder.mutation({
 			query: () => ({
 				url: "user/delete",
@@ -24,4 +32,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 	overrideExisting: false,
 });
 
-export const { useDeleteAccountMutation } = userApiSlice;
+export const {
+	useResendVerificationEmailMutation, //
+	useDeleteAccountMutation,
+} = userApiSlice;
