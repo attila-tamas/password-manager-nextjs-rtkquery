@@ -2,11 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
 	name: "user",
-	initialState: { emailToVerify: null },
+	initialState: { persist: null, email: null },
 	reducers: {
+		setPersist: (state, action) => {
+			const { persist } = action.payload;
+			state.persist = persist;
+		},
+
 		setEmailToVerify: (state, action) => {
 			const { email } = action.payload;
-			state.emailToVerify = email;
+			state.email = email;
 		},
 	},
 });
@@ -14,7 +19,8 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 
 // actions
-export const { setEmailToVerify } = userSlice.actions;
+export const { setPersist, setEmailToVerify } = userSlice.actions;
 
 // selectors
-export const selectEmailToVerfy = (state: any) => state.user.emailToVerify;
+export const selectPersist = (state: any) => state.user.persist;
+export const selectEmail = (state: any) => state.user.email;

@@ -5,20 +5,20 @@ import { useEffect } from "react";
 
 import routes from "@util/routes";
 
-import useLocalStorage from "@hooks/useLocalStorage";
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 
+import { setPersist } from "@/redux/user/userSlice";
 import AccountIcon from "@components/icon-components/account-icon";
 import GenerateIcon from "@components/icon-components/generate-icon";
 import LogoutIcon from "@components/icon-components/logout-icon";
 import VaultIcon from "@components/icon-components/vault-icon";
 import Logo from "@components/logo-component/logo";
 import NavItem from "@components/nav-item-component/nav-item";
+import { useDispatch } from "react-redux";
 
 export default function Nav() {
 	const router = useRouter();
-
-	const [persist, setPersist] = useLocalStorage("persist", "true");
+	const dispatch = useDispatch();
 
 	const [sendLogout, { isLoading, isSuccess }] = useSendLogoutMutation();
 
@@ -29,11 +29,9 @@ export default function Nav() {
 	}, [isSuccess, router]);
 
 	const handleLogout = () => {
-		setPersist("false");
+		dispatch(setPersist({ persist: false }));
 		sendLogout("");
 	};
-
-	if (isLoading) return <p>Logging out...</p>;
 
 	return (
 		<div className={styles.container}>
@@ -76,7 +74,9 @@ export default function Nav() {
 			<div className={`${styles.container__nav__item} ${styles.container__logoutContainer}`}>
 				<div className={styles.container__nav__item__logout} onClick={handleLogout}>
 					<LogoutIcon size="26" />
-					<span className={styles.container__nav__item__logout__text}>Logout</span>
+					<span className={styles.container__nav__item__logout__text}>
+						{isLoading ? "Logging out..." : "Logout"}
+					</span>
 				</div>
 			</div>
 		</div>

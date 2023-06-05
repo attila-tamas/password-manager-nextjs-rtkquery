@@ -45,10 +45,7 @@ export default function Register() {
 
 			dispatch(setEmailToVerify({ email }));
 
-			router.push({
-				pathname: routes.verifyEmail,
-				query: { email: email },
-			});
+			router.push(routes.verifyEmail);
 		} catch (error: any) {
 			setErrorMsg(error.data?.message);
 

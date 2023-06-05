@@ -6,9 +6,10 @@ import { useEffect, useRef, useState } from "react";
 
 import routes from "@util/routes";
 
-import useLocalStorage from "@hooks/useLocalStorage";
-import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { setCredentials } from "@redux/auth/authSlice";
+import { setPersist } from "@redux/user/userSlice";
+
+import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 
 import Button from "@components/button-component/button";
@@ -25,7 +26,6 @@ export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState("");
-	const [persist, setPersist] = useLocalStorage("persist", "false");
 	const [showPwd, setShowPwd] = useState(false);
 
 	const [login, { isLoading }] = useLoginMutation();
@@ -45,7 +45,7 @@ export default function Login() {
 			const { accessToken } = await login({ email, password }).unwrap();
 			dispatch(setCredentials({ accessToken }));
 
-			setPersist("true");
+			dispatch(setPersist({ persist: true }));
 
 			router.push(routes.vault);
 		} catch (error: any) {

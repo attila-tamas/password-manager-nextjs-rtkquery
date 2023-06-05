@@ -5,18 +5,19 @@ import { useEffect, useState } from "react";
 import routes from "@util/routes";
 import { useRouter } from "next/router";
 
-import useLocalStorage from "@hooks/useLocalStorage";
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
+import { useDispatch } from "react-redux";
 
 import { useDeleteAllKeysMutation } from "@/redux/keys/keysApiSlice";
 import { useDeleteAccountMutation } from "@/redux/user/userApiSlice";
+
+import { setPersist } from "@/redux/user/userSlice";
 import ConfirmModal from "@components/confirm-modal/confirm-modal";
 import LogoutIcon from "@components/icon-components/logout-icon";
 
 export default function Account() {
 	const router = useRouter();
-
-	const [persist, setPersist] = useLocalStorage("persist", "true");
+	const dispatch = useDispatch();
 
 	const [showConfirmEmptying, setShowConfirmEmptying] = useState(false);
 	const [showConfirmDeletion, setShowConfirmDeletion] = useState(false);
@@ -56,7 +57,7 @@ export default function Account() {
 
 	// api handler functions
 	const onLogoutClicked = () => {
-		setPersist("false");
+		dispatch(setPersist({ persist: false }));
 		sendLogout("");
 	};
 
@@ -65,7 +66,7 @@ export default function Account() {
 	};
 
 	const onDeleteAccountConfirmed = () => {
-		setPersist("false");
+		dispatch(setPersist({ persist: false }));
 		deleteAccount("");
 	};
 	//

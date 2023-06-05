@@ -2,32 +2,24 @@ import styles from "./verify-email.module.scss";
 
 import { useEffect, useState } from "react";
 
-import { useResendVerificationEmailMutation } from "@/redux/user/userApiSlice";
+import { useResendVerificationEmailMutation } from "@redux/user/userApiSlice";
+import { selectEmail } from "@redux/user/userSlice";
+import { useSelector } from "react-redux";
 
 import Image from "next/image";
 
 import verifyEmailGraphic from "@public/verify-email-graphic.svg";
 
 import Button from "@components/button-component/button";
-import { useRouter } from "next/router";
 
 export default function VerifyEmail() {
-	const router = useRouter();
+	const email = useSelector(selectEmail);
 
 	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 	const [countDownInSeconds, setCountDownInSeconds] = useState(0);
 	const [errorMsg, setErrorMsg] = useState("");
 
 	const resendDelayInSeconds = 30;
-
-	useEffect(() => {
-		const path = router.asPath;
-		const encodedEmail = path.match(/[^=]+$/);
-		const decodedEmail = decodeURIComponent(encodedEmail?.toString() as string);
-
-		console.log(decodedEmail);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const [resendEmail, { isLoading, isSuccess, isError, error }] =
 		useResendVerificationEmailMutation();
@@ -62,12 +54,13 @@ export default function VerifyEmail() {
 			return () => clearInterval(interval);
 		} else {
 			setIsButtonDisabled(false);
+			setErrorMsg("");
 		}
 	}, [countDownInSeconds]);
 
 	const onResendButtonClicked = async () => {
 		try {
-			// await resendEmail(email);
+			await resendEmail(email);
 			setCountDownInSeconds(resendDelayInSeconds);
 		} catch (error: any) {
 			setErrorMsg(error.data?.message);
@@ -94,8 +87,6 @@ export default function VerifyEmail() {
 				the link to gain access to your account.
 			</p>
 
-			{errorMsg && <p>{errorMsg}</p>}
-
 			<div className={styles.container__buttonContainer}>
 				<Button
 					text={getButtonText()}
@@ -105,6 +96,8 @@ export default function VerifyEmail() {
 					onClick={onResendButtonClicked}
 				/>
 			</div>
+
+			{errorMsg && <p className="error">{errorMsg}</p>}
 		</div>
 	);
 }

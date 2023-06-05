@@ -4,12 +4,17 @@ import type { AppProps } from "next/app";
 import { Quicksand } from "next/font/google";
 import Head from "next/head";
 
-import { store } from "@redux/store";
+import { wrapper } from "@redux/store";
 import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
+	const { store } = wrapper.useWrappedStore(pageProps);
+	const persistor = persistStore(store);
+
 	return (
 		<>
 			<Head>
@@ -26,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
 			`}</style>
 
 			<Provider store={store}>
-				<Component {...pageProps} />
+				<PersistGate persistor={persistor} loading={null}>
+					<Component {...pageProps} />
+				</PersistGate>
 			</Provider>
 		</>
 	);

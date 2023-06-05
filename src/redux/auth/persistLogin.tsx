@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
-import { useRefreshMutation } from "./authApiSlice";
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "./authSlice";
 import router from "next/router";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectPersist } from "../user/userSlice";
+import { useRefreshMutation } from "./authApiSlice";
+import { selectCurrentToken } from "./authSlice";
 
-const PersistLogin = ({ children }: any) => {
+export default function PersistLogin({ children }: any) {
 	const token = useSelector(selectCurrentToken);
+	const persist = useSelector(selectPersist);
 
 	const [trueSuccess, setTrueSuccess] = useState(false);
 
@@ -14,7 +16,6 @@ const PersistLogin = ({ children }: any) => {
 
 	useEffect(() => {
 		const verifyRefreshToken = async () => {
-			console.log("verifying refresh token");
 			try {
 				await refresh("");
 				setTrueSuccess(true);
@@ -23,7 +24,7 @@ const PersistLogin = ({ children }: any) => {
 			}
 		};
 
-		if (!token && JSON.parse(localStorage.getItem("persist") as string)) {
+		if (!token && persist) {
 			verifyRefreshToken();
 		}
 
@@ -48,5 +49,4 @@ const PersistLogin = ({ children }: any) => {
 	}
 
 	return content;
-};
-export default PersistLogin;
+}
