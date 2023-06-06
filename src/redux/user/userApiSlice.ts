@@ -18,9 +18,25 @@ export const userApiSlice = apiSlice.injectEndpoints({
 			}),
 		}),
 
+		requestPasswordChange: builder.mutation({
+			query: email => ({
+				url: "/user/request-password-change",
+				method: "POST",
+				body: { email },
+			}),
+		}),
+
+		changePassword: builder.mutation({
+			query: ({ id, token, password }) => ({
+				url: `/user/change-password?id=${id}&token=${token}`,
+				method: "POST",
+				body: { password },
+			}),
+		}),
+
 		deleteAccount: builder.mutation({
 			query: () => ({
-				url: "user/delete",
+				url: "/user/delete",
 				method: "DELETE",
 			}),
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -40,7 +56,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-	useResendVerificationEmailMutation, //
+	useResendVerificationEmailMutation,
 	useActivateAccountMutation,
+	useRequestPasswordChangeMutation,
+	useChangePasswordMutation,
 	useDeleteAccountMutation,
 } = userApiSlice;

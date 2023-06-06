@@ -7,11 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import routes from "@util/routes";
 
 import { setCredentials } from "@redux/auth/authSlice";
-import { selectEmail, setPersist } from "@redux/user/userSlice";
+import { selectEmail, setCurrentEmail, setPersist } from "@redux/user/userSlice";
 
 import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useRequestPasswordChangeMutation } from "@/redux/user/userApiSlice";
 import Button from "@components/button-component/button";
 import Checkbox from "@components/checkbox-component/checkbox";
 import Input from "@components/input-component/input";
@@ -22,6 +23,11 @@ export default function Login() {
 
 	const currentEmail = useSelector(selectEmail);
 
+	const [
+		requestPasswordChange,
+		{ isLoading: isPasswordChangeRequestLoading, isSuccess, isError, error },
+	] = useRequestPasswordChangeMutation();
+
 	const emailRef = useRef<HTMLDivElement>(null);
 	const passwordRef = useRef<HTMLDivElement>(null);
 	const errorRef = useRef<HTMLDivElement>(null);
@@ -31,7 +37,7 @@ export default function Login() {
 	const [errorMsg, setErrorMsg] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
 
-	const [login, { isLoading }] = useLoginMutation();
+	const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 
 	useEffect(() => {
 		if (!email) {
@@ -54,6 +60,7 @@ export default function Login() {
 			dispatch(setCredentials({ accessToken }));
 
 			dispatch(setPersist({ persist: true }));
+			dispatch(setCurrentEmail({ email }));
 
 			router.replace(routes.vault);
 		} catch (error: any) {
@@ -67,6 +74,28 @@ export default function Login() {
 	const handlePwdInput = (e: any) => setPassword(e.target.value);
 
 	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
+
+	useEffect(() => {
+		if (isError) {
+			const errorObj = error as any;
+			setErrorMsg(errorObj.data.message);
+		}
+	}, [error, isError]);
+
+	const onForgotPasswordClicked = async () => {
+		if (!email) {
+			emailRef.current?.focus();
+			setErrorMsg("The email address must not be empty");
+		} else {
+			await requestPasswordChange(email);
+		}
+	};
+
+	useEffect(() => {
+		if (isSuccess) {
+			setErrorMsg("");
+		}
+	}, [isSuccess]);
 
 	return (
 		<div className={styles.container}>
@@ -83,45 +112,54 @@ export default function Login() {
 			{/* temp */}
 
 			<form className={styles.container__form} onSubmit={handleSubmit}>
-				<label className={styles.container__form__inputContainer}>
-					Email
+				<div className={styles.container__form__inputContainer}>
+					<label htmlFor="email">Email</label>
 					<Input
 						type="text"
+						id="email"
 						reference={emailRef}
 						value={email}
 						onChange={handleEmailInput}
 					/>
-				</label>
+				</div>
 
-				<label className={styles.container__form__inputContainer}>
+				<div className={styles.container__form__inputContainer}>
 					<span className={styles.container__form__inputContainer__textContainer}>
-						Password
-						<a
-							className={`link ${styles.container__form__inputContainer__textContainer__link}`}>
-							Forgot password?
-						</a>
+						<label htmlFor="password">Password</label>
+
+						<span
+							className={`link ${styles.container__form__inputContainer__textContainer__link}`}
+							onClick={onForgotPasswordClicked}>
+							{isPasswordChangeRequestLoading
+								? "Sending email..."
+								: "Forgot password?"}
+						</span>
 					</span>
+
 					<Input
 						type="password"
+						id="password"
 						reference={passwordRef}
 						show={showPwd}
 						value={password}
 						onChange={handlePwdInput}
 					/>
+
 					<Checkbox
 						label="Show Password"
 						checked={showPwd}
 						onChange={handleShowPwdToggle}
 					/>
-				</label>
+				</div>
 
 				<div className={styles.container__form__buttonGroup}>
 					<Button
-						text={isLoading ? "Signing in..." : "Sign in"}
+						text={isLoginLoading ? "Signing in..." : "Sign in"}
 						color="primary"
 						type="submit"
 						flex
 					/>
+
 					<p>
 						New to keystone?
 						<Link href="/register" className="link">

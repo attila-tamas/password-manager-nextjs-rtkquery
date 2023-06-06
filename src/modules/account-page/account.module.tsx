@@ -6,12 +6,15 @@ import routes from "@util/routes";
 import { useRouter } from "next/router";
 
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useDeleteAllKeysMutation } from "@/redux/keys/keysApiSlice";
-import { useDeleteAccountMutation } from "@/redux/user/userApiSlice";
+import {
+	useDeleteAccountMutation,
+	useRequestPasswordChangeMutation,
+} from "@redux/user/userApiSlice";
 
-import { setCurrentEmail, setPersist } from "@/redux/user/userSlice";
+import { selectEmail, setCurrentEmail, setPersist } from "@/redux/user/userSlice";
 import ConfirmModal from "@components/confirm-modal/confirm-modal";
 import LogoutIcon from "@components/icon-components/logout-icon";
 
@@ -19,12 +22,17 @@ export default function Account() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 
+	const email = useSelector(selectEmail);
+
 	const [showConfirmEmptying, setShowConfirmEmptying] = useState(false);
 	const [showConfirmDeletion, setShowConfirmDeletion] = useState(false);
 
 	// api hooks
 	const [sendLogout, { isLoading: isLogoutLoading, isSuccess: isLogoutSuccess }] =
 		useSendLogoutMutation();
+
+	const [requestPasswordChange, { isLoading: isPasswordChangeRequestLoading }] =
+		useRequestPasswordChangeMutation();
 
 	const [
 		deleteAllKeys,
@@ -61,6 +69,10 @@ export default function Account() {
 		sendLogout("");
 	};
 
+	const onChangePasswordClicked = async () => {
+		await requestPasswordChange(email);
+	};
+
 	const onEmptyTheVaultConfirmed = async () => {
 		await deleteAllKeys("");
 	};
@@ -87,8 +99,14 @@ export default function Account() {
 					</div>
 
 					<div className={styles.container__wrapper__optionsGroup}>
-						<div className={styles.container__wrapper__optionsGroup__option}>
-							<span>Change password</span>
+						<div
+							className={styles.container__wrapper__optionsGroup__option}
+							onClick={onChangePasswordClicked}>
+							<span>
+								{isPasswordChangeRequestLoading
+									? "Sending email..."
+									: "Request password change"}{" "}
+							</span>
 						</div>
 
 						<div
