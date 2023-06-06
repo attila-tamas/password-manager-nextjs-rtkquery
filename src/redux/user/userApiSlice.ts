@@ -13,7 +13,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
 		activateAccount: builder.mutation({
 			query: token => ({
-				url: `/auth/activate?token=${token}`,
+				url: `/user/activate?token=${token}`,
 				method: "GET",
 			}),
 		}),

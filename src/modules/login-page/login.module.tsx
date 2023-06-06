@@ -26,7 +26,7 @@ export default function Login() {
 	const passwordRef = useRef<HTMLDivElement>(null);
 	const errorRef = useRef<HTMLDivElement>(null);
 
-	const [email, setEmail] = useState(currentEmail);
+	const [email, setEmail] = useState(currentEmail || "");
 	const [password, setPassword] = useState("");
 	const [errorMsg, setErrorMsg] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
