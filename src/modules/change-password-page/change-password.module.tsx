@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useChangePasswordMutation } from "@/redux/user/userApiSlice";
 
 import Image from "next/image";
+import Link from "next/link";
 import router from "next/router";
 
 import routes from "@util/routes";
@@ -96,6 +97,10 @@ export default function ChangePassword() {
 
 					<p className={styles.container__desc}>
 						You will be redirected to the login page in {countDownInSeconds}...
+						<br />
+						<Link href={routes.login} className="link">
+							Go now
+						</Link>
 					</p>
 				</>
 			) : (
