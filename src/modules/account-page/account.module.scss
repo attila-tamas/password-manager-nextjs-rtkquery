@@ -10,118 +10,116 @@
 	justify-content: center;
 	align-items: center;
 	gap: util.rem(20);
+}
 
-	&__wrapper {
-		width: min(100%, util.rem(360));
-		height: 100%;
+.wrapper {
+	width: min(100%, util.rem(360));
+	height: 100%;
 
-		margin-inline: auto;
-		padding: util.rem(20) util.rem(20) 0 util.rem(20);
+	margin-inline: auto;
+	padding: util.rem(20) util.rem(20) 0 util.rem(20);
 
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: util.rem(20);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: util.rem(20);
 
-		&__titleContainer {
-			width: 100%;
+	&__titleContainer {
+		width: 100%;
 
-			display: grid;
-			text-align: center;
+		display: grid;
+		text-align: center;
 
-			&__title {
-				font-size: util.rem(28);
-				font-weight: var(--font-weight-bold);
+		&__title {
+			font-size: util.rem(28);
+			font-weight: var(--font-weight-bold);
 
-				grid-row: 1;
-				grid-column: 1;
-			}
-
-			&__logoutIcon {
-				display: block;
-
-				grid-row: 1;
-				grid-column: 1;
-
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
-
-				color: var(--color-primary);
-
-				cursor: pointer;
-			}
+			grid-row: 1;
+			grid-column: 1;
 		}
 
-		&__optionsGroup {
+		&__logoutIcon {
+			display: block;
+
+			grid-row: 1;
+			grid-column: 1;
+
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+
+			color: var(--color-primary);
+
+			cursor: pointer;
+		}
+	}
+
+	&__optionsGroup {
+		width: 100%;
+		height: fit-content;
+
+		border-radius: util.rem(4);
+		border: util.rem(1) solid var(--color-border);
+
+		box-shadow: var(--drop-shadow-bottom);
+
+		&__option {
 			width: 100%;
 			height: fit-content;
 
-			border-radius: util.rem(4);
-			border: util.rem(1) solid var(--color-border);
+			padding: util.rem(12);
 
-			box-shadow: var(--drop-shadow-bottom);
+			background-color: var(--color-contrast);
 
-			&__option {
-				width: 100%;
-				height: fit-content;
+			cursor: pointer;
 
-				padding: util.rem(12);
+			&:hover {
+				background-color: var(--color-hover);
+			}
 
-				background-color: var(--color-contrast);
+			&:not(:first-child, :last-child) {
+				border-top: util.rem(1) solid var(--color-border);
+				border-bottom: util.rem(1) solid var(--color-border);
+			}
 
-				cursor: pointer;
+			&:first-child {
+				border-top-left-radius: util.rem(4);
+				border-top-right-radius: util.rem(4);
+			}
 
-				&:hover {
-					background-color: var(--color-hover);
-				}
-
-				&:not(:first-child, :last-child) {
-					border-top: util.rem(1) solid var(--color-border);
-					border-bottom: util.rem(1) solid var(--color-border);
-				}
-
-				&:first-child {
-					border-top-left-radius: util.rem(4);
-					border-top-right-radius: util.rem(4);
-				}
-
-				&:last-child {
-					border-bottom-left-radius: util.rem(4);
-					border-bottom-right-radius: util.rem(4);
-				}
+			&:last-child {
+				border-bottom-left-radius: util.rem(4);
+				border-bottom-right-radius: util.rem(4);
 			}
 		}
 	}
-
-	&__confirmModal {
-		width: 100%;
-		height: 100%;
-
-		position: absolute;
-
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
 }
 
-.shadow {
+.modal {
 	width: 100%;
 	height: 100%;
 
 	position: absolute;
 
-	background-color: var(--color-shadow-background);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__shadow {
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+
+		background-color: var(--color-shadow-background);
+	}
 }
 
 @include util.breakpoint-up(medium) {
-	.container {
-		&__wrapper {
-			&__titleContainer {
-				&__logoutIcon {
-					display: none;
-				}
+	.wrapper {
+		&__titleContainer {
+			&__logoutIcon {
+				display: none;
 			}
 		}
 	}

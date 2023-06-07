@@ -10,7 +10,7 @@
 
 	color: inherit;
 
-	&__text {
+	& span {
 		font-size: util.rem(16);
 
 		display: none;
@@ -22,7 +22,7 @@
 		flex-direction: row;
 		gap: util.rem(12);
 
-		&__text {
+		& span {
 			display: block;
 			font-size: util.rem(20);
 		}

@@ -1,5 +1,5 @@
 import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { logout, setCredentials } from "../auth/authSlice";
+import { logout, setCredentials } from "./auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: "http://localhost:5000/api",

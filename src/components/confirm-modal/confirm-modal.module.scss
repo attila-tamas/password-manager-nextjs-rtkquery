@@ -20,50 +20,50 @@
 	background-color: var(--color-background);
 
 	z-index: 1;
+}
 
-	&__title {
-		font-size: util.rem(22);
-		font-weight: var(--font-weight-bold);
-	}
+.title {
+	font-size: util.rem(22);
+	font-weight: var(--font-weight-bold);
+}
 
-	&__desc {
-		color: var(--color-gray);
-	}
+.desc {
+	color: var(--color-gray);
+}
 
-	&__buttonGroup {
-		width: min(100%, util.rem(480));
+.buttonGroup {
+	width: min(100%, util.rem(480));
+	height: fit-content;
+
+	display: grid;
+	place-items: center center;
+	grid-template-columns: 1fr fit-content(util.rem(1)) 1fr;
+
+	border-radius: util.rem(4) util.rem(4) 0 0;
+	border: util.rem(1) solid var(--color-border);
+
+	background-color: var(--color-contrast);
+	box-shadow: var(--drop-shadow-bottom);
+
+	& span {
+		width: 100%;
 		height: fit-content;
 
-		display: grid;
-		place-items: center center;
-		grid-template-columns: 1fr fit-content(util.rem(1)) 1fr;
+		text-align: center;
 
-		border-radius: util.rem(4) util.rem(4) 0 0;
-		border: util.rem(1) solid var(--color-border);
+		grid-row: 1;
 
-		background-color: var(--color-contrast);
-		box-shadow: var(--drop-shadow-bottom);
+		cursor: pointer;
+	}
 
-		& span {
-			width: 100%;
-			height: fit-content;
+	&__separator {
+		width: util.rem(1);
+		height: 70%;
 
-			text-align: center;
+		grid-row: 1;
 
-			grid-row: 1;
+		border-radius: util.rem(4);
 
-			cursor: pointer;
-		}
-
-		&__separator {
-			width: util.rem(1);
-			height: 70%;
-
-			grid-row: 1;
-
-			border-radius: util.rem(4);
-
-			background-color: var(--color-gray-light);
-		}
+		background-color: var(--color-gray-light);
 	}
 }

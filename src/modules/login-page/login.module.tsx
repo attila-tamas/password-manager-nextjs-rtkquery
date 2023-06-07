@@ -99,9 +99,9 @@ export default function Login() {
 
 	return (
 		<div className={styles.container}>
-			<Logo width="130" />
+			<Logo size="130" />
 
-			<p className={styles.container__title}>Sign in</p>
+			<p className={styles.title}>Sign in</p>
 
 			{/* temp */}
 			{errorMsg && (
@@ -111,8 +111,8 @@ export default function Login() {
 			)}
 			{/* temp */}
 
-			<form className={styles.container__form} onSubmit={handleSubmit}>
-				<div className={styles.container__form__inputContainer}>
+			<form onSubmit={handleSubmit} className={styles.form}>
+				<div className={styles.form__field}>
 					<label htmlFor="email">Email</label>
 					<Input
 						type="text"
@@ -123,13 +123,13 @@ export default function Login() {
 					/>
 				</div>
 
-				<div className={styles.container__form__inputContainer}>
-					<span className={styles.container__form__inputContainer__textContainer}>
+				<div className={styles.form__field}>
+					<span className={styles.form__field__textContainer}>
 						<label htmlFor="password">Password</label>
 
 						<span
-							className={`link ${styles.container__form__inputContainer__textContainer__link}`}
-							onClick={onForgotPasswordClicked}>
+							onClick={onForgotPasswordClicked}
+							className={`link ${styles.form__field__textContainer__link}`}>
 							{isPasswordChangeRequestLoading
 								? "Sending email..."
 								: "Forgot password?"}
@@ -152,7 +152,7 @@ export default function Login() {
 					/>
 				</div>
 
-				<div className={styles.container__form__buttonGroup}>
+				<div className={styles.form__buttonGroup}>
 					<Button
 						text={isLoginLoading ? "Signing in..." : "Sign in"}
 						color="primary"

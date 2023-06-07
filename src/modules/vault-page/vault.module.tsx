@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 import format from "@util/formatInputValue";
 
+import AddNewKeyModal from "@/components/key-modal-components/new-key-modal";
+import UpdateKeyModal from "@/components/key-modal-components/update-key-modal";
 import Button from "@components/button-component/button";
 import Input from "@components/input-component/input";
 import Key from "@components/key-component/key";
-import AddNewKeyModal from "@components/key-modal-component/new-key-modal";
-import UpdateKeyModal from "@components/key-modal-component/update-key-modal";
 
 export default function Vault() {
 	let keys: object[];
@@ -32,6 +32,7 @@ export default function Vault() {
 	useEffect(() => {
 		if (isError) {
 			const errorObj = error as any;
+			console.log(errorObj.data.message);
 		}
 	}, [isError, error]);
 
@@ -107,9 +108,11 @@ export default function Vault() {
 				/>
 			))
 		) : (
-			<div className={styles.noResult}>
+			<div className={styles.wrapper__keyList__noResult}>
 				<span>No results for &quot;{keyword}&quot;</span>
-				<p className={styles.noResult__hint}>Check for typos or use a different term</p>
+				<p className={styles.wrapper__keyList__noResult__hint}>
+					Check for typos or use a different term
+				</p>
 			</div>
 		);
 
@@ -126,8 +129,8 @@ export default function Vault() {
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={styles.container__wrapper}>
-					<div className={styles.container__wrapper__utilContainer}>
+				<div className={styles.wrapper}>
+					<div className={styles.wrapper__utilContainer}>
 						<Input
 							type="text"
 							placeholder="Search..."
@@ -144,26 +147,27 @@ export default function Vault() {
 						/>
 					</div>
 
-					<div className={styles.container__wrapper__keyList}>
+					<div className={styles.wrapper__keyList}>
 						<>{getKeyList()}</>
 					</div>
 				</div>
 
 				{showUpdateKeyModal && (
-					<div className={styles.container__keyEditor}>
+					<div className={styles.modal}>
 						<UpdateKeyModal keyId={keyId} show={setShowUpdateKeyModal} />
 					</div>
 				)}
 
 				{showAddNewKeyModal && (
-					<div className={styles.container__keyEditor}>
+					<div className={styles.modal}>
 						<AddNewKeyModal show={setShowAddNewKeyModal} />
 					</div>
 				)}
 			</div>
+
 			{(showUpdateKeyModal || showAddNewKeyModal) && (
 				<div
-					className={styles.shadow}
+					className={styles.modal__shadow}
 					onClick={() => {
 						setShowUpdateKeyModal(false);
 						setShowAddNewKeyModal(false);

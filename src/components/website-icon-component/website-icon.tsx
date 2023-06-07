@@ -22,7 +22,8 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 
 	let url = urlField?.value;
 
-	// add "https://" at the start of the url to decrease user error
+	// add "https://" at the start of the url if it is not found
+	// "http" urls are not accepted, becase of the URL constructor
 	if (url && url.indexOf("https://") === -1) {
 		url = "https://" + url;
 	}
@@ -68,35 +69,36 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 		<>
 			{!error.message && url ? (
 				<a
-					className={`${styles.container} ${grow && styles.grow}`}
+					className={`${styles.container} ${grow && styles.container__grow}`}
 					href={url}
 					target="_blank"
 					rel="noopener noreferrer">
 					<Image
-						className={`unselectable ${styles.container__image}`}
+						className={`unselectable ${styles.image}`}
 						src={icon || warningIcon}
 						alt={`${currentKey.title} icon`}
 						fill
 						sizes="(max-width: 40rem) 2.875rem, 4.75rem"
 					/>
 
-					<div className={styles.container__openIcon}>
+					<div className={styles.openIcon}>
 						<OpenIcon size="16" />
 					</div>
 				</a>
 			) : (
-				<div className={`${styles.warning} ${grow && styles.grow}`}>
+				<div className={`${styles.warning} ${grow && styles.container__grow}`}>
 					<Image
-						className={`unselectable ${styles.container__image}`}
+						className={`unselectable ${styles.image}`}
 						src={warningIcon}
 						alt="warning icon"
 						fill
 						sizes="(max-width: 40rem) 2.875rem, 4.75rem"
 					/>
-					<span className={styles.warning__tooltip}>
+
+					<span className={styles.tooltip}>
 						{error.message}
 						<br />
-						<span className={styles.warning__tooltip__hint}>{error.hint}</span>
+						<span className={styles.tooltip__hint}>{error.hint}</span>
 					</span>
 				</div>
 			)}

@@ -8,34 +8,41 @@
 
 	cursor: pointer;
 
-	&__image {
-		border-radius: util.rem(4);
-	}
-
-	&__openIcon {
-		width: fit-content;
-		height: fit-content;
-
-		position: absolute;
-		bottom: util.rem(2);
-		left: util.rem(2);
-
-		padding: util.rem(4);
-
-		border-radius: util.rem(4);
-
-		background-color: var(--color-contrast);
-		color: var(--color-primary);
-
-		transform: scale(0);
-		transform-origin: bottom left;
-
-		transition: all 100ms ease 0s;
-	}
-
-	&:hover &__openIcon {
+	&:hover .openIcon {
 		transform: scale(1);
 	}
+
+	&__grow {
+		@include util.breakpoint-up(medium) {
+			min-width: util.rem(72);
+			min-height: util.rem(72);
+		}
+	}
+}
+
+.image {
+	border-radius: util.rem(4);
+}
+
+.openIcon {
+	width: fit-content;
+	height: fit-content;
+
+	position: absolute;
+	bottom: util.rem(2);
+	left: util.rem(2);
+
+	padding: util.rem(4);
+
+	border-radius: util.rem(4);
+
+	background-color: var(--color-contrast);
+	color: var(--color-primary);
+
+	transform: scale(0);
+	transform-origin: bottom left;
+
+	transition: all 100ms ease 0s;
 }
 
 .warning {
@@ -46,55 +53,44 @@
 
 	display: inline-block;
 
-	&__tooltip {
-		width: fit-content;
-		height: fit-content;
-
-		position: absolute;
-		left: 120%;
-		top: 0;
-		z-index: 1;
-
-		white-space: nowrap;
-
-		transform: scale(0);
-		transform-origin: left;
-
-		padding-inline: util.rem(16);
-		padding-top: util.rem(2);
-
-		background-color: var(--color-hover);
-		color: var(--color-foreground);
-
-		border-radius: util.rem(4);
-		border: util.rem(1) solid var(--color-border);
-
-		font-size: util.rem(15);
-		line-height: 0;
-
-		@include util.breakpoint-up(medium) {
-			top: util.rem(12.5);
-		}
-
-		transition: 100ms all ease;
-
-		&__hint {
-			position: relative;
-			top: util.rem(-4);
-
-			color: var(--color-gray);
-			font-size: util.rem(12);
-		}
-	}
-
-	&:hover &__tooltip {
+	&:hover .tooltip {
 		transform: scale(1);
 	}
 }
 
-.grow {
-	@include util.breakpoint-up(medium) {
-		min-width: util.rem(72);
-		min-height: util.rem(72);
+.tooltip {
+	width: fit-content;
+	height: fit-content;
+
+	position: absolute;
+	left: 120%;
+	top: 0;
+	z-index: 1;
+
+	white-space: nowrap;
+
+	transform: scale(0);
+	transform-origin: left;
+
+	padding-inline: util.rem(16);
+	padding-top: util.rem(2);
+
+	background-color: var(--color-hover);
+	color: var(--color-foreground);
+
+	border-radius: util.rem(4);
+	border: util.rem(1) solid var(--color-border);
+
+	font-size: util.rem(15);
+	line-height: 0;
+
+	transition: 100ms all ease;
+
+	&__hint {
+		position: relative;
+		top: util.rem(-4);
+
+		color: var(--color-gray);
+		font-size: util.rem(12);
 	}
 }

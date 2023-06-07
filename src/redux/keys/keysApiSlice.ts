@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
-import { apiSlice } from "../api/apiSlice";
+import { apiSlice } from "../apiSlice";
 
 const keysAdapter = createEntityAdapter({
 	sortComparer: (a: any, b: any) => a.title.localeCompare(b.title),

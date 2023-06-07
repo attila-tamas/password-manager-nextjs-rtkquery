@@ -2,22 +2,36 @@ import styles from "./input.module.scss";
 
 import { useState } from "react";
 
-export default function Input(props: any) {
+export default function Input({
+	type,
+	value,
+	defaultValue,
+	placeholder,
+	maxLength,
+	name,
+	id,
+	reference,
+	show,
+	withCopyButton,
+	className,
+	onChange,
+}: any) {
 	const [waitTimer, setWaitTimer] = useState(undefined);
 	const [wasCopied, setWasCopied] = useState(false);
 
 	// show password functionality
 	const getInputType = (type: string) => {
-		if (props.show && type === "password") {
+		if (show && type === "password") {
 			return "text";
 		} else {
 			return type;
 		}
 	};
+	//
 
 	const onCopyButtonClick = () => {
 		if (!waitTimer) {
-			navigator.clipboard.writeText(props.value);
+			navigator.clipboard.writeText(value);
 
 			setWasCopied(true);
 
@@ -33,31 +47,29 @@ export default function Input(props: any) {
 	return (
 		<div className={styles.container}>
 			<input
-				type={getInputType(props.type)}
-				placeholder={props.placeholder}
-				name={props.name}
-				ref={props.reference}
-				value={props.value}
-				defaultValue={props.defaultValue}
-				maxLength={props.maxLength}
-				onChange={props.onChange}
+				type={getInputType(type)}
+				placeholder={placeholder}
+				name={name}
+				ref={reference}
+				value={value}
+				defaultValue={defaultValue}
+				maxLength={maxLength}
+				onChange={onChange}
 				className={`
-					${props.className || styles.container__input}
-					${wasCopied && styles.container__copied}
+					${className || styles.input}
+					${wasCopied && styles.input__copied}
 				`}
-				id={props.id}
+				id={id}
 			/>
 
-			{props.withCopyButton && (
+			{withCopyButton && (
 				<>
-					<div
-						className={`link ${styles.container__copyBtn}`}
-						onClick={onCopyButtonClick}>
-						<span className={styles.container__copyBtn__separator}>&nbsp;</span>
+					<div onClick={onCopyButtonClick} className={`link ${styles.copyBtn}`}>
+						<span className={styles.copyBtn__separator}>&nbsp;</span>
 						<p>Copy</p>
 					</div>
 
-					{wasCopied && <div className={styles.container__copyFeedback}>Copied</div>}
+					{wasCopied && <div className={styles.copyFeedback}>Copied</div>}
 				</>
 			)}
 		</div>

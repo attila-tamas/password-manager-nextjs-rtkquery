@@ -1,22 +1,31 @@
 import styles from "./button.module.scss";
 
-export default function Button(props: any) {
+export default function Button({
+	type,
+	text,
+	color,
+	disabled,
+	noBackdrop,
+	flex,
+	grow,
+	onClick,
+}: any) {
 	const getButtonColor = (color: string) => {
 		switch (color) {
 			case "primary":
-				if (props.noBackdrop) {
+				if (noBackdrop) {
 					return styles.button__noBackdrop__primary;
 				}
 				return styles.button__backdrop__primary;
 
 			case "danger":
-				if (props.noBackdrop) {
+				if (noBackdrop) {
 					return styles.button__noBackdrop__danger;
 				}
 				return styles.button__backdrop__danger;
 
 			default:
-				if (props.noBackdrop) {
+				if (noBackdrop) {
 					return styles.button__noBackdrop__default;
 				}
 				return styles.button__backdrop__default;
@@ -25,18 +34,18 @@ export default function Button(props: any) {
 
 	return (
 		<input
-			type={props.type || "button"}
-			value={props.text}
-			disabled={props.disabled}
+			type={type || "button"}
+			value={text}
+			disabled={disabled}
 			readOnly
 			className={`
 						${styles.button}
-						${props.noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
-						${props.flex && styles.button__flex}
-						${props.grow && styles.button__grow}
-						${getButtonColor(props.color)}
+						${noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
+						${flex && styles.button__flex}
+						${grow && styles.button__grow}
+						${getButtonColor(color)}
 					`}
-			onClick={props.onClick}
+			onClick={onClick}
 		/>
 	);
 }

@@ -16,61 +16,61 @@
 
 	background-color: var(--color-contrast);
 	box-shadow: var(--drop-shadow-bottom);
+}
 
-	&__content {
-		width: 100%;
-		height: fit-content;
+.content {
+	width: 100%;
+	height: fit-content;
 
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: util.rem(12);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: util.rem(12);
 
-		&__text {
-			p {
-				width: fit-content;
-			}
+	&__textContainer {
+		p {
+			width: fit-content;
+		}
 
-			&__title {
-				font-size: util.rem(18);
-				font-weight: var(--font-weight-semibold);
-			}
+		&__title {
+			font-size: util.rem(18);
+			font-weight: var(--font-weight-semibold);
+		}
 
-			&__description {
-				color: var(--color-gray);
-			}
+		&__description {
+			color: var(--color-gray);
+		}
 
-			&__description,
-			&__action {
-				font-size: util.rem(13);
-			}
+		&__description,
+		&__actionBtn {
+			font-size: util.rem(13);
 		}
 	}
+}
 
-	&__options {
-		color: var(--color-gray);
-		padding-block: util.rem(4);
+.optionsIcon {
+	color: var(--color-gray);
+	padding-block: util.rem(4);
 
-		cursor: pointer;
-	}
+	cursor: pointer;
 }
 
 @include util.breakpoint-up(medium) {
 	.container {
 		padding: util.rem(16);
+	}
 
-		&__content {
-			gap: util.rem(20);
+	.content {
+		gap: util.rem(20);
 
-			&__text {
-				&__title {
-					font-size: util.rem(24);
-				}
+		&__textContainer {
+			&__title {
+				font-size: util.rem(24);
+			}
 
-				&__description,
-				&__action {
-					font-size: util.rem(18);
-				}
+			&__description,
+			&__actionBtn {
+				font-size: util.rem(18);
 			}
 		}
 	}

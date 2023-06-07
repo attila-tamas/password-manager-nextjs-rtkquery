@@ -80,14 +80,14 @@ export default function VerifyEmail() {
 		<div className={styles.container}>
 			<Image className="unselectable" src={verifyEmailGraphic} alt="Verify email graphic" />
 
-			<p className={styles.container__title}>Verify email</p>
+			<p className={styles.title}>Verify email</p>
 
-			<p className={styles.container__desc}>
+			<p className={styles.desc}>
 				An email containing a verification link has been sent to your email address. Click
 				the link to gain access to your account.
 			</p>
 
-			<div className={styles.container__buttonContainer}>
+			<div className={styles.button}>
 				<Button
 					text={getButtonText()}
 					color="primary"

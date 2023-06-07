@@ -6,7 +6,7 @@ export default function NavItem({ children, text, to, onClick }: any) {
 	return (
 		<Link href={to} onClick={onClick} className={styles.container}>
 			{children}
-			<span className={styles.container__text}>{text}</span>
+			<span className={styles.text}>{text}</span>
 		</Link>
 	);
 }

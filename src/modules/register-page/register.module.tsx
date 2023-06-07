@@ -60,9 +60,9 @@ export default function Register() {
 
 	return (
 		<div className={styles.container}>
-			<Logo width="130" />
+			<Logo size="130" />
 
-			<p className={styles.container__title}>Create account</p>
+			<p className={styles.title}>Create account</p>
 
 			{/* temp */}
 			{errorMsg && (
@@ -72,8 +72,8 @@ export default function Register() {
 			)}
 			{/* temp */}
 
-			<form className={styles.container__form} onSubmit={handleSubmit}>
-				<label className={styles.container__form__inputContainer}>
+			<form onSubmit={handleSubmit} className={styles.form}>
+				<label className={styles.form__field}>
 					Email
 					<Input
 						type="text"
@@ -83,7 +83,7 @@ export default function Register() {
 					/>
 				</label>
 
-				<label className={styles.container__form__inputContainer}>
+				<label className={styles.form__field}>
 					Password
 					<Input
 						type="password"
@@ -98,7 +98,7 @@ export default function Register() {
 					/>
 				</label>
 
-				<div className={styles.container__form__buttonGroup}>
+				<div className={styles.form__buttonGroup}>
 					<Button
 						text={isLoading ? "Creating account..." : "Create account"}
 						color="primary"

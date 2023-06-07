@@ -4,18 +4,19 @@ import Image from "next/image";
 
 import favicon from "@public/favicon.svg";
 
-export default function Logo({ width }: any) {
-	if (!width) {
-		width = 175;
+export default function Logo({ size }: any) {
+	if (!size) {
+		size = 175;
 	}
 
 	return (
 		<div
 			className={`unselectable ${styles.container}`}
-			style={{ width: `${width}px`, fontSize: width / 12 }}>
-			<Image className={styles.container__img} src={favicon} alt="keystone container" />
-			<span className={styles.container__text}>
-				<span className={styles.container__text__highlight}>key</span>
+			style={{ width: `${size}px`, fontSize: size / 12 }}>
+			<Image className={styles.img} src={favicon} alt="keystone container" />
+
+			<span className={styles.text}>
+				<span className={styles.text__highlight}>key</span>
 				stone
 			</span>
 		</div>

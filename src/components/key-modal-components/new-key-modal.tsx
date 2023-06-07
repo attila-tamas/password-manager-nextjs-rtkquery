@@ -73,10 +73,9 @@ export default function AddNewKeyModal({ show }: any) {
 
 	const customFields = inputFields.map((field: any, index: number) => {
 		return (
-			<div key={index} className={styles.container__form__fieldContainer}>
-				<div className={styles.container__form__fieldContainer__title}>
-					<span
-						className={styles.container__form__fieldContainer__title__customFieldIcon}>
+			<div key={index} className={styles.form__field}>
+				<div className={styles.form__field__titleContainer}>
+					<span className={styles.form__field__titleContainer__customFieldIcon}>
 						<CustomFieldIcon size="24" />
 					</span>
 
@@ -87,11 +86,11 @@ export default function AddNewKeyModal({ show }: any) {
 						value={field.key}
 						size={field.key.length || 4}
 						onChange={(event: any) => handleInputChange(index, event)}
-						className={styles.container__form__fieldContainer__title__input}
+						className={styles.form__field__titleContainer__input}
 					/>
 				</div>
 
-				<div className={styles.container__form__fieldContainer__input}>
+				<div className={styles.form__field__inputContainer}>
 					<Input
 						type="text"
 						name="value"
@@ -101,8 +100,8 @@ export default function AddNewKeyModal({ show }: any) {
 					/>
 
 					<span
-						className={styles.container__form__fieldContainer__input__deleteIcon}
-						onClick={() => handleRemoveField(index)}>
+						onClick={() => handleRemoveField(index)}
+						className={styles.form__field__inputContainer__deleteIcon}>
 						<DeleteIcon size="32" />
 					</span>
 				</div>
@@ -122,12 +121,12 @@ export default function AddNewKeyModal({ show }: any) {
 
 	return (
 		<div className={styles.container}>
-			<span className={styles.container__closeIcon} onClick={() => show(false)}>
+			<span onClick={() => show(false)} className={styles.closeIcon}>
 				<CloseIcon size="28" />
 			</span>
 
-			<form className={styles.container__form} onSubmit={handleSubmit}>
-				<div className={styles.container__form__titleContainer}>
+			<form onSubmit={handleSubmit} className={styles.form}>
+				<div className={styles.form__titleContainer}>
 					<input
 						type="text"
 						name="key"
@@ -135,14 +134,14 @@ export default function AddNewKeyModal({ show }: any) {
 						value={format(title)}
 						size={format(title).length || 4}
 						onChange={(event: any) => setTitle(event.target.value)}
-						className={styles.container__form__titleContainer__input}
+						className={styles.form__titleContainer__input}
 					/>
 				</div>
 
-				<div className={styles.container__form__fieldContainer}>
+				<div className={styles.form__field}>
 					<label htmlFor="password">Password</label>
 
-					<div className={styles.container__form__fieldContainer__input}>
+					<div className={styles.form__field__inputContainer}>
 						<Input
 							id="password"
 							type="password"
@@ -152,7 +151,7 @@ export default function AddNewKeyModal({ show }: any) {
 						/>
 
 						<span
-							className={styles.container__form__fieldContainer__input__generateIcon}
+							className={styles.form__field__inputContainer__generateIcon}
 							onClick={handleGeneratePasswordClick}>
 							<GenerateIcon size="32" />
 						</span>
@@ -161,20 +160,22 @@ export default function AddNewKeyModal({ show }: any) {
 
 				<>{customFields}</>
 
-				<div className={styles.container__form__addNewField}>
+				<div className={styles.form__addNewFieldContainer}>
 					<span
-						className={`link ${styles.container__form__addNewField__content}`}
-						onClick={handleAddNewField}>
+						onClick={handleAddNewField}
+						className={`link ${styles.form__addNewFieldContainer__button}`}>
 						<AddIcon size="26" />
 						<span>Add new field</span>
 					</span>
 				</div>
 
-				<div className={styles.container__form__buttonGroup}>
+				<div className={styles.form__buttonGroup}>
 					<span onClick={() => show(false)}>
 						<Button text="Cancel" color="danger" noBackdrop flex />
 					</span>
-					<div className={styles.container__form__buttonGroup__separator}>&nbsp;</div>
+
+					<div className={styles.form__buttonGroup__separator}>&nbsp;</div>
+
 					<span>
 						{/* Make the buttons disabled while loading */}
 						{/* Make the modal unclosable while loading */}

@@ -4,7 +4,8 @@ import { combineReducers } from "redux";
 import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 import storage from "./sync-storage";
 
-import { apiSlice } from "./api/apiSlice";
+import { apiSlice } from "./apiSlice";
+
 import authReducer from "./auth/authSlice";
 import userReducer from "./user/userSlice";
 

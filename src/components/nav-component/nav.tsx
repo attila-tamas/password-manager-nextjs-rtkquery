@@ -35,15 +35,15 @@ export default function Nav() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.container__logo}>
-				<Logo width="130" />
+			<div className={styles.logo}>
+				<Logo size="130" />
 			</div>
 
-			<div className={styles.container__nav}>
+			<div className={styles.nav}>
 				<div
 					className={`
-						${router.pathname == routes.vault && `${styles.container__nav__active}`}
-						${styles.container__nav__item}
+						${router.pathname == routes.vault && `${styles.nav__item__active}`}
+						${styles.nav__item}
 					`}>
 					<NavItem text="Vault" to={routes.vault}>
 						<VaultIcon size="26" />
@@ -52,8 +52,8 @@ export default function Nav() {
 
 				<div
 					className={`
-						${router.pathname == routes.generate && `${styles.container__nav__active}`}
-						${styles.container__nav__item}
+						${router.pathname == routes.generate && `${styles.nav__item__active}`}
+						${styles.nav__item}
 					`}>
 					<NavItem text="Generate" to={routes.generate}>
 						<GenerateIcon size="26" />
@@ -62,8 +62,8 @@ export default function Nav() {
 
 				<div
 					className={`
-						${router.pathname == routes.account && `${styles.container__nav__active}`}
-						${styles.container__nav__item}
+						${router.pathname == routes.account && `${styles.nav__item__active}`}
+						${styles.nav__item}
 					`}>
 					<NavItem text="Account" to={routes.account}>
 						<AccountIcon size="26" />
@@ -71,10 +71,10 @@ export default function Nav() {
 				</div>
 			</div>
 
-			<div className={`${styles.container__nav__item} ${styles.container__logoutContainer}`}>
-				<div className={styles.container__nav__item__logout} onClick={handleLogout}>
+			<div className={`${styles.nav__item} ${styles.logoutContainer}`}>
+				<div className={styles.nav__item__logout} onClick={handleLogout}>
 					<LogoutIcon size="26" />
-					<span className={styles.container__nav__item__logout__text}>
+					<span className={styles.nav__item__logout__text}>
 						{isLoading ? "Logging out..." : "Logout"}
 					</span>
 				</div>

@@ -93,9 +93,9 @@ export default function ChangePassword() {
 
 			{isSuccess ? (
 				<>
-					<p className={styles.container__title}>New password set</p>
+					<p className={styles.title}>New password set</p>
 
-					<p className={styles.container__desc}>
+					<p className={styles.desc}>
 						You will be redirected to the login page in {countDownInSeconds}...
 						<br />
 						<Link href={routes.login} className="link">
@@ -105,10 +105,10 @@ export default function ChangePassword() {
 				</>
 			) : (
 				<>
-					<p className={styles.container__title}>Change password</p>
+					<p className={styles.title}>Change password</p>
 
-					<form className={styles.container__form} onSubmit={handleSubmit}>
-						<div className={styles.container__form__inputContainer}>
+					<form className={styles.form} onSubmit={handleSubmit}>
+						<div className={styles.form__inputContainer}>
 							<label htmlFor="password">Password</label>
 
 							<Input

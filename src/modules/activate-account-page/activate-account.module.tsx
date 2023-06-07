@@ -61,11 +61,11 @@ export default function ActivateAccount() {
 				alt="Account activated graphic"
 			/>
 
-			<p className={styles.container__title}>
+			<p className={styles.title}>
 				{isSuccess ? "Your account has been activated" : "Account already activated"}
 			</p>
 
-			<p className={styles.container__desc}>
+			<p>
 				You will be redirected to the login page in {countDownInSeconds}...
 				<br />
 				<Link href={routes.login} className="link">

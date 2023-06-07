@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 
 import router from "next/router";
 
-import routes from "@/util/routes";
+import routes from "@util/routes";
 
 import { useSelector } from "react-redux";
 
-import { selectPersist } from "../user/userSlice";
-import { useRefreshMutation } from "./authApiSlice";
-import { selectCurrentToken } from "./authSlice";
+import { useRefreshMutation } from "@redux/auth/authApiSlice";
+import { selectCurrentToken } from "@redux/auth/authSlice";
+import { selectPersist } from "@redux/user/userSlice";
 
 export default function PersistLogin({ children }: any) {
 	const token = useSelector(selectCurrentToken);

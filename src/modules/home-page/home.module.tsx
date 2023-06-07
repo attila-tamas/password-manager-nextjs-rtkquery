@@ -11,10 +11,10 @@ import heroGraphic from "@public/home-page-hero-graphic.svg";
 export default function Home() {
 	return (
 		<main className={styles.container}>
-			<div className={styles.container__nav}>
+			<div className={styles.nav}>
 				<Logo />
 
-				<div className={styles.container__nav__buttonGroup}>
+				<div className={styles.nav__buttonGroup}>
 					<Link href="/login">
 						<Button text="Sign in" color="primary" noBackdrop />
 					</Link>
@@ -25,23 +25,23 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className={styles.container__hero}>
-				<div className={styles.container__hero__text}>
-					<p className={styles.container__hero__text__title}>
+			<div className={styles.hero}>
+				<div className={styles.hero__textContainer}>
+					<p className={styles.hero__textContainer__title}>
 						Your password is the key to your digital life
 					</p>
 
-					<p className={styles.container__hero__text__description}>
+					<p className={styles.hero__textContainer__description}>
 						Generate strong passwords with a click of a button. While&nbsp;managing them
 						with an easy-to-use interface.
 					</p>
 
-					<div className={styles.container__hero__text__buttonGroup}>
+					<div className={styles.hero__textContainer__buttonGroup}>
 						<Link href="/register">
 							<Button text="Try it now for free" color="primary" grow />
 						</Link>
 
-						<p className={styles.container__hero__text__buttonGroup__small}>
+						<p className={styles.hero__textContainer__buttonGroup__smallText}>
 							I have an account.
 							<Link href="/login" className="link">
 								{" "}
@@ -52,7 +52,7 @@ export default function Home() {
 				</div>
 
 				<Image
-					className={`unselectable ${styles.container__hero__image}`}
+					className={`unselectable ${styles.hero__image}`}
 					src={heroGraphic}
 					alt="Mobile and desktop device showing keystone vault"
 				/>

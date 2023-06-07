@@ -1,20 +1,20 @@
 import styles from "./account.module.scss";
 
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import routes from "@util/routes";
 import { useRouter } from "next/router";
 
-import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
-import { useDispatch, useSelector } from "react-redux";
-
 import { useDeleteAllKeysMutation } from "@/redux/keys/keysApiSlice";
+import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 import {
 	useDeleteAccountMutation,
 	useRequestPasswordChangeMutation,
 } from "@redux/user/userApiSlice";
 
-import { selectEmail, setCurrentEmail, setPersist } from "@/redux/user/userSlice";
+import { selectEmail, setCurrentEmail, setPersist } from "@redux/user/userSlice";
+
 import ConfirmModal from "@components/confirm-modal/confirm-modal";
 import LogoutIcon from "@components/icon-components/logout-icon";
 
@@ -87,21 +87,21 @@ export default function Account() {
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={styles.container__wrapper}>
-					<div className={styles.container__wrapper__titleContainer}>
-						<p className={styles.container__wrapper__titleContainer__title}>Account</p>
+				<div className={styles.wrapper}>
+					<div className={styles.wrapper__titleContainer}>
+						<p className={styles.wrapper__titleContainer__title}>Account</p>
 
 						<span
-							className={styles.container__wrapper__titleContainer__logoutIcon}
+							className={styles.wrapper__titleContainer__logoutIcon}
 							onClick={onLogoutClicked}>
 							<LogoutIcon size="32" />
 						</span>
 					</div>
 
-					<div className={styles.container__wrapper__optionsGroup}>
+					<div className={styles.wrapper__optionsGroup}>
 						<div
-							className={styles.container__wrapper__optionsGroup__option}
-							onClick={onChangePasswordClicked}>
+							onClick={onChangePasswordClicked}
+							className={styles.wrapper__optionsGroup__option}>
 							<span>
 								{isPasswordChangeRequestLoading
 									? "Sending email..."
@@ -110,21 +110,21 @@ export default function Account() {
 						</div>
 
 						<div
-							className={`${styles.container__wrapper__optionsGroup__option} danger`}
-							onClick={() => setShowConfirmEmptying(true)}>
+							onClick={() => setShowConfirmEmptying(true)}
+							className={`${styles.wrapper__optionsGroup__option} danger`}>
 							<span>Empty the vault</span>
 						</div>
 
 						<div
-							className={`${styles.container__wrapper__optionsGroup__option} danger`}
-							onClick={() => setShowConfirmDeletion(true)}>
+							onClick={() => setShowConfirmDeletion(true)}
+							className={`${styles.wrapper__optionsGroup__option} danger`}>
 							<span>Delete account</span>
 						</div>
 					</div>
 				</div>
 
 				{showConfirmEmptying && (
-					<div className={styles.container__confirmModal}>
+					<div className={styles.modal}>
 						<ConfirmModal
 							title="Empty the vault"
 							desc="Are you sure you want to delete all your entries? This action cannot be undone."
@@ -136,7 +136,7 @@ export default function Account() {
 				)}
 
 				{showConfirmDeletion && (
-					<div className={styles.container__confirmModal}>
+					<div className={styles.modal}>
 						<ConfirmModal
 							title="Delete account"
 							desc="Are you sure you want to delete your account? This action cannot be undone."
@@ -150,7 +150,7 @@ export default function Account() {
 
 			{(showConfirmDeletion || showConfirmEmptying) && (
 				<div
-					className={styles.shadow}
+					className={styles.modal__shadow}
 					onClick={() => {
 						setShowConfirmEmptying(false);
 						setShowConfirmDeletion(false);

@@ -72,21 +72,21 @@ export default function Generate() {
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.container__title}>Password generator</p>
+			<p className={styles.title}>Password generator</p>
 
-			<div className={styles.container__content}>
+			<div className={styles.wrapper}>
 				<div
 					onClick={copyPassword}
 					className={`
-								${styles.container__content__generatedPassword}
-								${errorMsg && styles.container__content__generatedPassword__error}
-								${wasPasswordCopied && styles.container__content__generatedPassword__copied}
+								${styles.wrapper__generatedPassword}
+								${errorMsg && styles.wrapper__generatedPassword__error}
+								${wasPasswordCopied && styles.wrapper__generatedPassword__copied}
 							`}>
 					<p>{text}</p>
 				</div>
 
-				<div className={styles.container__content__settings}>
-					<div className={styles.container__content__settings__sliderContainer}>
+				<div className={styles.wrapper__settings}>
+					<div className={styles.wrapper__settings__sliderContainer}>
 						<p>
 							Length: <span>{passwordLength}</span>
 						</p>

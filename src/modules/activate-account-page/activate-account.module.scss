@@ -14,9 +14,9 @@
 	gap: util.rem(32);
 
 	text-align: center;
+}
 
-	&__title {
-		font-size: util.rem(28);
-		font-weight: var(--font-weight-bold);
-	}
+.title {
+	font-size: util.rem(28);
+	font-weight: var(--font-weight-bold);
 }

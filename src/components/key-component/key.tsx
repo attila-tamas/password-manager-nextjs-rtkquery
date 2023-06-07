@@ -7,8 +7,8 @@ import OptionsIcon from "@components/icon-components/options-icon";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
 import { useState } from "react";
 
-export default function Key(props: any) {
-	const key = useSelector(state => selectKeyById(state, props.keyId));
+export default function Key({ keyId, onClick }: any) {
+	const key = useSelector(state => selectKeyById(state, keyId));
 
 	const [text, setText] = useState("Copy password");
 	const [waitTimer, setWaitTimer] = useState(undefined);
@@ -42,21 +42,21 @@ export default function Key(props: any) {
 	if (key) {
 		return (
 			<div className={styles.container}>
-				<div className={styles.container__content}>
+				<div className={styles.content}>
 					<WebsiteIcon currentKey={key} grow />
 
-					<div className={styles.container__content__text}>
-						<p className={styles.container__content__text__title}>{key.title}</p>
-						<p className={styles.container__content__text__description}>{credential}</p>
+					<div className={styles.content__textContainer}>
+						<p className={styles.content__textContainer__title}>{key.title}</p>
+						<p className={styles.content__textContainer__description}>{credential}</p>
 						<p
-							className={`link ${styles.container__content__text__action}`}
-							onClick={copyPassword}>
+							onClick={copyPassword}
+							className={`link ${styles.content__textContainer__actionBtn}`}>
 							{text}
 						</p>
 					</div>
 				</div>
 
-				<div className={styles.container__options} onClick={props.onClick}>
+				<div onClick={onClick} className={styles.optionsIcon}>
 					<OptionsIcon size="24" />
 				</div>
 			</div>

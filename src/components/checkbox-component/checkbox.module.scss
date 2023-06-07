@@ -11,53 +11,53 @@
 	font-size: util.rem(16);
 
 	cursor: pointer;
+}
 
-	&__checkbox {
-		-webkit-appearance: none;
-		appearance: none;
+.checkbox {
+	-webkit-appearance: none;
+	appearance: none;
 
-		margin: 0;
+	margin: 0;
 
-		width: util.rem(24);
-		height: util.rem(24);
+	width: util.rem(24);
+	height: util.rem(24);
 
-		border: util.rem(1) solid var(--color-border);
-		border-radius: util.rem(4);
+	border: util.rem(1) solid var(--color-border);
+	border-radius: util.rem(4);
 
-		background-color: var(--color-contrast);
-		box-shadow: var(--drop-shadow-bottom);
+	background-color: var(--color-contrast);
+	box-shadow: var(--drop-shadow-bottom);
 
-		display: grid;
-		place-content: center;
+	display: grid;
+	place-content: center;
 
-		cursor: pointer;
+	cursor: pointer;
 
-		&::before {
-			content: "";
+	&::before {
+		content: "";
 
-			width: util.rem(16);
-			height: util.rem(16);
+		width: util.rem(16);
+		height: util.rem(16);
 
-			transform: scale(0);
-			transform-origin: bottom left;
+		transform: scale(0);
+		transform-origin: bottom left;
 
-			box-shadow: inset util.em(16) util.em(16) var(--color-primary);
-			background-color: var(--color-primary);
+		box-shadow: inset util.em(16) util.em(16) var(--color-primary);
+		background-color: var(--color-primary);
 
-			clip-path: polygon(
-				17.22% 49.02%,
-				3.8% 64.89%,
-				40.39% 95.84%,
-				97.11% 28.78%,
-				80.96% 15.12%,
-				37.66% 66.31%
-			);
+		clip-path: polygon(
+			17.22% 49.02%,
+			3.8% 64.89%,
+			40.39% 95.84%,
+			97.11% 28.78%,
+			80.96% 15.12%,
+			37.66% 66.31%
+		);
 
-			transition: all 100ms ease 0s;
-		}
+		transition: all 100ms ease 0s;
+	}
 
-		&:checked::before {
-			transform: scale(1);
-		}
+	&:checked::before {
+		transform: scale(1);
 	}
 }

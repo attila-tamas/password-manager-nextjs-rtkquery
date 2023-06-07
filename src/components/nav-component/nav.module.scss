@@ -16,55 +16,55 @@
 	box-shadow: var(--drop-shadow-top);
 
 	z-index: 999;
+}
 
-	&__logo,
-	&__logoutContainer {
-		display: none;
-	}
+.logo,
+.logoutContainer {
+	display: none;
+}
 
-	&__nav {
-		width: min(100%, util.rem(200));
+.nav {
+	width: min(100%, util.rem(200));
+	height: fit-content;
+
+	margin-inline: auto;
+	padding-block: util.rem(8);
+
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: util.rem(12);
+
+	&__item {
+		width: 100%;
 		height: fit-content;
 
-		margin-inline: auto;
-		padding-block: util.rem(8);
+		color: var(--color-foreground);
 
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: util.rem(12);
+		cursor: pointer;
 
-		&__item {
-			width: 100%;
-			height: fit-content;
-
-			color: var(--color-foreground);
-
-			cursor: pointer;
-
-			&:hover {
-				color: var(--color-primary);
-			}
-
-			&__logout {
-				width: 100%;
-				height: fit-content;
-
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-
-				color: inherit;
-
-				&__text {
-					font-size: util.rem(16);
-
-					display: none;
-				}
-			}
+		&:hover {
+			color: var(--color-primary);
 		}
 
 		&__active {
 			color: var(--color-primary);
+		}
+
+		&__logout {
+			width: 100%;
+			height: fit-content;
+
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			color: inherit;
+
+			&__text {
+				font-size: util.rem(16);
+
+				display: none;
+			}
 		}
 	}
 }
@@ -78,31 +78,31 @@
 		position: relative;
 
 		padding: util.rem(40) util.rem(32);
+	}
 
-		&__nav {
-			width: 100%;
-			height: 100%;
+	.logo,
+	.logoutContainer {
+		display: block;
+	}
 
-			display: flex;
-			flex-direction: column;
-			gap: util.rem(16);
+	.nav {
+		width: 100%;
+		height: 100%;
 
-			&__item {
-				&__logout {
-					flex-direction: row;
-					gap: util.rem(12);
+		display: flex;
+		flex-direction: column;
+		gap: util.rem(16);
 
-					&__text {
-						display: block;
-						font-size: util.rem(20);
-					}
+		&__item {
+			&__logout {
+				flex-direction: row;
+				gap: util.rem(12);
+
+				&__text {
+					display: block;
+					font-size: util.rem(20);
 				}
 			}
-		}
-
-		&__logo,
-		&__logoutContainer {
-			display: block;
 		}
 	}
 }
