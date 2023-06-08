@@ -1,16 +1,21 @@
+// styles
 import styles from "./website-icon.module.scss";
-
+// react
 import { useEffect, useState } from "react";
-
-import warningIcon from "@public/warning-icon.svg";
+// next.js
 import Image from "next/image";
-
+// @public
+import warningIcon from "@public/warning-icon.svg";
+// @components
 import OpenIcon from "@components/icon-components/open-icon";
 
 export default function WebsiteIcon({ currentKey, grow }: any) {
+	// states
 	const [icon, setIcon] = useState("");
 	const [error, setError] = useState({ message: "", hint: "" });
+	//
 
+	// get the website url of the given key
 	const urlField = currentKey.customFields.find((field: any) => {
 		const fieldInLowerCase = field.key.toLowerCase();
 		const foundField = fieldInLowerCase.includes("url") || fieldInLowerCase.includes("website");
@@ -19,8 +24,8 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 			return foundField;
 		}
 	});
-
 	let url = urlField?.value;
+	//
 
 	// add "https://" at the start of the url if it is not found
 	// "http" urls are not accepted, becase of the URL constructor
@@ -38,6 +43,7 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 				"(\\#[-a-z\\d_]*)?$", // validate fragment locator
 			"i"
 		);
+
 		return !!urlPattern.test(urlString);
 	};
 
@@ -59,6 +65,7 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 				setError({ message: "Invalid URL", hint: "Check for typos" });
 			}
 
+			// store the icon url in a state so it changes when the website url changes as well
 			setIcon(`https://icon.horse/icon/${domain}`);
 		} else {
 			setError({ message: "Missing URL", hint: "Add a custom URL field" });
@@ -68,6 +75,8 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 	return (
 		<>
 			{!error.message && url ? (
+				// display the website icon if there is a valid url and there is no error
+
 				<a
 					className={`${styles.container} ${grow && styles.container__grow}`}
 					href={url}
@@ -86,6 +95,8 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 					</div>
 				</a>
 			) : (
+				// display a warning icon and a tooltip on hover to display the error message if there is an error
+
 				<div className={`${styles.warning} ${grow && styles.container__grow}`}>
 					<Image
 						className={`unselectable ${styles.image}`}

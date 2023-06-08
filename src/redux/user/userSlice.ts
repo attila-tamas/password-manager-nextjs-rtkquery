@@ -23,4 +23,4 @@ export const { setPersist, setCurrentEmail } = userSlice.actions;
 
 // selectors
 export const selectPersist = (state: any) => state.user.persist;
-export const selectEmail = (state: any) => state.user.email;
+export const selectCurrentEmail = (state: any) => state.user.email;

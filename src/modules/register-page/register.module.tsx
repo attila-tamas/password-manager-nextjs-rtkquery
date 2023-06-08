@@ -1,42 +1,67 @@
+// styles
 import styles from "./register.module.scss";
-
+// react
 import { useEffect, useRef, useState } from "react";
-
-import { useRegisterMutation } from "@redux/auth/authApiSlice";
-import { setCurrentEmail } from "@redux/user/userSlice";
+// npm
 import { useDispatch } from "react-redux";
-
+// next.js
 import Link from "next/link";
 import router from "next/router";
-
+// @redux
+// api hooks
+import { useRegisterMutation } from "@redux/auth/authApiSlice";
+// actions
+import { setCurrentEmail } from "@redux/user/userSlice";
+//
+// @util
 import routes from "@util/routes";
-
+// @components
 import Button from "@components/button-component/button";
 import Checkbox from "@components/checkbox-component/checkbox";
 import Input from "@components/input-component/input";
 import Logo from "@components/logo-component/logo";
 
+// page module for "/register" route
 export default function Register() {
 	const dispatch = useDispatch();
 
+	// refs
 	const emailRef = useRef<HTMLDivElement>(null);
 	const errorRef = useRef<HTMLDivElement>(null);
+	//
 
+	// states
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
 	const [errorMsg, setErrorMsg] = useState("");
+	//
 
+	// api hook
 	const [register, { isLoading, isSuccess }] = useRegisterMutation();
 
+	// useEffect hooks
+	// focus the email input on page load
 	useEffect(() => {
 		emailRef.current?.focus();
 	}, []);
 
+	// clear the error message when the email or password input value changes
 	useEffect(() => {
-		setErrorMsg("");
-	}, [email, password]);
+		if (errorMsg) {
+			setErrorMsg("");
+		}
+	}, [email, password, errorMsg]);
+	//
 
+	// handler functions
+	// input handlers
+	const handleEmailInput = (e: any) => setEmail(e.target.value);
+	const handlePwdInput = (e: any) => setPassword(e.target.value);
+
+	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
+
+	// form submit handler
 	const handleSubmit = async (e: any) => {
 		e.preventDefault(); // prevent page reload
 
@@ -48,15 +73,10 @@ export default function Register() {
 			router.replace(routes.verifyEmail);
 		} catch (error: any) {
 			setErrorMsg(error.data?.message);
-
 			errorRef.current?.focus();
 		}
 	};
-
-	const handleEmailInput = (e: any) => setEmail(e.target.value);
-	const handlePwdInput = (e: any) => setPassword(e.target.value);
-
-	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
+	//
 
 	return (
 		<div className={styles.container}>
@@ -64,40 +84,51 @@ export default function Register() {
 
 			<p className={styles.title}>Create account</p>
 
-			{/* temp */}
+			{/* error message display starts */}
 			{errorMsg && (
 				<p ref={errorRef} className="error" aria-live="assertive">
 					{errorMsg}
 				</p>
 			)}
-			{/* temp */}
+			{/* error message display ends */}
 
+			{/* register form starts */}
 			<form onSubmit={handleSubmit} className={styles.form}>
-				<label className={styles.form__field}>
-					Email
+				{/* email field starts */}
+				<div className={styles.form__field}>
+					<label htmlFor="email">Email</label>
+
 					<Input
 						type="text"
+						id="email"
 						reference={emailRef}
 						value={email}
 						onChange={handleEmailInput}
 					/>
-				</label>
+				</div>
+				{/* email field ends */}
 
-				<label className={styles.form__field}>
-					Password
+				{/* password field starts */}
+				<div className={styles.form__field}>
+					<label htmlFor="password">Password</label>
+
 					<Input
 						type="password"
+						id="password"
 						show={showPwd}
 						value={password}
 						onChange={handlePwdInput}
 					/>
+
 					<Checkbox
 						label="Show Password"
 						checked={showPwd}
 						onChange={handleShowPwdToggle}
 					/>
-				</label>
+				</div>
+				{/* password field ends */}
 
+				{/* button group starts */}
 				<div className={styles.form__buttonGroup}>
 					<Button
 						text={isLoading ? "Creating account..." : "Create account"}
@@ -105,6 +136,7 @@ export default function Register() {
 						type="submit"
 						flex
 					/>
+
 					<p>
 						I have an account.
 						<Link href="/login" className="link">
@@ -113,7 +145,9 @@ export default function Register() {
 						</Link>
 					</p>
 				</div>
+				{/* button group ends */}
 			</form>
+			{/* register form ends */}
 		</div>
 	);
 }

@@ -1,26 +1,31 @@
+// styles
 import styles from "./activate-account.module.scss";
-
+// react
 import { useEffect, useState } from "react";
-
+// next.js
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+// @redux
+import { useActivateAccountMutation } from "@redux/user/userApiSlice";
+// @util
 import routes from "@util/routes";
-
+// @public
 import accountActivatedGraphic from "@public/account-activated-graphic.svg";
 
-import { useActivateAccountMutation } from "@/redux/user/userApiSlice";
-
+// page module for "/activate-account" route
 export default function ActivateAccount() {
 	const router = useRouter();
 
+	// state for the countdown timer
 	const [countDownInSeconds, setCountDownInSeconds] = useState(3);
 
+	// api hook
 	const [activateAccount, { isLoading, isSuccess }] = useActivateAccountMutation();
 
-	// get the token from the query
-	// and send an API call on page load to activate the account
+	// usEffect hooks
+	// when the user visits the account activation link sent by email
+	// get the token from the query and send an API call on page load to activate the account
 	useEffect(() => {
 		const token = router.query.token;
 
@@ -33,6 +38,8 @@ export default function ActivateAccount() {
 		}
 	}, [activateAccount, router.query.token]);
 
+	// debug when the account activation is loading
+	// REPLACE WITH A LOADING SPINNER!
 	useEffect(() => {
 		if (isLoading) {
 			console.log("loading...");
@@ -52,6 +59,7 @@ export default function ActivateAccount() {
 			router.replace(routes.login);
 		}
 	}, [countDownInSeconds, router]);
+	//
 
 	return (
 		<div className={styles.container}>

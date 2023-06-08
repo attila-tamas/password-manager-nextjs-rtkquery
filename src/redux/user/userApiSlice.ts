@@ -1,5 +1,5 @@
-import { apiSlice } from "../apiSlice";
-import { logout } from "../auth/authSlice";
+import { apiSlice } from "@redux/apiSlice";
+import { logout } from "@redux/auth/authSlice";
 
 export const userApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
@@ -39,6 +39,8 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				url: "/user/delete",
 				method: "DELETE",
 			}),
+			// use onQueryStarted when we want to do something with the response data
+			// or if we want to do something after the query is fulfilled, like logging out the user in this case
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;

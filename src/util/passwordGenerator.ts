@@ -1,3 +1,6 @@
+// default password generation settings
+// import it where the passwordGenerator() function is being used
+// used for generating a password on page load, or without settings set by the user
 export const passwordGenerationSettings = {
 	passwordLength: 32,
 	uppercase: true,
@@ -6,6 +9,7 @@ export const passwordGenerationSettings = {
 	symbols: true,
 };
 
+// generates and returns a randomized password based on the generation settings
 export const passwordGenerator = (settings: {
 	passwordLength: number;
 	uppercase: boolean;
@@ -34,19 +38,24 @@ export const passwordGenerator = (settings: {
 	return password;
 };
 
+// generate a random number
 const random = (min = 0, max = 1) => {
 	return Math.floor(Math.random() * (max + 1 - min) + min);
 };
 
+// generate a random lowercase character
 const randomLower = () => {
 	return String.fromCharCode(random(97, 122));
 };
 
+// generate a random uppercase character
 const randomUpper = () => {
 	return String.fromCharCode(random(65, 90));
 };
 
+// generate a random symbol from the predefined symbols string
+const SYMBOLS = "~*$%@#^&!?*'-=/,.{}()[]<>";
+
 const randomSymbol = () => {
-	const symbols = "~*$%@#^&!?*'-=/,.{}()[]<>";
-	return symbols[random(0, symbols.length - 1)];
+	return SYMBOLS[random(0, SYMBOLS.length - 1)];
 };

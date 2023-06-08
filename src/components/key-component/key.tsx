@@ -1,18 +1,24 @@
+// styles
 import styles from "./key.module.scss";
-
-import { selectKeyById } from "@redux/keys/keysApiSlice";
+// react
+import { useState } from "react";
+// npm
 import { useSelector } from "react-redux";
-
+// @redux
+import { selectKeyById } from "@redux/keys/keysApiSlice";
+// @components
 import OptionsIcon from "@components/icon-components/options-icon";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
-import { useState } from "react";
 
 export default function Key({ keyId, onClick }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
 
+	// states
 	const [text, setText] = useState("Copy password");
 	const [waitTimer, setWaitTimer] = useState(undefined);
+	//
 
+	// get the email, or the username if the email does not exist
 	const credentialField = key?.customFields.find((field: any) => {
 		const fieldInLowerCase = field.key.toLowerCase();
 		const foundField =
@@ -23,13 +29,17 @@ export default function Key({ keyId, onClick }: any) {
 		}
 	});
 	const credential = credentialField?.value;
+	//
 
-	const copyPassword = () => {
+	// copy button handler
+	const onCopyButtonClicked = () => {
 		if (!waitTimer) {
 			navigator.clipboard.writeText(key.password);
 
+			// change the button text on a successful copy to give feedback to the user
 			setText("Password copied");
 
+			// reset the text after a 600ms delay
 			setWaitTimer(
 				setTimeout(() => {
 					setText("Copy password");
@@ -39,22 +49,29 @@ export default function Key({ keyId, onClick }: any) {
 		}
 	};
 
+	// only return content when a key was found by the given id
 	if (key) {
 		return (
 			<div className={styles.container}>
+				{/* main content of the key starts */}
 				<div className={styles.content}>
 					<WebsiteIcon currentKey={key} grow />
 
+					{/* text content of the key starts */}
 					<div className={styles.content__textContainer}>
 						<p className={styles.content__textContainer__title}>{key.title}</p>
+
 						<p className={styles.content__textContainer__description}>{credential}</p>
+
 						<p
-							onClick={copyPassword}
+							onClick={onCopyButtonClicked}
 							className={`link ${styles.content__textContainer__actionBtn}`}>
 							{text}
 						</p>
 					</div>
+					{/* text content of the key ends */}
 				</div>
+				{/* main content of the key ends */}
 
 				<div onClick={onClick} className={styles.optionsIcon}>
 					<OptionsIcon size="24" />

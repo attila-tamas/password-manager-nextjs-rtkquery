@@ -1,35 +1,48 @@
+// styles
 import styles from "./verify-email.module.scss";
-
+// react
 import { useEffect, useState } from "react";
-
-import { useResendVerificationEmailMutation } from "@redux/user/userApiSlice";
-import { selectEmail } from "@redux/user/userSlice";
-import { useSelector } from "react-redux";
-
+// next.js
 import Image from "next/image";
-
+// npm
+import { useSelector } from "react-redux";
+// @redux
+// api hooks
+import { useResendVerificationEmailMutation } from "@redux/user/userApiSlice";
+// selectors
+import { selectCurrentEmail } from "@redux/user/userSlice";
+//
+// @public
 import verifyEmailGraphic from "@public/verify-email-graphic.svg";
-
+// @components
 import Button from "@components/button-component/button";
 
+// page module for "/verify-email" route
 export default function VerifyEmail() {
-	const email = useSelector(selectEmail);
+	const resendDelayInSeconds = 30;
 
+	const email = useSelector(selectCurrentEmail);
+
+	// states
 	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 	const [countDownInSeconds, setCountDownInSeconds] = useState(0);
 	const [errorMsg, setErrorMsg] = useState("");
+	//
 
-	const resendDelayInSeconds = 30;
-
+	// api hook
 	const [resendEmail, { isLoading, isSuccess, isError, error }] =
 		useResendVerificationEmailMutation();
 
+	// useEffect hooks
+	// debug when the page is loading
+	// REPLACE WITH A LOADING SPINNER!
 	useEffect(() => {
 		if (isLoading) {
 			console.log("loading...");
 		}
 	}, [isLoading]);
 
+	// set the error message if there is an error to display it to the user
 	useEffect(() => {
 		if (isError) {
 			const errorObj = error as any;
@@ -37,18 +50,23 @@ export default function VerifyEmail() {
 		}
 	}, [error, isError]);
 
+	// set a resend countdown timer if the API call was successful
 	useEffect(() => {
 		if (isSuccess) {
-			console.log("new email sent");
+			setCountDownInSeconds(resendDelayInSeconds);
 		}
 	}, [isSuccess]);
 
+	// set the countdown timer display and disable the resend email button when the timer is not finished
+	// this can be bypassed by reloading the page, but it is also handled on the backend by a rate limiter
 	useEffect(() => {
 		if (countDownInSeconds > 0) {
 			setIsButtonDisabled(true);
 
 			const interval = setInterval(() => {
-				setCountDownInSeconds(countDownInSeconds - 1);
+				setCountDownInSeconds(countDownInSeconds => {
+					return countDownInSeconds - 1;
+				});
 			}, 1000);
 
 			return () => clearInterval(interval);
@@ -57,24 +75,32 @@ export default function VerifyEmail() {
 			setErrorMsg("");
 		}
 	}, [countDownInSeconds]);
+	//
 
+	// handler functions
+	// resend button handler
 	const onResendButtonClicked = async () => {
 		try {
 			await resendEmail(email);
-			setCountDownInSeconds(resendDelayInSeconds);
 		} catch (error: any) {
 			setErrorMsg(error.data?.message);
 		}
 	};
 
+	// button text handler
 	const getButtonText = () => {
 		if (isLoading) {
+			// when the API call is loading
 			return "Resending...";
 		} else if (countDownInSeconds > 0) {
+			// when there is a countdown timer going
 			return countDownInSeconds;
 		}
+
+		// default button text
 		return "Resend email";
 	};
+	//
 
 	return (
 		<div className={styles.container}>

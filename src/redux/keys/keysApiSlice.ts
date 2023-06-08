@@ -1,7 +1,9 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
-import { apiSlice } from "../apiSlice";
+
+import { apiSlice } from "@redux/apiSlice";
 
 const keysAdapter = createEntityAdapter({
+	// sort keys in ascending order based on their title
 	sortComparer: (a: any, b: any) => a.title.localeCompare(b.title),
 });
 
@@ -9,6 +11,9 @@ const initialState = keysAdapter.getInitialState();
 
 export const keysApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
+		// builder.query if we do not change data on the server, used for GET methods, like getKeys
+		// builder.mutation if we do change data on the server
+
 		getKeys: builder.query({
 			query: () => ({
 				url: "/key",

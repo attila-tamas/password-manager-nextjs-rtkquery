@@ -1,5 +1,6 @@
+// styles
 import styles from "./confirm-modal.module.scss";
-
+// @components
 import Button from "@components/button-component/button";
 
 export default function ConfirmModal({ title, desc, confirmText, show, onClick }: any) {

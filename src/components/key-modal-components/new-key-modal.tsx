@@ -1,11 +1,13 @@
+// styles
 import styles from "./key-modal.module.scss";
-
-import { useAddNewKeyMutation } from "@redux/keys/keysApiSlice";
+// react
 import { useEffect, useState } from "react";
-
+// @redux
+import { useAddNewKeyMutation } from "@redux/keys/keysApiSlice";
+// @util
+import format from "@util/formatInputValue";
 import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGenerator";
-
-import format from "@/util/formatInputValue";
+// @components
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
 import CloseIcon from "@components/icon-components/close-icon";
@@ -15,24 +17,39 @@ import GenerateIcon from "@components/icon-components/generate-icon";
 import Input from "@components/input-component/input";
 
 export default function AddNewKeyModal({ show }: any) {
+	// states
 	const [title, setTitle] = useState("Title");
 	const [password, setPassword] = useState("");
 	const [inputFields, setInputFields] = useState([] as any[]);
+	//
 
+	// api hook
 	const [addNewKey, { isLoading, isSuccess, isError, error }] = useAddNewKeyMutation();
 
+	// useEffect hooks
+	// generate a password on page load
+	useEffect(() => {
+		setPassword(passwordGenerator(passwordGenerationSettings));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	// debug when a request is loading
+	// REPLACE WITH A LOADING SPINNER OR TEXT ON THE SUBMIT BUTTON!
+	// ALSO MAKE THE BUTTON DISABLED WHEN LOADING
 	useEffect(() => {
 		if (isLoading) {
 			console.log("loading...");
 		}
 	}, [isLoading]);
 
+	// close the modal if the update or delete was successful
 	useEffect(() => {
 		if (isSuccess) {
 			show(false);
 		}
 	}, [isSuccess, show]);
 
+	// set the error message if there is an error to display it to the user
 	useEffect(() => {
 		if (isError) {
 			const errorObj = error as any;
@@ -40,12 +57,18 @@ export default function AddNewKeyModal({ show }: any) {
 		}
 	}, [isError, error]);
 
-	useEffect(() => {
-		setPassword(passwordGenerator(passwordGenerationSettings));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	//
 
-	const handlePasswordChange = (e: any) => setPassword(e.target.value);
+	// handler functions
+	// input handler
+	const onPasswordChange = (e: any) => setPassword(e.target.value);
+
+	// custom field input handler
+	const onInputChange = (index: number, event: any) => {
+		const data = [...inputFields];
+		data[index][event.target.name] = event.target.value;
+		setInputFields(data);
+	};
 
 	// empty the password field and set an artificial delay
 	// to convey response to the user that the password has been regenerated
@@ -54,62 +77,21 @@ export default function AddNewKeyModal({ show }: any) {
 		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
 	};
 
-	const handleInputChange = (index: number, event: any) => {
-		const data = [...inputFields];
-		data[index][event.target.name] = event.target.value;
-		setInputFields(data);
-	};
-
-	const handleAddNewField = () => {
+	// add new custom field handler
+	const onAddNewFieldClicked = () => {
 		const newfield = { key: "New field", value: "" };
 		setInputFields([...inputFields, newfield]);
 	};
 
-	const handleRemoveField = (index: number) => {
+	// remove custom field handler
+	const onRemoveFieldClicked = (index: number) => {
 		const data = [...inputFields];
 		data.splice(index, 1);
 		setInputFields(data);
 	};
 
-	const customFields = inputFields.map((field: any, index: number) => {
-		return (
-			<div key={index} className={styles.form__field}>
-				<div className={styles.form__field__titleContainer}>
-					<span className={styles.form__field__titleContainer__customFieldIcon}>
-						<CustomFieldIcon size="24" />
-					</span>
-
-					<input
-						type="text"
-						name="key"
-						maxLength={24}
-						value={field.key}
-						size={field.key.length || 4}
-						onChange={(event: any) => handleInputChange(index, event)}
-						className={styles.form__field__titleContainer__input}
-					/>
-				</div>
-
-				<div className={styles.form__field__inputContainer}>
-					<Input
-						type="text"
-						name="value"
-						value={field.value}
-						onChange={(event: any) => handleInputChange(index, event)}
-						withCopyButton
-					/>
-
-					<span
-						onClick={() => handleRemoveField(index)}
-						className={styles.form__field__inputContainer__deleteIcon}>
-						<DeleteIcon size="32" />
-					</span>
-				</div>
-			</div>
-		);
-	});
-
-	const handleSubmit = async (e: any) => {
+	// form submit handler
+	const onSubmit = async (e: any) => {
 		e.preventDefault(); // prevent page reload
 
 		await addNewKey({
@@ -118,6 +100,7 @@ export default function AddNewKeyModal({ show }: any) {
 			customFields: inputFields,
 		});
 	};
+	//
 
 	return (
 		<div className={styles.container}>
@@ -125,7 +108,9 @@ export default function AddNewKeyModal({ show }: any) {
 				<CloseIcon size="28" />
 			</span>
 
-			<form onSubmit={handleSubmit} className={styles.form}>
+			{/* new key form starts */}
+			<form onSubmit={onSubmit} className={styles.form}>
+				{/* title starts */}
 				<div className={styles.form__titleContainer}>
 					<input
 						type="text"
@@ -137,7 +122,9 @@ export default function AddNewKeyModal({ show }: any) {
 						className={styles.form__titleContainer__input}
 					/>
 				</div>
+				{/* title ends */}
 
+				{/* password input starts */}
 				<div className={styles.form__field}>
 					<label htmlFor="password">Password</label>
 
@@ -146,7 +133,7 @@ export default function AddNewKeyModal({ show }: any) {
 							id="password"
 							type="password"
 							value={password}
-							onChange={handlePasswordChange}
+							onChange={onPasswordChange}
 							withCopyButton
 						/>
 
@@ -157,18 +144,65 @@ export default function AddNewKeyModal({ show }: any) {
 						</span>
 					</div>
 				</div>
+				{/* password input ends */}
 
-				<>{customFields}</>
+				{/* custom fields start */}
+				{inputFields.map((field: any, index: number) => {
+					return (
+						<div key={index} className={styles.form__field}>
+							{/* title of the custom field starts */}
+							<div className={styles.form__field__titleContainer}>
+								<span
+									className={styles.form__field__titleContainer__customFieldIcon}>
+									<CustomFieldIcon size="24" />
+								</span>
 
+								<input
+									type="text"
+									name="key"
+									maxLength={24}
+									value={field.key}
+									size={field.key.length || 4}
+									onChange={(event: any) => onInputChange(index, event)}
+									className={styles.form__field__titleContainer__input}
+								/>
+							</div>
+							{/* title of the custom field ends */}
+
+							{/* input of the custom field starts */}
+							<div className={styles.form__field__inputContainer}>
+								<Input
+									type="text"
+									name="value"
+									value={field.value}
+									onChange={(event: any) => onInputChange(index, event)}
+									withCopyButton
+								/>
+
+								<span
+									onClick={() => onRemoveFieldClicked(index)}
+									className={styles.form__field__inputContainer__deleteIcon}>
+									<DeleteIcon size="32" />
+								</span>
+							</div>
+							{/* input of the custom field ends */}
+						</div>
+					);
+				})}
+				{/* custom fields end */}
+
+				{/* add new field button starts */}
 				<div className={styles.form__addNewFieldContainer}>
 					<span
-						onClick={handleAddNewField}
+						onClick={onAddNewFieldClicked}
 						className={`link ${styles.form__addNewFieldContainer__button}`}>
 						<AddIcon size="26" />
 						<span>Add new field</span>
 					</span>
 				</div>
+				{/* add new field button ends */}
 
+				{/* button group starts */}
 				<div className={styles.form__buttonGroup}>
 					<span onClick={() => show(false)}>
 						<Button text="Cancel" color="danger" noBackdrop flex />
@@ -188,7 +222,9 @@ export default function AddNewKeyModal({ show }: any) {
 						/>
 					</span>
 				</div>
+				{/* button group ends */}
 			</form>
+			{/* new key form ends */}
 		</div>
 	);
 }

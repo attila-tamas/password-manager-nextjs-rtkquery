@@ -1,4 +1,4 @@
-import { apiSlice } from "@/redux/apiSlice";
+import { apiSlice } from "@redux/apiSlice";
 import { logout, setCredentials } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -24,6 +24,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				url: "/auth/logout",
 				method: "POST",
 			}),
+			// clear the token and reset the API state after the cookie is cleared
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
@@ -42,6 +43,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				url: "/auth/refresh",
 				method: "GET",
 			}),
+			// get and set the new access token after the query is fulfilled
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {
 					const { data } = await queryFulfilled;

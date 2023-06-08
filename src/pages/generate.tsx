@@ -10,6 +10,7 @@ export default function GeneratePage() {
 				<title>Password generator | keystone</title>
 			</Head>
 
+			{/* navigation bar and container for in-app pages */}
 			<Layout>
 				<Generate />
 			</Layout>

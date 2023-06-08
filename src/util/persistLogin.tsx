@@ -1,15 +1,20 @@
+// react
 import { useEffect, useState } from "react";
-
+// next.js
 import router from "next/router";
-
-import routes from "@util/routes";
-
+// npm
 import { useSelector } from "react-redux";
-
+// @redux
+// api hooks
 import { useRefreshMutation } from "@redux/auth/authApiSlice";
+// selectors
 import { selectCurrentToken } from "@redux/auth/authSlice";
 import { selectPersist } from "@redux/user/userSlice";
+//
+// @util
+import routes from "@util/routes";
 
+// used to keep the user signed in on page reload
 export default function PersistLogin({ children }: any) {
 	const token = useSelector(selectCurrentToken);
 	const persist = useSelector(selectPersist);
@@ -19,10 +24,13 @@ export default function PersistLogin({ children }: any) {
 	const [refresh, { isUninitialized, isLoading, isSuccess, isError, error }] =
 		useRefreshMutation();
 
+	// verify the refresh token on page load when there is no token but a user is logged in
 	useEffect(() => {
 		const verifyRefreshToken = async () => {
 			try {
 				await refresh("");
+
+				// make sure we only render the data when the query is finished
 				setTrueSuccess(true);
 			} catch (err) {
 				console.error(err);
@@ -37,19 +45,18 @@ export default function PersistLogin({ children }: any) {
 	}, []);
 
 	let content = <></>;
+
 	if (isLoading) {
-		console.log("loading");
+		// display a feedback when the page is loading
 		content = <p>Loading...</p>;
 	} else if (isError) {
-		// when trying to access a protected route without a token
-		console.log("error");
+		// redirect the user when trying to access a protected route without a token
 		router.replace(routes.home);
 	} else if (isSuccess && trueSuccess) {
-		console.log("success");
+		// display the page content when the token is successfully verified
 		content = <>{children}</>;
 	} else if (token && isUninitialized) {
-		console.log("token and uninit");
-		console.log(isUninitialized);
+		// when the query does not have cached data
 		content = <>{children}</>;
 	}
 

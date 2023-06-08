@@ -10,6 +10,7 @@ export default function AccountPage() {
 				<title>Account | keystone</title>
 			</Head>
 
+			{/* navigation bar and container for in-app pages */}
 			<Layout>
 				<Account />
 			</Layout>

@@ -1,5 +1,6 @@
+// styles
 import styles from "./slider.module.scss";
-
+// npm
 import ReactSlider from "react-slider";
 
 export default function Slider({ defaultValue, onChange, onAfterChange }: any) {

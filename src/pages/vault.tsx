@@ -10,6 +10,7 @@ export default function VaultPage() {
 				<title>Vault | keystone</title>
 			</Head>
 
+			{/* navigation bar and container for in-app pages */}
 			<Layout>
 				<Vault />
 			</Layout>

@@ -1,10 +1,12 @@
+// styles
 import styles from "./logo.module.scss";
-
+// next.js
 import Image from "next/image";
-
+// @public
 import favicon from "@public/favicon.svg";
 
 export default function Logo({ size }: any) {
+	// if a size is not given to the component it will default to 175px for easier use
 	if (!size) {
 		size = 175;
 	}

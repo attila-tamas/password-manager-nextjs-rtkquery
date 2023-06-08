@@ -1,9 +1,14 @@
+// npm
 import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { logout, setCredentials } from "./auth/authSlice";
+// authSlice reducers
+import { logout, setCredentials } from "@redux/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
+	// base url for the backend
 	baseUrl: "http://localhost:5000/api",
+	// include the cookie with our requests
 	credentials: "include",
+	// set the cookie
 	prepareHeaders: (headers: Headers, { getState }: any) => {
 		const token = getState().auth.token;
 		if (token) {
@@ -21,8 +26,6 @@ const baseQueryWithReauth = async (
 	let result = await baseQuery(args, api, extraOptions);
 
 	if (result?.error?.status === 400) {
-		console.log("sending refresh token");
-
 		// send refresh token to get new access token
 		const refreshResult = await baseQuery("/auth/refresh", api, extraOptions);
 
@@ -33,6 +36,7 @@ const baseQueryWithReauth = async (
 			// retry original query with new access token
 			result = await baseQuery(args, api, extraOptions);
 		} else {
+			// log out the user when the refresh token is expired and we do not get a new access token
 			api.dispatch(logout(""));
 		}
 	}
@@ -42,6 +46,6 @@ const baseQueryWithReauth = async (
 
 export const apiSlice = createApi({
 	baseQuery: baseQueryWithReauth,
-	tagTypes: ["Key"],
+	tagTypes: ["Key"], // data tag types for caching
 	endpoints: () => ({}),
 });

@@ -1,16 +1,19 @@
+// styles
 import styles from "./home.module.scss";
-
+// next.js
 import Image from "next/image";
 import Link from "next/link";
-
+// @public
+import heroGraphic from "@public/home-page-hero-graphic.svg";
+// @components
 import Button from "@components/button-component/button";
 import Logo from "@components/logo-component/logo";
 
-import heroGraphic from "@public/home-page-hero-graphic.svg";
-
+// page module for "/" route
 export default function Home() {
 	return (
 		<main className={styles.container}>
+			{/* nav starts */}
 			<div className={styles.nav}>
 				<Logo />
 
@@ -24,8 +27,11 @@ export default function Home() {
 					</Link>
 				</div>
 			</div>
+			{/* nav ends */}
 
+			{/* hero starts */}
 			<div className={styles.hero}>
+				{/* hero text content starts */}
 				<div className={styles.hero__textContainer}>
 					<p className={styles.hero__textContainer__title}>
 						Your password is the key to your digital life
@@ -50,6 +56,7 @@ export default function Home() {
 						</p>
 					</div>
 				</div>
+				{/* hero text content ends */}
 
 				<Image
 					className={`unselectable ${styles.hero__image}`}
@@ -57,6 +64,7 @@ export default function Home() {
 					alt="Mobile and desktop device showing keystone vault"
 				/>
 			</div>
+			{/* hero ends */}
 		</main>
 	);
 }
