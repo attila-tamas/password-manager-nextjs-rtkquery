@@ -2,11 +2,12 @@
 import styles from "./register.module.scss";
 // react
 import { useEffect, useRef, useState } from "react";
-// npm
-import { useDispatch } from "react-redux";
 // next.js
 import Link from "next/link";
 import router from "next/router";
+// npm
+import { enqueueSnackbar } from "notistack";
+import { useDispatch } from "react-redux";
 // @redux
 // api hooks
 import { useRegisterMutation } from "@redux/auth/authApiSlice";
@@ -34,7 +35,6 @@ export default function Register() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
-	const [errorMsg, setErrorMsg] = useState("");
 	//
 
 	// api hook
@@ -45,12 +45,6 @@ export default function Register() {
 	useEffect(() => {
 		emailRef.current?.focus();
 	}, []);
-
-	// clear the error message when the email or password input value changes
-	useEffect(() => {
-		setErrorMsg("");
-	}, [email, password]);
-	//
 
 	// handler functions
 	// input handlers
@@ -70,7 +64,7 @@ export default function Register() {
 
 			router.replace(routes.verifyEmail);
 		} catch (error: any) {
-			setErrorMsg(error.data?.message);
+			enqueueSnackbar(error.data?.message, { variant: "error" });
 			errorRef.current?.focus();
 		}
 	};
@@ -81,14 +75,6 @@ export default function Register() {
 			<Logo size="130" />
 
 			<p className={styles.title}>Create account</p>
-
-			{/* error message display starts */}
-			{errorMsg && (
-				<p ref={errorRef} className="error" aria-live="assertive">
-					{errorMsg}
-				</p>
-			)}
-			{/* error message display ends */}
 
 			{/* register form starts */}
 			<form onSubmit={handleSubmit} className={styles.form}>

@@ -10,6 +10,8 @@ import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 // @redux
 import { wrapper } from "@redux/store";
+// @components
+import SnackbarContext from "@components/snackbar-components/snackbar-context";
 
 // create the font for next/font
 const quicksand = Quicksand({ subsets: ["latin"] });
@@ -38,12 +40,15 @@ export default function App({ Component, pageProps }: AppProps) {
 				}
 			`}</style>
 
-			{/* provied for the redux store */}
+			{/* provider for the redux store */}
 			<Provider store={store}>
 				{/* redux-persist gate, that only allows the data to load when the persisted states are rehydrated */}
 				<PersistGate persistor={persistor} loading={null}>
-					{/* render the child components */}
-					<Component {...pageProps} />
+					{/* provide access to the snackbar hook context */}
+					<SnackbarContext>
+						{/* render the child components */}
+						<Component {...pageProps} />
+					</SnackbarContext>
 				</PersistGate>
 			</Provider>
 		</>

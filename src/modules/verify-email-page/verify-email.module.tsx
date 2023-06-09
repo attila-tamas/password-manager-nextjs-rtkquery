@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 // next.js
 import Image from "next/image";
 // npm
+import { enqueueSnackbar } from "notistack";
 import { useSelector } from "react-redux";
 // @redux
 // api hooks
@@ -26,7 +27,6 @@ export default function VerifyEmail() {
 	// states
 	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 	const [countDownInSeconds, setCountDownInSeconds] = useState(0);
-	const [errorMsg, setErrorMsg] = useState("");
 	//
 
 	// api hook
@@ -34,14 +34,6 @@ export default function VerifyEmail() {
 		useResendVerificationEmailMutation();
 
 	// useEffect hooks
-	// set the error message if there is an error to display it to the user
-	useEffect(() => {
-		if (isError) {
-			const errorObj = error as any;
-			setErrorMsg(errorObj.data.message);
-		}
-	}, [error, isError]);
-
 	// set a resend countdown timer if the API call was successful
 	useEffect(() => {
 		if (isSuccess) {
@@ -64,7 +56,6 @@ export default function VerifyEmail() {
 			return () => clearInterval(interval);
 		} else {
 			setIsButtonDisabled(false);
-			setErrorMsg("");
 		}
 	}, [countDownInSeconds]);
 	//
@@ -75,7 +66,7 @@ export default function VerifyEmail() {
 		try {
 			await resendEmail(email);
 		} catch (error: any) {
-			setErrorMsg(error.data?.message);
+			enqueueSnackbar(error.data?.message, { variant: "error" });
 		}
 	};
 
@@ -114,8 +105,6 @@ export default function VerifyEmail() {
 					onClick={onResendButtonClicked}
 				/>
 			</div>
-
-			{errorMsg && <p className="error">{errorMsg}</p>}
 		</div>
 	);
 }

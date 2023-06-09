@@ -30,11 +30,10 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 	const [title, setTitle] = useState(key.title);
 	const [password, setPassword] = useState(key.password);
 	const [inputFields, setInputFields] = useState([{ key: "", value: "" }]);
-	const [errorMsg, setErrorMsg] = useState("");
 	//
 
 	// api hooks
-	const [updateKey, { isLoading, isSuccess, isError, error }] = useUpdateKeyMutation();
+	const [updateKey, { isLoading, isSuccess }] = useUpdateKeyMutation();
 	const [deleteKey, { isLoading: isDelLoading, isSuccess: isDelSuccess }] =
 		useDeleteKeyMutation();
 	//
@@ -46,19 +45,6 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 			show(false);
 		}
 	}, [isSuccess, isDelSuccess, show]);
-
-	// set the error message if there is an error to display it to the user
-	useEffect(() => {
-		if (isError) {
-			const errorObj = error as any;
-			setErrorMsg(errorObj.data.message);
-		}
-	}, [isError, error]);
-
-	// clear the password input's error message on value change
-	useEffect(() => {
-		setErrorMsg("");
-	}, [password]);
 
 	// load the custom fields from the key
 	useEffect(() => {
@@ -114,8 +100,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 		await updateKey({
 			id: key.id,
-			title: title || "Title", // if the user did not provied a title, default if to "Title"
-			password,
+			title: title || "Title",
+			password: password || passwordGenerator(passwordGenerationSettings),
 			customFields: inputFields,
 		});
 	};
@@ -171,12 +157,6 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 							<GenerateIcon size="32" />
 						</span>
 					</div>
-
-					{errorMsg && (
-						<p className="error" aria-live="assertive">
-							{errorMsg}
-						</p>
-					)}
 				</div>
 				{/* password input ends */}
 

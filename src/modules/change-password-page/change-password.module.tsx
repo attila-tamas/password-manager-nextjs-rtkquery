@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
+// npm
+import { enqueueSnackbar } from "notistack";
 // @redux
 import { useChangePasswordMutation } from "@redux/user/userApiSlice";
 // @util
@@ -25,7 +27,6 @@ export default function ChangePassword() {
 	// states
 	const [password, setPassword] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
-	const [errorMsg, setErrorMsg] = useState("");
 	const [countDownInSeconds, setCountDownInSeconds] = useState(3);
 	//
 
@@ -53,19 +54,6 @@ export default function ChangePassword() {
 			}
 		}
 	}, [isSuccess, countDownInSeconds]);
-
-	// set the error message if there is an error to display it to the user
-	useEffect(() => {
-		if (isError) {
-			const errorObj = error as any;
-			setErrorMsg(errorObj.data?.message);
-		}
-	}, [isError, error]);
-
-	// clear the error message when the password input value changes
-	useEffect(() => {
-		setErrorMsg("");
-	}, [password]);
 	//
 
 	// handler functions
@@ -81,7 +69,11 @@ export default function ChangePassword() {
 			const id = router.query.credentials[0];
 			const token = router.query.credentials[1];
 
-			await changePassword({ id, token, password });
+			try {
+				await changePassword({ id, token, password });
+			} catch (error: any) {
+				enqueueSnackbar(error.data?.message, { variant: "error" });
+			}
 		}
 	};
 	//
@@ -142,8 +134,6 @@ export default function ChangePassword() {
 							disabled={isLoading}
 						/>
 					</form>
-
-					{errorMsg && <p className="error">{errorMsg}</p>}
 				</>
 			)}
 		</div>

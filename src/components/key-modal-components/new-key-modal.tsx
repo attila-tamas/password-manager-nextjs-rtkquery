@@ -24,7 +24,7 @@ export default function AddNewKeyModal({ show }: any) {
 	//
 
 	// api hook
-	const [addNewKey, { isLoading, isSuccess, isError, error }] = useAddNewKeyMutation();
+	const [addNewKey, { isLoading, isSuccess }] = useAddNewKeyMutation();
 
 	// useEffect hooks
 	// generate a password on page load
@@ -39,15 +39,6 @@ export default function AddNewKeyModal({ show }: any) {
 			show(false);
 		}
 	}, [isSuccess, show]);
-
-	// set the error message if there is an error to display it to the user
-	useEffect(() => {
-		if (isError) {
-			const errorObj = error as any;
-			console.log(errorObj.data.message);
-		}
-	}, [isError, error]);
-
 	//
 
 	// handler functions

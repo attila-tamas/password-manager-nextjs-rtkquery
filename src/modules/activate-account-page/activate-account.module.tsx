@@ -1,28 +1,24 @@
 // styles
 import styles from "./activate-account.module.scss";
 // react
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // next.js
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
+// npm
+import { enqueueSnackbar } from "notistack";
 // @redux
 import { useActivateAccountMutation } from "@redux/user/userApiSlice";
 // @util
-import routes from "@util/routes";
-// @public
-import SpinnerIcon from "@/components/icon-components/spinner-icon";
-import accountActivatedGraphic from "@public/account-activated-graphic.svg";
+import routes from "@/util/routes";
+// @components
+import SpinnerIcon from "@components/icon-components/spinner-icon";
 
 // page module for "/activate-account" route
 export default function ActivateAccount() {
 	const router = useRouter();
 
-	// state for the countdown timer
-	const [countDownInSeconds, setCountDownInSeconds] = useState(3);
-
 	// api hook
-	const [activateAccount, { isLoading, isSuccess }] = useActivateAccountMutation();
+	const [activateAccount, { isSuccess, isError, error }] = useActivateAccountMutation();
 
 	// usEffect hooks
 	// when the user visits the account activation link sent by email
@@ -39,49 +35,30 @@ export default function ActivateAccount() {
 		}
 	}, [activateAccount, router.query.token]);
 
-	// set a timer for 3 seconds before redirecting
-	// to give feedback to the user that their account has been activated
+	// upon successful activation redirect the user and display a success snackbar as feedback
 	useEffect(() => {
-		if (countDownInSeconds > 0) {
-			const interval = setInterval(() => {
-				setCountDownInSeconds(countDownInSeconds - 1);
-			}, 1000);
-
-			return () => clearInterval(interval);
-		} else {
+		if (isSuccess) {
 			router.replace(routes.login);
+			enqueueSnackbar("Account activated", { variant: "success" });
 		}
-	}, [countDownInSeconds, router]);
+	}, [isSuccess, router]);
+
+	useEffect(() => {
+		if (isError) {
+			const errorObj = error as any;
+			router.replace(routes.login);
+			enqueueSnackbar(errorObj.data?.message, { variant: "error" });
+		}
+	}, [isError, error, router]);
 	//
 
 	return (
-		<>
-			{isSuccess ? (
-				<div className={styles.container}>
-					<Image
-						className="unselectable"
-						src={accountActivatedGraphic}
-						alt="Account activated graphic"
-					/>
-
-					<p className={styles.title}>
-						{isSuccess
-							? "Your account has been activated"
-							: "Account already activated"}
-					</p>
-
-					<p>
-						You will be redirected to the login page in {countDownInSeconds}...
-						<br />
-						<Link href={routes.login} className="link">
-							Go now
-						</Link>
-					</p>
-				</div>
-			) : (
-				// display a spinner while waiting for the account activation response
-				<SpinnerIcon fullScreen />
-			)}
-		</>
+		// give feedback to the user while waiting for the activation response
+		// the user will be automatically redirected if the activation is successful
+		// therefore the loading feedback is the only content we need to display
+		<div className={styles.container}>
+			<SpinnerIcon />
+			<p>Your account is being activated. Please&nbsp;wait...</p>
+		</div>
 	);
 }

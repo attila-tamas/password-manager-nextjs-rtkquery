@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import router from "next/router";
 // npm
+import { enqueueSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
 // @redux
 // api hooks
@@ -33,14 +34,12 @@ export default function Login() {
 	// refs
 	const emailRef = useRef<HTMLDivElement>(null);
 	const passwordRef = useRef<HTMLDivElement>(null);
-	const errorRef = useRef<HTMLDivElement>(null);
 	//
 
 	// states
 	const [email, setEmail] = useState(currentEmail || "");
 	const [password, setPassword] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
-	const [errorMsg, setErrorMsg] = useState("");
 	//
 
 	// api hooks
@@ -62,26 +61,6 @@ export default function Login() {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	// set the error message if there is an error to display it to the user
-	useEffect(() => {
-		if (isError) {
-			const errorObj = error as any;
-			setErrorMsg(errorObj.data.message);
-		}
-	}, [error, isError]);
-
-	// clear the error message when the email or password input value changes
-	useEffect(() => {
-		setErrorMsg("");
-	}, [email, password]);
-
-	// clear the error message if the password change request was successful
-	useEffect(() => {
-		if (isSuccess) {
-			setErrorMsg("");
-		}
-	}, [isSuccess]);
 	//
 
 	// handler functions
@@ -103,8 +82,7 @@ export default function Login() {
 
 			router.replace(routes.vault);
 		} catch (error: any) {
-			setErrorMsg(error.data?.message);
-			errorRef.current?.focus();
+			enqueueSnackbar(error.data?.message, { variant: "error" });
 		}
 	};
 
@@ -112,7 +90,7 @@ export default function Login() {
 	const onForgotPasswordClicked = async () => {
 		if (!email) {
 			emailRef.current?.focus();
-			setErrorMsg("The email address must not be empty");
+			enqueueSnackbar("The email address must not be empty", { variant: "error" });
 		} else {
 			await requestPasswordChange(email);
 		}
@@ -124,14 +102,6 @@ export default function Login() {
 			<Logo size="130" />
 
 			<p className={styles.title}>Sign in</p>
-
-			{/* error message display starts */}
-			{errorMsg && (
-				<p ref={errorRef} className="error" aria-live="assertive">
-					{errorMsg}
-				</p>
-			)}
-			{/* error message display ends  */}
 
 			{/* login form starts */}
 			<form onSubmit={handleSubmit} className={styles.form}>
