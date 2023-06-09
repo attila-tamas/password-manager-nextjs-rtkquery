@@ -48,10 +48,8 @@ export default function Register() {
 
 	// clear the error message when the email or password input value changes
 	useEffect(() => {
-		if (errorMsg) {
-			setErrorMsg("");
-		}
-	}, [email, password, errorMsg]);
+		setErrorMsg("");
+	}, [email, password]);
 	//
 
 	// handler functions

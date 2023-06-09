@@ -11,6 +11,7 @@ import { useActivateAccountMutation } from "@redux/user/userApiSlice";
 // @util
 import routes from "@util/routes";
 // @public
+import SpinnerIcon from "@/components/icon-components/spinner-icon";
 import accountActivatedGraphic from "@public/account-activated-graphic.svg";
 
 // page module for "/activate-account" route
@@ -38,14 +39,6 @@ export default function ActivateAccount() {
 		}
 	}, [activateAccount, router.query.token]);
 
-	// debug when the account activation is loading
-	// REPLACE WITH A LOADING SPINNER!
-	useEffect(() => {
-		if (isLoading) {
-			console.log("loading...");
-		}
-	}, [isLoading]);
-
 	// set a timer for 3 seconds before redirecting
 	// to give feedback to the user that their account has been activated
 	useEffect(() => {
@@ -62,24 +55,33 @@ export default function ActivateAccount() {
 	//
 
 	return (
-		<div className={styles.container}>
-			<Image
-				className="unselectable"
-				src={accountActivatedGraphic}
-				alt="Account activated graphic"
-			/>
+		<>
+			{isSuccess ? (
+				<div className={styles.container}>
+					<Image
+						className="unselectable"
+						src={accountActivatedGraphic}
+						alt="Account activated graphic"
+					/>
 
-			<p className={styles.title}>
-				{isSuccess ? "Your account has been activated" : "Account already activated"}
-			</p>
+					<p className={styles.title}>
+						{isSuccess
+							? "Your account has been activated"
+							: "Account already activated"}
+					</p>
 
-			<p>
-				You will be redirected to the login page in {countDownInSeconds}...
-				<br />
-				<Link href={routes.login} className="link">
-					Go now
-				</Link>
-			</p>
-		</div>
+					<p>
+						You will be redirected to the login page in {countDownInSeconds}...
+						<br />
+						<Link href={routes.login} className="link">
+							Go now
+						</Link>
+					</p>
+				</div>
+			) : (
+				// display a spinner while waiting for the account activation response
+				<SpinnerIcon fullScreen />
+			)}
+		</>
 	);
 }

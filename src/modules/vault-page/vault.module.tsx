@@ -7,6 +7,7 @@ import { useGetKeysQuery } from "@redux/keys/keysApiSlice";
 // @util
 import format from "@util/formatInputValue";
 // @components
+import SpinnerIcon from "@/components/icon-components/spinner-icon";
 import Button from "@components/button-component/button";
 import Input from "@components/input-component/input";
 import Key from "@components/key-component/key";
@@ -32,15 +33,6 @@ export default function Vault() {
 	const { data, isLoading, isSuccess, isError, error } = useGetKeysQuery("");
 
 	// useEffect hooks
-	// debug when the getKeys query is loading
-	// REPLACE WITH A LOADING SPINNER!
-	// DISPLAY A LOADING SPINNER IN THE PLACE OF THE KEYS LIST!
-	useEffect(() => {
-		if (isLoading) {
-			console.log("loading...");
-		}
-	}, [isLoading]);
-
 	// set the error message if there is an error to display it to the user
 	useEffect(() => {
 		if (isError) {
@@ -158,10 +150,37 @@ export default function Vault() {
 	// set the key list display to the initial keys from the API call if there is no keyword to search for
 	// this makes sure a list of keys is displayed at all times
 	const getKeyList = () => {
-		if (!query) {
-			return initialKeysList;
+		if (initialKeysList) {
+			// display the keys when the vault is not empty
+
+			if (!query) {
+				return initialKeysList;
+			}
+
+			return filteredKeysList;
+		} else {
+			// display a hint when the vault is empty
+
+			return (
+				<div className={styles.wrapper__keyList__noResult}>
+					<span>Your vault is empty</span>
+
+					<p className={styles.wrapper__keyList__noResult__hint}>
+						Add a key by pressing the{" "}
+						<span onClick={onAddNewClicked} className="link">
+							New
+						</span>{" "}
+						button
+					</p>
+				</div>
+			);
 		}
-		return filteredKeysList;
+	};
+
+	// add new key handler
+	const onAddNewClicked = () => {
+		setShowAddNewKeyModal(true);
+		setQuery("");
 	};
 	//
 
@@ -179,20 +198,13 @@ export default function Vault() {
 							value={query}
 							onChange={onSearchInputChange}
 						/>
-						<Button
-							text="New"
-							color="primary"
-							onClick={() => {
-								setShowAddNewKeyModal(true);
-								setQuery("");
-							}}
-						/>
+						<Button text="New" color="primary" onClick={onAddNewClicked} />
 					</div>
 					{/* search bar and new key button container ends */}
 
 					{/* key list starts */}
 					<div className={styles.wrapper__keyList}>
-						<>{getKeyList()}</>
+						<>{isLoading ? <SpinnerIcon /> : getKeyList()}</>
 					</div>
 					{/* key list ends */}
 				</div>

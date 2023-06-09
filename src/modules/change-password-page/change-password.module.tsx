@@ -54,15 +54,6 @@ export default function ChangePassword() {
 		}
 	}, [isSuccess, countDownInSeconds]);
 
-	// debug when the change password request is loading
-	// REPLACE WITH A LOADING SPINNER OR TEXT ON THE SUBMIT BUTTON!
-	// ALSO MAKE THE BUTTON DISABLED WHEN LOADING
-	useEffect(() => {
-		if (isLoading) {
-			console.log("loading...");
-		}
-	}, [isLoading]);
-
 	// set the error message if there is an error to display it to the user
 	useEffect(() => {
 		if (isError) {
@@ -73,10 +64,8 @@ export default function ChangePassword() {
 
 	// clear the error message when the password input value changes
 	useEffect(() => {
-		if (errorMsg) {
-			setErrorMsg("");
-		}
-	}, [password, errorMsg]);
+		setErrorMsg("");
+	}, [password]);
 	//
 
 	// handler functions
@@ -145,7 +134,13 @@ export default function ChangePassword() {
 							/>
 						</div>
 
-						<Button text="Set new password" color="primary" type="submit" flex />
+						<Button
+							text={isLoading ? "Setting new password..." : "Set new password"}
+							color="primary"
+							type="submit"
+							flex
+							disabled={isLoading}
+						/>
 					</form>
 
 					{errorMsg && <p className="error">{errorMsg}</p>}

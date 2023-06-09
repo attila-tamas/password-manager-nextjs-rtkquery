@@ -34,14 +34,6 @@ export default function VerifyEmail() {
 		useResendVerificationEmailMutation();
 
 	// useEffect hooks
-	// debug when the page is loading
-	// REPLACE WITH A LOADING SPINNER!
-	useEffect(() => {
-		if (isLoading) {
-			console.log("loading...");
-		}
-	}, [isLoading]);
-
 	// set the error message if there is an error to display it to the user
 	useEffect(() => {
 		if (isError) {

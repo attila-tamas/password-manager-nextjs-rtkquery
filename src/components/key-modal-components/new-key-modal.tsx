@@ -33,15 +33,6 @@ export default function AddNewKeyModal({ show }: any) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// debug when a request is loading
-	// REPLACE WITH A LOADING SPINNER OR TEXT ON THE SUBMIT BUTTON!
-	// ALSO MAKE THE BUTTON DISABLED WHEN LOADING
-	useEffect(() => {
-		if (isLoading) {
-			console.log("loading...");
-		}
-	}, [isLoading]);
-
 	// close the modal if the update or delete was successful
 	useEffect(() => {
 		if (isSuccess) {
@@ -100,11 +91,18 @@ export default function AddNewKeyModal({ show }: any) {
 			customFields: inputFields,
 		});
 	};
+
+	// modal close handler
+	const handleClose = () => {
+		if (!isLoading) {
+			show(false);
+		}
+	};
 	//
 
 	return (
 		<div className={styles.container}>
-			<span onClick={() => show(false)} className={styles.closeIcon}>
+			<span onClick={handleClose} className={styles.closeIcon}>
 				<CloseIcon size="28" />
 			</span>
 
@@ -204,21 +202,20 @@ export default function AddNewKeyModal({ show }: any) {
 
 				{/* button group starts */}
 				<div className={styles.form__buttonGroup}>
-					<span onClick={() => show(false)}>
+					<span onClick={handleClose}>
 						<Button text="Cancel" color="danger" noBackdrop flex />
 					</span>
 
 					<div className={styles.form__buttonGroup__separator}>&nbsp;</div>
 
 					<span>
-						{/* Make the buttons disabled while loading */}
-						{/* Make the modal unclosable while loading */}
 						<Button
 							text={isLoading ? "Saving..." : "Save"}
+							type="submit"
 							color="primary"
 							noBackdrop
 							flex
-							type="submit"
+							disabled={isLoading}
 						/>
 					</span>
 				</div>

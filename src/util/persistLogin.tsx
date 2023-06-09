@@ -12,6 +12,7 @@ import { selectCurrentToken } from "@redux/auth/authSlice";
 import { selectPersist } from "@redux/user/userSlice";
 //
 // @util
+import SpinnerIcon from "@/components/icon-components/spinner-icon";
 import routes from "@util/routes";
 
 // used to keep the user signed in on page reload
@@ -48,7 +49,7 @@ export default function PersistLogin({ children }: any) {
 
 	if (isLoading) {
 		// display a feedback when the page is loading
-		content = <p>Loading...</p>;
+		content = <SpinnerIcon fullScreen />;
 	} else if (isError) {
 		// redirect the user when trying to access a protected route without a token
 		router.replace(routes.home);

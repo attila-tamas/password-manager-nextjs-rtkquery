@@ -73,10 +73,8 @@ export default function Login() {
 
 	// clear the error message when the email or password input value changes
 	useEffect(() => {
-		if (errorMsg) {
-			setErrorMsg("");
-		}
-	}, [email, password, errorMsg]);
+		setErrorMsg("");
+	}, [email, password]);
 
 	// clear the error message if the password change request was successful
 	useEffect(() => {
