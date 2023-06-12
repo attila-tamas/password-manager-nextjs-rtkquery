@@ -112,6 +112,9 @@
 
 		margin-inline: auto;
 
+		// so that the left border of the input does not get cut off in the new key modal
+		padding-left: util.rem(1);
+
 		&__input {
 			max-width: util.rem(216);
 

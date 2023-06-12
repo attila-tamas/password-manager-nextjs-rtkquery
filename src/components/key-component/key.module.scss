@@ -55,6 +55,11 @@
 	cursor: pointer;
 }
 
+.active {
+	border-color: var(--color-primary);
+	outline: util.rem(1) solid var(--color-primary);
+}
+
 @include util.breakpoint-up(medium) {
 	.container {
 		padding: util.rem(16);

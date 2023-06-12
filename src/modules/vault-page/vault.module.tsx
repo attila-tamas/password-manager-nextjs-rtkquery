@@ -25,6 +25,7 @@ export default function Vault() {
 	const [query, setQuery] = useState("");
 	const [filteredKeysList, setFilteredKeysList] = useState([] as Element[] | Element);
 	// modals
+	const [selectedKeyId, setSelectedKeyId] = useState("");
 	const [showUpdateKeyModal, setShowUpdateKeyModal] = useState(false);
 	const [showAddNewKeyModal, setShowAddNewKeyModal] = useState(false);
 	//
@@ -40,9 +41,16 @@ export default function Vault() {
 			console.log(errorObj.data.message);
 		}
 	}, [isError, error]);
+
+	// deselect the key on page reload
+	useEffect(() => {
+		if (selectedKeyId && !showUpdateKeyModal) {
+			setSelectedKeyId("");
+		}
+	}, [selectedKeyId, showUpdateKeyModal]);
 	//
 
-	// if the getKeys query is successful display the keys
+	// if the getKeys query is successful set the initialKeysList to display the keys for the user
 	if (isSuccess) {
 		const { ids, entities } = data;
 
@@ -51,8 +59,10 @@ export default function Vault() {
 					<Key
 						key={keyId}
 						keyId={keyId}
+						active={selectedKeyId === keyId}
 						onClick={() => {
 							setKeyId(keyId);
+							setSelectedKeyId(keyId);
 							setShowUpdateKeyModal(true);
 						}}
 					/>
@@ -127,8 +137,10 @@ export default function Vault() {
 				<Key
 					key={keyId}
 					keyId={keyId}
+					active={selectedKeyId === keyId}
 					onClick={() => {
 						setKeyId(keyId);
+						setSelectedKeyId(keyId);
 						setShowUpdateKeyModal(true);
 					}}
 				/>

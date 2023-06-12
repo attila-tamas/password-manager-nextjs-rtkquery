@@ -14,15 +14,16 @@ import {
 import format from "@util/formatInputValue";
 import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGenerator";
 // @components
+
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
 import CustomFieldIcon from "@components/icon-components/custom-field-icon";
 import DeleteIcon from "@components/icon-components/delete-icon";
 import GenerateIcon from "@components/icon-components/generate-icon";
+import HideIcon from "@components/icon-components/hide-icon";
+import ShowIcon from "@components/icon-components/show-icon";
 import Input from "@components/input-component/input";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
-import HideIcon from "../icon-components/hide-icon";
-import ShowIcon from "../icon-components/show-icon";
 
 export default function UpdateKeyModal({ keyId, show }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));

@@ -10,7 +10,7 @@ import { selectKeyById } from "@redux/keys/keysApiSlice";
 import OptionsIcon from "@components/icon-components/options-icon";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
 
-export default function Key({ keyId, onClick }: any) {
+export default function Key({ keyId, active, onClick }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
 
 	// states
@@ -52,7 +52,7 @@ export default function Key({ keyId, onClick }: any) {
 	// only return content when a key was found by the given id
 	if (key) {
 		return (
-			<div className={styles.container}>
+			<div className={`${styles.container} ${active && styles.active}`}>
 				{/* main content of the key starts */}
 				<div className={styles.content}>
 					<WebsiteIcon currentKey={key} grow />
