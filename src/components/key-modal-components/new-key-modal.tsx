@@ -10,16 +10,18 @@ import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGen
 // @components
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
-import CloseIcon from "@components/icon-components/close-icon";
 import CustomFieldIcon from "@components/icon-components/custom-field-icon";
 import DeleteIcon from "@components/icon-components/delete-icon";
 import GenerateIcon from "@components/icon-components/generate-icon";
 import Input from "@components/input-component/input";
+import HideIcon from "../icon-components/hide-icon";
+import ShowIcon from "../icon-components/show-icon";
 
 export default function AddNewKeyModal({ show }: any) {
 	// states
 	const [title, setTitle] = useState("Title");
 	const [password, setPassword] = useState("");
+	const [showPwd, setShowPwd] = useState(false);
 	const [inputFields, setInputFields] = useState([] as any[]);
 	//
 
@@ -44,6 +46,7 @@ export default function AddNewKeyModal({ show }: any) {
 	// handler functions
 	// input handler
 	const onPasswordChange = (e: any) => setPassword(e.target.value);
+	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
 
 	// custom field input handler
 	const onInputChange = (index: number, event: any) => {
@@ -54,7 +57,7 @@ export default function AddNewKeyModal({ show }: any) {
 
 	// empty the password field and set an artificial delay
 	// to convey response to the user that the password has been regenerated
-	const handleGeneratePasswordClick = () => {
+	const onGeneratePasswordClick = () => {
 		setPassword("");
 		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
 	};
@@ -92,13 +95,28 @@ export default function AddNewKeyModal({ show }: any) {
 	//
 
 	return (
-		<div className={styles.container}>
-			<span onClick={handleClose} className={styles.closeIcon}>
-				<CloseIcon size="28" />
-			</span>
+		<form onSubmit={onSubmit} className={styles.form}>
+			{/* button group starts */}
+			<div className={styles.form__buttonGroup}>
+				<Button
+					text="Cancel"
+					noBackdrop
+					onClick={handleClose}
+					className={styles.form__buttonGroup__button}
+				/>
 
-			{/* new key form starts */}
-			<form onSubmit={onSubmit} className={styles.form}>
+				<Button
+					text={isLoading ? "Creating..." : "Create"}
+					type="submit"
+					color="primary"
+					disabled={isLoading}
+					className={styles.form__buttonGroup__button}
+				/>
+			</div>
+			{/* button group ends */}
+
+			{/* scrollable content starts */}
+			<div className={styles.form__wrapper}>
 				{/* title starts */}
 				<div className={styles.form__titleContainer}>
 					<input
@@ -113,9 +131,17 @@ export default function AddNewKeyModal({ show }: any) {
 				</div>
 				{/* title ends */}
 
-				{/* password input starts */}
+				{/* password field starts */}
 				<div className={styles.form__field}>
-					<label htmlFor="password">Password</label>
+					<div className={styles.form__field__passwordFieldTitle}>
+						<label htmlFor="password">Password</label>
+
+						<span
+							onClick={handleShowPwdToggle}
+							className={styles.form__field__passwordFieldTitle__showIcon}>
+							{showPwd ? <HideIcon size="22" /> : <ShowIcon size="22" />}
+						</span>
+					</div>
 
 					<div className={styles.form__field__inputContainer}>
 						<Input
@@ -124,16 +150,17 @@ export default function AddNewKeyModal({ show }: any) {
 							value={password}
 							onChange={onPasswordChange}
 							withCopyButton
+							show={showPwd}
 						/>
 
 						<span
-							className={styles.form__field__inputContainer__generateIcon}
-							onClick={handleGeneratePasswordClick}>
+							onClick={onGeneratePasswordClick}
+							className={styles.form__field__inputContainer__generateIcon}>
 							<GenerateIcon size="32" />
 						</span>
 					</div>
 				</div>
-				{/* password input ends */}
+				{/* password field ends */}
 
 				{/* custom fields start */}
 				{inputFields.map((field: any, index: number) => {
@@ -190,29 +217,8 @@ export default function AddNewKeyModal({ show }: any) {
 					</span>
 				</div>
 				{/* add new field button ends */}
-
-				{/* button group starts */}
-				<div className={styles.form__buttonGroup}>
-					<span onClick={handleClose}>
-						<Button text="Cancel" color="danger" noBackdrop flex />
-					</span>
-
-					<div className={styles.form__buttonGroup__separator}>&nbsp;</div>
-
-					<span>
-						<Button
-							text={isLoading ? "Saving..." : "Save"}
-							type="submit"
-							color="primary"
-							noBackdrop
-							flex
-							disabled={isLoading}
-						/>
-					</span>
-				</div>
-				{/* button group ends */}
-			</form>
-			{/* new key form ends */}
-		</div>
+			</div>
+			{/* scrollable content ends */}
+		</form>
 	);
 }

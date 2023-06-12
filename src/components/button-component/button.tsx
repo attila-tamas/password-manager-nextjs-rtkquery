@@ -8,6 +8,7 @@ export default function Button({
 	noBackdrop,
 	flex,
 	grow,
+	className,
 	onClick,
 }: any) {
 	const getButtonColor = (color: string) => {
@@ -44,6 +45,7 @@ export default function Button({
 						${flex && styles.button__flex}
 						${grow && styles.button__grow}
 						${getButtonColor(color)}
+						${className}
 					`}
 			onClick={onClick}
 		/>

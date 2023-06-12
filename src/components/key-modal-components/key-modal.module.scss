@@ -1,7 +1,7 @@
 @use "@styles/util" as util;
 
-.container {
-	width: min(100%, util.rem(480));
+.form {
+	width: min(100%, util.rem(360));
 	height: fit-content;
 	max-height: 100%;
 
@@ -9,40 +9,97 @@
 
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	gap: util.rem(24);
 
-	overflow-y: auto;
+	padding-inline: util.rem(20);
+	padding-bottom: util.rem(58);
+	margin-inline: auto;
 
-	padding: util.rem(20);
-	padding-bottom: util.rem(66);
+	font-size: util.rem(18);
 
 	border-radius: util.rem(4);
 
 	box-shadow: var(--drop-shadow-bottom);
 	background-color: var(--color-background);
 
-	z-index: 1;
-}
+	z-index: 2;
 
-.closeIcon {
-	width: fit-content;
+	&__buttonGroup {
+		width: min(100%, util.rem(480));
+		height: fit-content;
 
-	color: var(--color-error);
-	cursor: pointer;
-}
+		position: absolute;
+		bottom: 0;
+		left: 0;
 
-.form {
-	width: min(100%, util.rem(360));
-	height: fit-content;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: util.rem(8);
 
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	gap: util.rem(24);
+		padding: util.rem(8) util.rem(20);
 
-	margin-inline: auto;
+		border-radius: 0 0 util.rem(4) util.rem(4);
+		border: util.rem(1) solid var(--color-border);
 
-	font-size: util.rem(18);
+		background-color: var(--color-contrast);
+		box-shadow: var(--drop-shadow-top);
+
+		z-index: 3;
+
+		&__button {
+			padding: util.rem(6) util.rem(18);
+		}
+
+		&__deleteKeyContainer {
+			width: 100%;
+			height: fit-content;
+
+			display: flex;
+			justify-content: flex-start;
+
+			&__button {
+				width: fit-content;
+				height: fit-content;
+
+				display: flex;
+				align-items: center;
+				gap: util.rem(8);
+
+				color: var(--color-error);
+
+				font-size: util.rem(16);
+
+				cursor: pointer;
+			}
+		}
+	}
+
+	&__wrapper {
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: util.rem(24);
+
+		overflow-y: auto;
+
+		padding-block: util.rem(20);
+
+		// hide scrollbar
+		overflow-y: scroll;
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+
+		/* WebKit */
+		&::-webkit-scrollbar {
+			width: 0;
+			height: 0;
+		}
+		//
+	}
 
 	&__titleContainer {
 		width: 100%;
@@ -92,6 +149,21 @@
 		display: flex;
 		flex-direction: column;
 		gap: util.rem(8);
+
+		&__passwordFieldTitle {
+			display: flex;
+			align-items: center;
+			gap: util.rem(8);
+
+			&__showIcon {
+				width: fit-content;
+				height: fit-content;
+
+				color: var(--color-primary);
+
+				cursor: pointer;
+			}
+		}
 
 		&__titleContainer {
 			width: 100%;
@@ -162,75 +234,10 @@
 			gap: util.rem(8);
 		}
 	}
-
-	&__buttonGroup {
-		width: min(100%, util.rem(480));
-		height: fit-content;
-
-		margin-top: util.rem(32);
-
-		display: grid;
-		place-items: center center;
-		grid-template-columns: 1fr fit-content(util.rem(1)) 1fr;
-
-		border-radius: util.rem(4) util.rem(4) 0 0;
-		border: util.rem(1) solid var(--color-border);
-
-		background-color: var(--color-contrast);
-		box-shadow: var(--drop-shadow-bottom);
-
-		& span {
-			width: 100%;
-			height: fit-content;
-
-			text-align: center;
-
-			grid-row: 1;
-
-			cursor: pointer;
-		}
-
-		&__separator {
-			width: util.rem(1);
-			height: 70%;
-
-			grid-row: 1;
-
-			border-radius: util.rem(4);
-
-			background-color: var(--color-gray-light);
-		}
-	}
-}
-
-.deleteKeyContainer {
-	width: 100%;
-	height: fit-content;
-
-	display: flex;
-	justify-content: center;
-
-	margin-top: util.rem(24);
-
-	&__button {
-		width: fit-content;
-		height: fit-content;
-
-		display: flex;
-		align-items: center;
-		gap: util.rem(8);
-
-		color: var(--color-error);
-
-		font-size: util.rem(16);
-
-		cursor: pointer;
-	}
 }
 
 @include util.breakpoint-up(medium) {
-	.container {
+	.form {
 		max-height: calc(100% - util.rem(40));
-		padding: util.rem(20);
 	}
 }

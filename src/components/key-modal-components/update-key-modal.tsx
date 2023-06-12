@@ -16,12 +16,13 @@ import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGen
 // @components
 import Button from "@components/button-component/button";
 import AddIcon from "@components/icon-components/add-icon";
-import CloseIcon from "@components/icon-components/close-icon";
 import CustomFieldIcon from "@components/icon-components/custom-field-icon";
 import DeleteIcon from "@components/icon-components/delete-icon";
 import GenerateIcon from "@components/icon-components/generate-icon";
 import Input from "@components/input-component/input";
 import WebsiteIcon from "@components/website-icon-component/website-icon";
+import HideIcon from "../icon-components/hide-icon";
+import ShowIcon from "../icon-components/show-icon";
 
 export default function UpdateKeyModal({ keyId, show }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
@@ -29,6 +30,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 	// states
 	const [title, setTitle] = useState(key.title);
 	const [password, setPassword] = useState(key.password);
+	const [showPwd, setShowPwd] = useState(false);
 	const [inputFields, setInputFields] = useState([{ key: "", value: "" }]);
 	//
 
@@ -61,6 +63,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 	// handler functions
 	// password input handler
 	const onPasswordChange = (e: any) => setPassword(e.target.value);
+	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
 
 	// custom field input handler
 	const onInputChange = (index: number, event: any) => {
@@ -71,7 +74,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 	// empty the password field and set an artificial delay
 	// to convey response to the user that the password has been regenerated
-	const onGeneratePwdClick = () => {
+	const onGeneratePasswordClick = () => {
 		setPassword("");
 		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
 	};
@@ -115,13 +118,39 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 	//
 
 	return (
-		<div className={styles.container}>
-			<span onClick={handleClose} className={styles.closeIcon}>
-				<CloseIcon size="28" />
-			</span>
+		<form onSubmit={onSubmit} className={styles.form}>
+			{/* button group starts */}
+			<div className={styles.form__buttonGroup}>
+				{/* delete key button starts */}
+				<div className={styles.form__buttonGroup__deleteKeyContainer}>
+					<div
+						onClick={onDeleteKeyClicked}
+						className={styles.form__buttonGroup__deleteKeyContainer__button}>
+						<DeleteIcon size="20" />
+						<p className="danger">{isDelLoading ? "Deleting..." : "Delete"}</p>
+					</div>
+				</div>
+				{/* delete key button ends */}
 
-			{/* update key form starts */}
-			<form onSubmit={onSubmit} className={styles.form}>
+				<Button
+					text="Close"
+					noBackdrop
+					onClick={handleClose}
+					className={styles.form__buttonGroup__button}
+				/>
+
+				<Button
+					text={isLoading ? "Saving..." : "Save"}
+					type="submit"
+					color="primary"
+					disabled={isLoading}
+					className={styles.form__buttonGroup__button}
+				/>
+			</div>
+			{/* button group ends */}
+
+			{/* scrollable content starts */}
+			<div className={styles.form__wrapper}>
 				{/* title starts */}
 				<div className={styles.form__titleContainer}>
 					<WebsiteIcon currentKey={key} />
@@ -138,9 +167,17 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 				</div>
 				{/* title ends */}
 
-				{/* password input starts */}
+				{/* password field starts */}
 				<div className={styles.form__field}>
-					<label htmlFor="password">Password</label>
+					<div className={styles.form__field__passwordFieldTitle}>
+						<label htmlFor="password">Password</label>
+
+						<span
+							onClick={handleShowPwdToggle}
+							className={styles.form__field__passwordFieldTitle__showIcon}>
+							{showPwd ? <HideIcon size="22" /> : <ShowIcon size="22" />}
+						</span>
+					</div>
 
 					<div className={styles.form__field__inputContainer}>
 						<Input
@@ -149,16 +186,17 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 							value={password}
 							onChange={onPasswordChange}
 							withCopyButton
+							show={showPwd}
 						/>
 
 						<span
-							onClick={onGeneratePwdClick}
+							onClick={onGeneratePasswordClick}
 							className={styles.form__field__inputContainer__generateIcon}>
 							<GenerateIcon size="32" />
 						</span>
 					</div>
 				</div>
-				{/* password input ends */}
+				{/* password field ends */}
 
 				{/* custom fields start */}
 				{inputFields.map((field: any, index: number) => {
@@ -215,38 +253,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 					</span>
 				</div>
 				{/* add new field button ends */}
-
-				{/* button group starts */}
-				<div className={styles.form__buttonGroup}>
-					<span onClick={handleClose}>
-						<Button text="Cancel" color="danger" noBackdrop flex />
-					</span>
-
-					<div className={styles.form__buttonGroup__separator}>&nbsp;</div>
-
-					<span>
-						<Button
-							text={isLoading ? "Saving..." : "Save"}
-							type="submit"
-							color="primary"
-							noBackdrop
-							flex
-							disabled={isLoading}
-						/>
-					</span>
-				</div>
-				{/* group ends */}
-			</form>
-			{/* update key form starts */}
-
-			{/* dekete key button starts */}
-			<div className={styles.deleteKeyContainer}>
-				<div onClick={onDeleteKeyClicked} className={styles.deleteKeyContainer__button}>
-					<DeleteIcon size="22" />
-					<p className="danger">{isDelLoading ? "Deleting key..." : "Delete key"}</p>
-				</div>
 			</div>
-			{/* dekete key button ends */}
-		</div>
+			{/* scrollable content ends */}
+		</form>
 	);
 }

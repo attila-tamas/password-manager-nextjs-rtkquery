@@ -60,8 +60,9 @@ export default function Input({
 				maxLength={maxLength}
 				onChange={onChange}
 				className={`
-					${className || styles.input}
+					${styles.input}
 					${wasCopied && styles.input__copied}
+					${className}
 				`}
 				id={id}
 			/>

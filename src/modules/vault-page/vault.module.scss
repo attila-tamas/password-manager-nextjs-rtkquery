@@ -17,16 +17,21 @@
 	height: 100%;
 
 	margin-inline: auto;
-	padding: util.rem(20) util.rem(20) 0 util.rem(20);
+	padding: util.rem(20);
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: util.rem(20);
+	gap: util.rem(24);
 
 	&__utilContainer {
 		width: 100%;
 		height: fit-content;
+
+		// to be the same width as the keyList
+		padding: util.rem(4);
+		margin: util.rem(-4);
+		//
 
 		display: flex;
 		align-items: center;
@@ -40,10 +45,27 @@
 
 		overflow-y: auto;
 
+		// to not cut off the drop-shadows
+		padding: util.rem(4);
+		margin: util.rem(-4);
+		//
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: util.rem(12);
+
+		// hide scrollbar
+		overflow-y: scroll;
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+
+		/* WebKit */
+		&::-webkit-scrollbar {
+			width: 0;
+			height: 0;
+		}
+		//
 
 		&__noResult {
 			width: min(100%, util.rem(360));
@@ -78,6 +100,8 @@
 		position: absolute;
 
 		background-color: var(--color-shadow-background);
+
+		z-index: 1;
 	}
 }
 
