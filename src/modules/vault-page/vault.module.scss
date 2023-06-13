@@ -13,16 +13,19 @@
 }
 
 .wrapper {
-	width: min(100%, util.rem(320));
+	width: min(100%, util.rem(360));
 	height: 100%;
 
 	margin-inline: auto;
 	padding: util.rem(20);
+	padding-bottom: 0;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: util.rem(24);
+
+	border-radius: util.rem(4);
 
 	&__utilContainer {
 		width: 100%;
@@ -49,6 +52,9 @@
 		padding: util.rem(4);
 		margin: util.rem(-4);
 		//
+
+		// to add a bit of extra space between the nav at the bottom and the list
+		padding-bottom: util.rem(16);
 
 		display: flex;
 		flex-direction: column;
@@ -108,5 +114,27 @@
 @include util.breakpoint-up(medium) {
 	.wrapper {
 		width: min(100%, util.rem(480));
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.container {
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+	.wrapper {
+		margin: 0;
+	}
+
+	.modal {
+		width: min(100%, util.rem(480));
+		height: fit-content;
+
+		position: relative;
+
+		&__shadow {
+			display: none;
+		}
 	}
 }

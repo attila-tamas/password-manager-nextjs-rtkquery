@@ -63,6 +63,7 @@ export default function Vault() {
 						onClick={() => {
 							setKeyId(keyId);
 							setSelectedKeyId(keyId);
+							if (showAddNewKeyModal) setShowAddNewKeyModal(false);
 							setShowUpdateKeyModal(true);
 						}}
 					/>
@@ -141,6 +142,7 @@ export default function Vault() {
 					onClick={() => {
 						setKeyId(keyId);
 						setSelectedKeyId(keyId);
+						if (showAddNewKeyModal) setShowAddNewKeyModal(false);
 						setShowUpdateKeyModal(true);
 					}}
 				/>
@@ -191,6 +193,7 @@ export default function Vault() {
 
 	// add new key handler
 	const onAddNewClicked = () => {
+		if (showUpdateKeyModal) setShowUpdateKeyModal(false);
 		setShowAddNewKeyModal(true);
 		setQuery("");
 	};

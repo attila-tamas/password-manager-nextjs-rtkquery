@@ -29,26 +29,33 @@
 
 	&__textContainer {
 		p {
-			width: fit-content;
+			width: 100%;
+			word-break: break-word;
 		}
 
 		&__title {
 			font-size: util.rem(18);
-			font-weight: var(--font-weight-semibold);
+			font-weight: var(--font-weight-bold);
 		}
 
 		&__description {
+			font-size: util.rem(14);
 			color: var(--color-gray);
 		}
 
-		&__description,
 		&__actionBtn {
-			font-size: util.rem(13);
+			font-size: util.rem(15);
 		}
 	}
 }
 
 .optionsIcon {
+	width: fit-content;
+	height: 100%;
+
+	display: flex;
+	align-items: center;
+
 	color: var(--color-gray);
 	padding-block: util.rem(4);
 
@@ -70,12 +77,12 @@
 
 		&__textContainer {
 			&__title {
-				font-size: util.rem(24);
+				font-size: util.rem(22);
 			}
 
-			&__description,
-			&__actionBtn {
-				font-size: util.rem(18);
+			&__actionBtn,
+			&__description {
+				font-size: util.rem(16);
 			}
 		}
 	}

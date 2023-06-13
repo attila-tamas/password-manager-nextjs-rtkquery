@@ -11,9 +11,8 @@
 	color: inherit;
 
 	& span {
-		font-size: util.rem(16);
-
 		display: none;
+		font-size: util.rem(20);
 	}
 }
 
@@ -24,7 +23,6 @@
 
 		& span {
 			display: block;
-			font-size: util.rem(20);
 		}
 	}
 }

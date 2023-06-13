@@ -96,25 +96,6 @@ export default function AddNewKeyModal({ show }: any) {
 
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
-			{/* button group starts */}
-			<div className={styles.form__buttonGroup}>
-				<Button
-					text="Cancel"
-					noBackdrop
-					onClick={handleClose}
-					className={styles.form__buttonGroup__button}
-				/>
-
-				<Button
-					text={isLoading ? "Creating..." : "Create"}
-					type="submit"
-					color="primary"
-					disabled={isLoading}
-					className={styles.form__buttonGroup__button}
-				/>
-			</div>
-			{/* button group ends */}
-
 			{/* scrollable content starts */}
 			<div className={styles.form__wrapper}>
 				{/* title starts */}
@@ -219,6 +200,25 @@ export default function AddNewKeyModal({ show }: any) {
 				{/* add new field button ends */}
 			</div>
 			{/* scrollable content ends */}
+
+			{/* button group starts */}
+			<div className={styles.form__buttonGroup}>
+				<Button
+					text="Cancel"
+					noBackdrop
+					onClick={handleClose}
+					className={styles.form__buttonGroup__button}
+				/>
+
+				<Button
+					text={isLoading ? "Creating..." : "Create"}
+					type="submit"
+					color="primary"
+					disabled={isLoading}
+					className={styles.form__buttonGroup__button}
+				/>
+			</div>
+			{/* button group ends */}
 		</form>
 	);
 }

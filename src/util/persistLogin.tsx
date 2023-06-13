@@ -40,6 +40,9 @@ export default function PersistLogin({ children }: any) {
 
 		if (!token && persist) {
 			verifyRefreshToken();
+		} else if (!token && !persist) {
+			// redirect the user to the login page if they are not logged in and they have no token
+			router.replace(routes.login);
 		}
 
 		// eslint-disable-next-line
@@ -51,8 +54,7 @@ export default function PersistLogin({ children }: any) {
 		// display a feedback when the page is loading
 		content = <SpinnerIcon fullScreen />;
 	} else if (isError) {
-		// redirect the user when trying to access a protected route without a token
-		router.replace(routes.home);
+		console.log(error);
 	} else if (isSuccess && trueSuccess) {
 		// display the page content when the token is successfully verified
 		content = <>{children}</>;

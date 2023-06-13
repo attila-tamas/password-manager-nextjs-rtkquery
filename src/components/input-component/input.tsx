@@ -62,6 +62,7 @@ export default function Input({
 				className={`
 					${styles.input}
 					${wasCopied && styles.input__copied}
+					${withCopyButton && styles.input__withCopyButton}
 					${className}
 				`}
 				id={id}

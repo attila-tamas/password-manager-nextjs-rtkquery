@@ -35,6 +35,11 @@
 		border-color: var(--color-primary);
 	}
 
+	&__withCopyButton {
+		// add the copy buttons width as padding
+		padding-right: util.rem(60);
+	}
+
 	&__copied {
 		outline-color: var(--color-primary);
 		border-color: var(--color-primary);

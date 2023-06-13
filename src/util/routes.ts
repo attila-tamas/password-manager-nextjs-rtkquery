@@ -1,14 +1,19 @@
-const routes = {
-	// public routes - do not require an access token
+export const publicRoutes = {
 	home: "/",
 	login: "/login",
 	register: "/register",
 	verifyEmail: "/verify-email",
+};
 
-	// protected routes - require an access token
+export const protectedRoutes = {
 	vault: "/vault",
 	generate: "/generate",
 	account: "/account",
+};
+
+const routes = {
+	...publicRoutes,
+	...protectedRoutes,
 };
 
 export default routes;

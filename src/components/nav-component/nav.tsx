@@ -47,54 +47,56 @@ export default function Nav() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.logo}>
-				<Logo size="130" />
-			</div>
+			<div className={styles.wrapper}>
+				<div className={styles.logo}>
+					<Logo size="130" />
+				</div>
 
-			{/* main content of the navigation starts */}
-			<div className={styles.nav}>
-				<div
-					className={`
+				{/* main content of the navigation starts */}
+				<div className={styles.nav}>
+					<div
+						className={`
 						${router.pathname == routes.vault && `${styles.nav__item__active}`}
 						${styles.nav__item}
 					`}>
-					<NavItem text="Vault" to={routes.vault}>
-						<VaultIcon size="26" />
-					</NavItem>
-				</div>
+						<NavItem text="Vault" to={routes.vault}>
+							<VaultIcon size="26" />
+						</NavItem>
+					</div>
 
-				<div
-					className={`
+					<div
+						className={`
 						${router.pathname == routes.generate && `${styles.nav__item__active}`}
 						${styles.nav__item}
 					`}>
-					<NavItem text="Generate" to={routes.generate}>
-						<GenerateIcon size="26" />
-					</NavItem>
-				</div>
+						<NavItem text="Generate" to={routes.generate}>
+							<GenerateIcon size="26" />
+						</NavItem>
+					</div>
 
-				<div
-					className={`
+					<div
+						className={`
 						${router.pathname == routes.account && `${styles.nav__item__active}`}
 						${styles.nav__item}
 					`}>
-					<NavItem text="Account" to={routes.account}>
-						<AccountIcon size="26" />
-					</NavItem>
+						<NavItem text="Account" to={routes.account}>
+							<AccountIcon size="26" />
+						</NavItem>
+					</div>
 				</div>
-			</div>
-			{/* main content of the navigation ends */}
+				{/* main content of the navigation ends */}
 
-			{/* logout button starts */}
-			<div className={`${styles.nav__item} ${styles.logoutContainer}`}>
-				<div className={styles.nav__item__logout} onClick={onLogoutClicked}>
-					<LogoutIcon size="26" />
-					<span className={styles.nav__item__logout__text}>
-						{isLoading ? "Logging out..." : "Logout"}
-					</span>
+				{/* logout button starts */}
+				<div className={`${styles.nav__item} ${styles.logoutContainer}`}>
+					<div className={styles.nav__item__logout} onClick={onLogoutClicked}>
+						<span className={styles.nav__item__logout__icon}>
+							<LogoutIcon size="26" />
+						</span>
+						<span>{isLoading ? "Logging out..." : "Logout"}</span>
+					</div>
 				</div>
+				{/* logout button ends */}
 			</div>
-			{/* logout button ends */}
 		</div>
 	);
 }

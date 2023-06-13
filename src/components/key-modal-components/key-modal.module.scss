@@ -1,7 +1,7 @@
 @use "@styles/util" as util;
 
 .form {
-	width: min(100%, util.rem(360));
+	width: min(100%, util.rem(320));
 	height: fit-content;
 	max-height: 100%;
 
@@ -12,14 +12,12 @@
 	gap: util.rem(24);
 
 	padding-inline: util.rem(20);
-	padding-bottom: util.rem(58);
 	margin-inline: auto;
 
 	font-size: util.rem(18);
 
 	border-radius: util.rem(4);
 
-	box-shadow: var(--drop-shadow-bottom);
 	background-color: var(--color-background);
 
 	z-index: 2;
@@ -37,7 +35,7 @@
 		justify-content: flex-end;
 		gap: util.rem(8);
 
-		padding: util.rem(8) util.rem(20);
+		padding: util.rem(4) util.rem(20);
 
 		border-radius: 0 0 util.rem(4) util.rem(4);
 		border: util.rem(1) solid var(--color-border);
@@ -48,7 +46,7 @@
 		z-index: 3;
 
 		&__button {
-			padding: util.rem(6) util.rem(18);
+			padding: util.rem(7) util.rem(18);
 		}
 
 		&__deleteKeyContainer {
@@ -71,6 +69,12 @@
 				font-size: util.rem(16);
 
 				cursor: pointer;
+
+				// to make the icon not shrink when the button text gets longer
+				&__icon {
+					min-width: util.rem(20);
+					min-height: util.rem(20);
+				}
 			}
 		}
 	}
@@ -87,6 +91,12 @@
 		overflow-y: auto;
 
 		padding-block: util.rem(20);
+
+		// the buttonGroup height + flex gap (24)
+		padding-bottom: util.rem(74);
+
+		// to make the left border of the input not get cut off
+		padding-left: util.rem(1);
 
 		// hide scrollbar
 		overflow-y: scroll;
@@ -112,7 +122,7 @@
 
 		margin-inline: auto;
 
-		// so that the left border of the input does not get cut off in the new key modal
+		// to make the left border of the input not get cut off in the new key modal
 		padding-left: util.rem(1);
 
 		&__input {
@@ -241,6 +251,33 @@
 
 @include util.breakpoint-up(medium) {
 	.form {
+		width: calc(100% - util.rem(40));
+		max-width: util.rem(440);
 		max-height: calc(100% - util.rem(40));
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.form {
+		width: 100%;
+		max-width: 100%;
+
+		padding-top: util.rem(58);
+		padding-bottom: 0;
+
+		&__buttonGroup {
+			top: util.rem(20);
+
+			padding-block: 0;
+
+			border: none;
+
+			background-color: transparent;
+			box-shadow: none;
+
+			&__button__close {
+				display: none;
+			}
+		}
 	}
 }

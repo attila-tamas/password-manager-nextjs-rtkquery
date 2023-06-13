@@ -120,36 +120,6 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
-			{/* button group starts */}
-			<div className={styles.form__buttonGroup}>
-				{/* delete key button starts */}
-				<div className={styles.form__buttonGroup__deleteKeyContainer}>
-					<div
-						onClick={onDeleteKeyClicked}
-						className={styles.form__buttonGroup__deleteKeyContainer__button}>
-						<DeleteIcon size="20" />
-						<p className="danger">{isDelLoading ? "Deleting..." : "Delete"}</p>
-					</div>
-				</div>
-				{/* delete key button ends */}
-
-				<Button
-					text="Close"
-					noBackdrop
-					onClick={handleClose}
-					className={styles.form__buttonGroup__button}
-				/>
-
-				<Button
-					text={isLoading ? "Saving..." : "Save"}
-					type="submit"
-					color="primary"
-					disabled={isLoading}
-					className={styles.form__buttonGroup__button}
-				/>
-			</div>
-			{/* button group ends */}
-
 			{/* scrollable content starts */}
 			<div className={styles.form__wrapper}>
 				{/* title starts */}
@@ -256,6 +226,39 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 				{/* add new field button ends */}
 			</div>
 			{/* scrollable content ends */}
+
+			{/* button group starts */}
+			<div className={styles.form__buttonGroup}>
+				{/* delete key button starts */}
+				<div className={styles.form__buttonGroup__deleteKeyContainer}>
+					<div
+						onClick={onDeleteKeyClicked}
+						className={styles.form__buttonGroup__deleteKeyContainer__button}>
+						<span
+							className={styles.form__buttonGroup__deleteKeyContainer__button__icon}>
+							<DeleteIcon size="20" />
+						</span>
+						<p className="danger">{isDelLoading ? "Deleting..." : "Delete"}</p>
+					</div>
+				</div>
+				{/* delete key button ends */}
+
+				<Button
+					text="Close"
+					noBackdrop
+					onClick={handleClose}
+					className={`${styles.form__buttonGroup__button} ${styles.form__buttonGroup__button__close}`}
+				/>
+
+				<Button
+					text={isLoading ? "Saving..." : "Save"}
+					type="submit"
+					color="primary"
+					disabled={isLoading}
+					className={styles.form__buttonGroup__button}
+				/>
+			</div>
+			{/* button group ends */}
 		</form>
 	);
 }
