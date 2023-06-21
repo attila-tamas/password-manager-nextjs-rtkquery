@@ -1,0 +1,71 @@
+@use "@styles/util" as util;
+
+.registration-module {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: util.rem(20);
+
+	padding: util.rem(20);
+	margin-inline: auto;
+
+	border-radius: var(--border-radius);
+	border: util.rem(1) solid var(--color-border);
+
+	background-color: var(--color-contrast);
+}
+
+.form {
+	width: min(100%, util.rem(320));
+	height: fit-content;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: util.rem(24);
+
+	&__field {
+		width: 100%;
+		height: fit-content;
+
+		&__label {
+			font-size: util.rem(18);
+		}
+
+		&__forgot-password {
+			float: right;
+			font-size: util.rem(14);
+		}
+
+		&__input {
+			margin-top: util.rem(8); // add space between the label and the input field
+		}
+	}
+
+	&__button {
+		margin-top: util.rem(12);
+	}
+
+	&__hint {
+		font-size: util.rem(14);
+	}
+}
+
+@include util.breakpoint-up(small) {
+	.registration-module {
+		width: util.rem(360);
+		height: fit-content;
+
+		margin-top: 5vh;
+		margin-top: 5dvh;
+	}
+}
+
+@include util.breakpoint-up(medium) {
+	.registration-module {
+		width: util.rem(360 + 64); // 64 / 2 => 32px padding to the sides
+	}
+}

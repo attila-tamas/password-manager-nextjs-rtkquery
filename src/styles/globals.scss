@@ -19,6 +19,12 @@ body {
 	user-select: none;
 }
 
+// module title
+.title {
+	font-size: util.rem(24);
+	font-weight: var(--font-weight-bold);
+}
+
 .link {
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-primary);

@@ -1,13 +1,13 @@
 @mixin colors {
-	--color-foreground: rgb(32, 33, 36);
-	--color-background: rgb(247, 248, 251);
+	--color-foreground: rgb(50, 51, 54);
+	--color-background: rgb(249, 250, 253);
 
 	--color-white: rgb(255, 255, 255);
-	--color-black: rgb(10, 10, 10);
+	--color-black: rgb(37, 38, 41);
 
-	--color-gray: rgb(132, 134, 136);
-	--color-gray-light: rgb(227, 227, 227);
-	--color-gray-dark: rgb(45, 49, 53);
+	--color-gray: rgb(132, 133, 136);
+	--color-gray-light: rgb(237, 238, 241);
+	--color-gray-dark: rgb(45, 46, 49);
 
 	--color-primary: rgb(90, 201, 122);
 	--color-primary-light: rgb(158, 232, 179);
@@ -20,8 +20,7 @@
 	--color-shadow-background: rgba(0, 0, 0, 0.5);
 
 	--color-hover: rgb(243, 243, 243);
-	// --color-border: rgb(227, 227, 227);
-	--color-border: transparent;
+	--color-border: rgb(237, 238, 241);
 	--color-contrast: rgb(255, 255, 255);
 
 	@media (prefers-color-scheme: dark) {
@@ -32,8 +31,9 @@
 		--color-gray-light: rgb(32, 33, 36);
 
 		--color-shadow: rgba(10, 10, 10, 0.3);
+
 		--color-hover: rgb(36, 40, 44);
-		// --color-border: rgb(10, 10, 10);
+		--color-border: rgb(37, 38, 41);
 		--color-contrast: rgb(45, 49, 53);
 	}
 }

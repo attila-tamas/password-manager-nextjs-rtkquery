@@ -12,7 +12,7 @@ import { selectCurrentToken } from "@redux/auth/authSlice";
 import { selectPersist } from "@redux/user/userSlice";
 //
 // @util
-import SpinnerIcon from "@/components/icon-components/spinner-icon";
+import SpinnerIcon from "@components/icon-components/spinner-icon";
 import routes from "@util/routes";
 
 // used to keep the user signed in on page reload

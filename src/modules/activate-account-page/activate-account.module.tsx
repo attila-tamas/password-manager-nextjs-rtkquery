@@ -9,7 +9,7 @@ import { enqueueSnackbar } from "notistack";
 // @redux
 import { useActivateAccountMutation } from "@redux/user/userApiSlice";
 // @util
-import routes from "@/util/routes";
+import routes from "@util/routes";
 // @components
 import SpinnerIcon from "@components/icon-components/spinner-icon";
 

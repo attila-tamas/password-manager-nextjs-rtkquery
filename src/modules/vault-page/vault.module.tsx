@@ -7,8 +7,8 @@ import { useGetKeysQuery } from "@redux/keys/keysApiSlice";
 // @util
 import format from "@util/formatInputValue";
 // @components
-import SpinnerIcon from "@/components/icon-components/spinner-icon";
 import Button from "@components/button-component/button";
+import SpinnerIcon from "@components/icon-components/spinner-icon";
 import Input from "@components/input-component/input";
 import Key from "@components/key-component/key";
 import AddNewKeyModal from "@components/key-modal-components/new-key-modal";
