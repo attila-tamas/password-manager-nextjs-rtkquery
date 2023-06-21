@@ -1,53 +1,59 @@
 import styles from "./button.module.scss";
+// react
+import { MouseEventHandler } from "react";
 
 export default function Button({
-	type,
-	text,
-	color,
-	disabled,
-	noBackdrop,
-	flex,
-	grow,
-	className,
+	type = "button",
+	text = "text",
+	disabled = false,
+	background = true,
+	color = "primary",
+	flex = false,
+	grow = false,
+	className = undefined,
 	onClick,
-}: any) {
-	const getButtonColor = (color: string) => {
+}: {
+	type?: "button" | "submit" | "reset" | undefined;
+	text?: string | number;
+	disabled?: boolean;
+	background?: boolean;
+	color?: string;
+	flex?: boolean;
+	grow?: boolean;
+	onClick?: MouseEventHandler<HTMLButtonElement>;
+	className?: string;
+}) {
+	const buttonColor = (): string => {
 		switch (color) {
 			case "primary":
-				if (noBackdrop) {
-					return styles.button__noBackdrop__primary;
-				}
-				return styles.button__backdrop__primary;
+				if (background) return styles["button--background--primary"];
+				return styles["button--no-background--primary"];
 
 			case "danger":
-				if (noBackdrop) {
-					return styles.button__noBackdrop__danger;
-				}
-				return styles.button__backdrop__danger;
+				if (background) return styles["button--background--danger"];
+				return styles["button--no-background--danger"];
 
 			default:
-				if (noBackdrop) {
-					return styles.button__noBackdrop__default;
-				}
-				return styles.button__backdrop__default;
+				if (background) return styles["button--background--default"];
+				return styles["button--no-background--default"];
 		}
 	};
 
+	const buttonClasses = (): string => {
+		let classes = `${styles["button"]} ${buttonColor()} ${className}`;
+
+		if (background) classes += ` ${styles["button--background"]}`;
+		else classes += ` ${styles["button--no-background"]}`;
+
+		if (flex) classes += ` ${styles["button--flex"]}`;
+		if (grow) classes += ` ${styles["button--grow"]}`;
+
+		return classes;
+	};
+
 	return (
-		<input
-			type={type || "button"}
-			value={text}
-			disabled={disabled}
-			readOnly
-			className={`
-						${styles.button}
-						${noBackdrop ? styles.button__noBackdrop : styles.button__backdrop}
-						${flex && styles.button__flex}
-						${grow && styles.button__grow}
-						${getButtonColor(color)}
-						${className}
-					`}
-			onClick={onClick}
-		/>
+		<button type={type} disabled={disabled} className={buttonClasses()} onClick={onClick}>
+			{text}
+		</button>
 	);
 }

@@ -11,7 +11,7 @@ export default function ConfirmModal({ title, desc, confirmText, show, onClick }
 
 			<div className={styles.buttonGroup}>
 				<span onClick={() => show(false)}>
-					<Button text="Cancel" noBackdrop flex />
+					<Button text="Cancel" background={false} flex={true} />
 				</span>
 
 				<div className={styles.buttonGroup__separator}>&nbsp;</div>
@@ -21,8 +21,8 @@ export default function ConfirmModal({ title, desc, confirmText, show, onClick }
 						onClick={onClick}
 						text={confirmText}
 						color="danger"
-						noBackdrop
-						flex
+						background={false}
+						flex={true}
 						type="submit"
 					/>
 				</span>

@@ -37,7 +37,7 @@ export default function Registration() {
 					className={styles["form__button"]}
 					text="Create account"
 					color="primary"
-					flex
+					flex={true}
 				/>
 
 				<p className={styles["form__hint"]}>

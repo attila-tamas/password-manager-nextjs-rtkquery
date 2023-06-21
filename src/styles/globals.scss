@@ -6,6 +6,7 @@
 	@include var.colors;
 	@include var.font-weights;
 	@include var.shadows;
+	@include var.variables;
 }
 
 body {

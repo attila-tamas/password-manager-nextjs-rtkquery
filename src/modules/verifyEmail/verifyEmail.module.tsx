@@ -100,7 +100,7 @@ export default function VerifyEmail() {
 				<Button
 					text={getButtonText()}
 					color="primary"
-					flex
+					flex={true}
 					disabled={isButtonDisabled}
 					onClick={onResendButtonClicked}
 				/>

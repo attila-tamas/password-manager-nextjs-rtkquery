@@ -245,7 +245,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 				<Button
 					text="Close"
-					noBackdrop
+					background={false}
 					onClick={handleClose}
 					className={`${styles.form__buttonGroup__button} ${styles.form__buttonGroup__button__close}`}
 				/>

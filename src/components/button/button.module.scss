@@ -4,9 +4,9 @@
 	width: fit-content;
 	height: fit-content;
 
+	border-radius: var(--border-radius);
 	outline: util.rem(0.5) solid transparent;
 	border: util.rem(1) solid transparent;
-	border-radius: util.rem(4);
 
 	padding: util.rem(8) util.rem(24);
 
@@ -15,47 +15,28 @@
 
 	background-color: transparent;
 
-	transition: all 200ms ease 0s;
+	transition: all 200ms ease;
 
 	cursor: pointer;
 
-	&:disabled,
-	&[disabled] {
+	&:disabled {
 		opacity: 0.5;
-		cursor: default;
 		pointer-events: none;
+		cursor: default;
 	}
 
-	&__flex {
+	&--flex {
 		width: 100%;
 	}
 
-	&__grow {
+	&--grow {
 		@include util.breakpoint-up(large) {
 			font-size: util.rem(20);
 			padding: util.rem(12) util.rem(28);
 		}
 	}
 
-	&__noBackdrop {
-		&:hover {
-			background-color: var(--color-hover);
-		}
-
-		&__default {
-			color: var(--color-gray);
-		}
-
-		&__primary {
-			color: var(--color-primary);
-		}
-
-		&__danger {
-			color: var(--color-error);
-		}
-	}
-
-	&__backdrop {
+	&--background {
 		color: var(--color-white);
 		box-shadow: var(--drop-shadow-bottom);
 
@@ -63,7 +44,7 @@
 			background-color: var(--color-contrast);
 		}
 
-		&__default {
+		&--default {
 			color: var(--color-gray);
 			background-color: var(--color-contrast);
 			border-color: var(--color-border);
@@ -74,7 +55,7 @@
 			}
 		}
 
-		&__primary {
+		&--primary {
 			background-color: var(--color-primary);
 			border-color: var(--color-primary);
 
@@ -84,7 +65,7 @@
 			}
 		}
 
-		&__danger {
+		&--danger {
 			background-color: var(--color-error);
 			border-color: var(--color-error);
 
@@ -92,6 +73,24 @@
 				color: var(--color-error);
 				outline-color: var(--color-error);
 			}
+		}
+	}
+
+	&--no-background {
+		&:hover {
+			background-color: var(--color-hover);
+		}
+
+		&--default {
+			color: var(--color-gray);
+		}
+
+		&--primary {
+			color: var(--color-primary);
+		}
+
+		&--danger {
+			color: var(--color-error);
 		}
 	}
 }

@@ -148,7 +148,7 @@ export default function Generate() {
 				</div>
 				{/* generation settings ends */}
 
-				<Button text="Generate" color="primary" flex onClick={generatePassword} />
+				<Button text="Generate" color="primary" flex={true} onClick={generatePassword} />
 			</div>
 			{/* main content of the page ends */}
 		</div>

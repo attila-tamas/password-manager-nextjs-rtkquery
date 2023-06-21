@@ -4,7 +4,7 @@ import styles from "./home.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 // @public
-import heroGraphic from "@public/home-page-hero-graphic.svg";
+import heroGraphic from "@public/homePageHeroGraphic.svg";
 // @components
 import Button from "@components/button/button.component";
 import Logo from "@components/logo/logo.component";
@@ -19,7 +19,7 @@ export default function Home() {
 
 				<div className={styles.nav__buttonGroup}>
 					<Link href="/login">
-						<Button text="Sign in" color="primary" noBackdrop />
+						<Button text="Sign in" color="primary" background={false} />
 					</Link>
 
 					<Link href="/register">
@@ -44,7 +44,7 @@ export default function Home() {
 
 					<div className={styles.hero__textContainer__buttonGroup}>
 						<Link href="/register">
-							<Button text="Try it now for free" color="primary" grow />
+							<Button text="Try it now for free" color="primary" grow={true} />
 						</Link>
 
 						<p className={styles.hero__textContainer__buttonGroup__smallText}>

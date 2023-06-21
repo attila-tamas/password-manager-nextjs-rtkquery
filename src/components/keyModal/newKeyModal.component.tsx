@@ -205,7 +205,7 @@ export default function AddNewKeyModal({ show }: any) {
 			<div className={styles.form__buttonGroup}>
 				<Button
 					text="Cancel"
-					noBackdrop
+					background={false}
 					onClick={handleClose}
 					className={styles.form__buttonGroup__button}
 				/>
