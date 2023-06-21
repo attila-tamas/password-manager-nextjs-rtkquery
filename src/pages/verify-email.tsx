@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import VerifyEmail from "@modules/verify-email-page/verify-email.module";
+import VerifyEmail from "@modules/verifyEmail/verifyEmail.module";
 
 export default function VerifyEmailPage() {
 	return (

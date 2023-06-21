@@ -11,7 +11,7 @@ import { PersistGate } from "redux-persist/integration/react";
 // @redux
 import { wrapper } from "@redux/store";
 // @components
-import SnackbarContext from "@components/snackbar-components/snackbar-context";
+import SnackbarContext from "@components/snackbars/snackbarContext";
 
 // create the font for next/font
 const quicksand = Quicksand({ subsets: ["latin"] });

@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import ChangePassword from "@modules/change-password-page/change-password.module";
+import ChangePassword from "@modules/changePassword/changePassword.module";
 
 export default function ChangePasswordPage() {
 	return (

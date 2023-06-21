@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import ActivateAccount from "@modules/activate-account-page/activate-account.module";
+import ActivateAccount from "@modules/activateAccount/activateAccount.module";
 
 export default function ActivateAccountPage() {
 	return (

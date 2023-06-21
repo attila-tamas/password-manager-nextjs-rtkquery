@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import Layout from "@components/layout-component/layout";
-import Generate from "@modules/generate-password-page/password-generator.module";
+import Layout from "@components/layout/layout.component";
+import Generate from "@modules/passwordGenerator/passwordGenerator.module";
 
 export default function GeneratePage() {
 	return (

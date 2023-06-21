@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import Home from "@modules/home-page/home.module";
+import Home from "@modules/home/home.module";
 
 export default function HomePage() {
 	return (

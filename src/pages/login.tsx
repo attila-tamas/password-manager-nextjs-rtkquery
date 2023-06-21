@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import Login from "@modules/login-page/login.module";
+import Login from "@modules/login/login.module";
 
 export default function LoginPage() {
 	return (

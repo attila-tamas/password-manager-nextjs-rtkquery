@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import Registration from "@modules/registration-page/registration.module";
+import Registration from "@modules/registration/registration.module";
 
 export default function RegisterPage() {
 	return (
