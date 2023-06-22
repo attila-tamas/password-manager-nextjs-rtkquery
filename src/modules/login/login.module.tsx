@@ -32,8 +32,8 @@ export default function Login() {
 	const currentEmail = useSelector(selectCurrentEmail);
 
 	// refs
-	const emailRef = useRef<HTMLDivElement>(null);
-	const passwordRef = useRef<HTMLDivElement>(null);
+	const emailRef = useRef<HTMLInputElement>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
 	//
 
 	// states
@@ -137,7 +137,7 @@ export default function Login() {
 						type="password"
 						id="password"
 						reference={passwordRef}
-						show={showPwd}
+						showPassword={showPwd}
 						value={password}
 						onChange={handlePwdInput}
 					/>
@@ -161,7 +161,7 @@ export default function Login() {
 
 					<p>
 						New to keystone?
-						<Link href="/register" className="link">
+						<Link href="/register" className="interactable">
 							{" "}
 							Create account
 						</Link>

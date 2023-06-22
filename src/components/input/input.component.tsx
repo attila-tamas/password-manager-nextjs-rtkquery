@@ -1,85 +1,54 @@
-// styles
 import styles from "./input.module.scss";
 // react
-import { useState } from "react";
+import { LegacyRef, ReactNode, RefObject } from "react";
 
 export default function Input({
-	type,
+	type = "text",
 	value,
 	defaultValue,
 	placeholder,
 	maxLength,
-	name,
 	id,
+	name,
 	reference,
-	show,
-	withCopyButton,
+	showPassword,
 	className,
+	children,
 	onChange,
-}: any) {
-	// copy functionality states
-	const [waitTimer, setWaitTimer] = useState(undefined);
-	const [wasCopied, setWasCopied] = useState(false);
-	//
-
-	// show password functionality
-	const getInputType = (type: string) => {
-		if (show && type === "password") {
-			return "text";
-		} else {
-			return type;
-		}
-	};
-
-	// copy input value functionality
-	const onCopyButtonClick = () => {
-		if (!waitTimer) {
-			navigator.clipboard.writeText(value);
-
-			setWasCopied(true);
-
-			// show an overlay for 600ms as feedback to the user that the value has been copied
-			setWaitTimer(
-				setTimeout(() => {
-					setWaitTimer(undefined);
-					setWasCopied(false);
-				}, 600) as any
-			);
-		}
+}: {
+	type: string;
+	value?: string;
+	defaultValue?: string;
+	placeholder?: string;
+	maxLength?: number;
+	id?: string;
+	name?: string;
+	reference?: LegacyRef<HTMLInputElement> | RefObject<HTMLInputElement>;
+	showPassword?: boolean;
+	copyButton?: boolean;
+	className?: string;
+	children?: ReactNode;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+	const inputType = () => {
+		if (type === "password" && showPassword) return "text";
+		return type;
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles["input"]} ${className}`}>
 			<input
-				type={getInputType(type)}
-				placeholder={placeholder}
-				name={name}
-				ref={reference}
+				type={inputType()}
 				value={value}
 				defaultValue={defaultValue}
+				placeholder={placeholder}
+				id={id}
+				name={name}
+				ref={reference}
 				maxLength={maxLength}
 				onChange={onChange}
-				className={`
-					${styles.input}
-					${wasCopied && styles.input__copied}
-					${withCopyButton && styles.input__withCopyButton}
-					${className}
-				`}
-				id={id}
 			/>
-
-			{withCopyButton && (
-				<>
-					{/* add a copy button to the input */}
-					<div onClick={onCopyButtonClick} className={`link ${styles.copyBtn}`}>
-						<span className={styles.copyBtn__separator}>&nbsp;</span>
-						<p>Copy</p>
-					</div>
-
-					{/* display an overlay on copy button click as a feeadback to the user */}
-					{wasCopied && <div className={styles.copyFeedback}>Copied</div>}
-				</>
-			)}
+			{children}
 		</div>
 	);
 }

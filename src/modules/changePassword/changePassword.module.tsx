@@ -22,7 +22,7 @@ import Input from "@components/input/input.component";
 // page module for "change-password" route
 export default function ChangePassword() {
 	// ref
-	const passwordRef = useRef<HTMLDivElement>(null);
+	const passwordRef = useRef<HTMLInputElement>(null);
 
 	// states
 	const [password, setPassword] = useState("");
@@ -95,7 +95,7 @@ export default function ChangePassword() {
 					<p className={styles.desc}>
 						You will be redirected to the login page in {countDownInSeconds}...
 						<br />
-						<Link href={routes.login} className="link">
+						<Link href={routes.login} className="interactable">
 							Go now
 						</Link>
 					</p>
@@ -114,7 +114,7 @@ export default function ChangePassword() {
 								type="password"
 								id="password"
 								reference={passwordRef}
-								show={showPwd}
+								showPassword={showPwd}
 								value={password}
 								onChange={handlePwdInput}
 							/>

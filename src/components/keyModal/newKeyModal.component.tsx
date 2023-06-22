@@ -130,8 +130,8 @@ export default function AddNewKeyModal({ show }: any) {
 							type="password"
 							value={password}
 							onChange={onPasswordChange}
-							withCopyButton
-							show={showPwd}
+							copyButton={true}
+							showPassword={showPwd}
 						/>
 
 						<span
@@ -173,7 +173,7 @@ export default function AddNewKeyModal({ show }: any) {
 									name="value"
 									value={field.value}
 									onChange={(event: any) => onInputChange(index, event)}
-									withCopyButton
+									copyButton={true}
 								/>
 
 								<span
@@ -192,7 +192,7 @@ export default function AddNewKeyModal({ show }: any) {
 				<div className={styles.form__addNewFieldContainer}>
 					<span
 						onClick={onAddNewFieldClicked}
-						className={`link ${styles.form__addNewFieldContainer__button}`}>
+						className={`interactable ${styles.form__addNewFieldContainer__button}`}>
 						<AddIcon size="26" />
 						<span>Add new field</span>
 					</span>

@@ -1,98 +1,30 @@
 @use "@styles/util" as util;
 
-.container {
-	width: 100%;
-	height: fit-content;
-
-	position: relative;
-
-	display: grid;
-	place-items: center end;
-}
-
 .input {
 	width: 100%;
 	height: fit-content;
 
-	grid-row: 1;
-	grid-column: 1;
-
-	outline: util.rem(0.5) solid transparent;
-	border: util.rem(1) solid var(--color-border);
-	border-radius: util.rem(4);
-
-	background-color: var(--color-contrast);
-	box-shadow: var(--drop-shadow-bottom);
-
-	padding: util.rem(8) util.rem(12);
-
-	font-size: util.rem(16);
-
-	transition: all 200ms ease 0s;
-
-	&:focus {
-		outline-color: var(--color-primary);
-		border-color: var(--color-primary);
-	}
-
-	&__withCopyButton {
-		// add the copy buttons width as padding
-		padding-right: util.rem(60);
-	}
-
-	&__copied {
-		outline-color: var(--color-primary);
-		border-color: var(--color-primary);
-	}
-}
-
-.copyBtn {
-	width: fit-content;
-	height: calc(100% - util.rem(2));
-
 	display: flex;
 	align-items: center;
-
-	grid-row: 1;
-	grid-column: 1;
-
-	margin-right: util.rem(1);
-	padding-right: util.rem(8);
-
-	font-size: util.rem(14);
-
-	border-radius: util.rem(4);
-
-	background-color: var(--color-contrast);
-
-	&__separator {
-		width: util.rem(1);
-		height: 70%;
-
-		margin-inline: util.rem(8);
-
-		border-radius: util.rem(4);
-
-		background-color: var(--color-gray-light);
-	}
-}
-
-.copyFeedback {
-	width: calc(100% - util.rem(2));
-	height: calc(100% - util.rem(2));
-
-	position: absolute;
-	top: util.rem(1);
-	left: util.rem(1);
+	gap: util.rem(8);
 
 	padding: util.rem(8) util.rem(12);
 
-	text-align: center;
-	font-size: util.rem(16);
-	font-weight: var(--font-weight-semibold);
+	border-radius: var(--border-radius);
+	outline: util.rem(0.5) solid transparent;
+	border: util.rem(1) solid var(--color-border);
 
-	border-radius: util.rem(4);
+	background-color: var(--color-background);
 
-	background-color: var(--color-contrast);
-	color: var(--color-primary);
+	transition: all 200ms ease;
+
+	&:focus-within {
+		outline-color: var(--color-primary);
+		border-color: var(--color-primary);
+	}
+
+	& input {
+		all: unset;
+		width: 100%;
+	}
 }
