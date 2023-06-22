@@ -18,7 +18,7 @@ import {
 import { selectCurrentEmail, setCurrentEmail, setPersist } from "@redux/user/userSlice";
 //
 // @util
-import pixelToRem from "@util/pixelToRem";
+import { pixelToEm } from "@util/pixelConverter";
 import routes from "@util/routes";
 // @components
 import ConfirmModal from "@components/confirmModal/confirmModal.component";
@@ -114,7 +114,7 @@ export default function Account() {
 						>
 							<Icon
 								icon={icons.logout}
-								size={pixelToRem(32)}
+								size={pixelToEm(32)}
 								className="interactable"
 							/>
 						</span>

@@ -7,7 +7,7 @@ import { CustomContentProps, SnackbarContent } from "notistack";
 // @components
 import Icon, { icons } from "@components/icon/icon";
 // @util
-import pixelToRem from "@util/pixelToRem";
+import { pixelToEm } from "@util/pixelConverter";
 
 interface SuccessProps extends CustomContentProps {
 	allowDownload?: boolean;
@@ -18,7 +18,7 @@ const SuccessSnackbar = forwardRef<HTMLDivElement, SuccessProps>(({ id, ...props
 		<SnackbarContent ref={ref} className={styles.container}>
 			<>
 				<span className={styles.icon}>
-					<Icon icon={icons.crossWithBg} size={pixelToRem(24)} />
+					<Icon icon={icons.crossWithBg} size={pixelToEm(24)} />
 				</span>
 
 				{props.message}

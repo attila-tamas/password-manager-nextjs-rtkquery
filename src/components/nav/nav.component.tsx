@@ -13,7 +13,7 @@ import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 import { setPersist } from "@redux/user/userSlice";
 //
 // @util
-import pixelToRem from "@util/pixelToRem";
+import { pixelToEm } from "@util/pixelConverter";
 import routes from "@util/routes";
 // @components
 import Icon, { icons } from "@components/icon/icon";
@@ -59,7 +59,7 @@ export default function Nav() {
 					`}
 					>
 						<NavItem text="Vault" to={routes.vault}>
-							<Icon icon={icons.vault} size={pixelToRem(26)} />
+							<Icon icon={icons.vault} size={pixelToEm(26)} />
 						</NavItem>
 					</div>
 
@@ -70,7 +70,7 @@ export default function Nav() {
 					`}
 					>
 						<NavItem text="Generate" to={routes.generate}>
-							<Icon icon={icons.generate} size={pixelToRem(26)} />
+							<Icon icon={icons.generate} size={pixelToEm(26)} />
 						</NavItem>
 					</div>
 
@@ -81,7 +81,7 @@ export default function Nav() {
 					`}
 					>
 						<NavItem text="Account" to={routes.account}>
-							<Icon icon={icons.account} size={pixelToRem(26)} />
+							<Icon icon={icons.account} size={pixelToEm(26)} />
 						</NavItem>
 					</div>
 				</div>
@@ -93,7 +93,7 @@ export default function Nav() {
 						<span className={styles.nav__item__logout__icon}>
 							<Icon
 								icon={icons.logout}
-								size={pixelToRem(26)}
+								size={pixelToEm(26)}
 								className="interactable"
 							/>
 						</span>

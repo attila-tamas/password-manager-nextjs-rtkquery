@@ -7,7 +7,7 @@ import Image from "next/image";
 // @public
 import warningIcon from "@public/warningIcon.svg";
 // @util
-import pixelToRem from "@util/pixelToRem";
+import { pixelToEm } from "@util/pixelConverter";
 // @components
 import Icon, { icons } from "@components/icon/icon";
 
@@ -94,7 +94,7 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 					/>
 
 					<div className={styles.openIcon}>
-						<Icon icon={icons.open} size={pixelToRem(16)} />
+						<Icon icon={icons.open} size={pixelToEm(16)} />
 					</div>
 				</a>
 			) : (

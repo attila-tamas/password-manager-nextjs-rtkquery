@@ -10,7 +10,7 @@ import { selectKeyById } from "@redux/keys/keysApiSlice";
 import Icon, { icons } from "@components/icon/icon";
 import WebsiteIcon from "@components/websiteIcon/websiteIcon";
 // @util
-import pixelToRem from "@util/pixelToRem";
+import { pixelToEm } from "@util/pixelConverter";
 
 export default function Key({ keyId, active, onClick }: any) {
 	const key = useSelector(state => selectKeyById(state, keyId));
@@ -77,7 +77,7 @@ export default function Key({ keyId, active, onClick }: any) {
 				{/* main content of the key ends */}
 
 				<div onClick={onClick} className={styles.optionsIcon}>
-					<Icon icon={icons.options} size={pixelToRem(24)} />
+					<Icon icon={icons.options} size={pixelToEm(24)} />
 				</div>
 			</div>
 		);
