@@ -11,7 +11,7 @@ import { useActivateAccountMutation } from "@redux/user/userApiSlice";
 // @util
 import routes from "@util/routes";
 // @components
-import SpinnerIcon from "@components/icons/spinner.icon";
+import SpinnerIcon from "@components/spinner/spinner.component";
 
 // page module for "/activate-account" route
 export default function ActivateAccount() {

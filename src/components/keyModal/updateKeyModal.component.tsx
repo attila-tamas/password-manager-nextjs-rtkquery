@@ -13,15 +13,10 @@ import {
 // @util
 import format from "@util/formatInputValue";
 import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGenerator";
+import pixelToRem from "@util/pixelToRem";
 // @components
-
 import Button from "@components/button/button.component";
-import AddIcon from "@components/icons/add.icon";
-import CustomFieldIcon from "@components/icons/customField.icon";
-import DeleteIcon from "@components/icons/delete.icon";
-import GenerateIcon from "@components/icons/generate.icon";
-import HideIcon from "@components/icons/hide.icon";
-import ShowIcon from "@components/icons/show.icon";
+import Icon, { icons } from "@components/icon/icon";
 import Input from "@components/input/input.component";
 import WebsiteIcon from "@components/websiteIcon/websiteIcon";
 
@@ -146,7 +141,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 						<span
 							onClick={handleShowPwdToggle}
 							className={styles.form__field__passwordFieldTitle__showIcon}>
-							{showPwd ? <HideIcon size="22" /> : <ShowIcon size="22" />}
+							<Icon icon={icons.eye} size={pixelToRem(24)} className="interactable" />
 						</span>
 					</div>
 
@@ -163,7 +158,11 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 						<span
 							onClick={onGeneratePasswordClick}
 							className={styles.form__field__inputContainer__generateIcon}>
-							<GenerateIcon size="32" />
+							<Icon
+								icon={icons.generate}
+								size={pixelToRem(32)}
+								className="interactable"
+							/>
 						</span>
 					</div>
 				</div>
@@ -177,7 +176,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 							<div className={styles.form__field__titleContainer}>
 								<span
 									className={styles.form__field__titleContainer__customFieldIcon}>
-									<CustomFieldIcon size="24" />
+									<Icon icon={icons.customField} size={pixelToRem(24)} />
 								</span>
 
 								<input
@@ -205,7 +204,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 								<span
 									onClick={() => onRemoveFieldClicked(index)}
 									className={styles.form__field__inputContainer__deleteIcon}>
-									<DeleteIcon size="32" />
+									<Icon icon={icons.trash} size={pixelToRem(32)} />
 								</span>
 							</div>
 							{/* input of the custom field ends */}
@@ -219,7 +218,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 					<span
 						onClick={onAddNewFieldClicked}
 						className={`interactable ${styles.form__addNewFieldContainer__button}`}>
-						<AddIcon size="26" />
+						<Icon icon={icons.add} size={pixelToRem(28)} />
 						<span>Add new field</span>
 					</span>
 				</div>
@@ -236,7 +235,7 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 						className={styles.form__buttonGroup__deleteKeyContainer__button}>
 						<span
 							className={styles.form__buttonGroup__deleteKeyContainer__button__icon}>
-							<DeleteIcon size="20" />
+							<Icon icon={icons.trash} size={pixelToRem(20)} />
 						</span>
 						<p className="danger">{isDelLoading ? "Deleting..." : "Delete"}</p>
 					</div>

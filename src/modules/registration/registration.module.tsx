@@ -1,8 +1,11 @@
 import styles from "./registration.module.scss";
 // @components
 import Button from "@components/button/button.component";
+import Icon, { icons } from "@components/icon/icon";
 import Input from "@components/input/input.component";
 import Logo from "@components/logo/logo.component";
+// @util
+import pixelToRem from "@util/pixelToRem";
 
 // page module for "/register" route
 export default function Registration() {
@@ -30,7 +33,9 @@ export default function Registration() {
 						Forgot password?
 					</span>
 
-					<Input className={styles["form__field__input"]} id="password" type="password" />
+					<Input className={styles["form__field__input"]} id="password" type="password">
+						<Icon icon={icons.eye} size={pixelToRem(24)} className="interactable" />
+					</Input>
 				</div>
 
 				<Button

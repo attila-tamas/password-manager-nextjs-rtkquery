@@ -13,12 +13,10 @@ import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 import { setPersist } from "@redux/user/userSlice";
 //
 // @util
+import pixelToRem from "@util/pixelToRem";
 import routes from "@util/routes";
 // @components
-import AccountIcon from "@components/icons/account.icon";
-import GenerateIcon from "@components/icons/generate.icon";
-import LogoutIcon from "@components/icons/logout.icon";
-import VaultIcon from "@components/icons/vault.icon";
+import Icon, { icons } from "@components/icon/icon";
 import Logo from "@components/logo/logo.component";
 import NavItem from "@components/navItem/navItem.component";
 
@@ -60,7 +58,7 @@ export default function Nav() {
 						${styles.nav__item}
 					`}>
 						<NavItem text="Vault" to={routes.vault}>
-							<VaultIcon size="26" />
+							<Icon icon={icons.vault} size={pixelToRem(26)} />
 						</NavItem>
 					</div>
 
@@ -70,7 +68,7 @@ export default function Nav() {
 						${styles.nav__item}
 					`}>
 						<NavItem text="Generate" to={routes.generate}>
-							<GenerateIcon size="26" />
+							<Icon icon={icons.generate} size={pixelToRem(26)} />
 						</NavItem>
 					</div>
 
@@ -80,7 +78,7 @@ export default function Nav() {
 						${styles.nav__item}
 					`}>
 						<NavItem text="Account" to={routes.account}>
-							<AccountIcon size="26" />
+							<Icon icon={icons.account} size={pixelToRem(26)} />
 						</NavItem>
 					</div>
 				</div>
@@ -90,7 +88,11 @@ export default function Nav() {
 				<div className={`${styles.nav__item} ${styles.logoutContainer}`}>
 					<div className={styles.nav__item__logout} onClick={onLogoutClicked}>
 						<span className={styles.nav__item__logout__icon}>
-							<LogoutIcon size="26" />
+							<Icon
+								icon={icons.logout}
+								size={pixelToRem(26)}
+								className="interactable"
+							/>
 						</span>
 						<span>{isLoading ? "Logging out..." : "Logout"}</span>
 					</div>

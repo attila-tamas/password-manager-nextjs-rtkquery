@@ -8,11 +8,11 @@ import { useGetKeysQuery } from "@redux/keys/keysApiSlice";
 import format from "@util/formatInputValue";
 // @components
 import Button from "@components/button/button.component";
-import SpinnerIcon from "@components/icons/spinner.icon";
 import Input from "@components/input/input.component";
 import Key from "@components/key/key.component";
 import AddNewKeyModal from "@components/keyModal/newKeyModal.component";
 import UpdateKeyModal from "@components/keyModal/updateKeyModal.component";
+import SpinnerIcon from "@components/spinner/spinner.component";
 
 // page module for "/vault" route
 export default function Vault() {

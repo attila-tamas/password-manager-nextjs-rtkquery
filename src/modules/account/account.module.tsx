@@ -18,10 +18,11 @@ import {
 import { selectCurrentEmail, setCurrentEmail, setPersist } from "@redux/user/userSlice";
 //
 // @util
+import pixelToRem from "@util/pixelToRem";
 import routes from "@util/routes";
 // @components
 import ConfirmModal from "@components/confirmModal/confirmModal.component";
-import LogoutIcon from "@components/icons/logout.icon";
+import Icon, { icons } from "@components/icon/icon";
 
 // page module for "/account" route
 export default function Account() {
@@ -110,7 +111,11 @@ export default function Account() {
 						<span
 							className={styles.wrapper__titleContainer__logoutIcon}
 							onClick={onLogoutClicked}>
-							<LogoutIcon size="32" />
+							<Icon
+								icon={icons.logout}
+								size={pixelToRem(32)}
+								className="interactable"
+							/>
 						</span>
 					</div>
 					{/* title ends */}

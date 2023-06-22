@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 // @public
 import warningIcon from "@public/warning-icon.svg";
+// @util
+import pixelToRem from "@util/pixelToRem";
 // @components
-import OpenIcon from "@components/icons/open.icon";
+import Icon, { icons } from "@components/icon/icon";
 
 export default function WebsiteIcon({ currentKey, grow }: any) {
 	// states
@@ -91,7 +93,7 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 					/>
 
 					<div className={styles.openIcon}>
-						<OpenIcon size="16" />
+						<Icon icon={icons.open} size={pixelToRem(16)} />
 					</div>
 				</a>
 			) : (
