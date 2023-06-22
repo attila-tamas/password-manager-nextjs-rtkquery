@@ -110,7 +110,8 @@ export default function Account() {
 
 						<span
 							className={styles.wrapper__titleContainer__logoutIcon}
-							onClick={onLogoutClicked}>
+							onClick={onLogoutClicked}
+						>
 							<Icon
 								icon={icons.logout}
 								size={pixelToRem(32)}
@@ -124,7 +125,8 @@ export default function Account() {
 					<div className={styles.wrapper__optionsGroup}>
 						<div
 							onClick={onChangePasswordClicked}
-							className={styles.wrapper__optionsGroup__option}>
+							className={styles.wrapper__optionsGroup__option}
+						>
 							<span>
 								{isPasswordChangeRequestLoading
 									? "Sending email..."
@@ -134,13 +136,15 @@ export default function Account() {
 
 						<div
 							onClick={() => setShowConfirmEmptying(true)}
-							className={`${styles.wrapper__optionsGroup__option} danger`}>
+							className={`${styles.wrapper__optionsGroup__option} danger`}
+						>
 							<span>Empty the vault</span>
 						</div>
 
 						<div
 							onClick={() => setShowConfirmDeletion(true)}
-							className={`${styles.wrapper__optionsGroup__option} danger`}>
+							className={`${styles.wrapper__optionsGroup__option} danger`}
+						>
 							<span>Delete account</span>
 						</div>
 					</div>

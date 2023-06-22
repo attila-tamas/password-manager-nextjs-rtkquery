@@ -56,7 +56,8 @@ export default function Nav() {
 						className={`
 						${router.pathname == routes.vault && `${styles.nav__item__active}`}
 						${styles.nav__item}
-					`}>
+					`}
+					>
 						<NavItem text="Vault" to={routes.vault}>
 							<Icon icon={icons.vault} size={pixelToRem(26)} />
 						</NavItem>
@@ -66,7 +67,8 @@ export default function Nav() {
 						className={`
 						${router.pathname == routes.generate && `${styles.nav__item__active}`}
 						${styles.nav__item}
-					`}>
+					`}
+					>
 						<NavItem text="Generate" to={routes.generate}>
 							<Icon icon={icons.generate} size={pixelToRem(26)} />
 						</NavItem>
@@ -76,7 +78,8 @@ export default function Nav() {
 						className={`
 						${router.pathname == routes.account && `${styles.nav__item__active}`}
 						${styles.nav__item}
-					`}>
+					`}
+					>
 						<NavItem text="Account" to={routes.account}>
 							<Icon icon={icons.account} size={pixelToRem(26)} />
 						</NavItem>

@@ -14,7 +14,8 @@ export default function Logo({ size }: any) {
 	return (
 		<div
 			className={`unselectable ${styles.container}`}
-			style={{ width: `${size}px`, fontSize: size / 12 }}>
+			style={{ width: `${size}px`, fontSize: size / 12 }}
+		>
 			<Image className={styles.img} src={favicon} alt="keystone container" />
 
 			<span className={styles.text}>

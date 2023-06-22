@@ -126,7 +126,8 @@ export default function Login() {
 
 						<span
 							onClick={onForgotPasswordClicked}
-							className={`link ${styles.form__field__textContainer__link}`}>
+							className={`link ${styles.form__field__textContainer__link}`}
+						>
 							{isPasswordChangeRequestLoading
 								? "Sending email..."
 								: "Forgot password?"}

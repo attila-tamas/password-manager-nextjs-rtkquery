@@ -140,7 +140,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 						<span
 							onClick={handleShowPwdToggle}
-							className={styles.form__field__passwordFieldTitle__showIcon}>
+							className={styles.form__field__passwordFieldTitle__showIcon}
+						>
 							<Icon icon={icons.eye} size={pixelToRem(24)} className="interactable" />
 						</span>
 					</div>
@@ -157,7 +158,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 						<span
 							onClick={onGeneratePasswordClick}
-							className={styles.form__field__inputContainer__generateIcon}>
+							className={styles.form__field__inputContainer__generateIcon}
+						>
 							<Icon
 								icon={icons.generate}
 								size={pixelToRem(32)}
@@ -175,7 +177,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 							{/* title of the custom field starts */}
 							<div className={styles.form__field__titleContainer}>
 								<span
-									className={styles.form__field__titleContainer__customFieldIcon}>
+									className={styles.form__field__titleContainer__customFieldIcon}
+								>
 									<Icon icon={icons.customField} size={pixelToRem(24)} />
 								</span>
 
@@ -203,7 +206,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 
 								<span
 									onClick={() => onRemoveFieldClicked(index)}
-									className={styles.form__field__inputContainer__deleteIcon}>
+									className={styles.form__field__inputContainer__deleteIcon}
+								>
 									<Icon icon={icons.trash} size={pixelToRem(32)} />
 								</span>
 							</div>
@@ -217,7 +221,8 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 				<div className={styles.form__addNewFieldContainer}>
 					<span
 						onClick={onAddNewFieldClicked}
-						className={`interactable ${styles.form__addNewFieldContainer__button}`}>
+						className={`interactable ${styles.form__addNewFieldContainer__button}`}
+					>
 						<Icon icon={icons.add} size={pixelToRem(28)} />
 						<span>Add new field</span>
 					</span>
@@ -232,9 +237,11 @@ export default function UpdateKeyModal({ keyId, show }: any) {
 				<div className={styles.form__buttonGroup__deleteKeyContainer}>
 					<div
 						onClick={onDeleteKeyClicked}
-						className={styles.form__buttonGroup__deleteKeyContainer__button}>
+						className={styles.form__buttonGroup__deleteKeyContainer__button}
+					>
 						<span
-							className={styles.form__buttonGroup__deleteKeyContainer__button__icon}>
+							className={styles.form__buttonGroup__deleteKeyContainer__button__icon}
+						>
 							<Icon icon={icons.trash} size={pixelToRem(20)} />
 						</span>
 						<p className="danger">{isDelLoading ? "Deleting..." : "Delete"}</p>

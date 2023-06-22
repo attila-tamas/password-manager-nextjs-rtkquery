@@ -99,7 +99,8 @@ export default function Generate() {
 								${styles.wrapper__generatedPassword}
 								${errorMsg && styles.wrapper__generatedPassword__error}
 								${wasPasswordCopied && styles.wrapper__generatedPassword__copied}
-							`}>
+							`}
+				>
 					<p>{text}</p>
 				</div>
 				{/* generated password display ends */}

@@ -21,7 +21,8 @@ export default function SnackbarContext({ children }: any) {
 				// snackbar variants
 				success: SuccessSnackbar,
 				error: ErrorSnackbar,
-			}}>
+			}}
+		>
 			{/* render the child components */}
 			{children}
 		</SnackbarProvider>

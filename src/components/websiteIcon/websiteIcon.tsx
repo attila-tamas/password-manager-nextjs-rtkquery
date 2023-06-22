@@ -83,7 +83,8 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 					className={`${styles.container} ${grow && styles.container__grow}`}
 					href={url}
 					target="_blank"
-					rel="noopener noreferrer">
+					rel="noopener noreferrer"
+				>
 					<Image
 						className={`unselectable ${styles.image}`}
 						src={icon || warningIcon}
