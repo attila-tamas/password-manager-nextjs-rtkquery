@@ -10,7 +10,7 @@ export default function Button({
 	color = "primary",
 	flex = false,
 	grow = false,
-	className = undefined,
+	className,
 	onClick,
 }: {
 	type?: "button" | "submit" | "reset" | undefined;

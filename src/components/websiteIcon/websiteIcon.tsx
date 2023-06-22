@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 // next.js
 import Image from "next/image";
 // @public
-import warningIcon from "@public/warning-icon.svg";
+import warningIcon from "@public/warningIcon.svg";
 // @util
 import pixelToRem from "@util/pixelToRem";
 // @components
