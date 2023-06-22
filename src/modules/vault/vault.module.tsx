@@ -181,7 +181,7 @@ export default function Vault() {
 
 					<p className={styles.wrapper__keyList__noResult__hint}>
 						Add a key by pressing the{" "}
-						<span onClick={onAddNewClicked} className="link">
+						<span onClick={onAddNewClicked} className="interactable">
 							New
 						</span>{" "}
 						button

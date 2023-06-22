@@ -26,7 +26,7 @@ export default function Registration() {
 						Password
 					</label>
 
-					<span className={`${styles["form__field__forgot-password"]} link`}>
+					<span className={`${styles["form__field__forgot-password"]} interactable`}>
 						Forgot password?
 					</span>
 
@@ -41,7 +41,7 @@ export default function Registration() {
 				/>
 
 				<p className={styles["form__hint"]}>
-					I have an account. <span className={"link"}>Sign in</span>
+					I have an account. <span className={"interactable"}>Sign in</span>
 				</p>
 			</form>
 		</div>

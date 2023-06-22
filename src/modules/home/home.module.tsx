@@ -49,7 +49,7 @@ export default function Home() {
 
 						<p className={styles.hero__textContainer__buttonGroup__smallText}>
 							I have an account.
-							<Link href="/login" className="link">
+							<Link href="/login" className="interactable">
 								{" "}
 								Sign in
 							</Link>

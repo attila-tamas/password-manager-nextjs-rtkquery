@@ -65,7 +65,7 @@ export default function Key({ keyId, active, onClick }: any) {
 
 						<p
 							onClick={onCopyButtonClicked}
-							className={`link ${styles.content__textContainer__actionBtn}`}>
+							className={`interactable ${styles.content__textContainer__actionBtn}`}>
 							{text}
 						</p>
 					</div>
