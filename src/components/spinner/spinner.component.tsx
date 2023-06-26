@@ -2,9 +2,9 @@ import styles from "./spinner.module.scss";
 // all spinners can be viewed here: https://github.com/dephraiim/react-svg-spinners
 import { Tadpole } from "react-svg-spinners";
 
-export default function SpinnerIcon({
+export default function Spinner({
 	size = 24,
-	color = styles["defaultColor"],
+	color = "var(--color-primary)",
 	fullScreen,
 }: {
 	size?: number;

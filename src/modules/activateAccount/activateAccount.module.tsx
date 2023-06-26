@@ -11,14 +11,15 @@ import { useActivateAccountMutation } from "@redux/user/userApiSlice";
 // @util
 import routes from "@util/routes";
 // @components
-import SpinnerIcon from "@components/spinner/spinner.component";
+import Spinner from "@components/spinner/spinner.component";
 
 // page module for "/activate-account" route
 export default function ActivateAccount() {
 	const router = useRouter();
 
 	// api hook
-	const [activateAccount, { isSuccess, isError, error }] = useActivateAccountMutation();
+	const [activateAccount, { isSuccess, isError, error }] =
+		useActivateAccountMutation();
 
 	// usEffect hooks
 	// when the user visits the account activation link sent by email
@@ -57,7 +58,7 @@ export default function ActivateAccount() {
 		// the user will be automatically redirected if the activation is successful
 		// therefore the loading feedback is the only content we need to display
 		<div className={styles.container}>
-			<SpinnerIcon />
+			<Spinner />
 			<p>Your account is being activated. Please&nbsp;wait...</p>
 		</div>
 	);

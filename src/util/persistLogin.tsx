@@ -12,7 +12,7 @@ import { selectCurrentToken } from "@redux/auth/authSlice";
 import { selectPersist } from "@redux/user/userSlice";
 //
 // @util
-import SpinnerIcon from "@components/spinner/spinner.component";
+import Spinner from "@components/spinner/spinner.component";
 import routes from "@util/routes";
 
 // used to keep the user signed in on page reload
@@ -52,7 +52,7 @@ export default function PersistLogin({ children }: any) {
 
 	if (isLoading) {
 		// display a feedback when the page is loading
-		content = <SpinnerIcon fullScreen />;
+		content = <Spinner fullScreen />;
 	} else if (isError) {
 		console.log(error);
 	} else if (isSuccess && trueSuccess) {

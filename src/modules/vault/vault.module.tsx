@@ -12,7 +12,7 @@ import Input from "@components/input/input.component";
 import Key from "@components/key/key.component";
 import AddNewKeyModal from "@components/keyModal/newKeyModal.component";
 import UpdateKeyModal from "@components/keyModal/updateKeyModal.component";
-import SpinnerIcon from "@components/spinner/spinner.component";
+import Spinner from "@components/spinner/spinner.component";
 
 // page module for "/vault" route
 export default function Vault() {
@@ -23,7 +23,9 @@ export default function Vault() {
 	const [keyId, setKeyId] = useState("");
 	// search function
 	const [query, setQuery] = useState("");
-	const [filteredKeysList, setFilteredKeysList] = useState([] as Element[] | Element);
+	const [filteredKeysList, setFilteredKeysList] = useState(
+		[] as Element[] | Element
+	);
 	// modals
 	const [selectedKeyId, setSelectedKeyId] = useState("");
 	const [showUpdateKeyModal, setShowUpdateKeyModal] = useState(false);
@@ -63,7 +65,8 @@ export default function Vault() {
 						onClick={() => {
 							setKeyId(keyId);
 							setSelectedKeyId(keyId);
-							if (showAddNewKeyModal) setShowAddNewKeyModal(false);
+							if (showAddNewKeyModal)
+								setShowAddNewKeyModal(false);
 							setShowUpdateKeyModal(true);
 						}}
 					/>
@@ -181,7 +184,10 @@ export default function Vault() {
 
 					<p className={styles.wrapper__keyList__noResult__hint}>
 						Add a key by pressing the{" "}
-						<span onClick={onAddNewClicked} className="interactable">
+						<span
+							onClick={onAddNewClicked}
+							className="interactable"
+						>
 							New
 						</span>{" "}
 						button
@@ -213,13 +219,17 @@ export default function Vault() {
 							value={query}
 							onChange={onSearchInputChange}
 						/>
-						<Button text="New" color="primary" onClick={onAddNewClicked} />
+						<Button
+							text="New"
+							color="primary"
+							onClick={onAddNewClicked}
+						/>
 					</div>
 					{/* search bar and new key button container ends */}
 
 					{/* key list starts */}
 					<div className={styles.wrapper__keyList}>
-						<>{isLoading ? <SpinnerIcon /> : getKeyList()}</>
+						<>{isLoading ? <Spinner /> : getKeyList()}</>
 					</div>
 					{/* key list ends */}
 				</div>
@@ -228,7 +238,10 @@ export default function Vault() {
 				{/* modals start */}
 				{showUpdateKeyModal && (
 					<div className={styles.modal}>
-						<UpdateKeyModal keyId={keyId} show={setShowUpdateKeyModal} />
+						<UpdateKeyModal
+							keyId={keyId}
+							show={setShowUpdateKeyModal}
+						/>
 					</div>
 				)}
 
