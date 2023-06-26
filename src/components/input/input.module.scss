@@ -23,6 +23,14 @@
 		border-color: var(--color-primary);
 	}
 
+	// this class is only used when there is an input error
+	// we want the error styling to override the other styles
+	// and stay present while the error is ongoing
+	&--error {
+		outline-color: var(--color-error) !important;
+		border-color: var(--color-error) !important;
+	}
+
 	& input {
 		all: unset;
 		width: 100%;

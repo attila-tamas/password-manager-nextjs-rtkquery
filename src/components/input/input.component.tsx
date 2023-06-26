@@ -1,6 +1,23 @@
 import styles from "./input.module.scss";
 // react
-import { LegacyRef, ReactNode, RefObject } from "react";
+import { MutableRefObject, ReactNode } from "react";
+
+type Props = {
+	type: string;
+	value?: string;
+	defaultValue?: string;
+	placeholder?: string;
+	maxLength?: number;
+	id?: string;
+	name?: string;
+	reference?: MutableRefObject<HTMLInputElement | null>;
+	showPassword?: boolean;
+	copyButton?: boolean;
+	error?: boolean;
+	className?: string;
+	children?: ReactNode;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 export default function Input({
 	type = "text",
@@ -12,31 +29,24 @@ export default function Input({
 	name,
 	reference,
 	showPassword,
+	error,
 	className,
 	children,
 	onChange,
-}: {
-	type: string;
-	value?: string;
-	defaultValue?: string;
-	placeholder?: string;
-	maxLength?: number;
-	id?: string;
-	name?: string;
-	reference?: LegacyRef<HTMLInputElement> | RefObject<HTMLInputElement>;
-	showPassword?: boolean;
-	copyButton?: boolean;
-	className?: string;
-	children?: ReactNode;
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}) {
-	const inputType = () => {
+}: Props) {
+	function inputType(): string {
 		if (type === "password" && showPassword) return "text";
 		return type;
-	};
+	}
 
 	return (
-		<div className={`${styles["input"]} ${className}`}>
+		<div
+			className={`
+				${styles["input"]}
+				${error && styles["input--error"]}
+				${className}
+			`}
+		>
 			<input
 				type={inputType()}
 				value={value}
@@ -47,6 +57,7 @@ export default function Input({
 				ref={reference}
 				maxLength={maxLength}
 				onChange={onChange}
+				aria-invalid={error}
 			/>
 			{children}
 		</div>
