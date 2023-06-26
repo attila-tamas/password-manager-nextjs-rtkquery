@@ -2,23 +2,29 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { combineReducers } from "redux";
-import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import {
+	FLUSH,
+	PAUSE,
+	PERSIST,
+	persistReducer,
+	PURGE,
+	REGISTER,
+	REHYDRATE,
+} from "redux-persist";
 // @redux
 import { apiSlice } from "@redux/apiSlice";
 // reducers
 import authReducer from "@redux/auth/authSlice";
 import userReducer from "@redux/user/userSlice";
-// storage for "redux-persist" for the persistConfig
+// storage for "redux-persist"
 import storage from "@redux/sync-storage";
 
-// combine the reducers to use them in configureStore
 const reducers = combineReducers({
 	[apiSlice.reducerPath]: apiSlice.reducer,
 	auth: authReducer,
 	user: userReducer,
 });
 
-// create the store
 const makeStore = ({ isServer }: any) => {
 	if (isServer) {
 		// if it's on the server side, create a store without the persisted reducer
@@ -29,7 +35,14 @@ const makeStore = ({ isServer }: any) => {
 				getDefaultMiddleware({
 					// avoid typescript error
 					serializableCheck: {
-						ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+						ignoredActions: [
+							FLUSH,
+							REHYDRATE,
+							PAUSE,
+							PERSIST,
+							PURGE,
+							REGISTER,
+						],
 					},
 				}).concat(apiSlice.middleware),
 		});
@@ -50,7 +63,14 @@ const makeStore = ({ isServer }: any) => {
 				getDefaultMiddleware({
 					// avoid typescript error
 					serializableCheck: {
-						ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+						ignoredActions: [
+							FLUSH,
+							REHYDRATE,
+							PAUSE,
+							PERSIST,
+							PURGE,
+							REGISTER,
+						],
 					},
 				}).concat(apiSlice.middleware),
 		});
