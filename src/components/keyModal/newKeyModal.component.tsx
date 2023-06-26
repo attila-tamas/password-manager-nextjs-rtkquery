@@ -6,7 +6,10 @@ import { useEffect, useState } from "react";
 import { useAddNewKeyMutation } from "@redux/keys/keysApiSlice";
 // @util
 import format from "@util/formatInputValue";
-import { passwordGenerationSettings, passwordGenerator } from "@util/passwordGenerator";
+import {
+	passwordGenerationSettings,
+	passwordGenerator,
+} from "@util/passwordGenerator";
 import { pixelToEm } from "@util/pixelConverter";
 // @components
 import Button from "@components/button/button.component";
@@ -55,7 +58,10 @@ export default function AddNewKeyModal({ show }: any) {
 	// to convey response to the user that the password has been regenerated
 	const onGeneratePasswordClick = () => {
 		setPassword("");
-		setTimeout(() => setPassword(passwordGenerator(passwordGenerationSettings)), 100);
+		setTimeout(
+			() => setPassword(passwordGenerator(passwordGenerationSettings)),
+			100
+		);
 	};
 
 	// add new custom field handler
@@ -115,9 +121,15 @@ export default function AddNewKeyModal({ show }: any) {
 
 						<span
 							onClick={handleShowPwdToggle}
-							className={styles.form__field__passwordFieldTitle__showIcon}
+							className={
+								styles.form__field__passwordFieldTitle__showIcon
+							}
 						>
-							<Icon icon={icons.eye} size={pixelToEm(24)} className="interactable" />
+							<Icon
+								icon={showPwd ? icons.hide : icons.show}
+								size={pixelToEm(24)}
+								className="interactable"
+							/>
 						</span>
 					</div>
 
@@ -133,7 +145,9 @@ export default function AddNewKeyModal({ show }: any) {
 
 						<span
 							onClick={onGeneratePasswordClick}
-							className={styles.form__field__inputContainer__generateIcon}
+							className={
+								styles.form__field__inputContainer__generateIcon
+							}
 						>
 							<Icon
 								icon={icons.generate}
@@ -152,9 +166,14 @@ export default function AddNewKeyModal({ show }: any) {
 							{/* title of the custom field starts */}
 							<div className={styles.form__field__titleContainer}>
 								<span
-									className={styles.form__field__titleContainer__customFieldIcon}
+									className={
+										styles.form__field__titleContainer__customFieldIcon
+									}
 								>
-									<Icon icon={icons.customField} size={pixelToEm(24)} />
+									<Icon
+										icon={icons.customField}
+										size={pixelToEm(24)}
+									/>
 								</span>
 
 								<input
@@ -163,8 +182,12 @@ export default function AddNewKeyModal({ show }: any) {
 									maxLength={24}
 									value={field.key}
 									size={field.key.length || 4}
-									onChange={(event: any) => onInputChange(index, event)}
-									className={styles.form__field__titleContainer__input}
+									onChange={(event: any) =>
+										onInputChange(index, event)
+									}
+									className={
+										styles.form__field__titleContainer__input
+									}
 								/>
 							</div>
 							{/* title of the custom field ends */}
@@ -175,15 +198,22 @@ export default function AddNewKeyModal({ show }: any) {
 									type="text"
 									name="value"
 									value={field.value}
-									onChange={(event: any) => onInputChange(index, event)}
+									onChange={(event: any) =>
+										onInputChange(index, event)
+									}
 									copyButton={true}
 								/>
 
 								<span
 									onClick={() => onRemoveFieldClicked(index)}
-									className={styles.form__field__inputContainer__deleteIcon}
+									className={
+										styles.form__field__inputContainer__deleteIcon
+									}
 								>
-									<Icon icon={icons.trash} size={pixelToEm(32)} />
+									<Icon
+										icon={icons.trash}
+										size={pixelToEm(32)}
+									/>
 								</span>
 							</div>
 							{/* input of the custom field ends */}
