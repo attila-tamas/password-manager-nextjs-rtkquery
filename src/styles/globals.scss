@@ -22,7 +22,7 @@ body {
 
 // module title
 .title {
-	font-size: util.rem(24);
+	font-size: util.rem(28);
 	font-weight: var(--font-weight-bold);
 }
 
@@ -44,6 +44,11 @@ body {
 }
 
 .error {
+	position: relative;
+	top: util.rem(4);
+
 	color: var(--color-error);
-	font-size: util.rem(16);
+
+	font-size: util.rem(15);
+	font-weight: var(--font-weight-semibold);
 }
