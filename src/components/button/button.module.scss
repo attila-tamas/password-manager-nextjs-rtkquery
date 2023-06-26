@@ -4,6 +4,13 @@
 	width: fit-content;
 	height: fit-content;
 
+	// incase we want to display both the children and the button text
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: util.rem(8);
+
 	border-radius: var(--border-radius);
 	outline: util.rem(0.5) solid transparent;
 	border: util.rem(1) solid transparent;

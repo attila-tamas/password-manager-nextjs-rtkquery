@@ -1,6 +1,22 @@
 import styles from "./button.module.scss";
 // react
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, ReactNode } from "react";
+// @components
+import Spinner from "@components/spinner/spinner.component";
+
+type Props = {
+	type?: "button" | "submit" | "reset";
+	text?: string | number;
+	disabled?: boolean;
+	background?: boolean;
+	color?: string;
+	flex?: boolean;
+	grow?: boolean;
+	className?: string;
+	children?: ReactNode;
+	isLoading?: boolean;
+	onClick?: MouseEventHandler<HTMLButtonElement>;
+};
 
 export default function Button({
 	type = "button",
@@ -11,19 +27,11 @@ export default function Button({
 	flex = false,
 	grow = false,
 	className,
+	children,
+	isLoading,
 	onClick,
-}: {
-	type?: "button" | "submit" | "reset" | undefined;
-	text?: string | number;
-	disabled?: boolean;
-	background?: boolean;
-	color?: string;
-	flex?: boolean;
-	grow?: boolean;
-	onClick?: MouseEventHandler<HTMLButtonElement>;
-	className?: string;
-}) {
-	const buttonColor = (): string => {
+}: Props) {
+	function buttonColor(): string {
 		switch (color) {
 			case "primary":
 				if (background) return styles["button--background--primary"];
@@ -37,9 +45,9 @@ export default function Button({
 				if (background) return styles["button--background--default"];
 				return styles["button--no-background--default"];
 		}
-	};
+	}
 
-	const buttonClasses = (): string => {
+	function buttonClasses(): string {
 		let classes = `${styles["button"]} ${buttonColor()} ${className}`;
 
 		if (background) classes += ` ${styles["button--background"]}`;
@@ -49,11 +57,26 @@ export default function Button({
 		if (grow) classes += ` ${styles["button--grow"]}`;
 
 		return classes;
-	};
+	}
+
+	function handleButtonContent(): undefined | JSX.Element {
+		if (isLoading) return <Spinner size={24} color="currentColor" />;
+		return (
+			<>
+				{children}
+				{text}
+			</>
+		);
+	}
 
 	return (
-		<button type={type} disabled={disabled} className={buttonClasses()} onClick={onClick}>
-			{text}
+		<button
+			type={type}
+			disabled={disabled}
+			className={buttonClasses()}
+			onClick={onClick}
+		>
+			{handleButtonContent()}
 		</button>
 	);
 }
