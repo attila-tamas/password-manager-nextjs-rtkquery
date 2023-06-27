@@ -19,11 +19,7 @@ import {
 	useValidateRegistrationPasswordMutation,
 } from "@redux/validation/validationApiSlice";
 // @components
-import Button from "@components/button/button.component";
-import Error from "@components/error/error.component";
-import Icon from "@components/icon/icon";
-import Input from "@components/input/input.component";
-import Logo from "@components/logo/logo.component";
+import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
 import { pixelToEm } from "@util/pixelConverter";
 import routes from "@util/routes";
