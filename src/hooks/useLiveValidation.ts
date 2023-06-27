@@ -1,6 +1,6 @@
-import useDebounce from "@hooks/useDebounce";
+import useDebounce from "./useDebounce";
 
-export type Validation = {
+type LiveValidation = {
 	validate: any;
 	isLoading: boolean;
 	isSuccess: boolean;
@@ -22,7 +22,7 @@ export default function useLiveValidation(inputValue: string, hook: any) {
 	let errorMsg = "";
 	if (isError) errorMsg = (<any>error).data.message;
 
-	const result: Validation = {
+	const result: LiveValidation = {
 		validate,
 		isLoading,
 		isSuccess,

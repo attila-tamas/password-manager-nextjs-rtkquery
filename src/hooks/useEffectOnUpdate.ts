@@ -11,6 +11,6 @@ export default function useEffectOnUpdate<T>(
 			firstRenderRef.current = false;
 			return;
 		}
-		return callback();
-	}, [dependencies]);
+		callback();
+	}, [...dependencies]);
 }
