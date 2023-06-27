@@ -29,7 +29,8 @@
 	align-items: center;
 	gap: util.rem(24);
 
-	margin-top: util.rem(8); // add more space between the title and the form
+	// add more space between the title and the form
+	margin-top: util.rem(8);
 
 	&__field {
 		width: 100%;
@@ -45,7 +46,8 @@
 		}
 
 		&__input {
-			margin-top: util.rem(8); // add space between the label and the input field
+			// add space between the label and the input field
+			margin-top: util.rem(8);
 		}
 	}
 
@@ -70,6 +72,7 @@
 
 @include util.breakpoint-up(medium) {
 	.registration-module {
-		width: util.rem(360 + 64); // 64 / 2 => 32px padding to the sides
+		// 64 / 2 => 32px padding to the sides
+		width: util.rem(360 + 64);
 	}
 }

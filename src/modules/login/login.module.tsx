@@ -1,176 +1,170 @@
-// styles
 import styles from "./login.module.scss";
 // react
-import { useEffect, useRef, useState } from "react";
-// next.js
+import { FormEvent, useRef } from "react";
+// next
 import Link from "next/link";
-import router from "next/router";
-// npm
-import { enqueueSnackbar } from "notistack";
-import { useDispatch, useSelector } from "react-redux";
-// @redux
-// api hooks
+import { useRouter } from "next/router";
+// @hooks
+import {
+	useEffectOnMount,
+	useEffectOnUpdate,
+	useFormInput,
+	useLiveValidation,
+	useMutation,
+	useShowPasswordIcon,
+	useToggle,
+	useValidation,
+} from "@hooks/index";
+// @redux hooks
 import { useLoginMutation } from "@redux/auth/authApiSlice";
-import { useRequestPasswordChangeMutation } from "@redux/user/userApiSlice";
-// actions
+import { useValidateLoginEmailMutation } from "@redux/validation/validationApiSlice";
+import { useDispatch } from "react-redux";
+// @redux actions
 import { setCredentials } from "@redux/auth/authSlice";
-// selectors
-import { selectCurrentEmail, setCurrentEmail, setPersist } from "@redux/user/userSlice";
-//
-// @util
-import routes from "@util/routes";
+import { setPersist } from "@redux/user/userSlice";
 // @components
 import Button from "@components/button/button.component";
-import Checkbox from "@components/checkbox/checkbox.component";
+import Error from "@components/error/error.component";
+import Icon from "@components/icon/icon";
 import Input from "@components/input/input.component";
 import Logo from "@components/logo/logo.component";
+// @util
+import { pixelToEm } from "@util/pixelConverter";
+import routes from "@util/routes";
 
 // page module for "/login" route
 export default function Login() {
 	const dispatch = useDispatch();
+	const router = useRouter();
 
-	const currentEmail = useSelector(selectCurrentEmail);
+	const email = useFormInput("");
+	const password = useFormInput("");
 
-	// refs
-	const emailRef = useRef<HTMLInputElement>(null);
-	const passwordRef = useRef<HTMLInputElement>(null);
-	//
+	const showPassword = useToggle(false);
+	const showPasswordIcon = useShowPasswordIcon(showPassword.value);
 
-	// states
-	const [email, setEmail] = useState(currentEmail || "");
-	const [password, setPassword] = useState("");
-	const [showPwd, setShowPwd] = useState(false);
-	//
+	const loginMutation = useMutation(useLoginMutation());
 
-	// api hooks
-	const [
-		requestPasswordChange,
-		{ isLoading: isPasswordChangeRequestLoading, isSuccess, isError, error },
-	] = useRequestPasswordChangeMutation();
+	const emailValidation = useLiveValidation(
+		email.value,
+		useValidateLoginEmailMutation()
+	);
+	const passwordValidation = useValidation(
+		password.value, //
+		loginMutation
+	);
 
-	const [login, { isLoading: isLoginLoading }] = useLoginMutation();
-	//
+	const emailInputRef = useRef<HTMLInputElement>(null);
+	useEffectOnMount(() => emailInputRef.current?.focus());
 
-	// useEffect hooks
-	// focus the email input if it is empty, otherwise focus the password input on page load
-	useEffect(() => {
-		if (!email) {
-			emailRef.current?.focus();
-		} else {
-			passwordRef.current?.focus();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-	//
+	const passwordInputRef = useRef<HTMLInputElement>(null);
+	useEffectOnUpdate(() => {
+		if (passwordValidation.isError) passwordInputRef.current?.focus();
+	}, [passwordValidation.isError]);
 
-	// handler functions
-	// input handlers
-	const handleEmailInput = (e: any) => setEmail(e.target.value);
-	const handlePwdInput = (e: any) => setPassword(e.target.value);
-	const handleShowPwdToggle = () => setShowPwd((prev: boolean) => !prev);
+	function isSubmitButtonDisabled(): boolean {
+		return !email.value || !password.value || !emailValidation.isSuccess;
+	}
 
-	// form submit handler
-	const handleSubmit = async (e: any) => {
-		e.preventDefault(); // prevent page reload
+	async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
+		event.preventDefault(); // prevent page reload
 
-		try {
-			const { accessToken } = await login({ email, password }).unwrap();
-			dispatch(setCredentials({ accessToken }));
+		const { accessToken } = await loginMutation.trigger({
+			email: email.value,
+			password: password.value,
+		});
 
-			dispatch(setPersist({ persist: true }));
-			dispatch(setCurrentEmail({ email }));
+		if (!loginMutation.isSuccess) return;
 
-			router.replace(routes.vault);
-		} catch (error: any) {
-			enqueueSnackbar(error.data?.message, { variant: "error" });
-		}
-	};
+		dispatch(setCredentials({ accessToken }));
+		dispatch(setPersist({ persist: true }));
 
-	// forgot password handler
-	const onForgotPasswordClicked = async () => {
-		if (!email) {
-			emailRef.current?.focus();
-			enqueueSnackbar("The email address must not be empty", { variant: "error" });
-		} else {
-			await requestPasswordChange(email);
-		}
-	};
-	//
+		router.replace(routes.vault);
+	}
 
 	return (
-		<div className={styles.container}>
-			<Logo size="130" />
+		<div className={styles["login-module"]}>
+			<Logo size="110" />
 
-			<p className={styles.title}>Sign in</p>
+			<p className={"title"}>Sign in</p>
 
-			{/* login form starts */}
-			<form onSubmit={handleSubmit} className={styles.form}>
-				{/* email field starts */}
-				<div className={styles.form__field}>
-					<label htmlFor="email">Email</label>
+			<form className={styles["form"]} onSubmit={onSubmit}>
+				<div className={styles["form__field"]}>
+					<label
+						className={styles["form__field__label"]}
+						htmlFor="email"
+					>
+						Email
+					</label>
 
 					<Input
-						type="text"
+						className={`${styles["form__field__input"]}`}
 						id="email"
-						reference={emailRef}
-						value={email}
-						onChange={handleEmailInput}
+						type="text"
+						value={email.value}
+						onChange={email.onChange}
+						reference={emailInputRef}
+						validation={emailValidation}
 					/>
+
+					<Error message={emailValidation.errorMsg} />
 				</div>
-				{/* email field ends */}
 
-				{/* password field starts */}
-				<div className={styles.form__field}>
-					<span className={styles.form__field__textContainer}>
-						<label htmlFor="password">Password</label>
+				<div className={styles["form__field"]}>
+					<label
+						className={styles["form__field__label"]}
+						htmlFor="password"
+					>
+						Password
+					</label>
 
-						<span
-							onClick={onForgotPasswordClicked}
-							className={`link ${styles.form__field__textContainer__link}`}
-						>
-							{isPasswordChangeRequestLoading
-								? "Sending email..."
-								: "Forgot password?"}
-						</span>
+					<span
+						className={`
+							${styles["form__field__forgot-password"]}
+							interactable
+						`}
+					>
+						Forgot password?
 					</span>
 
 					<Input
-						type="password"
+						className={styles["form__field__input"]}
 						id="password"
-						reference={passwordRef}
-						showPassword={showPwd}
-						value={password}
-						onChange={handlePwdInput}
-					/>
+						type="password"
+						value={password.value}
+						onChange={password.onChange}
+						showPassword={showPassword.value}
+						reference={passwordInputRef}
+						validation={passwordValidation}
+					>
+						<Icon
+							icon={showPasswordIcon}
+							size={pixelToEm(24)}
+							className="interactable"
+							onClick={showPassword.toggleValue}
+						/>
+					</Input>
 
-					<Checkbox
-						label="Show Password"
-						checked={showPwd}
-						onChange={handleShowPwdToggle}
-					/>
+					<Error message={passwordValidation.errorMsg} />
 				</div>
-				{/* password field ends */}
 
-				{/* button group starts */}
-				<div className={styles.form__buttonGroup}>
-					<Button
-						text={isLoginLoading ? "Signing in..." : "Sign in"}
-						color="primary"
-						type="submit"
-						flex
-					/>
+				<Button
+					className={styles["form__button"]}
+					type="submit"
+					text="Sign in"
+					color="primary"
+					flex
+					disabled={isSubmitButtonDisabled()}
+					isLoading={loginMutation.isLoading}
+				/>
 
-					<p>
-						New to keystone?
-						<Link href="/register" className="interactable">
-							{" "}
-							Create account
-						</Link>
-					</p>
-				</div>
-				{/* button group ends */}
+				<p className={styles["form__hint"]}>
+					New to keystone?&nbsp;
+					<Link href={routes.register} className="interactable">
+						Create account
+					</Link>
+				</p>
 			</form>
-			{/* login form ends */}
 		</div>
 	);
 }

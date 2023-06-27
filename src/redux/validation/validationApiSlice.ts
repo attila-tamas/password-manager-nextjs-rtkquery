@@ -26,14 +26,6 @@ export const validationApiSlice = apiSlice.injectEndpoints({
 			}),
 		}),
 
-		validateLoginPassword: builder.mutation({
-			query: ({ email, password }) => ({
-				url: "/validate/login/password",
-				method: "POST",
-				body: { email, password },
-			}),
-		}),
-
 		validateOtp: builder.mutation({
 			query: token => ({
 				url: "/validate/otp",
@@ -49,6 +41,5 @@ export const {
 	useValidateRegistrationEmailMutation,
 	useValidateRegistrationPasswordMutation,
 	useValidateLoginEmailMutation,
-	useValidateLoginPasswordMutation,
 	useValidateOtpMutation,
 } = validationApiSlice;
