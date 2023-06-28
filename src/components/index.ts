@@ -2,7 +2,7 @@ import Button from "./button/button.component";
 import Checkbox from "./checkbox/checkbox.component";
 import ConfirmModal from "./confirmModal/confirmModal.component";
 import Error from "./error/error.component";
-import Icon from "./icon/icon";
+import Icon, { icons } from "./icon/icon";
 import Input from "./input/input.component";
 import Key from "./key/key.component";
 import AddNewKeyModal from "./keyModal/newKeyModal.component";
@@ -23,6 +23,7 @@ export {
 	ConfirmModal,
 	Error,
 	Icon,
+	icons,
 	Input,
 	Key,
 	AddNewKeyModal,
