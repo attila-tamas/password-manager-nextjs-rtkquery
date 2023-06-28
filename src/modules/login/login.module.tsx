@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 // @hooks
 import {
+	useDispatchLogin,
 	useEffectOnMount,
 	useEffectOnUpdate,
 	useFormInput,
@@ -18,10 +19,7 @@ import {
 // @redux hooks
 import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { useValidateLoginEmailMutation } from "@redux/validation/validationApiSlice";
-import { useDispatch } from "react-redux";
 // @redux actions
-import { setCredentials } from "@redux/auth/authSlice";
-import { setPersist } from "@redux/user/userSlice";
 // @components
 import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
@@ -30,36 +28,42 @@ import routes from "@util/routes";
 
 // page module for "/login" route
 export default function Login() {
-	const dispatch = useDispatch();
 	const router = useRouter();
-
-	const email = useFormInput("");
-	const password = useFormInput("");
-
-	const showPassword = useToggle(false);
-	const showPasswordIcon = useShowPasswordIcon(showPassword.value);
+	const dispatchLogin = useDispatchLogin();
 
 	const loginMutation = useMutation(useLoginMutation());
+
+	// email
+	const email = useFormInput("");
 
 	const emailValidation = useLiveValidation(
 		email.value,
 		useValidateLoginEmailMutation()
 	);
+
+	const emailInputRef = useRef<HTMLInputElement>(null);
+	useEffectOnMount(() => emailInputRef.current?.focus());
+	//
+
+	// password
+	const password = useFormInput("");
+
+	const showPassword = useToggle(false);
+	const showPasswordIcon = useShowPasswordIcon(showPassword.value);
+
 	const passwordValidation = useValidation(
 		password.value, //
 		loginMutation
 	);
 
-	const emailInputRef = useRef<HTMLInputElement>(null);
-	useEffectOnMount(() => emailInputRef.current?.focus());
-
 	const passwordInputRef = useRef<HTMLInputElement>(null);
 	useEffectOnUpdate(() => {
 		if (passwordValidation.isError) passwordInputRef.current?.focus();
 	}, [passwordValidation.isError]);
+	//
 
 	function isSubmitButtonDisabled(): boolean {
-		return !email.value || !password.value || !emailValidation.isSuccess;
+		return !password.value || !emailValidation.isSuccess;
 	}
 
 	async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
@@ -70,10 +74,7 @@ export default function Login() {
 			password: password.value,
 		});
 
-		if (!loginMutation.isSuccess) return;
-
-		dispatch(setCredentials({ accessToken }));
-		dispatch(setPersist({ persist: true }));
+		dispatchLogin({ accessToken, email: email.value, persist: true });
 
 		router.replace(routes.vault);
 	}
@@ -82,7 +83,7 @@ export default function Login() {
 		<div className={styles["login-module"]}>
 			<Logo size="110" />
 
-			<p className={"title"}>Sign in</p>
+			<p className="title">Sign in</p>
 
 			<form className={styles["form"]} onSubmit={onSubmit}>
 				<div className={styles["form__field"]}>
@@ -151,7 +152,7 @@ export default function Login() {
 					color="primary"
 					flex
 					disabled={isSubmitButtonDisabled()}
-					isLoading={loginMutation.isLoading}
+					loading={loginMutation.isLoading}
 				/>
 
 				<p className={styles["form__hint"]}>
