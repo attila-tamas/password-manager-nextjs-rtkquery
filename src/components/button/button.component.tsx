@@ -14,7 +14,7 @@ type Props = {
 	grow?: boolean;
 	className?: string;
 	children?: ReactNode;
-	isLoading?: boolean;
+	loading?: boolean;
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
@@ -28,7 +28,7 @@ export default function Button({
 	grow = false,
 	className,
 	children,
-	isLoading,
+	loading,
 	onClick,
 }: Props) {
 	function buttonColor(): string {
@@ -59,8 +59,8 @@ export default function Button({
 		return classes;
 	}
 
-	function handleButtonContent(): undefined | JSX.Element {
-		if (isLoading) return <Spinner size={24} color="currentColor" />;
+	function buttonContent(): JSX.Element {
+		if (loading) return <Spinner size={24} color="currentColor" />;
 		return (
 			<>
 				{children}
@@ -76,7 +76,7 @@ export default function Button({
 			className={buttonClasses()}
 			onClick={onClick}
 		>
-			{handleButtonContent()}
+			{buttonContent()}
 		</button>
 	);
 }
