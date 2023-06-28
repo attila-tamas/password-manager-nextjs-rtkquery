@@ -3,6 +3,8 @@ import styles from "./registration.module.scss";
 import { FormEvent, useRef } from "react";
 // next
 import Link from "next/link";
+import { useRouter } from "next/router";
+// npm
 // @hooks
 import {
 	useEffectOnMount,
@@ -10,10 +12,14 @@ import {
 	useLiveValidation,
 	useMutation,
 	useShowPasswordIcon,
+	useSuccess,
 	useToggle,
 } from "@hooks/index";
-// @redux
-import { useRegisterMutation } from "@redux/auth/authApiSlice";
+// @redux hooks
+import {
+	useLoginMutation,
+	useRegisterMutation,
+} from "@redux/auth/authApiSlice";
 import {
 	useValidateRegistrationEmailMutation,
 	useValidateRegistrationPasswordMutation,
@@ -21,39 +27,56 @@ import {
 // @components
 import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
+
+import useDispatchLogin from "@hooks/useDispatchLogin";
 import { pixelToEm } from "@util/pixelConverter";
 import routes from "@util/routes";
 
 // page module for "/register" route
 export default function Registration() {
-	const email = useFormInput("");
-	const password = useFormInput("");
-
-	const showPassword = useToggle(false);
-	const showPasswordIcon = useShowPasswordIcon(showPassword.value);
+	const router = useRouter();
+	const dispatchLogin = useDispatchLogin();
 
 	const registerMutation = useMutation(useRegisterMutation());
+	const loginMutation = useMutation(useLoginMutation());
+
+	// email
+	const email = useFormInput("");
 
 	const emailValidation = useLiveValidation(
 		email.value,
 		useValidateRegistrationEmailMutation()
 	);
+
+	const emailInputRef = useRef<HTMLInputElement>(null);
+	useEffectOnMount(() => emailInputRef.current?.focus());
+	//
+
+	// password
+	const password = useFormInput("");
+
+	const showPassword = useToggle(false);
+	const showPasswordIcon = useShowPasswordIcon(showPassword.value);
+
 	const passwordValidation = useLiveValidation(
 		password.value,
 		useValidateRegistrationPasswordMutation()
 	);
-
-	const emailInputRef = useRef<HTMLInputElement>(null);
-	useEffectOnMount(() => emailInputRef.current?.focus());
+	//
 
 	function isSubmitButtonDisabled(): boolean {
+		return !emailValidation.isSuccess || !passwordValidation.isSuccess;
+	}
+
+	function isSubmitButtonLoading(): boolean {
 		return (
-			!email.value ||
-			!password.value ||
-			!emailValidation.isSuccess ||
-			!passwordValidation.isSuccess
+			registerMutation.isLoading ||
+			registerMutation.isSuccess ||
+			loginMutation.isLoading
 		);
 	}
+
+	console.log(isSubmitButtonLoading());
 
 	async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault(); // prevent page reload
@@ -64,11 +87,28 @@ export default function Registration() {
 		});
 	}
 
+	// the user needs to be logged in first because
+	// a jwt token is needed to visit the verify email page
+	useSuccess(async () => {
+		const { accessToken } = await loginMutation.trigger({
+			email: email.value,
+			password: password.value,
+		});
+
+		dispatchLogin({
+			accessToken,
+			email: email.value,
+			persist: true,
+		});
+
+		router.replace(routes.verifyEmail);
+	}, registerMutation);
+
 	return (
 		<div className={styles["registration-module"]}>
 			<Logo size="110" />
 
-			<p className={"title"}>Create account</p>
+			<p className="title">Create account</p>
 
 			<form className={styles["form"]} onSubmit={onSubmit}>
 				<div className={styles["form__field"]}>
@@ -127,7 +167,7 @@ export default function Registration() {
 					color="primary"
 					flex
 					disabled={isSubmitButtonDisabled()}
-					isLoading={registerMutation.isLoading}
+					loading={isSubmitButtonLoading()}
 				/>
 
 				<p className={styles["form__hint"]}>
