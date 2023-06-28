@@ -12,9 +12,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
 		}),
 
 		activateAccount: builder.mutation({
-			query: token => ({
-				url: `/user/activate?token=${token}`,
-				method: "GET",
+			query: ({ email, token }) => ({
+				url: "/user/activate",
+				method: "POST",
+				body: { email, token },
 			}),
 		}),
 
@@ -39,9 +40,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				url: "/user/delete",
 				method: "DELETE",
 			}),
-			// use onQueryStarted when we want to do something with the response data
-			// or if we want to do something after the query is fulfilled, like logging out the user in this case
-			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+			async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(logout(""));

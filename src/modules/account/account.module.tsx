@@ -15,7 +15,8 @@ import {
 	useRequestPasswordChangeMutation,
 } from "@redux/user/userApiSlice";
 // selectors
-import { selectCurrentEmail, setCurrentEmail, setPersist } from "@redux/user/userSlice";
+import { selectCurrentEmail, setCurrentEmail } from "@redux/auth/authSlice";
+import { setPersist } from "@redux/user/userSlice";
 //
 // @util
 import { pixelToEm } from "@util/pixelConverter";
@@ -37,20 +38,30 @@ export default function Account() {
 	//
 
 	// api hooks
-	const [sendLogout, { isLoading: isLogoutLoading, isSuccess: isLogoutSuccess }] =
-		useSendLogoutMutation();
+	const [
+		sendLogout,
+		{ isLoading: isLogoutLoading, isSuccess: isLogoutSuccess },
+	] = useSendLogoutMutation();
 
-	const [requestPasswordChange, { isLoading: isPasswordChangeRequestLoading }] =
-		useRequestPasswordChangeMutation();
+	const [
+		requestPasswordChange,
+		{ isLoading: isPasswordChangeRequestLoading },
+	] = useRequestPasswordChangeMutation();
 
 	const [
 		deleteAllKeys,
-		{ isLoading: isEmptyTheVaultLoading, isSuccess: isEmptyTheVaultSuccess },
+		{
+			isLoading: isEmptyTheVaultLoading,
+			isSuccess: isEmptyTheVaultSuccess,
+		},
 	] = useDeleteAllKeysMutation();
 
 	const [
 		deleteAccount,
-		{ isLoading: isDeleteAccountLoading, isSuccess: isDeleteAccountSuccess },
+		{
+			isLoading: isDeleteAccountLoading,
+			isSuccess: isDeleteAccountSuccess,
+		},
 	] = useDeleteAccountMutation();
 	//
 
@@ -106,10 +117,14 @@ export default function Account() {
 				<div className={styles.wrapper}>
 					{/* title starts */}
 					<div className={styles.wrapper__titleContainer}>
-						<p className={styles.wrapper__titleContainer__title}>Account</p>
+						<p className={styles.wrapper__titleContainer__title}>
+							Account
+						</p>
 
 						<span
-							className={styles.wrapper__titleContainer__logoutIcon}
+							className={
+								styles.wrapper__titleContainer__logoutIcon
+							}
 							onClick={onLogoutClicked}
 						>
 							<Icon
@@ -158,7 +173,11 @@ export default function Account() {
 						<ConfirmModal
 							title="Empty the vault"
 							desc="Are you sure you want to delete all your entries? This action cannot be undone."
-							confirmText={isEmptyTheVaultLoading ? "Emptying..." : "Confirm"}
+							confirmText={
+								isEmptyTheVaultLoading
+									? "Emptying..."
+									: "Confirm"
+							}
 							show={setShowConfirmEmptying}
 							onClick={onEmptyTheVaultConfirmed}
 						/>
@@ -170,7 +189,11 @@ export default function Account() {
 						<ConfirmModal
 							title="Delete account"
 							desc="Are you sure you want to delete your account? This action cannot be undone."
-							confirmText={isDeleteAccountLoading ? "Deleting..." : "Confirm"}
+							confirmText={
+								isDeleteAccountLoading
+									? "Deleting..."
+									: "Confirm"
+							}
 							show={setShowConfirmDeletion}
 							onClick={onDeleteAccountConfirmed}
 						/>

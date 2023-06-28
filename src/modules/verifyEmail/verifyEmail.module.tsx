@@ -1,109 +1,144 @@
-// styles
 import styles from "./verifyEmail.module.scss";
-// react
-import { useEffect, useState } from "react";
-// next.js
+// next
 import Image from "next/image";
+import { useRouter } from "next/router";
 // npm
 import { enqueueSnackbar } from "notistack";
+// @hooks
+import {
+	useEffectOnMount,
+	useEffectOnUpdate,
+	useFormInput,
+	useLiveValidation,
+	useMutation,
+} from "@hooks/index";
+// @redux hooks
+import {
+	useActivateAccountMutation,
+	useResendVerificationEmailMutation,
+} from "@redux/user/userApiSlice";
+import { useValidateOtpMutation } from "@redux/validation/validationApiSlice";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-// @redux
-// api hooks
-import { useResendVerificationEmailMutation } from "@redux/user/userApiSlice";
-// selectors
-import { selectCurrentEmail } from "@redux/user/userSlice";
-//
+// @redux selectors
+import { selectCurrentEmail } from "@redux/auth/authSlice";
 // @public
-import verifyEmailGraphic from "@public/verify-email-graphic.svg";
+import verifyEmailGraphic from "@public/verifyEmailGraphic.svg";
 // @components
-import Button from "@components/button/button.component";
+import { Error, Input, Logo, Spinner } from "@components/index";
+// @util
+import useSuccess from "@hooks/useSuccess";
+import routes from "@util/routes";
 
 // page module for "/verify-email" route
 export default function VerifyEmail() {
-	const resendDelayInSeconds = 30;
+	const router = useRouter();
 
-	const email = useSelector(selectCurrentEmail);
+	const currentEmail = useSelector(selectCurrentEmail);
 
-	// states
-	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-	const [countDownInSeconds, setCountDownInSeconds] = useState(0);
+	const resendEmailMutation = useMutation(
+		useResendVerificationEmailMutation()
+	);
+	const activateAccountMutation = useMutation(
+		useActivateAccountMutation() //
+	);
+
+	// otp
+	const otp = useFormInput("");
+
+	const otpInputRef = useRef<HTMLInputElement>(null);
+	useEffectOnMount(() => otpInputRef.current?.focus());
+
+	const otpValidation = useLiveValidation(
+		otp.value,
+		useValidateOtpMutation()
+	);
 	//
 
-	// api hook
-	const [resendEmail, { isLoading, isSuccess, isError, error }] =
-		useResendVerificationEmailMutation();
+	// activate account
+	useSuccess(async () => {
+		await activateAccountMutation.trigger({
+			email: currentEmail,
+			token: otp.value,
+		});
+	}, otpValidation);
 
-	// useEffect hooks
-	// set a resend countdown timer if the API call was successful
-	useEffect(() => {
-		if (isSuccess) {
-			setCountDownInSeconds(resendDelayInSeconds);
-		}
-	}, [isSuccess]);
-
-	// set the countdown timer display and disable the resend email button when the timer is not finished
-	// this can be bypassed by reloading the page, but it is also handled on the backend by a rate limiter
-	useEffect(() => {
-		if (countDownInSeconds > 0) {
-			setIsButtonDisabled(true);
-
-			const interval = setInterval(() => {
-				setCountDownInSeconds(countDownInSeconds => {
-					return countDownInSeconds - 1;
-				});
-			}, 1000);
-
-			return () => clearInterval(interval);
-		} else {
-			setIsButtonDisabled(false);
-		}
-	}, [countDownInSeconds]);
+	useSuccess(() => {
+		enqueueSnackbar("Account activated", { variant: "success" });
+		router.replace(routes.vault);
+	}, activateAccountMutation);
 	//
 
-	// handler functions
-	// resend button handler
-	const onResendButtonClicked = async () => {
-		try {
-			await resendEmail(email);
-		} catch (error: any) {
-			enqueueSnackbar(error.data?.message, { variant: "error" });
-		}
-	};
+	// error message
+	const [errorMsg, setErrorMsg] = useState("");
 
-	// button text handler
-	const getButtonText = () => {
-		if (isLoading) {
-			// when the API call is loading
-			return "Resending...";
-		} else if (countDownInSeconds > 0) {
-			// when there is a countdown timer going
-			return countDownInSeconds;
-		}
+	useEffectOnUpdate(() => {
+		setErrorMsg(otpValidation.errorMsg);
+	}, [otpValidation.errorMsg]);
 
-		// default button text
-		return "Resend email";
-	};
+	useEffectOnUpdate(() => {
+		setErrorMsg(resendEmailMutation.errorMsg);
+	}, [resendEmailMutation.errorMsg]);
+	//
+
+	// resend email
+	async function onResendClicked(): Promise<void> {
+		await resendEmailMutation.trigger(currentEmail);
+	}
+
+	function resendButton(): JSX.Element {
+		if (resendEmailMutation.isLoading) return <Spinner size={16} />;
+		return (
+			<span className="interactable" onClick={onResendClicked}>
+				Resend
+			</span>
+		);
+	}
+
+	useSuccess(() => {
+		enqueueSnackbar("New email sent", { variant: "success" });
+	}, resendEmailMutation);
 	//
 
 	return (
-		<div className={styles.container}>
-			<Image className="unselectable" src={verifyEmailGraphic} alt="Verify email graphic" />
+		<div className={styles["verify-email-module"]}>
+			<Logo size="110" />
 
-			<p className={styles.title}>Verify email</p>
+			<Image
+				className="unselectable"
+				src={verifyEmailGraphic}
+				alt="Verify email graphic"
+			/>
 
-			<p className={styles.desc}>
-				An email containing a verification link has been sent to your email address. Click
-				the link to gain access to your account.
+			<p className="title">Verify email address</p>
+
+			<p>
+				A verification code has been sent to
+				<br />
+				<span className={styles["email"]}>{currentEmail}</span>
 			</p>
 
-			<div className={styles.button}>
-				<Button
-					text={getButtonText()}
-					color="primary"
-					flex={true}
-					disabled={isButtonDisabled}
-					onClick={onResendButtonClicked}
+			<div className={styles["field"]}>
+				<Input
+					type="text"
+					placeholder="Enter the verification code"
+					value={otp.value}
+					onChange={otp.onChange}
+					reference={otpInputRef}
+					validation={otpValidation}
 				/>
+
+				<Error message={errorMsg} />
+			</div>
+
+			<div className={styles["hint"]}>
+				<p className={styles["hint__body"]}>
+					Did not get the email?&nbsp;
+					{resendButton()}
+				</p>
+				<p className={styles["hint__footer"]}>
+					Make sure to check the spam folder as well
+				</p>
 			</div>
 		</div>
 	);

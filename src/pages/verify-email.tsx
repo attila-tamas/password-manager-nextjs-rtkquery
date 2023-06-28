@@ -1,6 +1,7 @@
 import Head from "next/head";
 
 import VerifyEmail from "@modules/verifyEmail/verifyEmail.module";
+import PersistLogin from "@util/persistLogin";
 
 export default function VerifyEmailPage() {
 	return (
@@ -9,7 +10,9 @@ export default function VerifyEmailPage() {
 				<title>Create account | keystone</title>
 			</Head>
 
-			<VerifyEmail />
+			<PersistLogin>
+				<VerifyEmail />
+			</PersistLogin>
 		</>
 	);
 }

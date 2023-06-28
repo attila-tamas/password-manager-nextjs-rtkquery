@@ -1,21 +1,21 @@
 import { apiSlice } from "@redux/apiSlice";
-import { logout, setCredentials } from "./authSlice";
+import { logout, setAccessToken } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
 		register: builder.mutation({
-			query: credentials => ({
+			query: ({ email, password }) => ({
 				url: "/auth/register",
 				method: "POST",
-				body: { ...credentials },
+				body: { email, password },
 			}),
 		}),
 
 		login: builder.mutation({
-			query: credentials => ({
+			query: ({ email, password }) => ({
 				url: "/auth/login",
 				method: "POST",
-				body: { ...credentials },
+				body: { email, password },
 			}),
 		}),
 
@@ -24,8 +24,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				url: "/auth/logout",
 				method: "POST",
 			}),
-			// clear the token and reset the API state after the cookie is cleared
-			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+			async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
 					dispatch(logout(""));
@@ -43,16 +42,22 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				url: "/auth/refresh",
 				method: "GET",
 			}),
-			// get and set the new access token after the query is fulfilled
-			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+			async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
 				try {
 					const { data } = await queryFulfilled;
 					const { accessToken } = data;
-					dispatch(setCredentials({ accessToken }));
+					dispatch(setAccessToken({ accessToken }));
 				} catch (err) {
 					console.log(err);
 				}
 			},
+		}),
+
+		getCurrentUser: builder.query({
+			query: () => ({
+				url: "/auth/current",
+				method: "GET",
+			}),
 		}),
 	}),
 	overrideExisting: false,
@@ -63,4 +68,5 @@ export const {
 	useLoginMutation,
 	useSendLogoutMutation,
 	useRefreshMutation,
+	useGetCurrentUserQuery,
 } = authApiSlice;

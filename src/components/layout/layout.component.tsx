@@ -8,10 +8,8 @@ import Nav from "@components/nav/nav.component";
 // used on pages that require a user to be logged in
 export default function Layout({ children }: any) {
 	return (
-		// wrap the pages that are wrapped in the layout in a persist login component
-		// to keep the user logged in on page reload
+		// keep the user logged in on page reload
 		<PersistLogin>
-			{/* set the base container for the child components and add a navigation bar */}
 			<div className={styles.container}>
 				<Nav />
 				{children}
