@@ -3,17 +3,40 @@ import styles from "./slider.module.scss";
 // npm
 import ReactSlider from "react-slider";
 
-export default function Slider({ defaultValue, onChange, onAfterChange }: any) {
+type Props = {
+	defaultValue: number;
+	min?: number;
+	max?: number;
+	disabled?: boolean;
+	className?: string;
+	onChange?: (value: number, index: number) => void;
+	onAfterChange?: (value: number, index: number) => void;
+};
+
+export default function Slider({
+	defaultValue = 1,
+	min = 1,
+	max = 99,
+	disabled = false,
+	className,
+	onChange,
+	onAfterChange,
+}: Props) {
 	return (
 		<ReactSlider
 			onChange={onChange}
 			onAfterChange={onAfterChange}
-			min={8}
-			max={32}
+			min={min}
+			max={max}
 			defaultValue={defaultValue}
-			className={styles.slider}
-			trackClassName={styles.slider__track}
-			thumbClassName={styles.slider__thumb}
+			disabled={disabled}
+			className={`
+				${styles["slider"]}
+				${disabled && styles["slider--disabled"]}
+				${className}
+			`}
+			trackClassName={styles["slider__track"]}
+			thumbClassName={styles["slider__thumb"]}
 		/>
 	);
 }

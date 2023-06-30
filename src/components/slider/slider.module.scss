@@ -1,9 +1,16 @@
 @use "@styles/util" as util;
 
 .slider {
-	width: min(100%, util.rem(360));
+	width: 100%;
+	height: fit-content;
 
 	cursor: pointer;
+
+	&--disabled {
+		opacity: 0.5;
+		pointer-events: none;
+		cursor: default;
+	}
 
 	&__track {
 		height: util.rem(4);
@@ -18,10 +25,10 @@
 	}
 
 	&__thumb {
-		top: util.rem(-8);
-
 		width: util.rem(20);
 		height: util.rem(20);
+
+		top: util.rem(-8);
 
 		outline: none;
 		border-radius: 100%;
