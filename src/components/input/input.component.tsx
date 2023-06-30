@@ -1,6 +1,6 @@
 import styles from "./input.module.scss";
 // react
-import { MutableRefObject, ReactNode } from "react";
+import { ChangeEvent, MutableRefObject, ReactNode } from "react";
 // @hooks
 import { Validation } from "@hooks/useValidation";
 // @components
@@ -17,12 +17,13 @@ type Props = {
 	maxLength?: number;
 	id?: string;
 	name?: string;
+	readonly?: boolean;
 	reference?: MutableRefObject<HTMLInputElement | null>;
 	showPassword?: boolean;
 	copyButton?: boolean;
 	className?: string;
 	children?: ReactNode;
-	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 	validation?: Validation;
 };
 
@@ -34,6 +35,7 @@ export default function Input({
 	maxLength,
 	id,
 	name,
+	readonly,
 	reference,
 	showPassword,
 	className,
@@ -92,6 +94,7 @@ export default function Input({
 				placeholder={placeholder}
 				id={id}
 				name={name}
+				readOnly={readonly}
 				ref={reference}
 				maxLength={maxLength}
 				onChange={onChange}
