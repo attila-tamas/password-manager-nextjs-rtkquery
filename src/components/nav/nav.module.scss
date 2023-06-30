@@ -1,140 +1,52 @@
 @use "@styles/util" as util;
 
-.container {
-	width: 100%;
-	height: fit-content;
-
-	position: fixed;
-	bottom: 0;
-	left: 0;
-
-	background-color: var(--color-contrast);
-	box-shadow: var(--drop-shadow-top);
-
-	z-index: 1;
-}
-
-.wrapper {
-	width: 100%;
-	height: fit-content;
-
-	display: flex;
-	flex-direction: column;
-	gap: util.rem(64);
-}
-
-.logo,
-.logoutContainer {
-	display: none;
-}
-
 .nav {
-	width: min(100%, util.rem(200));
+	width: min(100%, util.rem(280));
 	height: fit-content;
+
+	// using grid to get same width items
+	display: grid;
+	grid-auto-columns: minmax(0, 1fr);
+	grid-auto-flow: column;
+	gap: util.rem(16);
 
 	margin-inline: auto;
-	padding-block: util.rem(8);
-
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: util.rem(12);
 
 	&__item {
-		width: 100%;
-		height: fit-content;
-
-		color: var(--color-foreground);
-
-		cursor: pointer;
-
-		&:hover {
-			color: var(--color-primary);
-		}
-
-		&__active {
-			color: var(--color-primary);
-		}
-
-		&__logout {
-			width: 100%;
-			height: fit-content;
-
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: util.rem(12);
-
-			color: inherit;
-
-			font-size: util.rem(20);
-
-			&__icon {
-				// same as the icon size, to make the icon not shrink
-				min-width: util.rem(26);
-				min-height: util.rem(26);
-			}
-		}
-	}
-}
-
-@include util.breakpoint-up(medium) {
-	.container {
-		width: util.rem(240);
-		min-width: util.rem(240);
-		height: 100%;
-
-		position: relative;
-	}
-
-	.wrapper {
-		padding: util.rem(40) util.rem(32);
-	}
-
-	.logo,
-	.logoutContainer {
-		display: block;
-	}
-
-	.nav {
-		width: 100%;
-		height: 100%;
-
 		display: flex;
 		flex-direction: column;
-		gap: util.rem(16);
+		align-items: center;
+
+		color: var(--color-gray);
+
+		font-size: util.rem(13);
+
+		&--active {
+			color: var(--color-primary);
+		}
 	}
 }
 
-@include util.breakpoint-up(xlarge) {
-	.container {
-		width: 100%;
-		height: fit-content;
-
-		top: 0;
-		left: 0;
-	}
-
-	.wrapper {
-		width: min(100%, util.rem(1000));
-		height: fit-content;
-
-		padding: util.rem(4) util.rem(32);
-		margin-inline: auto;
-
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-
-		border-radius: 0 0 util.rem(4) util.rem(4);
-	}
-
+@include util.breakpoint-up(large) {
 	.nav {
-		flex-direction: row;
+		// center horizontally (margin-inline is already set)
+		position: absolute;
+		left: 0;
+		right: 0;
+
+		// we do not want same width items
+		display: flex;
 		justify-content: center;
-		gap: util.rem(40);
+		gap: util.rem(24);
 
 		&__item {
 			width: fit-content;
+			font-size: util.rem(20);
+
+			&__icon {
+				// override the icon components "display: inline-block" styling
+				display: none !important;
+			}
 		}
 	}
 }

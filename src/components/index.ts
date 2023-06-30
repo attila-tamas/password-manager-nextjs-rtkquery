@@ -10,7 +10,7 @@ import UpdateKeyModal from "./keyModal/updateKeyModal.component";
 import Layout from "./layout/layout.component";
 import Logo from "./logo/logo.component";
 import Nav from "./nav/nav.component";
-import NavItem from "./navItem/navItem.component";
+import Navbar from "./navbar/navbar.component";
 import Slider from "./slider/slider.component";
 import SnackbarContext from "./snackbars/snackbarContext";
 import Spinner from "./spinner/spinner.component";
@@ -31,7 +31,7 @@ export {
 	Layout,
 	Logo,
 	Nav,
-	NavItem,
+	Navbar,
 	Slider,
 	SnackbarContext,
 	Spinner,

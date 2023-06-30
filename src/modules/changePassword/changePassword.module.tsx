@@ -11,7 +11,7 @@ import { enqueueSnackbar } from "notistack";
 // @redux
 import { useChangePasswordMutation } from "@redux/user/userApiSlice";
 // @util
-import routes from "@util/routes";
+import { routes } from "@util/routes";
 // @public
 import changePasswordGraphic from "@public/change-password-graphic.svg";
 // @components
@@ -31,7 +31,8 @@ export default function ChangePassword() {
 	//
 
 	// api hook
-	const [changePassword, { isLoading, isSuccess, isError, error }] = useChangePasswordMutation();
+	const [changePassword, { isLoading, isSuccess, isError, error }] =
+		useChangePasswordMutation();
 
 	// useEffect hooks
 	// focus the password input on page load
@@ -93,7 +94,8 @@ export default function ChangePassword() {
 					<p className={styles.title}>New password set</p>
 
 					<p className={styles.desc}>
-						You will be redirected to the login page in {countDownInSeconds}...
+						You will be redirected to the login page in{" "}
+						{countDownInSeconds}...
 						<br />
 						<Link href={routes.login} className="interactable">
 							Go now
@@ -127,7 +129,11 @@ export default function ChangePassword() {
 						</div>
 
 						<Button
-							text={isLoading ? "Setting new password..." : "Set new password"}
+							text={
+								isLoading
+									? "Setting new password..."
+									: "Set new password"
+							}
 							color="primary"
 							type="submit"
 							flex

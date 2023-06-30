@@ -8,6 +8,8 @@ import heroGraphic from "@public/homePageHeroGraphic.svg";
 // @components
 import Button from "@components/button/button.component";
 import Logo from "@components/logo/logo.component";
+// @util
+import { pixelToRem } from "@util/pixelConverter";
 
 // page module for "/" route
 export default function Home() {
@@ -15,11 +17,15 @@ export default function Home() {
 		<main className={styles.container}>
 			{/* nav starts */}
 			<div className={styles.nav}>
-				<Logo />
+				<Logo size={pixelToRem(24)} />
 
 				<div className={styles.nav__buttonGroup}>
 					<Link href="/login">
-						<Button text="Sign in" color="primary" background={false} />
+						<Button
+							text="Sign in"
+							color="primary"
+							background={false}
+						/>
 					</Link>
 
 					<Link href="/register">
@@ -38,16 +44,24 @@ export default function Home() {
 					</p>
 
 					<p className={styles.hero__textContainer__description}>
-						Generate strong passwords with a click of a button. While&nbsp;managing them
-						with an easy-to-use interface.
+						Generate strong passwords with a click of a button.
+						While&nbsp;managing them with an easy-to-use interface.
 					</p>
 
 					<div className={styles.hero__textContainer__buttonGroup}>
 						<Link href="/register">
-							<Button text="Try it now for free" color="primary" grow={true} />
+							<Button
+								text="Try it now for free"
+								color="primary"
+								grow={true}
+							/>
 						</Link>
 
-						<p className={styles.hero__textContainer__buttonGroup__smallText}>
+						<p
+							className={
+								styles.hero__textContainer__buttonGroup__smallText
+							}
+						>
 							I have an account.
 							<Link href="/login" className="interactable">
 								{" "}

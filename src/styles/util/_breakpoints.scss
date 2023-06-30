@@ -1,6 +1,6 @@
-@use "./functions" as functions;
+@use "./functions";
 
-$breakpoints-up: (
+$breakpoints: (
 	"small": functions.rem(380),
 	"medium": functions.rem(640),
 	"large": functions.rem(1024),
@@ -8,7 +8,14 @@ $breakpoints-up: (
 );
 
 @mixin breakpoint-up($size) {
-	@media (min-width: map-get($breakpoints-up, $size)) {
+	@media (min-width: map-get($breakpoints, $size)) {
 		@content;
 	}
+}
+
+:export {
+	breakpointSmall: functions.rem(380);
+	breakpointMedium: functions.rem(640);
+	breakpointLarge: functions.rem(1024);
+	breakpointXLarge: functions.rem(1400);
 }

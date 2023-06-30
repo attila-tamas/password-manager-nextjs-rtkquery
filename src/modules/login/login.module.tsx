@@ -23,8 +23,8 @@ import { useValidateLoginEmailMutation } from "@redux/validation/validationApiSl
 // @components
 import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
-import { pixelToEm } from "@util/pixelConverter";
-import routes from "@util/routes";
+import { pixelToEm, pixelToRem } from "@util/pixelConverter";
+import { routes } from "@util/routes";
 
 // page module for "/login" route
 export default function Login() {
@@ -81,7 +81,7 @@ export default function Login() {
 
 	return (
 		<div className={styles["login-module"]}>
-			<Logo size="110" />
+			<Logo size={pixelToRem(20)} />
 
 			<p className="title">Sign in</p>
 

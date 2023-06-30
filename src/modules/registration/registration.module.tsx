@@ -29,8 +29,8 @@ import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
 
 import useDispatchLogin from "@hooks/useDispatchLogin";
-import { pixelToEm } from "@util/pixelConverter";
-import routes from "@util/routes";
+import { pixelToEm, pixelToRem } from "@util/pixelConverter";
+import { routes } from "@util/routes";
 
 // page module for "/register" route
 export default function Registration() {
@@ -76,8 +76,6 @@ export default function Registration() {
 		);
 	}
 
-	console.log(isSubmitButtonLoading());
-
 	async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault(); // prevent page reload
 
@@ -106,7 +104,7 @@ export default function Registration() {
 
 	return (
 		<div className={styles["registration-module"]}>
-			<Logo size="110" />
+			<Logo size={pixelToRem(20)} />
 
 			<p className="title">Create account</p>
 

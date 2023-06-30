@@ -28,7 +28,8 @@ import verifyEmailGraphic from "@public/verifyEmailGraphic.svg";
 import { Error, Input, Logo, Spinner } from "@components/index";
 // @util
 import useSuccess from "@hooks/useSuccess";
-import routes from "@util/routes";
+import { pixelToRem } from "@util/pixelConverter";
+import { routes } from "@util/routes";
 
 // page module for "/verify-email" route
 export default function VerifyEmail() {
@@ -102,7 +103,7 @@ export default function VerifyEmail() {
 
 	return (
 		<div className={styles["verify-email-module"]}>
-			<Logo size="110" />
+			<Logo size={pixelToRem(20)} />
 
 			<Image
 				className="unselectable"

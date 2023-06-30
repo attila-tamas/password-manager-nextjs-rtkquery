@@ -1,17 +1,16 @@
-// styles
 import styles from "./layout.module.scss";
+// react
+import { ReactNode } from "react";
+// @components
+import { Navbar } from "@components/index";
 // @util
 import PersistLogin from "@util/persistLogin";
-// @components
-import Nav from "@components/nav/nav.component";
 
-// used on pages that require a user to be logged in
-export default function Layout({ children }: any) {
+export default function Layout({ children }: { children: ReactNode }) {
 	return (
-		// keep the user logged in on page reload
 		<PersistLogin>
-			<div className={styles.container}>
-				<Nav />
+			<div className={styles["layout"]}>
+				<Navbar />
 				{children}
 			</div>
 		</PersistLogin>

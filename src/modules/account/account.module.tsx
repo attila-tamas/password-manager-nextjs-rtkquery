@@ -20,7 +20,7 @@ import { setPersist } from "@redux/user/userSlice";
 //
 // @util
 import { pixelToEm } from "@util/pixelConverter";
-import routes from "@util/routes";
+import { routes } from "@util/routes";
 // @components
 import ConfirmModal from "@components/confirmModal/confirmModal.component";
 import Icon, { icons } from "@components/icon/icon";

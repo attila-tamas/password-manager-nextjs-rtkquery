@@ -5,21 +5,26 @@ import Image from "next/image";
 // @public
 import favicon from "@public/favicon.svg";
 
-export default function Logo({ size }: any) {
-	// if a size is not given to the component it will default to 175px for easier use
-	if (!size) {
-		size = 175;
-	}
-
+export default function Logo({
+	size = "1.25rem",
+	className,
+}: {
+	size?: string;
+	className?: string;
+}) {
 	return (
 		<div
-			className={`unselectable ${styles.container}`}
-			style={{ width: `${size}px`, fontSize: size / 12 }}
+			className={`unselectable ${styles["logo"]} ${className}`}
+			style={{ fontSize: size }}
 		>
-			<Image className={styles.img} src={favicon} alt="keystone container" />
+			<Image
+				src={favicon}
+				alt="keystone container"
+				style={{ minWidth: size, minHeight: size }}
+			/>
 
-			<span className={styles.text}>
-				<span className={styles.text__highlight}>key</span>
+			<span className={styles["logo__text"]}>
+				<span className={styles["logo__text__highlight"]}>key</span>
 				stone
 			</span>
 		</div>

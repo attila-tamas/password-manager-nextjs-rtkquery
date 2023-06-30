@@ -1,11 +1,11 @@
-export const publicRoutes = {
+const publicRoutes = {
 	home: "/",
 	login: "/login",
 	register: "/register",
 	verifyEmail: "/verify-email",
 };
 
-export const protectedRoutes = {
+const protectedRoutes = {
 	vault: "/vault",
 	generate: "/generate",
 	account: "/account",
@@ -16,4 +16,10 @@ const routes = {
 	...protectedRoutes,
 };
 
-export default routes;
+const navLinks = [
+	{ name: "vault", href: protectedRoutes.vault },
+	{ name: "generate", href: protectedRoutes.generate },
+	{ name: "account", href: protectedRoutes.account },
+];
+
+export { publicRoutes, protectedRoutes, routes, navLinks };
