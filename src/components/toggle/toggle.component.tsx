@@ -1,15 +1,36 @@
+import { ChangeEvent } from "react";
 import styles from "./toggle.module.scss";
 
-export default function Toggle({ onChange, label, flex, defaultChecked }: any) {
+type Props = {
+	label: string;
+	flex?: boolean;
+	checked: boolean;
+	className?: string;
+	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export default function Toggle({
+	label,
+	flex,
+	checked,
+	className,
+	onChange,
+}: Props) {
 	return (
-		<label className={`${styles.container} ${flex && styles.container__flex}`}>
+		<label
+			className={`
+				${styles["wrapper"]}
+				${flex && styles["wrapper--flex"]}
+				${className}
+			`}
+		>
 			<input
-				className={styles.input}
 				type="checkbox"
+				className={styles["input"]}
+				checked={checked}
 				onChange={onChange}
-				defaultChecked={defaultChecked}
 			/>
-			<span className={styles.toggle} />
+			<span className={styles["toggle"]} />
 			<p>{label}</p>
 		</label>
 	);
