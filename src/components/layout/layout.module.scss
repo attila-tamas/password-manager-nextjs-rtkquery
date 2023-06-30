@@ -4,15 +4,19 @@
 	width: 100%;
 
 	// navbar height when it is on the bottom of the screen
-	height: calc(100% - util.rem(58));
-
-	// padding between the content and the navbar
-	padding-bottom: util.rem(24);
+	height: calc(100% - util.rem(66.75));
 
 	display: flex;
 	flex-direction: column;
 
 	overflow: auto;
+}
+
+@include util.breakpoint-up(small) {
+	.layout {
+		// padding between the content and the bottom navbar
+		padding-bottom: util.rem(24);
+	}
 }
 
 @include util.breakpoint-up(large) {

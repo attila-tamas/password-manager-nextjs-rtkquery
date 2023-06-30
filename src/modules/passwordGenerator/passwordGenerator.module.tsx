@@ -1,157 +1,119 @@
 // styles
-import styles from "./passwordGenerator.module.scss";
-// react
-import { useEffect, useState } from "react";
-// @util
+import { Button, Icon, icons, Input, Slider, Toggle } from "@components/index";
+import useCopyToClipboard from "@hooks/useCopyToClipboard";
+import useEffectOnMount from "@hooks/useEffectOnMount";
+import useToggle from "@hooks/useToggle";
 import { passwordGenerator } from "@util/passwordGenerator";
-// @components
-import Button from "@components/button/button.component";
-import Slider from "@components/slider/slider.component";
-import Toggle from "@components/toggle/toggle.component";
+import { pixelToEm } from "@util/pixelConverter";
+import { useState } from "react";
+import styles from "./passwordGenerator.module.scss";
 
 // page module for "/generate" route
 export default function Generate() {
-	// states
-	// generation settings
-	const [passwordLength, setPasswordLength] = useState(32);
-	const [uppercase, setUppercase] = useState(true);
-	const [lowercase, setLowercase] = useState(true);
-	const [numbers, setNumbers] = useState(true);
-	const [symbols, setSymbols] = useState(true);
-	// display for the generated password container
 	const [password, setPassword] = useState("");
-	const [errorMsg, setErrorMsg] = useState("");
-	const [text, setText] = useState("");
-	// copy feedback
-	const [wasPasswordCopied, setWasPasswordCopied] = useState(false);
-	const [waitTimer, setWaitTimer] = useState(undefined);
-	//
+	const [passwordLength, setPasswordLength] = useState(32);
 
-	// useEffect hooks
-	// generate a password on page load
-	useEffect(() => {
-		generatePassword();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	const uppercase = useToggle(true);
+	const lowercase = useToggle(true);
+	const numbers = useToggle(true);
+	const symbols = useToggle(true);
 
-	// handle text display in the generated password container
-	// if there is an error display the error, otherwise display the generated password
-	useEffect(() => {
-		if (errorMsg) {
-			setText(errorMsg);
-		} else {
-			setText(password);
-		}
-	}, [errorMsg, password]);
-	//
+	const [copyToClipboard, { success: copySuccess }] = useCopyToClipboard();
 
-	// handler functions
-	// used for generating the password
-	const generatePassword = () => {
-		setErrorMsg("");
+	function noOptionsSelected(): boolean {
+		return (
+			!uppercase.value &&
+			!lowercase.value &&
+			!numbers.value &&
+			!symbols.value
+		);
+	}
 
-		if (!uppercase && !lowercase && !numbers && !symbols) {
-			return setErrorMsg("Select at least one option");
-		}
+	function onSliderChange(value: number): void {
+		setPasswordLength(value);
+	}
 
+	function generatePassword(): void {
 		const generationSettings = {
 			passwordLength,
-			uppercase,
-			lowercase,
-			numbers,
-			symbols,
+			uppercase: uppercase.value,
+			lowercase: lowercase.value,
+			numbers: numbers.value,
+			symbols: symbols.value,
 		};
 
 		setPassword(passwordGenerator(generationSettings));
-	};
+	}
 
-	// used for handling copying the password
-	const copyPassword = () => {
-		if (!errorMsg && !waitTimer) {
-			navigator.clipboard.writeText(password);
+	useEffectOnMount(() => generatePassword());
 
-			// display feedback that the password has been copied
-			setWasPasswordCopied(true);
-			setText("Password copied");
-
-			// reset the display to the generated password after 600ms
-			setWaitTimer(
-				setTimeout(() => {
-					setText(password);
-					setWaitTimer(undefined);
-					setWasPasswordCopied(false);
-				}, 600) as any
-			);
-		}
-	};
-	//
+	function onCopyBtnClicked(): void {
+		copyToClipboard(password);
+	}
 
 	return (
-		<div className={styles.container}>
-			<p className={styles.title}>Password generator</p>
+		<div className={styles["password-generator-module"]}>
+			<p className="title">Generate password</p>
 
-			{/* main content of the page starts */}
-			<div className={styles.wrapper}>
-				{/* generated password display starts */}
-				<div
-					onClick={copyPassword}
-					className={`
-								${styles.wrapper__generatedPassword}
-								${errorMsg && styles.wrapper__generatedPassword__error}
-								${wasPasswordCopied && styles.wrapper__generatedPassword__copied}
-							`}
-				>
-					<p>{text}</p>
-				</div>
-				{/* generated password display ends */}
+			<Input
+				type="text"
+				readonly
+				value={password}
+				className={styles["generatedPassword"]}
+			>
+				<Icon
+					icon={copySuccess ? icons.tick : icons.copy}
+					size={pixelToEm(24)}
+					className="interactable"
+					onClick={onCopyBtnClicked}
+				/>
+			</Input>
 
-				{/* generation settings starts */}
-				<div className={styles.wrapper__settings}>
-					{/* slider for the password length starts */}
-					<div className={styles.wrapper__settings__sliderContainer}>
-						<p>
-							Length: <span>{passwordLength}</span>
-						</p>
-						<Slider
-							defaultValue={passwordLength}
-							onChange={(value: number) => setPasswordLength(value)}
-							onAfterChange={generatePassword}
-						/>
-					</div>
-					{/* slider for the password length ends */}
+			<div className={styles["generator-settings"]}>
+				<p>Length: {passwordLength}</p>
+				<Slider
+					defaultValue={passwordLength}
+					min={1}
+					max={32}
+					disabled={noOptionsSelected()}
+					onChange={onSliderChange}
+					onAfterChange={generatePassword}
+					className={styles["generator-settings__slider"]}
+				/>
 
-					{/* toggles for the additional settings start */}
-					<Toggle
-						label="Uppercase letters"
-						flex
-						defaultChecked={uppercase}
-						onChange={(event: any) => setUppercase(event.target.checked)}
-					/>
-					<Toggle
-						label="Lowercase letters"
-						flex
-						defaultChecked={lowercase}
-						onChange={(event: any) => setLowercase(event.target.checked)}
-					/>
-					<Toggle
-						label="Include Numbers"
-						flex
-						defaultChecked={numbers}
-						onChange={(event: any) => setNumbers(event.target.checked)}
-					/>
-					<Toggle
-						label="Special characters"
-						flex
-						defaultChecked={symbols}
-						onChange={(event: any) => setSymbols(event.target.checked)}
-					/>
-					{/* toggles for the additional settings end */}
-				</div>
-				{/* generation settings ends */}
-
-				<Button text="Generate" color="primary" flex={true} onClick={generatePassword} />
+				<Toggle
+					label="Uppercase letters"
+					flex
+					checked={uppercase.value}
+					onChange={uppercase.toggleValue}
+				/>
+				<Toggle
+					label="Lowercase letters"
+					flex
+					checked={lowercase.value}
+					onChange={lowercase.toggleValue}
+				/>
+				<Toggle
+					label="Include Numbers"
+					flex
+					checked={numbers.value}
+					onChange={numbers.toggleValue}
+				/>
+				<Toggle
+					label="Special characters"
+					flex
+					checked={symbols.value}
+					onChange={symbols.toggleValue}
+				/>
 			</div>
-			{/* main content of the page ends */}
+
+			<Button
+				text="Generate"
+				color="primary"
+				flex
+				disabled={noOptionsSelected()}
+				onClick={generatePassword}
+			/>
 		</div>
 	);
 }
