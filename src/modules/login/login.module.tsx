@@ -13,6 +13,7 @@ import {
 	useLiveValidation,
 	useMutation,
 	useShowPasswordIcon,
+	useSuccess,
 	useToggle,
 	useValidation,
 } from "@hooks/index";
@@ -30,6 +31,8 @@ import { routes } from "@util/routes";
 export default function Login() {
 	const router = useRouter();
 	const dispatchLogin = useDispatchLogin();
+
+	let accessToken = "";
 
 	const loginMutation = useMutation(useLoginMutation());
 
@@ -69,15 +72,21 @@ export default function Login() {
 	async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault(); // prevent page reload
 
-		const { accessToken } = await loginMutation.trigger({
+		accessToken = await loginMutation.trigger({
 			email: email.value,
 			password: password.value,
 		});
+	}
 
-		dispatchLogin({ accessToken, email: email.value, persist: true });
+	useSuccess(() => {
+		dispatchLogin({
+			accessToken,
+			email: email.value,
+			persist: true,
+		});
 
 		router.replace(routes.vault);
-	}
+	}, loginMutation);
 
 	return (
 		<div className={styles["login-module"]}>
