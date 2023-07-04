@@ -12,6 +12,7 @@ type Props = {
 	color?: string;
 	flex?: boolean;
 	grow?: boolean;
+	size?: "small" | "medium";
 	className?: string;
 	children?: ReactNode;
 	loading?: boolean;
@@ -26,6 +27,7 @@ export default function Button({
 	color = "primary",
 	flex = false,
 	grow = false,
+	size = "medium",
 	className,
 	children,
 	loading,
@@ -52,6 +54,9 @@ export default function Button({
 
 		if (background) classes += ` ${styles["button--background"]}`;
 		else classes += ` ${styles["button--no-background"]}`;
+
+		if (size === "small") classes += ` ${styles["button--small"]}`;
+		else classes += ` ${styles["button--medium"]}`;
 
 		if (flex) classes += ` ${styles["button--flex"]}`;
 		if (grow) classes += ` ${styles["button--grow"]}`;

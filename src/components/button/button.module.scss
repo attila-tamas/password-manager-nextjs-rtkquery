@@ -15,9 +15,6 @@
 	outline: util.rem(0.5) solid transparent;
 	border: util.rem(1) solid transparent;
 
-	padding: util.rem(8) util.rem(24);
-
-	font-size: util.rem(18);
 	font-weight: var(--font-weight-semibold);
 
 	background-color: transparent;
@@ -41,6 +38,16 @@
 			font-size: util.rem(20);
 			padding: util.rem(12) util.rem(28);
 		}
+	}
+
+	&--small {
+		padding: util.rem(4) util.rem(16);
+		font-size: util.rem(16);
+	}
+
+	&--medium {
+		padding: util.rem(8) util.rem(24);
+		font-size: util.rem(18);
 	}
 
 	&--background {
