@@ -1,7 +1,6 @@
 import AccountOption from "./accountOption/accountOption.component";
 import Button from "./button/button.component";
 import Checkbox from "./checkbox/checkbox.component";
-import ConfirmModal from "./confirmModal/confirmModal.component";
 import Error from "./error/error.component";
 import Icon, { icons } from "./icon/icon";
 import Input from "./input/input.component";
@@ -22,7 +21,6 @@ export {
 	AccountOption,
 	Button,
 	Checkbox,
-	ConfirmModal,
 	Error,
 	Icon,
 	icons,
