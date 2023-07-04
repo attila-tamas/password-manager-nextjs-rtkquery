@@ -2,8 +2,7 @@ import styles from "./navbar.module.scss";
 // next
 import { useRouter } from "next/router";
 // @hooks
-import useDispatchLogout from "@hooks/useDispatchLogout";
-import useMutation from "@hooks/useMutation";
+import { useDispatchLogout, useMutation } from "@hooks/index";
 // @redux
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 // @components

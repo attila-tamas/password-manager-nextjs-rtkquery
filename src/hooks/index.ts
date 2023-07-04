@@ -1,6 +1,7 @@
 import useClickOutside from "./useClickOutside";
 import useDebounce from "./useDebounce";
 import useDispatchLogin from "./useDispatchLogin";
+import useDispatchLogout from "./useDispatchLogout";
 import useEffectOnMount from "./useEffectOnMount";
 import useEffectOnUpdate from "./useEffectOnUpdate";
 import useEventListener from "./useEventListener";
@@ -18,6 +19,7 @@ export {
 	useClickOutside,
 	useDebounce,
 	useDispatchLogin,
+	useDispatchLogout,
 	useEffectOnMount,
 	useEffectOnUpdate,
 	useEventListener,

@@ -1,3 +1,4 @@
+import AccountOption from "./accountOption/accountOption.component";
 import Button from "./button/button.component";
 import Checkbox from "./checkbox/checkbox.component";
 import ConfirmModal from "./confirmModal/confirmModal.component";
@@ -18,6 +19,7 @@ import Toggle from "./toggle/toggle.component";
 import WebsiteIcon from "./websiteIcon/websiteIcon";
 
 export {
+	AccountOption,
 	Button,
 	Checkbox,
 	ConfirmModal,

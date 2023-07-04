@@ -1,16 +1,19 @@
-import AccountOption from "@components/accountOption/accountOption.component";
-import { Icon, icons } from "@components/index";
-import useDispatchLogout from "@hooks/useDispatchLogout";
-import useMutation from "@hooks/useMutation";
-import useSuccess from "@hooks/useSuccess";
+import styles from "./account.module.scss";
+// next
+import { useRouter } from "next/router";
+//npm
+import { enqueueSnackbar } from "notistack";
+// @hooks
+import { useDispatchLogout, useMutation, useSuccess } from "@hooks/index";
+// @redux
 import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { useDeleteAllKeysMutation } from "@redux/keys/keysApiSlice";
 import { useDeleteAccountMutation } from "@redux/user/userApiSlice";
+// @components
+import { AccountOption, Icon, icons } from "@components/index";
+// @util
 import { pixelToEm } from "@util/pixelConverter";
 import { routes } from "@util/routes";
-import { useRouter } from "next/router";
-import { enqueueSnackbar } from "notistack";
-import styles from "./account.module.scss";
 
 // page module for "/account" route
 export default function Account() {
