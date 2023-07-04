@@ -5,15 +5,18 @@ const authSlice = createSlice({
 	initialState: { token: null, email: null },
 	reducers: {
 		setAccessToken: (state, action) => {
-			state.token = action.payload;
+			const { accessToken } = action.payload;
+			state.token = accessToken;
 		},
 
 		logout: (state, _action) => {
 			state.token = null;
+			state.email = null;
 		},
 
 		setCurrentEmail: (state, action) => {
-			state.email = action.payload;
+			const { email } = action.payload;
+			state.email = email;
 		},
 	},
 });

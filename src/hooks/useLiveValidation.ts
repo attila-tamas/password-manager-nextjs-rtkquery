@@ -20,7 +20,13 @@ export default function useLiveValidation(inputValue: string, hook: any) {
 	);
 
 	let errorMsg = "";
-	if (isError) errorMsg = (<any>error).data.message;
+	if (isError) {
+		if (error.data) {
+			errorMsg = (<any>error).data.message;
+		} else {
+			errorMsg = <any>error.message;
+		}
+	}
 
 	const result: LiveValidation = {
 		validate,

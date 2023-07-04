@@ -5,7 +5,7 @@ export default function useDispatchLogout() {
 	const dispatch = useDispatch();
 
 	function invokeDispatch({ persist }: { persist: boolean }): void {
-		dispatch(setPersist(persist));
+		dispatch(setPersist({ persist }));
 	}
 
 	return invokeDispatch;

@@ -14,9 +14,9 @@ export default function useDispatchLogin() {
 		email: string;
 		persist: boolean;
 	}): void {
-		dispatch(setAccessToken(accessToken));
-		dispatch(setCurrentEmail(email));
-		dispatch(setPersist(persist));
+		dispatch(setAccessToken({ accessToken }));
+		dispatch(setCurrentEmail({ email }));
+		dispatch(setPersist({ persist }));
 	}
 
 	return invokeDispatch;
