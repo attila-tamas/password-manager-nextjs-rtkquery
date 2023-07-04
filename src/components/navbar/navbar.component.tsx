@@ -9,20 +9,26 @@ import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 // @components
 import { Icon, icons, Logo, Nav } from "@components/index";
 // @util
+import useSuccess from "@hooks/useSuccess";
 import { pixelToEm, pixelToRem } from "@util/pixelConverter";
 import { navLinks, routes } from "@util/routes";
 
 export default function Navbar() {
 	const router = useRouter();
 
+	// logout
 	const dispatchLogout = useDispatchLogout();
 	const logoutMutation = useMutation(useSendLogoutMutation());
 
-	function onLogoutClicked(): void {
-		logoutMutation.trigger();
+	async function onLogoutClicked(): Promise<void> {
+		await logoutMutation.trigger();
+	}
+
+	useSuccess(() => {
 		dispatchLogout({ persist: false });
 		router.replace(routes.home);
-	}
+	}, logoutMutation);
+	//
 
 	return (
 		<div className={styles["navbar"]}>

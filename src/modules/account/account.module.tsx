@@ -3,6 +3,7 @@ import { Icon, icons } from "@components/index";
 import useDispatchLogout from "@hooks/useDispatchLogout";
 import useMutation from "@hooks/useMutation";
 import useSuccess from "@hooks/useSuccess";
+import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { useDeleteAllKeysMutation } from "@redux/keys/keysApiSlice";
 import { useDeleteAccountMutation } from "@redux/user/userApiSlice";
 import { pixelToEm } from "@util/pixelConverter";
@@ -15,28 +16,45 @@ import styles from "./account.module.scss";
 export default function Account() {
 	const router = useRouter();
 
+	// logout
 	const dispatchLogout = useDispatchLogout();
+	const logoutMutation = useMutation(useLoginMutation());
 
+	async function onLogoutClicked(): Promise<void> {
+		await logoutMutation.trigger();
+	}
+
+	useSuccess(() => {
+		dispatchLogout({ persist: false });
+		router.replace(routes.home);
+	}, logoutMutation);
+	//
+
+	// empty vault
 	const emptyVaultMutation = useMutation(useDeleteAllKeysMutation());
-	const deleteAccountMutation = useMutation(useDeleteAccountMutation());
 
 	async function onEmptyVaultConfirmed(): Promise<void> {
 		await emptyVaultMutation.trigger();
 	}
+
+	useSuccess(() => {
+		enqueueSnackbar("Vault emptied", { variant: "success" });
+	}, emptyVaultMutation);
+	//
+
+	// delete account
+	const deleteAccountMutation = useMutation(useDeleteAccountMutation());
 
 	async function onDeleteAccountConfirmed(): Promise<void> {
 		await deleteAccountMutation.trigger();
 	}
 
 	useSuccess(() => {
-		enqueueSnackbar("Vault emptied", { variant: "success" });
-	}, emptyVaultMutation);
-
-	useSuccess(() => {
 		dispatchLogout({ persist: false });
 		router.replace(routes.home);
 		enqueueSnackbar("Account deleted", { variant: "success" });
 	}, deleteAccountMutation);
+	//
 
 	return (
 		<div className={styles["account-module"]}>
@@ -49,6 +67,7 @@ export default function Account() {
 						interactable
 						${styles["title-wrapper__logout"]}
 					`}
+					onClick={onLogoutClicked}
 				/>
 			</div>
 
