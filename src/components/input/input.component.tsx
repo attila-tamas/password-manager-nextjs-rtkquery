@@ -1,6 +1,6 @@
 import styles from "./input.module.scss";
 // react
-import { ChangeEvent, MutableRefObject, ReactNode } from "react";
+import { ChangeEvent, ReactNode, RefObject } from "react";
 // @hooks
 import { Validation } from "@hooks/useValidation";
 // @components
@@ -18,7 +18,7 @@ type Props = {
 	id?: string;
 	name?: string;
 	readonly?: boolean;
-	reference?: MutableRefObject<HTMLInputElement | null>;
+	reference?: RefObject<HTMLInputElement>;
 	showPassword?: boolean;
 	copyButton?: boolean;
 	className?: string;
