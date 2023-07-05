@@ -10,12 +10,18 @@
 	flex-direction: column;
 
 	overflow: auto;
+
+	// make the background-color same as the modules' background
+	// to give a full-screen effect on small screens
+	background-color: var(--color-contrast);
 }
 
 @include util.breakpoint-up(small) {
 	.layout {
 		// padding between the content and the bottom navbar
 		padding-bottom: util.rem(24);
+
+		background-color: var(--color-background);
 	}
 }
 

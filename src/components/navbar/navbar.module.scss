@@ -9,7 +9,7 @@
 
 	padding-block: util.rem(4);
 
-	border: util.rem(1) solid var(--color-border);
+	border-top: util.rem(1) solid var(--color-border);
 
 	background-color: var(--color-contrast);
 	box-shadow: var(--drop-shadow-top);
@@ -41,6 +41,7 @@
 		padding-inline: util.rem(32);
 
 		border-radius: var(--border-radius);
+		border: util.rem(1) solid var(--color-border);
 
 		box-shadow: none;
 

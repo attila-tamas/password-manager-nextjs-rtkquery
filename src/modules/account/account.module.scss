@@ -2,7 +2,7 @@
 
 .account-module {
 	width: 100%;
-	min-height: min(100%, fit-content);
+	height: 100%;
 
 	position: relative;
 
@@ -12,12 +12,6 @@
 	gap: util.rem(20);
 
 	padding: util.rem(20);
-	margin-inline: auto;
-
-	border-radius: var(--border-radius);
-	border: util.rem(1) solid var(--color-border);
-
-	background-color: var(--color-contrast);
 }
 
 .title-wrapper {
@@ -93,10 +87,17 @@
 @include util.breakpoint-up(small) {
 	.account-module {
 		width: util.rem(360);
-		min-height: fit-content;
+		height: fit-content;
 
 		top: 5vh;
 		top: 5dvh;
+
+		margin-inline: auto;
+
+		border-radius: var(--border-radius);
+		border: util.rem(1) solid var(--color-border);
+
+		background-color: var(--color-contrast);
 	}
 }
 
