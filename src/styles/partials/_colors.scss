@@ -25,6 +25,9 @@
 
 	--color-hover: rgba(45, 46, 49, 0.04);
 
+	--color-scrollbar: rgb(230, 231, 234);
+	--color-scrollbar-hover: rgb(187, 188, 191);
+
 	@media (prefers-color-scheme: dark) {
 		--color-foreground: rgb(248, 248, 248);
 		--color-background: rgb(32, 33, 36);
@@ -39,5 +42,8 @@
 		--color-border: rgb(13, 14, 17);
 
 		--color-hover: rgba(237, 238, 241, 0.04);
+
+		--color-scrollbar: rgb(100, 101, 104);
+		--color-scrollbar-hover: rgb(125, 126, 129);
 	}
 }

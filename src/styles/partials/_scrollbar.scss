@@ -1,0 +1,24 @@
+@mixin scrollbar {
+	overflow-y: auto;
+
+	// firefox
+	scrollbar-color: var(--color-scrollbar) transparent;
+	scrollbar-width: thin;
+	scrollbar-gutter: stable both-edges;
+	//
+
+	// webkit
+	&::-webkit-scrollbar {
+		width: 0.5rem;
+	}
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--color-scrollbar);
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background: var(--color-scrollbar-hover);
+	}
+	//
+}
