@@ -24,7 +24,7 @@ export default function Button({
 	text = "text",
 	disabled = false,
 	background = true,
-	color = "primary",
+	color = "default",
 	flex = false,
 	grow = false,
 	size = "medium",
@@ -64,16 +64,6 @@ export default function Button({
 		return classes;
 	}
 
-	function buttonContent(): JSX.Element {
-		if (loading) return <Spinner size={24} color="currentColor" />;
-		return (
-			<>
-				{children}
-				{text}
-			</>
-		);
-	}
-
 	return (
 		<button
 			type={type}
@@ -81,7 +71,14 @@ export default function Button({
 			className={buttonClasses()}
 			onClick={onClick}
 		>
-			{buttonContent()}
+			{loading ? (
+				<Spinner size={24} color="currentColor" />
+			) : (
+				<>
+					{children}
+					{text}
+				</>
+			)}
 		</button>
 	);
 }

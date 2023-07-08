@@ -4,12 +4,11 @@
 	width: fit-content;
 	height: fit-content;
 
-	// incase we want to display both the children and the button text
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: util.rem(8);
+	gap: util.rem(4);
 
 	border-radius: var(--border-radius);
 	outline: util.rem(0.5) solid transparent;
@@ -59,7 +58,7 @@
 
 		&--default {
 			color: var(--color-gray);
-			background-color: var(--color-contrast);
+			background-color: var(--color-background);
 			border-color: var(--color-border);
 
 			&:hover {
