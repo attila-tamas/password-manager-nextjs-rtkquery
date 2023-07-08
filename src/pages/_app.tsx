@@ -13,22 +13,20 @@ import { wrapper } from "@redux/store";
 // @components
 import SnackbarContext from "@components/snackbars/snackbarContext";
 
-// create the font for next/font
 const quicksand = Quicksand({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
-	// wrap the redux store
 	const { store } = wrapper.useWrappedStore(pageProps);
-	// create a persistor for the PersistGate
 	const persistor = persistStore(store);
 
 	return (
 		<>
 			<Head>
-				{/* responsive design support */}
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1"
+				/>
 
-				{/* set the favicon */}
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<link rel="icon" type="image/png" href="/favicon.png" />
 			</Head>
@@ -42,11 +40,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
 			{/* provider for the redux store */}
 			<Provider store={store}>
-				{/* redux-persist gate, that only allows the data to load when the persisted states are rehydrated */}
+				{/* only allow the children to load when the persisted states are rehydrated */}
 				<PersistGate persistor={persistor} loading={null}>
 					{/* provide access to the snackbar hook context */}
 					<SnackbarContext>
-						{/* render the child components */}
 						<Component {...pageProps} />
 					</SnackbarContext>
 				</PersistGate>
