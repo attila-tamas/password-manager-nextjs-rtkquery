@@ -6,8 +6,8 @@ import { enqueueSnackbar } from "notistack";
 // @hooks
 import { useDispatchLogout, useMutation, useSuccess } from "@hooks/index";
 // @redux
-import { useLoginMutation } from "@redux/auth/authApiSlice";
-import { useDeleteAllKeysMutation } from "@redux/keys/keysApiSlice";
+import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
+import { useDeleteAllEntriesMutation } from "@redux/entries/entryApiSlice";
 import { useDeleteAccountMutation } from "@redux/user/userApiSlice";
 // @components
 import { AccountOption, Icon, icons } from "@components/index";
@@ -21,7 +21,7 @@ export default function Account() {
 
 	// logout
 	const dispatchLogout = useDispatchLogout();
-	const logoutMutation = useMutation(useLoginMutation());
+	const logoutMutation = useMutation(useSendLogoutMutation());
 
 	async function onLogoutClicked(): Promise<void> {
 		await logoutMutation.trigger();
@@ -34,7 +34,7 @@ export default function Account() {
 	//
 
 	// empty vault
-	const emptyVaultMutation = useMutation(useDeleteAllKeysMutation());
+	const emptyVaultMutation = useMutation(useDeleteAllEntriesMutation());
 
 	async function onEmptyVaultConfirmed(): Promise<void> {
 		await emptyVaultMutation.trigger();
