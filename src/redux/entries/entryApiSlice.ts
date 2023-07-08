@@ -10,7 +10,7 @@ export const entryApiSlice = apiSlice.injectEndpoints({
 				sort = "title",
 				asc = 1,
 			}) => ({
-				url: `/key?keyword=${keyword}&page=${page}&limit=${limit}&sort=${sort}&asc=${asc}`,
+				url: `/entry?keyword=${keyword}&page=${page}&limit=${limit}&sort=${sort}&asc=${asc}`,
 				method: "GET",
 			}),
 			providesTags: result => {
@@ -26,7 +26,7 @@ export const entryApiSlice = apiSlice.injectEndpoints({
 
 		updateEntry: builder.mutation({
 			query: initialKeyData => ({
-				url: "/key/update",
+				url: "/entry/update",
 				method: "PATCH",
 				body: {
 					...initialKeyData,
@@ -39,7 +39,7 @@ export const entryApiSlice = apiSlice.injectEndpoints({
 
 		addNewEntry: builder.mutation({
 			query: initialKeyData => ({
-				url: "/key/new",
+				url: "/entry/new",
 				method: "POST",
 				body: {
 					...initialKeyData,
@@ -50,7 +50,7 @@ export const entryApiSlice = apiSlice.injectEndpoints({
 
 		deleteEntry: builder.mutation({
 			query: ({ id }) => ({
-				url: "/key/delete",
+				url: "/entry/delete",
 				method: "DELETE",
 				body: { id },
 			}),
@@ -61,7 +61,7 @@ export const entryApiSlice = apiSlice.injectEndpoints({
 
 		deleteAllEntries: builder.mutation({
 			query: () => ({
-				url: "/key/delete/all",
+				url: "/entry/delete/all",
 				method: "DELETE",
 			}),
 			invalidatesTags: [{ type: "Key", id: "ALL" }],
