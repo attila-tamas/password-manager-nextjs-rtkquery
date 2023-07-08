@@ -1,6 +1,6 @@
 @use "@styles/util" as util;
 
-.container {
+.website-icon {
 	min-width: util.rem(46);
 	min-height: util.rem(46);
 
@@ -8,15 +8,8 @@
 
 	cursor: pointer;
 
-	&:hover .openIcon {
+	&:hover .open-icon {
 		transform: scale(1);
-	}
-
-	&__grow {
-		@include util.breakpoint-up(medium) {
-			min-width: util.rem(72);
-			min-height: util.rem(72);
-		}
 	}
 }
 
@@ -24,15 +17,17 @@
 	border-radius: util.rem(4);
 }
 
-.openIcon {
+.open-icon {
 	width: fit-content;
 	height: fit-content;
+
+	display: flex;
 
 	position: absolute;
 	bottom: util.rem(2);
 	left: util.rem(2);
 
-	padding: util.rem(4);
+	padding: util.rem(1);
 
 	border-radius: util.rem(4);
 
@@ -75,7 +70,7 @@
 	padding-inline: util.rem(16);
 	padding-top: util.rem(2);
 
-	background-color: var(--color-hover);
+	background-color: var(--color-contrast);
 	color: var(--color-foreground);
 
 	border-radius: util.rem(4);

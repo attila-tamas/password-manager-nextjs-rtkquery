@@ -1,38 +1,28 @@
-// styles
 import styles from "./websiteIcon.module.scss";
 // react
 import { useEffect, useState } from "react";
 // next.js
 import Image from "next/image";
+// @hooks
+import { useFindCustomField } from "@hooks/index";
 // @public
 import warningIcon from "@public/warningIcon.svg";
 // @util
 import { pixelToEm } from "@util/pixelConverter";
 // @components
+import { EntryType } from "@components/entry/entry.component";
 import Icon, { icons } from "@components/icon/icon";
 
-export default function WebsiteIcon({ currentKey, grow }: any) {
-	// states
+export default function WebsiteIcon({ entry }: { entry: EntryType }) {
 	const [icon, setIcon] = useState("");
 	const [error, setError] = useState({ message: "", hint: "" });
-	//
 
-	// get the website url of the given key
-	const urlField = currentKey.customFields.find((field: any) => {
-		const fieldInLowerCase = field.key.toLowerCase();
-		const foundField = fieldInLowerCase.includes("url") || fieldInLowerCase.includes("website");
+	const urlField = useFindCustomField(entry, ["website", "url"]);
+	let url = urlField.value;
 
-		if (foundField) {
-			return foundField;
-		}
-	});
-	let url = urlField?.value;
-	//
-
-	// add "https://" at the start of the url if it is not found
-	// "http" urls are not accepted, becase of the URL constructor
-	if (url && url.indexOf("https://") === -1) {
-		url = "https://" + url;
+	if (url) {
+		// "http" urls are not accepted, becase of the URL constructor
+		if (url.indexOf("https://") === -1) url = "https://" + url;
 	}
 
 	const isValidUrl = (urlString: string) => {
@@ -61,7 +51,10 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 
 				// edge case error
 				if (!isValidUrl(url)) {
-					setError({ message: "Invalid URL", hint: "Check for typos" });
+					setError({
+						message: "Invalid URL",
+						hint: "Check for typos",
+					});
 				}
 			} catch (error) {
 				setError({ message: "Invalid URL", hint: "Check for typos" });
@@ -70,52 +63,57 @@ export default function WebsiteIcon({ currentKey, grow }: any) {
 			// store the icon url in a state so it changes when the website url changes as well
 			setIcon(`https://icon.horse/icon/${domain}`);
 		} else {
-			setError({ message: "Missing URL", hint: "Add a custom URL field" });
+			setError({
+				message: "Missing URL",
+				hint: "Add a custom URL field",
+			});
 		}
 	}, [url]);
 
-	return (
-		<>
-			{!error.message && url ? (
-				// display the website icon if there is a valid url and there is no error
+	if (!error.message && url) {
+		return (
+			// display the website icon if there is a valid url and there is no error
 
-				<a
-					className={`${styles.container} ${grow && styles.container__grow}`}
-					href={url}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						className={`unselectable ${styles.image}`}
-						src={icon || warningIcon}
-						alt={`${currentKey.title} icon`}
-						fill
-						sizes="(max-width: 40rem) 2.875rem, 4.75rem"
-					/>
+			<a
+				className={styles["website-icon"]}
+				href={url}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Image
+					className={`unselectable ${styles["image"]}`}
+					src={icon || warningIcon}
+					alt={`${entry.title} icon`}
+					fill
+					sizes="(max-width: 40rem) 2.875rem, 4.75rem"
+				/>
 
-					<div className={styles.openIcon}>
-						<Icon icon={icons.open} size={pixelToEm(16)} />
-					</div>
-				</a>
-			) : (
-				// display a warning icon and a tooltip on hover to display the error message if there is an error
-
-				<div className={`${styles.warning} ${grow && styles.container__grow}`}>
-					<Image
-						className={`unselectable ${styles.image}`}
-						src={warningIcon}
-						alt="warning icon"
-						fill
-						sizes="(max-width: 40rem) 2.875rem, 4.75rem"
-					/>
-
-					<span className={styles.tooltip}>
-						{error.message}
-						<br />
-						<span className={styles.tooltip__hint}>{error.hint}</span>
-					</span>
+				<div className={styles["open-icon"]}>
+					<Icon icon={icons.open} size={pixelToEm(16)} />
 				</div>
-			)}
-		</>
-	);
+			</a>
+		);
+	} else {
+		return (
+			// display a warning icon and an error tooltip on hover if there is an error
+
+			<div className={styles["warning"]}>
+				<Image
+					className={`unselectable ${styles["image"]}`}
+					src={warningIcon}
+					alt="warning icon"
+					fill
+					sizes="(max-width: 40rem) 2.875rem, 4.75rem"
+				/>
+
+				<span className={styles["tooltip"]}>
+					{error.message}
+					<br />
+					<span className={styles["tooltip__hint"]}>
+						{error.hint}
+					</span>
+				</span>
+			</div>
+		);
+	}
 }
