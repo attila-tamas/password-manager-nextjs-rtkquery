@@ -1,0 +1,7 @@
+@use "@styles/util" as util;
+
+.add-new-field {
+	display: flex;
+	align-items: center;
+	gap: util.rem(4);
+}
