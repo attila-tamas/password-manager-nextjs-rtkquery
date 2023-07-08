@@ -1,0 +1,70 @@
+@use "@styles/util" as util;
+
+.overlay {
+	width: 100%;
+	height: 100%;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	// these settings are required on the parent container
+	// to make the "max-height" work on the modal
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	background-color: var(--color-shadow-background);
+
+	z-index: 999;
+
+	&__modal {
+		width: 100%;
+		height: fit-content;
+		max-height: 100%;
+
+		padding: util.rem(20);
+
+		border: util.rem(1) solid var(--color-border);
+
+		background-color: var(--color-contrast);
+
+		&:focus {
+			border-color: var(--color-border);
+			outline: none;
+		}
+	}
+}
+
+@include util.breakpoint-up(small) {
+	.overlay__modal {
+		width: util.rem(360);
+		max-height: 90%;
+
+		border-radius: calc(var(--border-radius) * 1.5);
+	}
+}
+
+@include util.breakpoint-up(medium) {
+	.overlay__modal {
+		width: util.rem(360 + 64);
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.portal {
+		height: 100%;
+	}
+
+	.overlay {
+		position: relative;
+		justify-content: flex-start;
+		background-color: unset;
+
+		&__modal {
+			width: util.rem(360 + 64);
+			max-height: 100%;
+		}
+	}
+}
