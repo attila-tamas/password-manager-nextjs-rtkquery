@@ -12,6 +12,8 @@
 	gap: util.rem(20);
 
 	padding: util.rem(20);
+
+	background-color: var(--color-contrast);
 }
 
 .form {
@@ -66,8 +68,6 @@
 
 		border-radius: var(--border-radius);
 		border: util.rem(1) solid var(--color-border);
-
-		background-color: var(--color-contrast);
 	}
 }
 
