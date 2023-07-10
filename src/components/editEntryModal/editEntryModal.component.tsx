@@ -113,8 +113,6 @@ export default function EditEntryModal({
 	async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault(); // prevent page reload
 
-		if (!entry) return;
-
 		await updateEntryMutation.trigger({
 			id: entry.id,
 			title: title.value || "Title",
