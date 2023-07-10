@@ -3,6 +3,8 @@ const publicRoutes = {
 	login: "/login",
 	register: "/register",
 	verifyEmail: "/verify-email",
+	requestPasswordChange: "/request-password-change",
+	changePassword: "/change-password",
 };
 
 const protectedRoutes = {

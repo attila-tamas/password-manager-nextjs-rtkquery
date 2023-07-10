@@ -33,6 +33,12 @@ export default function Account() {
 	}, logoutMutation);
 	//
 
+	// change password
+	function onChangePasswordClicked(): void {
+		router.push(routes.requestPasswordChange);
+	}
+	//
+
 	// empty vault
 	const emptyVaultMutation = useMutation(useDeleteAllEntriesMutation());
 
@@ -77,7 +83,7 @@ export default function Account() {
 			<div className={styles["options"]}>
 				<AccountOption
 					text="Change password"
-					onClick={() => console.log("Changing password")}
+					onClick={onChangePasswordClicked}
 				/>
 
 				<AccountOption

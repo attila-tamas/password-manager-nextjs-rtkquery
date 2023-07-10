@@ -28,10 +28,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
 		}),
 
 		changePassword: builder.mutation({
-			query: ({ id, token, password }) => ({
-				url: `/user/change-password?id=${id}&token=${token}`,
+			query: ({ otp, email, password }) => ({
+				url: `/user/change-password`,
 				method: "POST",
-				body: { password },
+				body: { token: otp, email, password },
 			}),
 		}),
 
