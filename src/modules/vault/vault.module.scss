@@ -11,9 +11,7 @@
 	align-items: flex-start;
 	gap: util.rem(12);
 
-	// add the same space at the bottom that is
-	// between the navbar and the top of the v
-	padding-bottom: util.rem(32);
+	padding-block: util.rem(20);
 
 	// to make the vault module not overflow
 	overflow: hidden;
@@ -31,17 +29,15 @@
 	align-items: center;
 	gap: util.rem(20);
 
-	padding-block: util.rem(20);
-}
+	&__util {
+		width: 100%;
+		height: fit-content;
 
-.util {
-	width: 100%;
-	height: fit-content;
+		display: flex;
+		gap: util.rem(8);
 
-	display: flex;
-	gap: util.rem(8);
-
-	padding-inline: util.rem(20);
+		padding-inline: util.rem(20);
+	}
 }
 
 @include util.breakpoint-up(small) {
@@ -53,6 +49,7 @@
 		top: 5dvh;
 
 		margin-inline: auto;
+		padding-block: util.rem(20);
 
 		border-radius: var(--border-radius);
 		border: util.rem(1) solid var(--color-border);
@@ -62,6 +59,12 @@
 }
 
 @include util.breakpoint-up(large) {
+	#wrapper {
+		// add the same space at the bottom that is
+		// between the navbar and the top of the viewport
+		padding-bottom: util.rem(32);
+	}
+
 	.vault-module {
 		width: util.rem(360 + 24);
 		top: 0;

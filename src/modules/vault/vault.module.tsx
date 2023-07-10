@@ -71,7 +71,7 @@ export default function Vault() {
 	return (
 		<div id={styles["wrapper"]}>
 			<div className={styles["vault-module"]}>
-				<div className={styles["util"]}>
+				<div className={styles["vault-module__util"]}>
 					<Input
 						type="text"
 						placeholder="Search"
