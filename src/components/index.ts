@@ -1,6 +1,5 @@
 import AccountOption from "./accountOption/accountOption.component";
 import Button from "./button/button.component";
-import Checkbox from "./checkbox/checkbox.component";
 import CustomField from "./customField/customField.component";
 import CustomFieldsList from "./customFieldsList/customFieldsList.component";
 import EditEntryModal from "./editEntryModal/editEntryModal.component";
@@ -23,7 +22,6 @@ import WebsiteIcon from "./websiteIcon/websiteIcon";
 export {
 	AccountOption,
 	Button,
-	Checkbox,
 	CustomField,
 	CustomFieldsList,
 	EditEntryModal,
