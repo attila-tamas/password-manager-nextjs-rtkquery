@@ -124,15 +124,6 @@ export default function Login() {
 						Password
 					</label>
 
-					<span
-						className={`
-							${styles["form__field__forgot-password"]}
-							interactable
-						`}
-					>
-						Forgot password?
-					</span>
-
 					<Input
 						className={styles["form__field__input"]}
 						id="password"
@@ -152,6 +143,16 @@ export default function Login() {
 					</Input>
 
 					<Error message={passwordValidation.errorMsg} />
+
+					<Link
+						href={routes.requestPasswordChange}
+						className={`
+							${styles["form__field__forgot-password"]}
+							interactable
+						`}
+					>
+						Forgot password?
+					</Link>
 				</div>
 
 				<Button
