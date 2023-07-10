@@ -1,7 +1,9 @@
+// next
 import Head from "next/head";
-
-import Layout from "@components/layout/layout.component";
-import Vault from "@modules/vault/vault.module";
+// @components
+import { Layout } from "@components/index";
+// @modules
+import { Vault } from "@modules/index";
 
 export default function VaultPage() {
 	return (

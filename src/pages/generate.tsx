@@ -1,7 +1,9 @@
+// next
 import Head from "next/head";
-
-import Layout from "@components/layout/layout.component";
-import Generate from "@modules/passwordGenerator/passwordGenerator.module";
+// &components
+import { Layout } from "@components/index";
+// modules
+import { GeneratePassword } from "@modules/index";
 
 export default function GeneratePage() {
 	return (
@@ -12,7 +14,7 @@ export default function GeneratePage() {
 
 			{/* navigation bar and container for in-app pages */}
 			<Layout>
-				<Generate />
+				<GeneratePassword />
 			</Layout>
 		</>
 	);

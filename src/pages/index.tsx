@@ -1,13 +1,17 @@
+// next
 import Head from "next/head";
-
-import Home from "@modules/home/home.module";
+// @modules
+import { Home } from "@modules/index";
 
 export default function HomePage() {
 	return (
 		<>
 			<Head>
 				<title>Password Manager | keystone</title>
-				<meta name="description" content="Easy Password Management To Simplify Your Life" />
+				<meta
+					name="description"
+					content="Easy Password Management To Simplify Your Life"
+				/>
 			</Head>
 
 			<Home />

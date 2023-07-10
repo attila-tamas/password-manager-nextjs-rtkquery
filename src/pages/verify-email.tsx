@@ -1,6 +1,8 @@
+// next
 import Head from "next/head";
-
-import VerifyEmail from "@modules/verifyEmail/verifyEmail.module";
+// @modules
+import { VerifyEmail } from "@modules/index";
+// @util
 import PersistLogin from "@util/persistLogin";
 
 export default function VerifyEmailPage() {

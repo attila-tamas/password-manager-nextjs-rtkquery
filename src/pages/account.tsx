@@ -1,7 +1,9 @@
+// next
 import Head from "next/head";
-
-import Layout from "@components/layout/layout.component";
-import Account from "@modules/account/account.module";
+// @modules
+import { Account } from "@modules/index";
+// @components
+import { Layout } from "@components/index";
 
 export default function AccountPage() {
 	return (
