@@ -37,13 +37,6 @@ export default function VerifyEmail() {
 
 	const currentEmail = useSelector(selectCurrentEmail);
 
-	const resendEmailMutation = useMutation(
-		useResendVerificationEmailMutation()
-	);
-	const activateAccountMutation = useMutation(
-		useActivateAccountMutation() //
-	);
-
 	// otp
 	const otp = useFormInput("");
 
@@ -57,6 +50,10 @@ export default function VerifyEmail() {
 	//
 
 	// activate account
+	const activateAccountMutation = useMutation(
+		useActivateAccountMutation() //
+	);
+
 	useSuccess(async () => {
 		await activateAccountMutation.trigger({
 			email: currentEmail,
@@ -70,19 +67,11 @@ export default function VerifyEmail() {
 	}, activateAccountMutation);
 	//
 
-	// error message
-	const [errorMsg, setErrorMsg] = useState("");
-
-	useEffectOnUpdate(() => {
-		setErrorMsg(otpValidation.errorMsg);
-	}, [otpValidation.errorMsg]);
-
-	useEffectOnUpdate(() => {
-		setErrorMsg(resendEmailMutation.errorMsg);
-	}, [resendEmailMutation.errorMsg]);
-	//
-
 	// resend email
+	const resendEmailMutation = useMutation(
+		useResendVerificationEmailMutation()
+	);
+
 	async function onResendClicked(): Promise<void> {
 		await resendEmailMutation.trigger(currentEmail);
 	}
@@ -99,6 +88,18 @@ export default function VerifyEmail() {
 	useSuccess(() => {
 		enqueueSnackbar("New email sent", { variant: "success" });
 	}, resendEmailMutation);
+	//
+
+	// error message
+	const [errorMsg, setErrorMsg] = useState("");
+
+	useEffectOnUpdate(() => {
+		setErrorMsg(otpValidation.errorMsg);
+	}, [otpValidation.errorMsg]);
+
+	useEffectOnUpdate(() => {
+		setErrorMsg(resendEmailMutation.errorMsg);
+	}, [resendEmailMutation.errorMsg]);
 	//
 
 	return (
