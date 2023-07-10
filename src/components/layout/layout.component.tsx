@@ -2,9 +2,7 @@ import styles from "./layout.module.scss";
 // react
 import { ReactNode } from "react";
 // @components
-import { Navbar } from "@components/index";
-// @util
-import PersistLogin from "@util/persistLogin";
+import { Navbar, PersistLogin } from "@components/index";
 
 export default function Layout({ children }: { children: ReactNode }) {
 	return (

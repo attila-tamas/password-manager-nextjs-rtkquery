@@ -3,7 +3,7 @@ import Head from "next/head";
 // @modules
 import { VerifyEmail } from "@modules/index";
 // @util
-import PersistLogin from "@util/persistLogin";
+import { PersistLogin } from "@components/index";
 
 export default function VerifyEmailPage() {
 	return (

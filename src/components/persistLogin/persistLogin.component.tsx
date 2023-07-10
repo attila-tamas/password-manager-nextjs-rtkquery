@@ -5,14 +5,12 @@ import router from "next/router";
 // npm
 import { useSelector } from "react-redux";
 // @redux
-// api hooks
 import { useRefreshMutation } from "@redux/auth/authApiSlice";
-// selectors
 import { selectCurrentToken } from "@redux/auth/authSlice";
 import { selectPersist } from "@redux/user/userSlice";
-//
+// @components
+import { Spinner } from "@components/index";
 // @util
-import Spinner from "@components/spinner/spinner.component";
 import { routes } from "@util/routes";
 
 // used to keep the user signed in on page reload

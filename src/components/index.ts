@@ -14,6 +14,7 @@ import Modal from "./modal/modal.component";
 import Nav from "./nav/nav.component";
 import Navbar from "./navbar/navbar.component";
 import NewEntryModal from "./newEntryModal/newEntryModal.component";
+import PersistLogin from "./persistLogin/persistLogin.component";
 import Slider from "./slider/slider.component";
 import SnackbarContext from "./snackbars/snackbarContext";
 import Spinner from "./spinner/spinner.component";
@@ -38,6 +39,7 @@ export {
 	Nav,
 	Navbar,
 	NewEntryModal,
+	PersistLogin,
 	Slider,
 	SnackbarContext,
 	Spinner,
