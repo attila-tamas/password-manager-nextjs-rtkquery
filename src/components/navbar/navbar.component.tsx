@@ -8,8 +8,7 @@ import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 // @components
 import { Icon, icons, Logo, Nav } from "@components/index";
 // @util
-import { pixelToEm, pixelToRem } from "@util/pixelConverter";
-import { navLinks, routes } from "@util/routes";
+import { navLinks, pixelToEm, pixelToRem, routes } from "@util/index";
 
 export default function Navbar() {
 	const router = useRouter();

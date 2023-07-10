@@ -7,7 +7,7 @@ import { CustomContentProps, SnackbarContent } from "notistack";
 // @components
 import { Icon, icons } from "@components/index";
 // @util
-import { pixelToEm } from "@util/pixelConverter";
+import { pixelToEm } from "@util/index";
 
 interface SuccessProps extends CustomContentProps {
 	allowDownload?: boolean;

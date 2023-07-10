@@ -28,8 +28,8 @@ import { useAddNewEntryMutation } from "@redux/entries/entryApiSlice";
 import {
 	passwordGenerationSettings,
 	passwordGenerator,
-} from "@util/passwordGenerator";
-import { pixelToEm } from "@util/pixelConverter";
+	pixelToEm,
+} from "@util/index";
 
 export default function NewEntryModal({
 	showModal,

@@ -11,7 +11,7 @@ import { selectPersist } from "@redux/user/userSlice";
 // @components
 import { Spinner } from "@components/index";
 // @util
-import { routes } from "@util/routes";
+import { routes } from "@util/index";
 
 // used to keep the user signed in on page reload
 export default function PersistLogin({ children }: any) {

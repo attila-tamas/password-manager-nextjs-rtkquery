@@ -17,15 +17,13 @@ import {
 	useToggle,
 	useValidation,
 } from "@hooks/index";
-// @redux hooks
+// @redux
 import { useLoginMutation } from "@redux/auth/authApiSlice";
 import { useValidateLoginEmailMutation } from "@redux/validation/validationApiSlice";
-// @redux actions
 // @components
 import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
-import { pixelToEm, pixelToRem } from "@util/pixelConverter";
-import { routes } from "@util/routes";
+import { pixelToEm, pixelToRem, routes } from "@util/index";
 
 // page module for "/login" route
 export default function Login() {

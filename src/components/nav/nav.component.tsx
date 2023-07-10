@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 // @components
 import { Icon, icons } from "@components/index";
 // @util
-import capitalizeFirstLetter from "@util/capitalizeFirstLetter";
-import { pixelToEm } from "@util/pixelConverter";
+import { capitalizeFirstLetter, pixelToEm } from "@util/index";
 
 type NavLink = { name: string; href: string };
 

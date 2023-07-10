@@ -11,8 +11,10 @@ import {
 	useFormInput,
 	useLiveValidation,
 	useMutation,
+	useSuccess,
 } from "@hooks/index";
-// @redux hooks
+// @redux
+import { selectCurrentEmail } from "@redux/auth/authSlice";
 import {
 	useActivateAccountMutation,
 	useResendVerificationEmailMutation,
@@ -20,16 +22,12 @@ import {
 import { useValidateOtpMutation } from "@redux/validation/validationApiSlice";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-// @redux selectors
-import { selectCurrentEmail } from "@redux/auth/authSlice";
 // @public
 import verifyEmailGraphic from "@public/verifyEmailGraphic.svg";
 // @components
 import { Error, Input, Logo, Spinner } from "@components/index";
 // @util
-import useSuccess from "@hooks/useSuccess";
-import { pixelToRem } from "@util/pixelConverter";
-import { routes } from "@util/routes";
+import { pixelToRem, routes } from "@util/index";
 
 // page module for "/verify-email" route
 export default function VerifyEmail() {

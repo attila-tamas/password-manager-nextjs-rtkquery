@@ -2,7 +2,7 @@
 import Head from "next/head";
 // @modules
 import { VerifyEmail } from "@modules/index";
-// @util
+// @components
 import { PersistLogin } from "@components/index";
 
 export default function VerifyEmailPage() {

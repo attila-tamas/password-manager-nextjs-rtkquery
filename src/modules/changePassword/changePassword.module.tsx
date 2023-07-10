@@ -27,8 +27,7 @@ import changePasswordGraphic from "@public/changePasswordGraphic.svg";
 // @components
 import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
-import { pixelToEm, pixelToRem } from "@util/pixelConverter";
-import { routes } from "@util/routes";
+import { pixelToEm, pixelToRem, routes } from "@util/index";
 
 export default function ChangePassword() {
 	const router = useRouter();

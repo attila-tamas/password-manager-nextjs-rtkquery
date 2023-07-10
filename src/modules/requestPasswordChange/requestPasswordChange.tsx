@@ -11,6 +11,7 @@ import {
 	useFormInput,
 	useLiveValidation,
 	useMutation,
+	useSuccess,
 } from "@hooks/index";
 // @redux
 import {
@@ -28,9 +29,7 @@ import verifyEmailGraphic from "@public/verifyEmailGraphic.svg";
 // @components
 import { Button, Error, Input, Logo, Spinner } from "@components/index";
 // @util
-import useSuccess from "@hooks/useSuccess";
-import { pixelToRem } from "@util/pixelConverter";
-import { routes } from "@util/routes";
+import { pixelToRem, routes } from "@util/index";
 
 export default function RequestPasswordChange() {
 	const router = useRouter();

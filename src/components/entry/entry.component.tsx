@@ -8,7 +8,7 @@ import { useCopyToClipboard, useFindCustomField } from "@hooks/index";
 // @components
 import { Icon, icons, WebsiteIcon } from "@components/index";
 // @util
-import { pixelToEm } from "@util/pixelConverter";
+import { pixelToEm } from "@util/index";
 
 export type EntryType = {
 	id: EntityId;

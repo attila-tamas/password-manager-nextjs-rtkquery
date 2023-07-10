@@ -7,11 +7,11 @@ import Image from "next/image";
 import { useFindCustomField } from "@hooks/index";
 // @public
 import warningIcon from "@public/warningIcon.svg";
-// @util
-import { pixelToEm } from "@util/pixelConverter";
 // @components
 import { EntryType } from "@components/entry/entry.component";
 import { Icon, icons } from "@components/index";
+// @util
+import { pixelToEm } from "@util/index";
 
 export default function WebsiteIcon({ entry }: { entry: EntryType }) {
 	const [icon, setIcon] = useState("");

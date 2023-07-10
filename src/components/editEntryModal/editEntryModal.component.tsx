@@ -33,8 +33,8 @@ import {
 import {
 	passwordGenerationSettings,
 	passwordGenerator,
-} from "@util/passwordGenerator";
-import { pixelToEm } from "@util/pixelConverter";
+	pixelToEm,
+} from "@util/index";
 
 export default function EditEntryModal({
 	entry,

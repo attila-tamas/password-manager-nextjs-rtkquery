@@ -6,7 +6,7 @@ import { Validation } from "@hooks/useValidation";
 // @components
 import { Icon, icons, Spinner } from "@components/index";
 // @util
-import { pixelToEm } from "@util/pixelConverter";
+import { pixelToEm } from "@util/index";
 
 type Props = {
 	type: string;

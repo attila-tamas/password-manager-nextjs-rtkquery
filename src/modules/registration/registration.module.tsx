@@ -3,10 +3,11 @@ import styles from "./registration.module.scss";
 import { FormEvent, useRef } from "react";
 // next
 import Link from "next/link";
+// next
 import { useRouter } from "next/router";
-// npm
 // @hooks
 import {
+	useDispatchLogin,
 	useEffectOnMount,
 	useFormInput,
 	useLiveValidation,
@@ -15,7 +16,7 @@ import {
 	useSuccess,
 	useToggle,
 } from "@hooks/index";
-// @redux hooks
+// @redux
 import {
 	useLoginMutation,
 	useRegisterMutation,
@@ -27,9 +28,7 @@ import {
 // @components
 import { Button, Error, Icon, Input, Logo } from "@components/index";
 // @util
-import useDispatchLogin from "@hooks/useDispatchLogin";
-import { pixelToEm, pixelToRem } from "@util/pixelConverter";
-import { routes } from "@util/routes";
+import { pixelToEm, pixelToRem, routes } from "@util/index";
 
 // page module for "/register" route
 export default function Registration() {

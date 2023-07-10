@@ -6,8 +6,7 @@ import { useCopyToClipboard, useEffectOnMount, useToggle } from "@hooks/index";
 // @component
 import { Button, Icon, icons, Input, Slider, Toggle } from "@components/index";
 // @util
-import { passwordGenerator } from "@util/passwordGenerator";
-import { pixelToEm } from "@util/pixelConverter";
+import { passwordGenerator, pixelToEm } from "@util/index";
 
 // page module for "/generate" route
 export default function GeneratePassword() {

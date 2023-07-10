@@ -6,7 +6,7 @@ import { useClickOutside, useCopyToClipboard, useToggle } from "@hooks/index";
 // @components
 import { Icon, icons, Input } from "@components/index";
 // @util
-import { pixelToEm } from "@util/pixelConverter";
+import { pixelToEm } from "@util/index";
 
 export type CustomFieldType = {
 	key: string;

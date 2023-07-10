@@ -6,10 +6,9 @@ import Link from "next/link";
 // @public
 import heroGraphic from "@public/homePageHeroGraphic.svg";
 // @components
-import Button from "@components/button/button.component";
-import Logo from "@components/logo/logo.component";
+import { Button, Logo } from "@components/index";
 // @util
-import { pixelToRem } from "@util/pixelConverter";
+import { pixelToRem } from "@util/index";
 
 // page module for "/" route
 export default function Home() {
