@@ -1,6 +1,6 @@
 import styles from "./accountOption.module.scss";
 // react
-import { MouseEventHandler, useRef } from "react";
+import { useRef } from "react";
 // @hooks
 import { useClickOutside, useToggle } from "@hooks/index";
 // @components
@@ -10,7 +10,7 @@ type Props = {
 	text?: string;
 	danger?: boolean;
 	onConfirm?: () => void;
-	onClick?: MouseEventHandler<HTMLDivElement>;
+	onClick?: () => void;
 };
 
 export default function AccountOption({
@@ -23,7 +23,7 @@ export default function AccountOption({
 	const ref = useRef<HTMLDivElement>(null);
 
 	function onOptionClicked(): void {
-		if (onClick) onClick;
+		if (onClick) onClick();
 		else if (danger) showConfirmButton.toggleValue();
 	}
 
