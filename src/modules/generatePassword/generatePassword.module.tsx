@@ -1,15 +1,16 @@
-// styles
+import styles from "./generatePassword.module.scss";
+// react
+import { useState } from "react";
+// @hooks
+import { useCopyToClipboard, useEffectOnMount, useToggle } from "@hooks/index";
+// @component
 import { Button, Icon, icons, Input, Slider, Toggle } from "@components/index";
-import useCopyToClipboard from "@hooks/useCopyToClipboard";
-import useEffectOnMount from "@hooks/useEffectOnMount";
-import useToggle from "@hooks/useToggle";
+// @util
 import { passwordGenerator } from "@util/passwordGenerator";
 import { pixelToEm } from "@util/pixelConverter";
-import { useState } from "react";
-import styles from "./passwordGenerator.module.scss";
 
 // page module for "/generate" route
-export default function Generate() {
+export default function GeneratePassword() {
 	const [password, setPassword] = useState("");
 	const [passwordLength, setPasswordLength] = useState(32);
 
