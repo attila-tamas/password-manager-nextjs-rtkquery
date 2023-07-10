@@ -1,6 +1,6 @@
+import styles from "./modal.module.scss";
 // react
 import { ReactNode } from "react";
-import styles from "./modal.module.scss";
 // npm
 import ReactModal from "react-modal";
 

@@ -1,10 +1,12 @@
-import useClickOutside from "@hooks/useClickOutside";
-import useCopyToClipboard from "@hooks/useCopyToClipboard";
-import useToggle from "@hooks/useToggle";
-import { pixelToEm } from "@util/pixelConverter";
-import { useRef } from "react";
-import { Icon, icons, Input } from "..";
 import styles from "./customField.module.scss";
+// react
+import { useRef } from "react";
+// @hooks
+import { useClickOutside, useCopyToClipboard, useToggle } from "@hooks/index";
+// @components
+import { Icon, icons, Input } from "@components/index";
+// @util
+import { pixelToEm } from "@util/pixelConverter";
 
 export type CustomFieldType = {
 	key: string;

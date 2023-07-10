@@ -13,8 +13,8 @@ import {
 	EntriesList,
 	Entry,
 	Input,
+	NewEntryModal,
 } from "@components/index";
-import NewEntryModal from "@components/newEntryModal/newEntryModal.component";
 
 // page module for "/vault" route
 export default function Vault() {

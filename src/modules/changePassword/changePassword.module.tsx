@@ -1,26 +1,34 @@
-import { Button, Error, Icon, Input, Logo } from "@components/index";
+import useLiveValidation from "@hooks/useLiveValidation";
+import useToggle from "@hooks/useToggle";
+import styles from "./changePassword.module.scss";
+// react
+import { FormEvent, useRef } from "react";
+// next
+import Image from "next/image";
+import { useRouter } from "next/router";
+// npm
+import { enqueueSnackbar } from "notistack";
+// @hooks
 import {
 	useDispatchLogout,
+	useEffectOnMount,
 	useEffectOnUpdate,
+	useFormInput,
 	useMutation,
+	useShowPasswordIcon,
 	useSuccess,
 } from "@hooks/index";
-import useEffectOnMount from "@hooks/useEffectOnMount";
-import useFormInput from "@hooks/useFormInput";
-import useLiveValidation from "@hooks/useLiveValidation";
-import useShowPasswordIcon from "@hooks/useShowPasswordIcon";
-import useToggle from "@hooks/useToggle";
-import changePasswordGraphic from "@public/changePasswordGraphic.svg";
+// @redux
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 import { useChangePasswordMutation } from "@redux/user/userApiSlice";
 import { useValidateRegistrationPasswordMutation } from "@redux/validation/validationApiSlice";
+// @public
+import changePasswordGraphic from "@public/changePasswordGraphic.svg";
+// @components
+import { Button, Error, Icon, Input, Logo } from "@components/index";
+// @util
 import { pixelToEm, pixelToRem } from "@util/pixelConverter";
 import { routes } from "@util/routes";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { enqueueSnackbar } from "notistack";
-import { FormEvent, useRef } from "react";
-import styles from "./changePassword.module.scss";
 
 export default function ChangePassword() {
 	const router = useRouter();

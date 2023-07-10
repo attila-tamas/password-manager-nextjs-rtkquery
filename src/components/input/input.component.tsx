@@ -4,8 +4,7 @@ import { ChangeEvent, ReactNode, RefObject } from "react";
 // @hooks
 import { Validation } from "@hooks/useValidation";
 // @components
-import Icon, { icons } from "@components/icon/icon";
-import Spinner from "@components/spinner/spinner.component";
+import { Icon, icons, Spinner } from "@components/index";
 // @util
 import { pixelToEm } from "@util/pixelConverter";
 

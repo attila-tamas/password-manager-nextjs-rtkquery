@@ -2,13 +2,12 @@ import styles from "./navbar.module.scss";
 // next
 import { useRouter } from "next/router";
 // @hooks
-import { useDispatchLogout, useMutation } from "@hooks/index";
+import { useDispatchLogout, useMutation, useSuccess } from "@hooks/index";
 // @redux
 import { useSendLogoutMutation } from "@redux/auth/authApiSlice";
 // @components
 import { Icon, icons, Logo, Nav } from "@components/index";
 // @util
-import useSuccess from "@hooks/useSuccess";
 import { pixelToEm, pixelToRem } from "@util/pixelConverter";
 import { navLinks, routes } from "@util/routes";
 

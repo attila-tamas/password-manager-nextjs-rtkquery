@@ -11,7 +11,7 @@ import warningIcon from "@public/warningIcon.svg";
 import { pixelToEm } from "@util/pixelConverter";
 // @components
 import { EntryType } from "@components/entry/entry.component";
-import Icon, { icons } from "@components/icon/icon";
+import { Icon, icons } from "@components/index";
 
 export default function WebsiteIcon({ entry }: { entry: EntryType }) {
 	const [icon, setIcon] = useState("");

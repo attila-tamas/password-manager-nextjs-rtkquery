@@ -7,6 +7,7 @@ import {
 	useCopyToClipboard,
 	useEffectOnUpdate,
 	useFormInput,
+	useMatchMedia,
 	useMutation,
 	useShowPasswordIcon,
 	useSuccess,
@@ -29,7 +30,6 @@ import {
 	WebsiteIcon,
 } from "@components/index";
 // @util
-import useMatchMedia from "@hooks/useMatchMedia";
 import {
 	passwordGenerationSettings,
 	passwordGenerator,

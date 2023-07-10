@@ -10,6 +10,7 @@ import useFindCustomField from "./useFindCustomField";
 import useFormInput from "./useFormInput";
 import useLazyQuery from "./useLazyQuery";
 import useLiveValidation from "./useLiveValidation";
+import useMatchMedia from "./useMatchMedia";
 import useMutation from "./useMutation";
 import useRenderCount from "./useRenderCount";
 import useShowPasswordIcon from "./useShowPasswordIcon";
@@ -30,6 +31,7 @@ export {
 	useFindCustomField,
 	useFormInput,
 	useLiveValidation,
+	useMatchMedia,
 	useMutation,
 	useRenderCount,
 	useShowPasswordIcon,

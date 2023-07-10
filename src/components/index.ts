@@ -13,6 +13,7 @@ import Logo from "./logo/logo.component";
 import Modal from "./modal/modal.component";
 import Nav from "./nav/nav.component";
 import Navbar from "./navbar/navbar.component";
+import NewEntryModal from "./newEntryModal/newEntryModal.component";
 import Slider from "./slider/slider.component";
 import SnackbarContext from "./snackbars/snackbarContext";
 import Spinner from "./spinner/spinner.component";
@@ -36,6 +37,7 @@ export {
 	Modal,
 	Nav,
 	Navbar,
+	NewEntryModal,
 	Slider,
 	SnackbarContext,
 	Spinner,

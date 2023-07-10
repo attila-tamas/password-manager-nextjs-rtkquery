@@ -1,5 +1,6 @@
-import { ChangeEvent } from "react";
 import styles from "./toggle.module.scss";
+// react
+import { ChangeEvent } from "react";
 
 type Props = {
 	label: string;
