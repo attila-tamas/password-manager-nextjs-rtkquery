@@ -1,6 +1,13 @@
 @use "@styles/util" as util;
 
-.container {
+.wrapper {
+	width: 100%;
+	height: 100%;
+
+	background-color: var(--color-contrast);
+}
+
+.home-module {
 	width: min(100%, util.rem(420));
 	height: 100%;
 
@@ -21,7 +28,7 @@
 	display: flex;
 	align-items: center;
 
-	&__buttonGroup {
+	&__buttons {
 		display: none;
 	}
 }
@@ -35,7 +42,7 @@
 	justify-content: center;
 	gap: util.rem(32);
 
-	&__textContainer {
+	&__text {
 		width: 100%;
 		height: fit-content;
 
@@ -52,14 +59,14 @@
 			font-size: util.rem(18);
 		}
 
-		&__buttonGroup {
+		&__buttons {
 			width: fit-content;
 
 			display: flex;
 			flex-direction: column;
 			gap: util.rem(8);
 
-			&__smallText {
+			&__hint {
 				font-size: util.rem(16);
 			}
 		}
@@ -72,12 +79,12 @@
 }
 
 @include util.breakpoint-up(medium) {
-	.container {
-		width: util.rem(500);
+	.home-module {
+		width: util.rem(480);
 	}
 
 	.hero {
-		&__textContainer {
+		&__text {
 			&__title {
 				font-size: util.rem(40);
 			}
@@ -89,11 +96,29 @@
 	}
 }
 
-@include util.breakpoint-up(large) {
-	.container {
+@media (min-width: 43.125rem) {
+	.home-module {
+		width: util.rem(640);
+	}
+
+	.hero {
+		&__text {
+			&__title {
+				font-size: util.rem(48);
+			}
+
+			&__description {
+				font-size: util.rem(24);
+			}
+		}
+	}
+}
+
+@media (min-width: 71.25rem) {
+	.home-module {
 		width: fit-content;
 		gap: util.rem(88);
-		padding: util.rem(20) util.rem(60) 0 util.rem(60);
+		padding: util.rem(32) util.rem(60) 0 util.rem(60);
 	}
 
 	.nav {
@@ -101,7 +126,7 @@
 
 		justify-content: space-between;
 
-		&__buttonGroup {
+		&__buttons {
 			display: flex;
 			gap: util.rem(12);
 		}
@@ -111,40 +136,19 @@
 		flex-direction: row;
 		text-align: left;
 
-		&__textContainer {
+		&__text {
 			max-width: util.rem(650);
 
-			&__title {
-				font-size: util.rem(52);
-			}
-
-			&__buttonGroup {
-				&__smallText {
+			&__buttons {
+				&__hint {
 					display: none;
 				}
 			}
 		}
 
 		&__image {
-			margin-top: util.rem(48);
-		}
-	}
-}
-
-@include util.breakpoint-up(xlarge) {
-	.hero {
-		&__textContainer {
-			&__title {
-				font-size: util.rem(52);
-			}
-
-			&__description {
-				font-size: util.rem(24);
-			}
-		}
-
-		&__image {
 			width: util.rem(800);
+			margin-top: util.rem(48);
 		}
 	}
 }
