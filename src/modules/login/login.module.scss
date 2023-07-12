@@ -44,10 +44,15 @@
 			// the forgot password text is below the password input by default
 			// then we change it's position to appear above the password input
 			position: relative;
+
 			// 42 = input height
 			// 8 = margin-top of input
 			// 22 = forgot-password text height
 			top: util.rem(-(42 + 8 + 22));
+
+			// remove the left behind space
+			// 22 = forgot-password text height
+			margin-bottom: util.rem(-22);
 		}
 
 		&__input {
