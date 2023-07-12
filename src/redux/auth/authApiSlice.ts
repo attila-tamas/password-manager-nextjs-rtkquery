@@ -1,5 +1,5 @@
 import { apiSlice } from "@redux/apiSlice";
-import { createCookie, deleteCookies } from "@util/handleCookies";
+import { createCookie, deleteCookies } from "@util/index";
 import { logout, setAccessToken } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -78,5 +78,5 @@ export const {
 	useLoginMutation,
 	useSendLogoutMutation,
 	useRefreshMutation,
-	useGetCurrentUserQuery,
+	useLazyGetCurrentUserQuery,
 } = authApiSlice;
