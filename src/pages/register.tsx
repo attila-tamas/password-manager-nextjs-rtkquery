@@ -1,6 +1,7 @@
 // next
 import Head from "next/head";
 // @modules
+import RouteGuard from "@components/routeGuard/routeGuard";
 import { Registration } from "@modules/index";
 
 export default function RegisterPage() {
@@ -10,7 +11,9 @@ export default function RegisterPage() {
 				<title>Create account | keystone</title>
 			</Head>
 
-			<Registration />
+			<RouteGuard>
+				<Registration />
+			</RouteGuard>
 		</>
 	);
 }

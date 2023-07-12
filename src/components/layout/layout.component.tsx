@@ -3,14 +3,17 @@ import styles from "./layout.module.scss";
 import { ReactNode } from "react";
 // @components
 import { Navbar, PersistLogin } from "@components/index";
+import RouteGuard from "@components/routeGuard/routeGuard";
 
 export default function Layout({ children }: { children: ReactNode }) {
 	return (
 		<PersistLogin>
-			<div className={styles["layout"]}>
-				<Navbar />
-				{children}
-			</div>
+			<RouteGuard>
+				<div className={styles["layout"]}>
+					<Navbar />
+					{children}
+				</div>
+			</RouteGuard>
 		</PersistLogin>
 	);
 }

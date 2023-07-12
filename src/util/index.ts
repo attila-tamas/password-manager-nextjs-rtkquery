@@ -1,5 +1,6 @@
 import capitalizeFirstLetter from "./capitalizeFirstLetter";
 import format from "./formatInputValue";
+import { deleteCookies, getCookie } from "./handleCookies";
 import {
 	passwordGenerationSettings,
 	passwordGenerator,
@@ -18,4 +19,6 @@ export {
 	protectedRoutes,
 	publicRoutes,
 	routes,
+	deleteCookies,
+	getCookie,
 };

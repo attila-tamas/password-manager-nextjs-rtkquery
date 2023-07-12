@@ -1,5 +1,5 @@
-import { setAccessToken, setCurrentEmail } from "@redux/auth/authSlice";
-import { setPersist } from "@redux/user/userSlice";
+import { setAccessToken } from "@redux/auth/authSlice";
+import { setCurrentEmail, setPersist } from "@redux/user/userSlice";
 import { useDispatch } from "react-redux";
 
 export default function useDispatchLogin() {

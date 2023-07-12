@@ -1,4 +1,5 @@
 import { apiSlice } from "@redux/apiSlice";
+import { createCookie, deleteCookies } from "@util/handleCookies";
 import { logout, setAccessToken } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
@@ -17,6 +18,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body: { email, password },
 			}),
+			async onQueryStarted(_arg, { queryFulfilled }) {
+				try {
+					await queryFulfilled;
+					createCookie("isLoggedIn", "true");
+				} catch (err) {
+					console.log(err);
+				}
+			},
 		}),
 
 		sendLogout: builder.mutation({
@@ -28,6 +37,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
 				try {
 					await queryFulfilled;
 					dispatch(logout(""));
+					deleteCookies();
 					setTimeout(() => {
 						dispatch(apiSlice.util.resetApiState());
 					}, 1000);

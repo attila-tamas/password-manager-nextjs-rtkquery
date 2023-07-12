@@ -4,6 +4,7 @@ import Head from "next/head";
 import { VerifyEmail } from "@modules/index";
 // @components
 import { PersistLogin } from "@components/index";
+import RouteGuard from "@components/routeGuard/routeGuard";
 
 export default function VerifyEmailPage() {
 	return (
@@ -13,7 +14,9 @@ export default function VerifyEmailPage() {
 			</Head>
 
 			<PersistLogin>
-				<VerifyEmail />
+				<RouteGuard>
+					<VerifyEmail />
+				</RouteGuard>
 			</PersistLogin>
 		</>
 	);

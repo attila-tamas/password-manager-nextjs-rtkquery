@@ -1,6 +1,7 @@
 // next
 import Head from "next/head";
 // @modules
+import RouteGuard from "@components/routeGuard/routeGuard";
 import { Home } from "@modules/index";
 
 export default function HomePage() {
@@ -14,7 +15,9 @@ export default function HomePage() {
 				/>
 			</Head>
 
-			<Home />
+			<RouteGuard>
+				<Home />
+			</RouteGuard>
 		</>
 	);
 }

@@ -1,6 +1,7 @@
 // next
 import Head from "next/head";
 // @modules
+import RouteGuard from "@components/routeGuard/routeGuard";
 import { Login } from "@modules/index";
 
 export default function LoginPage() {
@@ -10,7 +11,9 @@ export default function LoginPage() {
 				<title>Sign in | keystone</title>
 			</Head>
 
-			<Login />
+			<RouteGuard>
+				<Login />
+			</RouteGuard>
 		</>
 	);
 }

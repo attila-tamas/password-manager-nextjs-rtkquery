@@ -2,12 +2,12 @@ const publicRoutes = {
 	home: "/",
 	login: "/login",
 	register: "/register",
-	verifyEmail: "/verify-email",
 	requestPasswordChange: "/request-password-change",
 	changePassword: "/change-password",
 };
 
 const protectedRoutes = {
+	verifyEmail: "/verify-email",
 	vault: "/vault",
 	generate: "/generate",
 	account: "/account",

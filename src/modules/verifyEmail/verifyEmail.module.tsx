@@ -14,24 +14,26 @@ import {
 	useSuccess,
 } from "@hooks/index";
 // @redux
-import { selectCurrentEmail } from "@redux/auth/authSlice";
 import {
 	useActivateAccountMutation,
 	useResendVerificationEmailMutation,
 } from "@redux/user/userApiSlice";
+import { selectCurrentEmail, setCurrentEmail } from "@redux/user/userSlice";
 import { useValidateOtpMutation } from "@redux/validation/validationApiSlice";
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // @public
 import verifyEmailGraphic from "@public/verifyEmailGraphic.svg";
 // @components
 import { Error, Input, Logo, Spinner } from "@components/index";
 // @util
+import { setIsActive } from "@redux/auth/authSlice";
 import { pixelToRem, routes } from "@util/index";
 
 // page module for "/verify-email" route
 export default function VerifyEmail() {
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	const currentEmail = useSelector(selectCurrentEmail);
 
@@ -61,6 +63,8 @@ export default function VerifyEmail() {
 
 	useSuccess(() => {
 		enqueueSnackbar("Account activated", { variant: "success" });
+		dispatch(setCurrentEmail({ email: null }));
+		dispatch(setIsActive({ isActive: true }));
 		router.replace(routes.vault);
 	}, activateAccountMutation);
 	//
