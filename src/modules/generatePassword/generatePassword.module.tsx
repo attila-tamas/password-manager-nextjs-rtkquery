@@ -60,6 +60,8 @@ export default function GeneratePassword() {
 				readonly
 				value={password}
 				className={styles["generatedPassword"]}
+				ariaLive="polite"
+				ariaLabel="generated password"
 			>
 				<Icon
 					icon={copySuccess ? icons.tick : icons.copy}

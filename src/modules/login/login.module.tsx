@@ -109,6 +109,7 @@ export default function Login() {
 						onChange={email.onChange}
 						reference={emailInputRef}
 						validation={emailValidation}
+						autocomplete="email"
 					/>
 
 					<Error message={emailValidation.errorMsg} />
@@ -131,6 +132,7 @@ export default function Login() {
 						showPassword={showPassword.value}
 						reference={passwordInputRef}
 						validation={passwordValidation}
+						autocomplete="current-password"
 					>
 						<Icon
 							icon={showPasswordIcon}

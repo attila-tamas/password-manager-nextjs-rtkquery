@@ -24,6 +24,9 @@ type Props = {
 	children?: ReactNode;
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 	validation?: Validation;
+	ariaLive?: "off" | "polite" | "assertive";
+	ariaLabel?: string;
+	autocomplete?: string;
 };
 
 export default function Input({
@@ -41,6 +44,9 @@ export default function Input({
 	children,
 	onChange,
 	validation,
+	ariaLive,
+	ariaLabel,
+	autocomplete,
 }: Props) {
 	function inputClasses(): string {
 		let classes = `${styles["input"]} ${className}`;
@@ -98,6 +104,9 @@ export default function Input({
 				maxLength={maxLength}
 				onChange={onChange}
 				aria-invalid={isAriaInvalid()}
+				aria-live={ariaLive}
+				aria-label={ariaLabel}
+				autoComplete={autocomplete}
 			/>
 			{children}
 			{validationIcon()}

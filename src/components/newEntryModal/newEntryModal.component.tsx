@@ -135,6 +135,7 @@ export default function NewEntryModal({
 								name="key"
 								value={title.value}
 								onChange={title.onChange}
+								autocomplete="off"
 							/>
 						) : (
 							<p>{title.value}</p>
@@ -150,6 +151,7 @@ export default function NewEntryModal({
 							value={password.value}
 							onChange={password.onChange}
 							showPassword={showPassword.value}
+							autocomplete="off"
 						>
 							<Icon
 								icon={showPasswordIcon}

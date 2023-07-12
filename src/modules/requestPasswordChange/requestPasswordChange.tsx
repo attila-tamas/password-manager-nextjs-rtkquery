@@ -145,6 +145,7 @@ export default function RequestPasswordChange() {
 						onChange={otp.onChange}
 						reference={otpInputRef}
 						validation={otpValidation}
+						autocomplete="off"
 					/>
 
 					<Error message={errorMsg} />
@@ -196,6 +197,7 @@ export default function RequestPasswordChange() {
 							onChange={email.onChange}
 							reference={emailInputRef}
 							validation={emailValidation}
+							autocomplete="email"
 						/>
 
 						<Error message={errorMsg} />

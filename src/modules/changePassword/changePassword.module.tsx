@@ -109,6 +109,7 @@ export default function ChangePassword() {
 						onChange={password.onChange}
 						showPassword={showPassword.value}
 						validation={passwordValidation}
+						autocomplete="new-password"
 					>
 						<Icon
 							icon={showPasswordIcon}

@@ -123,6 +123,7 @@ export default function Registration() {
 						onChange={email.onChange}
 						reference={emailInputRef}
 						validation={emailValidation}
+						autocomplete="email"
 					/>
 
 					<Error message={emailValidation.errorMsg} />
@@ -144,6 +145,7 @@ export default function Registration() {
 						onChange={password.onChange}
 						showPassword={showPassword.value}
 						validation={passwordValidation}
+						autocomplete="new-password"
 					>
 						<Icon
 							icon={showPasswordIcon}
