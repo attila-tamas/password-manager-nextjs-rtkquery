@@ -1,5 +1,6 @@
 import { apiSlice } from "@redux/apiSlice";
 import { logout } from "@redux/auth/authSlice";
+import { deleteCookies } from "@util/handleCookies";
 
 export const userApiSlice = apiSlice.injectEndpoints({
 	endpoints: builder => ({
@@ -44,6 +45,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				try {
 					await queryFulfilled;
 					dispatch(logout(""));
+					deleteCookies();
 					setTimeout(() => {
 						dispatch(apiSlice.util.resetApiState());
 					}, 1000);
