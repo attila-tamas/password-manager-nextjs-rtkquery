@@ -2,13 +2,17 @@
 import { ReactNode } from "react";
 // next
 import { useRouter } from "next/router";
+// @hooks
+import {
+	useEffectOnMount,
+	useEffectOnUpdate,
+	useLazyQuery,
+} from "@hooks/index";
 // @redux
-// @util
-import { useGetCurrentUserQuery } from "@redux/auth/authApiSlice";
-
+import { useLazyGetCurrentUserQuery } from "@redux/auth/authApiSlice";
 import { selectIsActive } from "@redux/auth/authSlice";
-import { checkIfCookieExists } from "@util/handleCookies";
-import { protectedRoutes, routes } from "@util/index";
+// @util
+import { checkIfCookieExists, protectedRoutes, routes } from "@util/index";
 import { useSelector } from "react-redux";
 
 const allowedPaths = [
@@ -24,19 +28,36 @@ export default function RouteGuard({ children }: { children: ReactNode }) {
 
 	const isLoggedIn = checkIfCookieExists("isLoggedIn");
 
-	const { data: currentUser } = useGetCurrentUserQuery("");
+	const getCurrentUserQuery = useLazyQuery(useLazyGetCurrentUserQuery());
 
-	if (currentUser) {
-		if (
-			!currentUser.active &&
-			!isActive &&
-			router.asPath !== routes.verifyEmail
-		) {
-			router.replace(routes.verifyEmail);
-		} else if (currentUser.active && router.asPath === routes.verifyEmail) {
-			router.replace(routes.vault);
+	useEffectOnMount(() => {
+		async function getCurrentUser(): Promise<void> {
+			await getCurrentUserQuery.trigger();
 		}
-	}
+
+		if ([...Object.values(protectedRoutes)].includes(router.asPath)) {
+			getCurrentUser();
+		}
+	});
+
+	const currentUser = getCurrentUserQuery.data;
+
+	useEffectOnUpdate(() => {
+		if (currentUser) {
+			if (
+				!currentUser.active &&
+				!isActive &&
+				router.asPath !== routes.verifyEmail
+			) {
+				router.replace(routes.verifyEmail);
+			} else if (
+				currentUser.active &&
+				router.asPath === routes.verifyEmail
+			) {
+				router.replace(routes.vault);
+			}
+		}
+	}, [currentUser]);
 
 	if (isLoggedIn && !allowedPaths.includes(router.asPath)) {
 		if (router.asPath !== routes.vault) router.replace(routes.vault);
