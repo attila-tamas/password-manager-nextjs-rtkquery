@@ -9,6 +9,10 @@ export default function LoginPage() {
 		<>
 			<Head>
 				<title>Sign in | keystone</title>
+				<meta
+					name="description"
+					content="Sign in to your keystone account"
+				/>
 			</Head>
 
 			<RouteGuard>

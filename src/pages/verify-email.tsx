@@ -10,7 +10,11 @@ export default function VerifyEmailPage() {
 	return (
 		<>
 			<Head>
-				<title>Create account | keystone</title>
+				<title>Verify email | keystone</title>
+				<meta
+					name="description"
+					content="Verify your email address to active your account"
+				/>
 			</Head>
 
 			<PersistLogin>

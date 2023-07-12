@@ -10,6 +10,10 @@ export default function AccountPage() {
 		<>
 			<Head>
 				<title>Account | keystone</title>
+				<meta
+					name="description"
+					content="Manage your keystone account"
+				/>
 			</Head>
 
 			{/* navigation bar and container for in-app pages */}

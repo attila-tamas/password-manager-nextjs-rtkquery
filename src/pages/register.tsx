@@ -9,6 +9,7 @@ export default function RegisterPage() {
 		<>
 			<Head>
 				<title>Create account | keystone</title>
+				<meta name="description" content="Create a keystone account" />
 			</Head>
 
 			<RouteGuard>

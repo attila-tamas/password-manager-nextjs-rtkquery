@@ -9,7 +9,11 @@ export default function GeneratePage() {
 	return (
 		<>
 			<Head>
-				<title>Password generator | keystone</title>
+				<title>Generate password | keystone</title>
+				<meta
+					name="description"
+					content="Generate strong passwords with a click of a button"
+				/>
 			</Head>
 
 			{/* navigation bar and container for in-app pages */}

@@ -10,6 +10,7 @@ export default function VaultPage() {
 		<>
 			<Head>
 				<title>Vault | keystone</title>
+				<meta name="description" content="Manage your passwords" />
 			</Head>
 
 			{/* navigation bar and container for in-app pages */}

@@ -7,7 +7,8 @@ export default function RequestPasswordChangePage() {
 	return (
 		<>
 			<Head>
-				<title>Create account | keystone</title>
+				<title>Request password change | keystone</title>
+				<meta name="description" content="Request password change" />
 			</Head>
 
 			<RequestPasswordChange />
