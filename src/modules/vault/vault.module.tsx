@@ -27,8 +27,8 @@ export default function Vault() {
 	const keyword = useFormInput("");
 
 	const getEntriesQuery = useLazyQuery(
-		{ keyword: keyword.value },
-		useLazyGetEntriesQuery()
+		useLazyGetEntriesQuery(), //
+		{ keyword: keyword.value }
 	);
 
 	useEffectOnMount(() => {

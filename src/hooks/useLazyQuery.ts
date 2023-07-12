@@ -11,7 +11,7 @@ export type Query = {
 	errorMsg: string;
 };
 
-export default function useLazyQuery(queryParams: object, hook: any) {
+export default function useLazyQuery(hook: any, queryParams?: object) {
 	const [trigger, { data, isLoading, isSuccess, isError, error }] = hook;
 
 	const queryParamsRef = useRef(queryParams);
