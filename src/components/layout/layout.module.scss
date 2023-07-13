@@ -1,0 +1,27 @@
+@use "@styles/util" as util;
+
+.layout {
+	width: 100%;
+
+	// navbar height when it is on the bottom of the screen
+	height: calc(100% - util.rem(65.75));
+
+	display: flex;
+	flex-direction: column;
+
+	// make the background-color same as the modules' background
+	// to give a full-screen effect on small screens
+	background-color: var(--color-contrast);
+}
+
+@include util.breakpoint-up(small) {
+	.layout {
+		background-color: var(--color-background);
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.layout {
+		height: 100%;
+	}
+}

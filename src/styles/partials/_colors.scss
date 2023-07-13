@@ -1,0 +1,49 @@
+@mixin colors {
+	--color-foreground: rgb(50, 51, 54);
+	--color-background: rgb(249, 250, 253);
+
+	--color-white: rgb(255, 255, 255);
+	--color-black: rgb(37, 38, 41);
+
+	--color-contrast: rgb(255, 255, 255);
+
+	--color-gray: rgb(132, 133, 136);
+	--color-gray-light: rgb(237, 238, 241);
+	--color-gray-dark: rgb(45, 46, 49);
+
+	--color-primary: rgb(90, 201, 122);
+	--color-primary-light: rgb(158, 232, 179);
+	--color-primary-dark: rgb(84, 184, 114);
+
+	--color-success: rgb(90, 201, 122);
+	--color-error: rgb(249, 109, 105);
+
+	--color-shadow: rgba(10, 11, 14, 0.05);
+	--color-shadow-background: rgba(0, 0, 0, 0.5);
+
+	--color-border: rgb(237, 238, 241);
+
+	--color-hover: rgba(45, 46, 49, 0.04);
+
+	--color-scrollbar: rgb(230, 231, 234);
+	--color-scrollbar-hover: rgb(187, 188, 191);
+
+	@media (prefers-color-scheme: dark) {
+		--color-foreground: rgb(248, 248, 248);
+		--color-background: rgb(32, 33, 36);
+
+		--color-contrast: rgb(45, 49, 53);
+
+		--color-gray: rgb(180, 182, 184);
+		--color-gray-light: rgb(32, 33, 36);
+
+		--color-shadow: rgba(0, 0, 0, 0.3);
+
+		--color-border: rgb(13, 14, 17);
+
+		--color-hover: rgba(237, 238, 241, 0.04);
+
+		--color-scrollbar: rgb(100, 101, 104);
+		--color-scrollbar-hover: rgb(125, 126, 129);
+	}
+}

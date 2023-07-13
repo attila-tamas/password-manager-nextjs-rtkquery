@@ -1,0 +1,38 @@
+@use "@styles/util" as util;
+
+.input {
+	width: 100%;
+	height: fit-content;
+
+	display: flex;
+	align-items: center;
+	gap: util.rem(8);
+
+	padding: util.rem(8) util.rem(12);
+
+	border-radius: var(--border-radius);
+	outline: util.rem(0.5) solid transparent;
+	border: util.rem(1) solid var(--color-border);
+
+	background-color: var(--color-background);
+
+	transition: all 200ms ease;
+
+	&:focus-within {
+		outline-color: var(--color-primary);
+		border-color: var(--color-primary);
+	}
+
+	// this class is only used when there is an input error
+	// we want the error styling to override the other styles
+	// and stay present while the error is ongoing
+	&--error {
+		outline-color: var(--color-error) !important;
+		border-color: var(--color-error) !important;
+	}
+
+	& input {
+		all: unset;
+		width: 100%;
+	}
+}

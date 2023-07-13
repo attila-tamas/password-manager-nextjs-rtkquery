@@ -1,0 +1,23 @@
+@use "./functions";
+
+$breakpointSmall: functions.rem(380);
+$breakpointMedium: functions.rem(380 + 128);
+$breakpointLarge: functions.rem(820 + 64); // navbar width (820) + 32px padding
+
+:export {
+	breakpointSmall: $breakpointSmall;
+	breakpointMedium: $breakpointMedium;
+	breakpointLarge: $breakpointLarge;
+}
+
+$breakpoints: (
+	"small": $breakpointSmall,
+	"medium": $breakpointMedium,
+	"large": $breakpointLarge,
+);
+
+@mixin breakpoint-up($size) {
+	@media (min-width: map-get($breakpoints, $size)) {
+		@content;
+	}
+}

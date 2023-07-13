@@ -1,0 +1,52 @@
+@use "@styles/util" as util;
+
+.nav {
+	width: min(100%, util.rem(280));
+	height: fit-content;
+
+	// using grid to get same width items
+	display: grid;
+	grid-auto-columns: minmax(0, 1fr);
+	grid-auto-flow: column;
+	gap: util.rem(16);
+
+	margin-inline: auto;
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		color: var(--color-gray);
+
+		font-size: util.rem(13);
+
+		&--active {
+			color: var(--color-primary);
+		}
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.nav {
+		// center horizontally (margin-inline is already set)
+		position: absolute;
+		left: 0;
+		right: 0;
+
+		// we do not want same width items
+		display: flex;
+		justify-content: center;
+		gap: util.rem(24);
+
+		&__item {
+			width: fit-content;
+			font-size: util.rem(20);
+
+			&__icon {
+				// override the icon components "display: inline-block" styling
+				display: none !important;
+			}
+		}
+	}
+}

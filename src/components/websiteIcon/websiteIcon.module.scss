@@ -1,0 +1,92 @@
+@use "@styles/util" as util;
+
+.website-icon {
+	min-width: util.rem(46);
+	min-height: util.rem(46);
+
+	position: relative;
+
+	cursor: pointer;
+
+	&:hover .open-icon {
+		transform: scale(1);
+	}
+}
+
+.image {
+	border-radius: util.rem(4);
+}
+
+.open-icon {
+	width: fit-content;
+	height: fit-content;
+
+	display: flex;
+
+	position: absolute;
+	bottom: util.rem(2);
+	left: util.rem(2);
+
+	padding: util.rem(1);
+
+	border-radius: util.rem(4);
+
+	background-color: var(--color-contrast);
+	color: var(--color-primary);
+
+	transform: scale(0);
+	transform-origin: bottom left;
+
+	transition: all 100ms ease 0s;
+}
+
+.warning {
+	min-width: util.rem(46);
+	min-height: util.rem(46);
+
+	position: relative;
+
+	display: inline-block;
+
+	&:hover .tooltip {
+		transform: scale(1);
+	}
+}
+
+.tooltip {
+	width: fit-content;
+	height: fit-content;
+
+	position: absolute;
+	left: 120%;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+
+	white-space: nowrap;
+
+	transform: scale(0);
+	transform-origin: left;
+
+	padding-inline: util.rem(16);
+	padding-top: util.rem(2);
+	margin-block: auto;
+
+	background-color: var(--color-contrast);
+	color: var(--color-foreground);
+
+	border-radius: util.rem(4);
+	border: util.rem(1) solid var(--color-border);
+
+	font-size: util.rem(15);
+
+	transition: 100ms all ease;
+
+	&__hint {
+		position: relative;
+		top: util.rem(-4);
+
+		color: var(--color-gray);
+		font-size: util.rem(12);
+	}
+}

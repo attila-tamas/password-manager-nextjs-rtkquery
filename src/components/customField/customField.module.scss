@@ -1,0 +1,17 @@
+@use "@styles/util" as util;
+
+.custom-field {
+	width: 100%;
+	height: fit-content;
+
+	&__title {
+		display: flex;
+		align-items: center;
+		gap: util.rem(8);
+	}
+
+	&__input {
+		// add space between the label and the input field
+		margin-top: util.rem(8);
+	}
+}

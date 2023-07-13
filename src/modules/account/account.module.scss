@@ -1,0 +1,123 @@
+@use "@styles/util" as util;
+
+.account-module {
+	width: 100%;
+	height: 100%;
+
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: util.rem(20);
+
+	padding: util.rem(20);
+}
+
+.title-wrapper {
+	width: 100%;
+	height: fit-content;
+
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&__logout {
+		position: absolute;
+		right: 0;
+	}
+}
+
+.options {
+	width: 100%;
+	height: fit-content;
+
+	border-radius: var(--border-radius);
+	border: util.rem(1) solid var(--color-border);
+
+	&__option {
+		width: 100%;
+		height: fit-content;
+
+		position: relative;
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		padding: util.rem(12);
+
+		background-color: var(--color-background);
+
+		cursor: pointer;
+
+		&--danger {
+			color: var(--color-error);
+		}
+
+		&:hover {
+			background-color: var(--color-hover);
+		}
+
+		&:not(:first-child) {
+			border-top: util.rem(1) solid var(--color-border);
+		}
+
+		&:first-child {
+			border-top-left-radius: var(--border-radius);
+			border-top-right-radius: var(--border-radius);
+		}
+
+		&:last-child {
+			border-bottom-left-radius: var(--border-radius);
+			border-bottom-right-radius: var(--border-radius);
+		}
+
+		// to not cause the option element to grow in size
+		&__confirm-button {
+			position: absolute;
+			// same as the right padding on the option element
+			right: util.rem(12);
+		}
+	}
+}
+
+@include util.breakpoint-up(small) {
+	.account-module {
+		width: util.rem(360);
+		height: fit-content;
+
+		top: 5vh;
+		top: 5dvh;
+
+		margin-inline: auto;
+
+		border-radius: var(--border-radius);
+		border: util.rem(1) solid var(--color-border);
+
+		background-color: var(--color-contrast);
+	}
+}
+
+@include util.breakpoint-up(medium) {
+	.account-module {
+		// 64 / 2 => +32px padding to the sides
+		width: util.rem(360 + 64);
+		padding-inline: util.rem(20 + 32);
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.account-module {
+		top: 0;
+	}
+
+	.title-wrapper {
+		&__logout {
+			// override the icon components "display: inline-block" styling
+			display: none !important;
+		}
+	}
+}

@@ -1,0 +1,155 @@
+@use "@styles/util" as util;
+
+.wrapper {
+	width: 100%;
+	height: fit-content;
+	min-height: 100%;
+
+	background-color: var(--color-contrast);
+}
+
+.home-module {
+	width: min(100%, util.rem(420));
+	height: fit-content;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: util.rem(24);
+
+	margin-inline: auto;
+	padding: util.rem(20) util.rem(20) 0 util.rem(20);
+}
+
+.nav {
+	width: 100%;
+	height: fit-content;
+
+	display: flex;
+	align-items: center;
+
+	&__buttons {
+		display: none;
+	}
+}
+
+.hero {
+	width: 100%;
+	height: fit-content;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: util.rem(32);
+
+	&__text {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		flex-direction: column;
+		gap: util.rem(32);
+
+		&__title {
+			font-size: util.rem(32);
+			font-weight: var(--font-weight-bold);
+		}
+
+		&__description {
+			font-size: util.rem(18);
+		}
+
+		&__buttons {
+			width: fit-content;
+
+			display: flex;
+			flex-direction: column;
+			gap: util.rem(8);
+
+			&__hint {
+				font-size: util.rem(16);
+			}
+		}
+	}
+
+	&__image {
+		width: 100%;
+		height: fit-content;
+	}
+}
+
+@include util.breakpoint-up(medium) {
+	.home-module {
+		width: util.rem(480);
+	}
+
+	.hero {
+		&__text {
+			&__title {
+				font-size: util.rem(40);
+			}
+
+			&__description {
+				font-size: util.rem(20);
+			}
+		}
+	}
+}
+
+@media (min-width: 43.125rem) {
+	.home-module {
+		width: util.rem(640);
+	}
+
+	.hero {
+		&__text {
+			&__title {
+				font-size: util.rem(48);
+			}
+
+			&__description {
+				font-size: util.rem(24);
+			}
+		}
+	}
+}
+
+@media (min-width: 71.25rem) {
+	.home-module {
+		width: fit-content;
+		gap: util.rem(88);
+		padding: util.rem(32) util.rem(60) 0 util.rem(60);
+	}
+
+	.nav {
+		max-width: 100%;
+
+		justify-content: space-between;
+
+		&__buttons {
+			display: flex;
+			gap: util.rem(12);
+		}
+	}
+
+	.hero {
+		flex-direction: row;
+		text-align: left;
+
+		&__text {
+			max-width: util.rem(650);
+
+			&__buttons {
+				&__hint {
+					display: none;
+				}
+			}
+		}
+
+		&__image {
+			width: util.rem(800);
+			margin-top: util.rem(48);
+		}
+	}
+}

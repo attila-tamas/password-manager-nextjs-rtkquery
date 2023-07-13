@@ -1,0 +1,67 @@
+@use "@styles/util" as util;
+
+.wrapper {
+	width: fit-content;
+	height: fit-content;
+
+	position: relative;
+
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+	gap: util.rem(16);
+
+	cursor: pointer;
+
+	&--flex {
+		width: 100%;
+	}
+}
+
+.input {
+	position: absolute;
+	left: -9999px;
+	top: -9999px;
+
+	&:checked + span {
+		background-color: var(--color-primary);
+
+		&:before {
+			left: calc(100% - util.rem(2));
+			transform: translateX(-100%);
+		}
+	}
+}
+
+.toggle {
+	width: util.rem(50);
+	height: util.rem(25);
+
+	position: relative;
+
+	display: flex;
+
+	border-radius: util.rem(100);
+
+	background-color: var(--color-gray-light);
+
+	transition: background-color 200ms ease;
+
+	&:before {
+		content: "";
+
+		width: util.rem(21);
+		height: util.rem(21);
+
+		position: absolute;
+		top: util.rem(2);
+		left: util.rem(2);
+
+		border-radius: 100%;
+
+		background-color: var(--color-white);
+
+		transition: all 200ms ease;
+	}
+}

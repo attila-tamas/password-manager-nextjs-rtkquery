@@ -1,0 +1,25 @@
+@use "@styles/util" as util;
+
+.snackbar {
+	display: flex;
+	align-items: center;
+	gap: util.rem(8);
+
+	padding: util.rem(8) util.rem(16);
+	box-shadow: none;
+
+	border-radius: util.rem(4);
+	border: none;
+
+	color: var(--color-white);
+
+	font-weight: var(--font-weight-semibold);
+
+	&--success {
+		background-color: var(--color-success);
+	}
+
+	&--error {
+		background-color: var(--color-error);
+	}
+}

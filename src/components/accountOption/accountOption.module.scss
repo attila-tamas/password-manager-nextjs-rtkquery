@@ -1,0 +1,47 @@
+@use "@styles/util" as util;
+
+.option {
+	width: 100%;
+	height: fit-content;
+
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: util.rem(12);
+
+	background-color: var(--color-background);
+
+	cursor: pointer;
+
+	&--danger {
+		color: var(--color-error);
+	}
+
+	&:hover {
+		background-color: var(--color-hover);
+	}
+
+	&:not(:first-child) {
+		border-top: util.rem(1) solid var(--color-border);
+	}
+
+	&:first-child {
+		border-top-left-radius: var(--border-radius);
+		border-top-right-radius: var(--border-radius);
+	}
+
+	&:last-child {
+		border-bottom-left-radius: var(--border-radius);
+		border-bottom-right-radius: var(--border-radius);
+	}
+
+	// to not cause the option element to grow in size
+	&__confirm-button {
+		position: absolute;
+		// same as the right padding on the option element
+		right: util.rem(12);
+	}
+}

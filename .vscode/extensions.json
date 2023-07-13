@@ -1,0 +1,15 @@
+{
+	"recommendations": [
+		"formulahendry.auto-rename-tag",
+		"dsznajder.es7-react-js-snippets",
+		"dbaeumer.vscode-eslint",
+		"mhutchie.git-graph",
+		"esbenp.prettier-vscode",
+		"burkeholland.simple-react-snippets",
+		"christian-kohler.npm-intellisense",
+		"cardinal90.multi-cursor-case-preserve",
+		"pkief.material-icon-theme",
+		"wix.vscode-import-cost",
+		"peterschmalfeldt.explorer-exclude"
+	]
+}

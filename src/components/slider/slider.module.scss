@@ -1,0 +1,47 @@
+@use "@styles/util" as util;
+
+.slider {
+	width: 100%;
+	height: fit-content;
+
+	cursor: pointer;
+
+	&--disabled {
+		opacity: 0.5;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	&__track {
+		height: util.rem(4);
+
+		border-radius: util.rem(4);
+
+		background-color: var(--color-gray-light);
+
+		&:first-child {
+			background-color: var(--color-primary);
+		}
+	}
+
+	&__thumb {
+		width: util.rem(20);
+		height: util.rem(20);
+
+		top: util.rem(-8);
+
+		outline: none;
+		border-radius: 100%;
+		border: util.rem(1) solid var(--color-gray-light);
+
+		background-color: var(--color-white);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.slider {
+		&__thumb {
+			border-color: transparent;
+		}
+	}
+}

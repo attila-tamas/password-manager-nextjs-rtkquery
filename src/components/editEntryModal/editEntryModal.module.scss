@@ -1,0 +1,100 @@
+@use "@styles/util" as util;
+@use "@styles/partials" as var;
+
+.modal {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	font-size: util.rem(18);
+
+	&__header {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		padding-bottom: util.rem(20);
+
+		border-bottom: util.rem(1) solid var(--color-gray-light);
+
+		&__title {
+			font-size: util.rem(22);
+			font-weight: var(--font-weight-bold);
+		}
+
+		&__close-icon {
+			color: var(--color-error);
+			cursor: pointer;
+		}
+	}
+
+	&__content {
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: util.rem(24);
+
+		padding-block: util.rem(20);
+
+		// make the input focus outlines not get cut off
+		padding-inline: util.rem(1);
+
+		// custom scrollbar
+		@include var.scrollbar;
+		// width: 100% + padding-right
+		width: calc(100% + util.rem(20));
+		// space between the scrollbar and the content
+		padding-right: util.rem(20);
+		//
+
+		&__title {
+			display: flex;
+			align-items: center;
+			gap: util.rem(8);
+
+			font-size: util.rem(22);
+			font-weight: var(--font-weight-bold);
+		}
+
+		&__field {
+			width: 100%;
+			height: fit-content;
+
+			&__input {
+				// add space between the label and the input field
+				margin-top: util.rem(8);
+			}
+		}
+	}
+
+	&__footer {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: util.rem(16);
+
+		// separate footer from content
+		border-top: util.rem(1) solid var(--color-gray-light);
+		padding-top: util.rem(14);
+		//
+
+		// decrease the default modal padding on the bottom
+		margin-bottom: util.rem(-6);
+
+		&__delete-button {
+			margin-right: auto;
+			padding-inline: util.rem(4);
+		}
+	}
+}

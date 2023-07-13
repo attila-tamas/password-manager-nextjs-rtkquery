@@ -1,0 +1,56 @@
+@use "@styles/partials/reset" as reset;
+@use "@styles/partials" as var;
+@use "@styles/util" as util;
+
+:root {
+	@include var.colors;
+	@include var.font-weights;
+	@include var.shadows;
+	@include var.variables;
+}
+
+body {
+	min-height: util.rem(320);
+	min-width: util.rem(320);
+
+	font-weight: var(--font-weight-normal);
+
+	color: var(--color-foreground);
+	background-color: var(--color-background);
+}
+
+.unselectable {
+	user-select: none;
+}
+
+.title {
+	font-size: util.rem(24);
+	font-weight: var(--font-weight-bold);
+}
+
+.interactable {
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary);
+
+	cursor: pointer;
+}
+
+.danger {
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-error);
+}
+
+::placeholder {
+	color: var(--color-gray);
+	opacity: 1;
+}
+
+.error {
+	position: relative;
+	top: util.rem(4);
+
+	color: var(--color-error);
+
+	font-size: util.rem(14);
+	font-weight: var(--font-weight-semibold);
+}

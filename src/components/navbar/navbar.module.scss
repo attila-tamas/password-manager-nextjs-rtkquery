@@ -1,0 +1,54 @@
+@use "@styles/util" as util;
+
+.navbar {
+	width: 100%;
+	height: fit-content;
+
+	position: fixed;
+	bottom: 0;
+
+	padding-block: util.rem(4);
+
+	border-top: util.rem(1) solid var(--color-border);
+
+	background-color: var(--color-contrast);
+	box-shadow: var(--drop-shadow-top);
+
+	z-index: 2;
+
+	&__logo,
+	&__logout {
+		// override the icon components "display: inline-block" styling
+		display: none !important;
+	}
+}
+
+@include util.breakpoint-up(large) {
+	.navbar {
+		max-width: util.rem(820);
+
+		position: relative;
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		margin-inline: auto;
+		margin-top: util.rem(32);
+		margin-bottom: util.rem(12);
+
+		padding-block: util.rem(12);
+		padding-inline: util.rem(32);
+
+		border-radius: var(--border-radius);
+		border: util.rem(1) solid var(--color-border);
+
+		box-shadow: none;
+
+		&__logo,
+		&__logout {
+			// override the icon components "display: inline-block" styling
+			display: flex !important;
+		}
+	}
+}

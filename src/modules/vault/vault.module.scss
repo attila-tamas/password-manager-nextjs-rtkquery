@@ -1,0 +1,74 @@
+@use "@styles/util" as util;
+
+#wrapper {
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	gap: util.rem(12);
+
+	padding-block: util.rem(20);
+
+	// to make the vault module not overflow
+	overflow: hidden;
+}
+
+.vault-module {
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: util.rem(20);
+
+	&__util {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		gap: util.rem(8);
+
+		padding-inline: util.rem(20);
+	}
+}
+
+@include util.breakpoint-up(small) {
+	.vault-module {
+		width: util.rem(360);
+		height: fit-content;
+
+		top: 5vh;
+		top: 5dvh;
+
+		margin-inline: auto;
+		padding-block: util.rem(20);
+
+		border-radius: var(--border-radius);
+		border: util.rem(1) solid var(--color-border);
+
+		background-color: var(--color-contrast);
+	}
+}
+
+@include util.breakpoint-up(large) {
+	#wrapper {
+		// add the same space at the bottom that is
+		// between the navbar and the top of the viewport
+		padding-bottom: util.rem(32);
+		padding-top: 0;
+	}
+
+	.vault-module {
+		width: util.rem(360 + 24);
+		top: 0;
+		margin: 0;
+	}
+}

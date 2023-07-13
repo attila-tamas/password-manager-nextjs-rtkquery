@@ -1,0 +1,85 @@
+@use "@styles/util" as util;
+
+.entry {
+	width: 100%;
+	height: fit-content;
+
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	gap: util.rem(8);
+
+	padding: util.rem(8);
+
+	// add space between keys
+	margin-bottom: util.rem(8);
+
+	border-radius: var(--border-radius);
+	border: util.rem(1) solid var(--color-border);
+
+	background-color: var(--color-background);
+
+	&--active {
+		border-color: var(--color-primary);
+		outline: util.rem(1) solid var(--color-primary);
+	}
+
+	&__content {
+		width: 100%;
+		height: fit-content;
+
+		display: flex;
+		align-items: center;
+		gap: util.rem(12);
+
+		&__text {
+			width: fit-content;
+			height: fit-content;
+
+			&__title {
+				font-size: util.rem(18);
+				font-weight: var(--font-weight-semibold);
+			}
+
+			&__credential {
+				display: flex;
+				align-items: center;
+				gap: util.rem(4);
+
+				font-size: util.rem(14);
+				color: var(--color-gray);
+			}
+
+			&__copy {
+				width: fit-content;
+				font-size: util.rem(14);
+
+				// align the copy succes icon and text
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+
+	&__options {
+		color: var(--color-gray);
+		cursor: pointer;
+	}
+}
+
+// the max-width values are fixed to the breakpoints
+// we need to do it like this because we do not want
+// to cut off the copy button next to the credential
+.truncate {
+	max-width: util.rem(147);
+
+	// truncate text
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	@include util.breakpoint-up(small) {
+		max-width: util.rem(185);
+	}
+}
