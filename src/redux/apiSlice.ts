@@ -9,7 +9,10 @@ import {
 import { logout, setAccessToken } from "@redux/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-	baseUrl: "http://localhost:5000/api",
+	baseUrl:
+		process.env.NODE_ENV === "development"
+			? "http://localhost:5000/api"
+			: "https://keystone-api-pvkd.onrender.com/api",
 	credentials: "include",
 	prepareHeaders: (headers: Headers, { getState }: any) => {
 		const token = getState().auth.token;
