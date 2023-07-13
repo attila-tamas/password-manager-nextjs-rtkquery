@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 // npm
 import { enqueueSnackbar } from "notistack";
+import { useDispatch, useSelector } from "react-redux";
 // @hooks
 import {
 	useEffectOnMount,
@@ -29,12 +30,12 @@ import verifyEmailGraphic from "@public/verifyEmailGraphic.svg";
 // @components
 import { Button, Error, Input, Logo, Spinner } from "@components/index";
 // @util
+import { selectCurrentEmail, setCurrentEmail } from "@redux/user/userSlice";
 import { pixelToRem, routes } from "@util/index";
 
 export default function RequestPasswordChange() {
 	const router = useRouter();
-
-	const [isEmailValidated, setIsEmailValidated] = useState(false);
+	const dispatch = useDispatch();
 
 	// email
 	const email = useFormInput("");
@@ -46,6 +47,12 @@ export default function RequestPasswordChange() {
 		email.value,
 		useValidateLoginEmailMutation()
 	);
+
+	const currentEmail = useSelector(selectCurrentEmail);
+
+	function onNextButtonClicked(): void {
+		dispatch(setCurrentEmail({ email: email.value }));
+	}
 	//
 
 	// form submit
@@ -59,7 +66,6 @@ export default function RequestPasswordChange() {
 		await requestPasswordChangeMutation.trigger(email.value);
 
 		setErrorMsg("");
-		setIsEmailValidated(true);
 	}
 	//
 
@@ -118,7 +124,7 @@ export default function RequestPasswordChange() {
 	}, [resendEmailMutation.errorMsg]);
 	//
 
-	if (isEmailValidated) {
+	if (currentEmail) {
 		return (
 			<div className={styles["request-password-change-module"]}>
 				<Logo size={pixelToRem(20)} />
@@ -134,7 +140,7 @@ export default function RequestPasswordChange() {
 				<p>
 					A verification code has been sent to
 					<br />
-					<span className={styles["email"]}>{email.value}</span>
+					<span className={styles["email"]}>{currentEmail}</span>
 				</p>
 
 				<div className={styles["field"]}>
@@ -210,6 +216,7 @@ export default function RequestPasswordChange() {
 						flex
 						disabled={!emailValidation.isSuccess}
 						loading={requestPasswordChangeMutation.isLoading}
+						onClick={onNextButtonClicked}
 					/>
 				</form>
 			</div>
