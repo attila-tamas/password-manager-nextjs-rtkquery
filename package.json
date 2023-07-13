@@ -1,7 +1,6 @@
 {
-	"name": "password-manager-mern-frontend",
-	"version": "0.1.0",
-	"private": true,
+	"name": "password-manager-frontend",
+	"version": "1.0.0",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
@@ -26,6 +25,7 @@
 		"react-slider": "^2.0.4",
 		"react-svg-spinners": "^0.3.1",
 		"redux-persist": "^6.0.0",
+		"sharp": "^0.32.2",
 		"typescript": "^5.0.4"
 	},
 	"devDependencies": {
@@ -42,6 +42,6 @@
 	},
 	"engines": {
 		"node": ">=18.15.0",
-		"npm": ">=9.6.0"
+		"npm": ">=9.5.0"
 	}
 }
